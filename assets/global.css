@@ -1,0 +1,30 @@
+:root {
+    --beige: #F4EDDB;
+    --dark-beige: #E6DCC2;
+    --green: #1C3025;
+}
+
+.global_container {
+    max-width: 1440px;
+    width: 100%;
+    margin: auto;
+}
+
+.comman_btn_Main a {
+    display: inline-flex;
+    padding: 12px 40px;
+    font-family: "Inter", sans-serif;
+
+}
+
+@media (max-width: 1024px) {
+    .global-padding {
+        padding: 40px 30px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .global-padding {
+        padding: 30px 20px;
+    }
+}
