@@ -1,9 +1,132 @@
 /* ===== Custom font: Rasbern (uploaded to Shopify Files / media) ===== */
+
+/* --- Normal styles --- */
 @font-face {
-  font-family: 'Rasbern-Regular';
-  src: url('https://cdn.shopify.com/s/files/1/0742/9839/2711/files/Rasbern-Regular.woff') format('woff');
-  font-weight: normal;
+  font-family: 'Rasbern';
+  src: url('https://cdn.shopify.com/s/files/1/0742/9839/2711/files/Rasbern-Thin.woff?v=1780343087') format('woff');
+  font-weight: 100;
   font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Rasbern';
+  src: url('https://cdn.shopify.com/s/files/1/0742/9839/2711/files/Rasbern-ExtraLight.woff?v=1780343087') format('woff');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Rasbern';
+  src: url('https://cdn.shopify.com/s/files/1/0742/9839/2711/files/Rasbern-Light.woff?v=1780343087') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Rasbern';
+  src: url('https://cdn.shopify.com/s/files/1/0742/9839/2711/files/Rasbern-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Rasbern';
+  src: url('https://cdn.shopify.com/s/files/1/0742/9839/2711/files/Rasbern-Medium.woff?v=1780343087') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Rasbern';
+  src: url('https://cdn.shopify.com/s/files/1/0742/9839/2711/files/Rasbern-SemiBold.woff?v=1780343087') format('woff');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Rasbern';
+  src: url('https://cdn.shopify.com/s/files/1/0742/9839/2711/files/Rasbern-Bold.woff?v=1780343087') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Rasbern';
+  src: url('https://cdn.shopify.com/s/files/1/0742/9839/2711/files/Rasbern-ExtraBold.woff?v=1780343087') format('woff');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Rasbern';
+  src: url('https://cdn.shopify.com/s/files/1/0742/9839/2711/files/Rasbern-Black.woff?v=1780343087') format('woff');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* --- Italic styles --- */
+@font-face {
+  font-family: 'Rasbern';
+  src: url('https://cdn.shopify.com/s/files/1/0742/9839/2711/files/Rasbern-ThinItalic.woff?v=1780343086') format('woff');
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Rasbern';
+  src: url('https://cdn.shopify.com/s/files/1/0742/9839/2711/files/Rasbern-ExtraLightItalic.woff?v=1780343087') format('woff');
+  font-weight: 200;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Rasbern';
+  src: url('https://cdn.shopify.com/s/files/1/0742/9839/2711/files/Rasbern-LightItalic.woff?v=1780343087') format('woff');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Rasbern';
+  src: url('https://cdn.shopify.com/s/files/1/0742/9839/2711/files/Rasbern-Italic.woff?v=1780343087') format('woff');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Rasbern';
+  src: url('https://cdn.shopify.com/s/files/1/0742/9839/2711/files/Rasbern-MediumItalic.woff?v=1780343087') format('woff');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Rasbern';
+  src: url('https://cdn.shopify.com/s/files/1/0742/9839/2711/files/Rasbern-SemiBoldItalic.woff?v=1780343087') format('woff');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Rasbern';
+  src: url('https://cdn.shopify.com/s/files/1/0742/9839/2711/files/Rasbern-BoldItalic.woff?v=1780343087') format('woff');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Rasbern';
+  src: url('https://cdn.shopify.com/s/files/1/0742/9839/2711/files/Rasbern-ExtraBoldItalic.woff?v=1780343087') format('woff');
+  font-weight: 800;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Rasbern';
+  src: url('https://cdn.shopify.com/s/files/1/0742/9839/2711/files/Rasbern-BlackItalic.woff?v=1780343087') format('woff');
+  font-weight: 900;
+  font-style: italic;
   font-display: swap;
 }
 
@@ -13,7 +136,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Rasbern-Regular', sans-serif;
+  font-family: 'Rasbern', sans-serif;
 }
 
 :root {
