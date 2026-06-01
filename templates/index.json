@@ -20,6 +20,7 @@
         "button_label": "Experience Now",
         "button_link": "",
         "image": "shopify://shop_images/hero-img.png",
+        "image_mobile": "shopify://shop_images/mobile_hero.png",
         "icon_image": "shopify://shop_images/hero_icon_a02ee0c1-b84c-4cef-a1fb-abbbeced1369.svg"
       }
     }
