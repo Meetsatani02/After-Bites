@@ -1,17 +1,163 @@
 {{ 'global.css' | asset_url | stylesheet_tag }}
 
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
+  .hero-section {
+      background-color: var(--beige);
+      background-position: center right;
+      background-repeat: no-repeat;
+      background-size: auto;
+  }
 
+  .hero-container {
+      background-image: url("img/hero-bg.png");
+      background-position: 3% 100%;
+      background-repeat: no-repeat;
+      background-size: auto;
+      display: flex;
+      justify-content: left;
+      align-items: center;
+      gap: 20px;
+      width: 100%;
+  }
+
+  .hero-content {
+      padding: 110px 0 170px 0px;
+      width: 50%;
+  }
+
+  .hero-content a {
+      padding: 10px 20px;
+      border: 1px solid var(--green);
+      border-radius: 50px;
+      font-family: "Inter", sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 16px;
+      color: var(--green);
+      letter-spacing: 0.03em;
+      display: inline-flex;
+  }
+
+  .hero-content h1 {
+      max-width: 610px;
+      font-size: 72px;
+      font-weight: 600;
+      margin: 24px 0 32px 0;
+      color: var(--green);
+  }
+
+  .hero-content p {
+      max-width: 500px;
+      font-family: "Inter", sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 16px;
+      color: var(--green);
+  }
+
+  .hero-btn a {
+      border-radius: 12px;
+      background-color: var(--green);
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.5em;
+      letter-spacing: -0.02em;
+      color: var(--beige);
+      margin-top: 64px;
+  }
+
+  .hero-img {
+      width: 50%;
+  }
+
+  .hero-img img {
+      position: absolute;
+      right: 0;
+      top: 0;
+  }
+
+  @media (max-width: 1400px) {
+      .hero-content {
+      padding: 0 0 0 40px;
+      }
+
+      .hero-img img {
+          width: 100%;
+          position: static;
+      }
+
+      .hero-content h1 {
+          font-size: 64px;
+          margin: 20px 0 20px 0;
+      }
+
+      .hero-btn a {
+          margin-top: 50px;
+      }
+  }
+
+  @media (max-width: 1024px) {
+      .hero-container {
+          flex-direction: column-reverse;
+          align-items: flex-start;
+          background-image: none;
+      }
+
+      .hero-content {
+          width: 100%;
+          padding: 0;
+      }
+
+      .hero-img {
+          width: 100%;
+      }
+
+      .hero-img {
+          width: auto;
+      }
+  }
+
+  @media (max-width: 768px) {
+      .hero-container {
+          align-items: center;
+      }
+
+      .hero-content h1 {
+          font-size: 54px;
+          line-height: 1em;
+      }
+  }
+</style>
+
+<section class="hero-section">
+  <div class="hero-container global_container global-padding">
+    <div class="hero-content">
+      <a href="#">20+ experience</a>
+      <h1>Lorem Ipsum is simply dummy text of the printing</h1>
+      <p>
+        The quality and purity of our product has made us a favorite in kitchens across the country.We’re proud to be a
+        trusted choice for healthy and delicious cooking.
+      </p>
+      <div class="comman_btn_Main hero-btn">
+        <a href="#">Experience Now</a>
+      </div>
+    </div>
+    <div class="hero-img">
+      <img src="img/hero-img.png" alt="hero-img">
+    </div>
+  </div>
+</section>
 
 {% schema %}
 {
   "name": "Hero",
-  "settings":[],
+  "settings": [],
   "presets": [
     {
-      "name" : "Hero"
+      "name": "Hero"
     }
   ]
 }
-
 {% endschema %}
