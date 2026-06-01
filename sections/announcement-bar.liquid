@@ -111,8 +111,8 @@
     {%- if left_desktop_src != blank -%}
       <div class="announcement-left">
         <picture>
-          <source media="(max-width: 768px)" srcset="{{ left_mobile_src }}">
-          <source media="(min-width: 769px)" srcset="{{ left_desktop_src }}">
+          <source media="(max-width: 640px)" srcset="{{ left_mobile_src }}">
+          <source media="(min-width: 641px)" srcset="{{ left_desktop_src }}">
           <img
             src="{{ left_desktop_src }}"
             alt="announcement icon"
@@ -151,8 +151,8 @@
     {%- if right_desktop_src != blank -%}
       <div class="announcement-right">
         <picture>
-          <source media="(max-width: 768px)" srcset="{{ right_mobile_src }}">
-          <source media="(min-width: 769px)" srcset="{{ right_desktop_src }}">
+          <source media="(max-width: 640px)" srcset="{{ right_mobile_src }}">
+          <source media="(min-width: 641px)" srcset="{{ right_desktop_src }}">
           <img
             src="{{ right_desktop_src }}"
             alt="announcement icon"
@@ -202,7 +202,7 @@
       "type": "image_picker",
       "id": "left_image_mobile",
       "label": "Left image (mobile)",
-      "info": "Shown on screens 768px and below. Falls back to the desktop image if empty."
+      "info": "Shown on screens 640px and below. Falls back to the desktop image if empty."
     },
     {
       "type": "url",
@@ -235,7 +235,7 @@
       "type": "image_picker",
       "id": "right_image_mobile",
       "label": "Right image (mobile)",
-      "info": "Shown on screens 768px and below. Falls back to the desktop image if empty."
+      "info": "Shown on screens 640px and below. Falls back to the desktop image if empty."
     },
     {
       "type": "url",
