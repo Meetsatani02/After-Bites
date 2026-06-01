@@ -262,6 +262,8 @@
 {%- style -%}
   .section-header {
     position: sticky;
+    top: 0;
+    z-index: 4;
     margin-bottom: {{ section.settings.margin_bottom | times: 0.75 | round: 0 }}px;
   }
 
@@ -269,6 +271,36 @@
     .section-header {
       margin-bottom: {{ section.settings.margin_bottom }}px;
     }
+  }
+
+  /* Sticky header behavior — pins to top on scroll, announcement bar scrolls away */
+  .shopify-section-header-sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 5;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    animation: stickySlideDown 0.3s ease;
+  }
+
+  .shopify-section-header-hidden {
+    transform: translateY(-100%);
+  }
+
+  .shopify-section-header-sticky.animate {
+    transition: transform 0.15s ease-out;
+  }
+
+  @keyframes stickySlideDown {
+    from { transform: translateY(-100%); }
+    to   { transform: translateY(0); }
+  }
+
+  /* Reserve space so content doesn't jump when header becomes fixed */
+  .shopify-section-header-sticky + * {
+    /* spacing is handled by sticky-header JS via --header-height */
   }
 {%- endstyle -%}
 
@@ -702,7 +734,7 @@
           "label": "t:sections.header.settings.sticky_header_type.options__4.label"
         }
       ],
-      "default": "on-scroll-up",
+      "default": "always",
       "label": "t:sections.header.settings.sticky_header_type.label"
     },
     {
