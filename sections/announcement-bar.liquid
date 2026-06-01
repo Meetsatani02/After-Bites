@@ -94,13 +94,27 @@
     {%- if left_text != blank or left_image != blank or left_image_url != blank -%}
       <div class="announcement-left">
         {%- if left_image != blank -%}
-          {{ left_image | image_url: width: 120 | image_tag:
+          {{
+            left_image
+            | image_url: width: 240
+            | image_tag:
               loading: 'lazy',
+              width: left_image.width,
+              height: left_image.height,
               class: 'announcement-icon',
-              alt: left_image.alt | default: 'announcement icon'
+              alt: left_image.alt | default: 'announcement icon',
+              widths: '60, 120, 180, 240',
+              sizes: '112px'
           }}
         {%- elsif left_image_url != blank -%}
-          <img src="{{ left_image_url }}" alt="" class="announcement-icon" loading="lazy">
+          <img
+            src="{{ left_image_url }}"
+            alt="announcement icon"
+            class="announcement-icon"
+            loading="lazy"
+            width="112"
+            height="17"
+          >
         {%- endif -%}
         {%- if left_text != blank -%}
           <p>
@@ -122,13 +136,27 @@
           </p>
         {%- endif -%}
         {%- if right_image != blank -%}
-          {{ right_image | image_url: width: 120 | image_tag:
+          {{
+            right_image
+            | image_url: width: 240
+            | image_tag:
               loading: 'lazy',
+              width: right_image.width,
+              height: right_image.height,
               class: 'announcement-icon',
-              alt: right_image.alt | default: 'announcement icon'
+              alt: right_image.alt | default: 'announcement icon',
+              widths: '60, 120, 180, 240',
+              sizes: '112px'
           }}
         {%- elsif right_image_url != blank -%}
-          <img src="{{ right_image_url }}" alt="" class="announcement-icon" loading="lazy">
+          <img
+            src="{{ right_image_url }}"
+            alt="announcement icon"
+            class="announcement-icon"
+            loading="lazy"
+            width="112"
+            height="17"
+          >
         {%- endif -%}
       </div>
     {%- endif -%}
