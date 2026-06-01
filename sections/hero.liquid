@@ -86,6 +86,23 @@
       top: 0; */
   }
 
+  /* Show desktop image, hide mobile image by default */
+  .hero-img .hero-img-mobile {
+      display: none;
+  }
+  {%- if section.settings.image_mobile != blank -%}
+  @media (max-width: 768px) {
+      .hero-img .hero-img-desktop {
+          display: none;
+      }
+
+      .hero-img .hero-img-mobile {
+          display: block;
+          width: 100%;
+      }
+  }
+  {%- endif -%}
+
   @media (max-width: 1400px) {
       .hero-content {
           padding: 0 0 0 40px;
@@ -189,9 +206,30 @@
             alt: section.settings.image.alt | default: 'hero image',
             sizes: '(min-width: 1024px) 50vw, 100vw',
             widths: '375, 550, 750, 1100, 1500',
-            fetchpriority: 'high'
+            fetchpriority: 'high',
+            class: 'hero-img-desktop'
         }}
-      {%- else -%}
+      {%- endif -%}
+
+      {%- if section.settings.image_mobile != blank -%}
+        {%- liquid
+          assign mobile_image_height = section.settings.image_mobile.width | divided_by: section.settings.image_mobile.aspect_ratio
+        -%}
+        {{
+          section.settings.image_mobile
+          | image_url: width: 1100
+          | image_tag:
+            width: section.settings.image_mobile.width,
+            height: mobile_image_height,
+            alt: section.settings.image_mobile.alt | default: 'hero image',
+            sizes: '100vw',
+            widths: '375, 550, 750, 1100',
+            fetchpriority: 'high',
+            class: 'hero-img-mobile'
+        }}
+      {%- endif -%}
+
+      {%- if section.settings.image == blank and section.settings.image_mobile == blank -%}
         {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
       {%- endif -%}
     </div>
@@ -251,7 +289,14 @@
     {
       "type": "image_picker",
       "id": "image",
-      "label": "Hero image"
+      "label": "Hero image",
+      "info": "Shown on desktop (and on mobile if no mobile image is set)."
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Hero image (mobile)",
+      "info": "Optional. Replaces the hero image on screens 768px and below."
     },
     {
       "type": "image_picker",
