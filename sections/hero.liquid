@@ -86,11 +86,11 @@
       top: 0; */
   }
 
-  /* Show desktop image, hide mobile image by default */
+  /* Desktop image only on desktop, mobile image only on mobile */
   .hero-img .hero-img-mobile {
       display: none;
   }
-  {%- if section.settings.image_mobile != blank -%}
+
   @media (max-width: 768px) {
       .hero-img .hero-img-desktop {
           display: none;
@@ -101,7 +101,6 @@
           width: 100%;
       }
   }
-  {%- endif -%}
 
   @media (max-width: 1400px) {
       .hero-content {
