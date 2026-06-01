@@ -5,6 +5,8 @@
   assign right_text = section.settings.right_text
   assign left_image = section.settings.left_image
   assign right_image = section.settings.right_image
+  assign left_image_mobile = section.settings.left_image_mobile
+  assign right_image_mobile = section.settings.right_image_mobile
   assign left_image_url = section.settings.left_image_url
   assign right_image_url = section.settings.right_image_url
   assign link = section.settings.link
@@ -91,31 +93,33 @@
 
 <section class="announcement-wrapper-{{ section.id }}">
   <div class="announcement-container-{{ section.id }}">
-    {%- if left_image != blank or left_image_url != blank -%}
+    {%- liquid
+      assign left_desktop_src = ''
+      if left_image != blank
+        assign left_desktop_src = left_image | image_url: width: 240
+      elsif left_image_url != blank
+        assign left_desktop_src = left_image_url
+      endif
+
+      assign left_mobile_src = ''
+      if left_image_mobile != blank
+        assign left_mobile_src = left_image_mobile | image_url: width: 240
+      else
+        assign left_mobile_src = left_desktop_src
+      endif
+    -%}
+    {%- if left_desktop_src != blank -%}
       <div class="announcement-left">
-        {%- if left_image != blank -%}
-          {{
-            left_image
-            | image_url: width: 240
-            | image_tag:
-              loading: 'lazy',
-              width: left_image.width,
-              height: left_image.height,
-              class: 'announcement-icon',
-              alt: left_image.alt | default: 'announcement icon',
-              widths: '60, 120, 180, 240',
-              sizes: '112px'
-          }}
-        {%- elsif left_image_url != blank -%}
+        <picture>
+          <source media="(max-width: 768px)" srcset="{{ left_mobile_src }}">
+          <source media="(min-width: 769px)" srcset="{{ left_desktop_src }}">
           <img
-            src="{{ left_image_url }}"
+            src="{{ left_desktop_src }}"
             alt="announcement icon"
             class="announcement-icon"
             loading="lazy"
-            width="112"
-            height="17"
           >
-        {%- endif -%}
+        </picture>
       </div>
     {%- endif -%}
 
@@ -129,31 +133,33 @@
       </div>
     {%- endif -%}
 
-    {%- if right_image != blank or right_image_url != blank -%}
+    {%- liquid
+      assign right_desktop_src = ''
+      if right_image != blank
+        assign right_desktop_src = right_image | image_url: width: 240
+      elsif right_image_url != blank
+        assign right_desktop_src = right_image_url
+      endif
+
+      assign right_mobile_src = ''
+      if right_image_mobile != blank
+        assign right_mobile_src = right_image_mobile | image_url: width: 240
+      else
+        assign right_mobile_src = right_desktop_src
+      endif
+    -%}
+    {%- if right_desktop_src != blank -%}
       <div class="announcement-right">
-        {%- if right_image != blank -%}
-          {{
-            right_image
-            | image_url: width: 240
-            | image_tag:
-              loading: 'lazy',
-              width: right_image.width,
-              height: right_image.height,
-              class: 'announcement-icon',
-              alt: right_image.alt | default: 'announcement icon',
-              widths: '60, 120, 180, 240',
-              sizes: '112px'
-          }}
-        {%- elsif right_image_url != blank -%}
+        <picture>
+          <source media="(max-width: 768px)" srcset="{{ right_mobile_src }}">
+          <source media="(min-width: 769px)" srcset="{{ right_desktop_src }}">
           <img
-            src="{{ right_image_url }}"
+            src="{{ right_desktop_src }}"
             alt="announcement icon"
             class="announcement-icon"
             loading="lazy"
-            width="112"
-            height="17"
           >
-        {%- endif -%}
+        </picture>
       </div>
     {%- endif -%}
   </div>
@@ -190,13 +196,19 @@
     {
       "type": "image_picker",
       "id": "left_image",
-      "label": "Left image (upload)"
+      "label": "Left image (desktop)"
+    },
+    {
+      "type": "image_picker",
+      "id": "left_image_mobile",
+      "label": "Left image (mobile)",
+      "info": "Shown on screens 768px and below. Falls back to the desktop image if empty."
     },
     {
       "type": "url",
       "id": "left_image_url",
       "label": "Left image URL (fallback)",
-      "info": "Used if no image is uploaded above."
+      "info": "Used if no desktop image is uploaded above."
     },
     {
       "type": "text",
@@ -217,13 +229,19 @@
     {
       "type": "image_picker",
       "id": "right_image",
-      "label": "Right image (upload)"
+      "label": "Right image (desktop)"
+    },
+    {
+      "type": "image_picker",
+      "id": "right_image_mobile",
+      "label": "Right image (mobile)",
+      "info": "Shown on screens 768px and below. Falls back to the desktop image if empty."
     },
     {
       "type": "url",
       "id": "right_image_url",
       "label": "Right image URL (fallback)",
-      "info": "Used if no image is uploaded above."
+      "info": "Used if no desktop image is uploaded above."
     },
     {
       "type": "header",
