@@ -94,12 +94,12 @@
 
     <div class="header-icons">
       <a href="#" class="user">
-        {{- 'icon-search-new.svg' | inline_asset_content -}}
+        {{ 'icon-search-new.svg' | asset_url}}
         {% comment %} <img src="/img/User Icon.svg" alt="user"> {% endcomment %}
       </a>
 
       <a href="#" class="search">
-        {{ 'icon-search-new.svg' | asset_url | stylesheet_tag }}
+        {{ 'icon-search-new.svg' | asset_url}}
         <img src="/img/Search Icon.svg" alt="search">
       </a>
 
