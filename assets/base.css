@@ -1,3 +1,21 @@
+/* ===== Custom font: Rasbern (uploaded to Shopify Files / media) ===== */
+@font-face {
+  font-family: 'Rasbern-Regular';
+  src: url('https://cdn.shopify.com/s/files/1/0742/9839/2711/files/Rasbern-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Rasbern-Regular', sans-serif;
+}
+
 :root {
   --alpha-button-background: 1;
   --alpha-button-border: 1;
