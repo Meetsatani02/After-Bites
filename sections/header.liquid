@@ -208,13 +208,76 @@
     display:flex;
   }
 
-  /* Show close icon when drawer is open, hide hamburger */
-  header-drawer > details > summary .icon-close,
-  header-drawer > details > summary svg.icon-close { display: none; }
-  header-drawer > details[open] > summary .icon-hamburger,
-  header-drawer > details[open] > summary svg.icon-hamburger { display: none; }
-  header-drawer > details[open] > summary .icon-close,
-  header-drawer > details[open] > summary svg.icon-close { display: inline-block; }
+  /* Trigger icon sizing + color */
+  header-drawer > details > summary.header__icon--menu svg {
+    width: 24px;
+    height: 24px;
+    color: var(--green);
+  }
+
+  /* Default: show hamburger, hide close */
+  header-drawer > details > summary .icon-close { display: none; }
+  /* When open: hide hamburger, show close */
+  header-drawer > details[open] > summary .icon-hamburger { display: none; }
+  header-drawer > details[open] > summary .icon-close { display: inline-block; }
+
+  /* ===== Menu drawer themed to header colors (beige / green) ===== */
+  .menu-drawer,
+  .menu-drawer.gradient {
+    background: var(--beige);
+    background-image: none;
+    color: var(--green);
+  }
+
+  .menu-drawer__inner-container,
+  .menu-drawer__navigation-container,
+  .menu-drawer__submenu,
+  .menu-drawer__submenu.gradient {
+    background: var(--beige);
+    background-image: none;
+  }
+
+  .menu-drawer .menu-drawer__menu-item,
+  .menu-drawer__close-button {
+    color: var(--green);
+    font-family: "Inter", sans-serif;
+  }
+
+  .menu-drawer .menu-drawer__menu-item .svg-wrapper,
+  .menu-drawer .menu-drawer__menu-item svg,
+  .menu-drawer__close-button .svg-wrapper,
+  .menu-drawer__close-button svg {
+    color: var(--green);
+  }
+
+  /* Dividers / hover states using green tints */
+  .menu-drawer__navigation .list-menu__item {
+    border-bottom: 1px solid rgba(28, 48, 37, 0.12);
+  }
+
+  .menu-drawer__menu-item--active,
+  .menu-drawer__menu-item:focus,
+  .menu-drawer__close-button:focus,
+  .menu-drawer__menu-item:hover,
+  .menu-drawer__close-button:hover {
+    color: var(--green);
+    background-color: rgba(28, 48, 37, 0.06);
+  }
+
+  .menu-drawer__utility-links {
+    background-color: rgba(28, 48, 37, 0.04);
+  }
+
+  .menu-drawer__account {
+    color: var(--green);
+  }
+
+  /* Drawer border + overlay tint */
+  @media screen and (min-width: 750px) {
+    .menu-drawer {
+      border-right: 2px solid var(--green);
+    }
+  }
 
   /* Hide dropdown details disclosure default marker inside nav */
   .header-nav details > summary { list-style: none; cursor: pointer; }
