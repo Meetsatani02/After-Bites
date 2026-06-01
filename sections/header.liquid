@@ -16,68 +16,39 @@
   <link rel="stylesheet" href="{{ 'component-mega-menu.css' | asset_url }}" media="print" onload="this.media='all'">
 {%- endif -%}
 
+{{ 'global.css' | asset_url | stylesheet_tag }}
+
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
-  header-drawer {
-    justify-self: start;
-  }
-
   {%- if section.settings.sticky_header_type == 'reduce-logo-size' -%}
     .scrolled-past-header .header-logo img {
-      transform: scale(0.75);
+      transform: translateX(-50%) scale(0.75);
       transform-origin: top center;
     }
   {%- endif -%}
 
-  {%- if section.settings.menu_type_desktop != "drawer" -%}
-    @media screen and (min-width: 1025px) {
-      header-drawer {
-        display: none;
-      }
-    }
-  {%- endif -%}
-
-  .menu-drawer-container {
-    display: flex;
-  }
-
-  .list-menu {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .list-menu--inline {
-    display: inline-flex;
-    flex-wrap: wrap;
-  }
-
-  summary.list-menu__item {
-    padding-right: 2.7rem;
-  }
-
+  /* Shopify drawer / list-menu base (needed for dropdown + drawer functionality) */
+  .menu-drawer-container { display: flex; }
+  .list-menu { list-style: none; padding: 0; margin: 0; }
+  .list-menu--inline { display: inline-flex; flex-wrap: wrap; }
+  summary.list-menu__item { padding-right: 2.7rem; }
   .list-menu__item {
     display: flex;
     align-items: center;
     line-height: calc(1 + 0.3 / var(--font-body-scale));
   }
-
   .list-menu__item--link {
     text-decoration: none;
     padding-bottom: 1rem;
     padding-top: 1rem;
     line-height: calc(1 + 0.8 / var(--font-body-scale));
   }
-
   @media screen and (min-width: 750px) {
-    .list-menu__item--link {
-      padding-bottom: 0.5rem;
-      padding-top: 0.5rem;
-    }
+    .list-menu__item--link { padding-bottom: 0.5rem; padding-top: 0.5rem; }
   }
 
-  /* ===== Custom header design ===== */
+  /* ===== Custom header design (from header-main.liquid) ===== */
   .header-wrapper {
     background: var(--beige);
     border-bottom: 2px solid var(--green);
@@ -89,11 +60,19 @@
     justify-content: space-between;
     align-items: center;
     position: relative;
-    gap: 16px;
   }
 
-  .header-nav,
-  .header-nav .list-menu {
+  .header-nav {
+    display: flex;
+    gap: 32px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    align-items: center;
+  }
+
+  .header-nav .list-menu,
+  .header-nav ul {
     display: flex;
     gap: 32px;
     margin: 0;
@@ -103,22 +82,25 @@
   }
 
   .header-nav a,
-  .header-nav .header__menu-item {
-    font-family: 'Inter', sans-serif;
+  .header-nav .header__menu-item,
+  .header-nav summary {
+    font-family: "Inter", sans-serif;
     font-size: 18px;
     font-weight: 500;
     line-height: 18px;
     color: var(--green);
     text-decoration: none;
     padding: 0;
+    background: transparent;
+    border: none;
   }
 
   .header-logo {
     position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 47%;
     top: -27px;
     margin: 0;
+    z-index: 2;
   }
 
   .header-logo a {
@@ -139,8 +121,10 @@
     align-items: center;
   }
 
-  .header-icons .header__icon,
-  .header-icons .header-cart-button {
+  .header-icons > a,
+  .header-icons > .header__icon,
+  .header-icons .header-cart-button,
+  .header-icons details-modal > details > summary {
     border: none;
     background: transparent;
     cursor: pointer;
@@ -152,55 +136,120 @@
     position: relative;
   }
 
-  .header-icons .svg-wrapper svg,
+  .header-icons .svg-wrapper,
   .header-icons svg {
-    width: 24px;
-    height: 24px;
     color: var(--green);
   }
 
+  .header-icons .svg-wrapper svg,
+  .header-icons > a > svg,
+  .header-icons summary svg {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+  }
+
+  /* Cart count bubble — beige bg on green dot */
+  .header-icons .cart-count-bubble {
+    position: absolute;
+    top: -6px;
+    right: -8px;
+    background: var(--green);
+    color: var(--beige);
+    border-radius: 50%;
+    min-width: 18px;
+    height: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 0 4px;
+    line-height: 1;
+  }
+
+  /* Hamburger / mobile menu trigger (uses Shopify header-drawer snippet) */
   .menu_bar_res {
     display: none;
+  }
+
+  header-drawer {
+    display: none;
+    justify-self: start;
+  }
+
+  header-drawer > details > summary.header__icon--menu {
+    list-style: none;
     border: none;
     background: transparent;
     cursor: pointer;
     padding: 0;
     color: var(--green);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  .menu_bar_res svg {
+  header-drawer > details > summary.header__icon--menu::-webkit-details-marker {
+    display: none;
+  }
+
+  header-drawer > details > summary.header__icon--menu svg {
     width: 28px;
     height: 28px;
+    color: var(--green);
+    fill: currentColor;
   }
 
+  /* Show close icon when drawer is open, hide hamburger */
+  header-drawer > details > summary .icon-close,
+  header-drawer > details > summary svg.icon-close { display: none; }
+  header-drawer > details[open] > summary .icon-hamburger,
+  header-drawer > details[open] > summary svg.icon-hamburger { display: none; }
+  header-drawer > details[open] > summary .icon-close,
+  header-drawer > details[open] > summary svg.icon-close { display: inline-block; }
+
+  /* Hide dropdown details disclosure default marker inside nav */
+  .header-nav details > summary { list-style: none; cursor: pointer; }
+  .header-nav details > summary::-webkit-details-marker { display: none; }
+
+  /* ===== Desktop (>1024px) ===== */
+  @media screen and (min-width: 1025px) {
+    header-drawer { display: none !important; }
+  }
+
+  /* ===== Tablet / Mobile (≤1024px) ===== */
   @media (max-width: 1024px) {
     .header-container {
-      padding: 20px 30px;
+      padding: 16px 30px;
     }
 
     .header-logo {
       position: static;
-      transform: none;
+      top: auto;
+      left: auto;
     }
 
     .header-nav {
       display: none;
     }
 
-    .menu_bar_res {
+    header-drawer {
       display: inline-flex;
     }
   }
 
+  /* ===== Mobile (≤768px) ===== */
   @media (max-width: 768px) {
     .header-container {
-      padding: 16px 20px;
+      padding: 14px 20px;
     }
 
     .header-icons .user,
-    .header-icons .header__icon--account,
     .header-icons .search,
-    .header-icons .header__icon--search {
+    .header-icons .header__icon--account,
+    .header-icons .header__icon--search,
+    .header-icons details-modal {
       display: none;
     }
 
@@ -260,21 +309,23 @@
     endif
   -%}
 
-  <header class="header-container global_container page-width header header--{{ section.settings.logo_position }} header--mobile-{{ section.settings.mobile_logo_position }}{% if section.settings.menu_type_desktop == 'drawer' %} drawer-menu{% endif %}{% if section.settings.menu != blank %} header--has-menu{% endif %}{% if has_app_block %} header--has-app{% endif %}{% if social_links %} header--has-social{% endif %}{% if shop.customer_accounts_enabled %} header--has-account{% endif %}{% if localization_forms %} header--has-localizations{% endif %}">
-    {%- comment %} LEFT: mobile drawer trigger + desktop navigation {% endcomment -%}
-    {%- if section.settings.menu != blank -%}
-      {% render 'header-drawer' %}
-    {%- endif -%}
+  <header class="header-container global_container header header--{{ section.settings.logo_position }} header--mobile-{{ section.settings.mobile_logo_position }}{% if section.settings.menu_type_desktop == 'drawer' %} drawer-menu{% endif %}{% if section.settings.menu != blank %} header--has-menu{% endif %}{% if has_app_block %} header--has-app{% endif %}{% if social_links %} header--has-social{% endif %}{% if shop.customer_accounts_enabled %} header--has-account{% endif %}{% if localization_forms %} header--has-localizations{% endif %}">
+    {%- comment %} LEFT: mobile drawer (hamburger) + desktop nav {% endcomment -%}
+    <div class="header-left">
+      {%- if section.settings.menu != blank -%}
+        {% render 'header-drawer' %}
+      {%- endif -%}
 
-    {%- if section.settings.menu != blank and section.settings.menu_type_desktop != 'drawer' -%}
-      <nav class="header-nav" role="navigation">
-        {%- if section.settings.menu_type_desktop == 'dropdown' -%}
-          {% render 'header-dropdown-menu' %}
-        {%- else -%}
-          {% render 'header-mega-menu' %}
-        {%- endif -%}
-      </nav>
-    {%- endif -%}
+      {%- if section.settings.menu != blank and section.settings.menu_type_desktop != 'drawer' -%}
+        <nav class="header-nav" role="navigation">
+          {%- if section.settings.menu_type_desktop == 'dropdown' -%}
+            {% render 'header-dropdown-menu' %}
+          {%- else -%}
+            {% render 'header-mega-menu' %}
+          {%- endif -%}
+        </nav>
+      {%- endif -%}
+    </div>
 
     {%- comment %} CENTER: logo {% endcomment -%}
     <div class="header-logo">
