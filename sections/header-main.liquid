@@ -1,16 +1,121 @@
 {{ 'global.css' | asset_url | stylesheet_tag }}
 
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
+  .header-wrapper {
+      background: var(--beige);
+      border-bottom: 2px solid var(--green);
+  }
+
+  .header-container {
+      padding: 29px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+  }
+
+  .header-nav {
+      display: flex;
+      gap: 32px;
+  }
+
+  .header-nav a {
+      font-family: "Inter", sans-serif;
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 18px;
+      color: var(--green);
+      text-decoration: none;
+  }
+
+  .header-logo {
+      position: absolute;
+      left: 50%;
+      top: -27px;
+  }
+
+  .header-icons {
+      display: flex;
+      gap: 18px;
+  }
+
+  .header-cart-button {
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      padding: 0;
+  }
+
+  @media (max-width:1024px) {
+      .header-container {
+          padding: 0 30px;
+      }
+
+      .header-logo {
+          position: static;
+      }
+
+      .header-nav {
+          display: none;
+      }
+  }
+
+  @media (max-width:768px) {
+      .header-container {
+          padding: 0 20px;
+      }
+
+      .user,
+      .search {
+          display: none;
+      }
+
+      .header-logo img {
+          width: 60px;
+      }
+  }
+</style>
+
+<header class="header-wrapper">
+  <div class="header-container global_container">
+    <nav class="header-nav">
+      <a href="#">Home</a>
+      <a href="#">Product</a>
+      <a href="#">About Us</a>
+      <a href="#">FAQ</a>
+      <a href="#">Contact Us</a>
+    </nav>
+
+    <div class="header-logo">
+      <img src="/img/logo-main.svg" alt="logo">
+    </div>
+
+    <div class="header-icons">
+      <a href="#" class="user">
+        <img src="/img/User Icon.svg" alt="user">
+      </a>
+
+      <a href="#" class="search">
+        <img src="/img/Search Icon.svg" alt="search">
+      </a>
+
+      <a href="#" class="cart header-cart-button">
+        <img src="/img/Shopping Cart Icon.svg" alt="cart">
+      </a>
+    </div>
+  </div>
+</header>
 
 {% schema %}
 {
   "name": "Header-main",
-  "settings":[],
+  "settings": [],
   "presets": [
     {
-      "name" : "Header-main"
+      "name": "Header-main"
     }
   ]
 }
-
 {% endschema %}
