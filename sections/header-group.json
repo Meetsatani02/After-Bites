@@ -43,10 +43,16 @@
         "padding_top": 20,
         "padding_bottom": 20
       }
+    },
+    "header_main_paTJLJ": {
+      "type": "header-main",
+      "name": "Header-main",
+      "settings": {}
     }
   },
   "order": [
     "announcement-bar",
-    "header"
+    "header",
+    "header_main_paTJLJ"
   ]
 }
