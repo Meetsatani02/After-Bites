@@ -139,99 +139,24 @@
   }
 </style>
 
-{%- liquid
-  assign badge_text   = section.settings.badge_text
-  assign badge_link   = section.settings.badge_link
-  assign heading      = section.settings.heading
-  assign description  = section.settings.description
-  assign button_text  = section.settings.button_text
-  assign button_link  = section.settings.button_link
-  assign decor_icon   = section.settings.decor_icon
-  assign decor_icon_url = section.settings.decor_icon_url
-  assign image_desktop = section.settings.image_desktop
-  assign image_mobile  = section.settings.image_mobile
-  assign image_url_fallback = section.settings.image_url_fallback
--%}
-
-<section class="hero-section">
+<section class="hero-section Meet">
   <div class="hero-container global_container global-padding">
     <div class="hero-content">
-      {%- if badge_text != blank -%}
-        <a href="{{ badge_link | default: '#' }}">{{ badge_text }}</a>
-      {%- endif -%}
-
-      {%- if heading != blank -%}
-        <h1>{{ heading }}</h1>
-      {%- endif -%}
-
-      {%- if description != blank -%}
-        <p>{{ description }}</p>
-      {%- endif -%}
-
-      {%- if decor_icon != blank or decor_icon_url != blank -%}
-        <div class="hero-icon-icon">
-          {%- if decor_icon != blank -%}
-            {{
-              decor_icon
-              | image_url: width: 600
-              | image_tag:
-                width: decor_icon.width,
-                height: decor_icon.height,
-                alt: decor_icon.alt | default: 'hero icon',
-                loading: 'lazy'
-            }}
-          {%- else -%}
-            <img src="{{ decor_icon_url }}" alt="hero icon" loading="lazy">
-          {%- endif -%}
-        </div>
-      {%- endif -%}
-
-      {%- if button_text != blank -%}
-        <div class="comman_btn_Main hero-btn">
-          <a href="{{ button_link | default: '#' }}">{{ button_text }}</a>
-        </div>
-      {%- endif -%}
+      <a href="#">20+ experience</a>
+      <h1>Lorem Ipsum is simply dummy text of the printing</h1>
+      <p>
+        The quality and purity of our product has made us a favorite in kitchens across the country.We’re proud to be a
+        trusted choice for healthy and delicious cooking.
+      </p>
+      <div class="hero-icon-icon">
+        <img src="/img/hero icon.svg" alt="hero icon">
+      </div>
+      <div class="comman_btn_Main hero-btn">
+        <a href="#">Experience Now</a>
+      </div>
     </div>
-
     <div class="hero-img">
-      {%- if image_desktop != blank or image_mobile != blank -%}
-        <picture>
-          {%- if image_mobile != blank -%}
-            <source
-              media="(max-width: 1024px)"
-              srcset="{{ image_mobile | image_url: width: 800 }} 1x, {{ image_mobile | image_url: width: 1200 }} 2x"
-            >
-          {%- endif -%}
-
-          {%- if image_desktop != blank -%}
-            {{
-              image_desktop
-              | image_url: width: 1200
-              | image_tag:
-                width: image_desktop.width,
-                height: image_desktop.height,
-                alt: image_desktop.alt | default: heading | default: 'hero image',
-                widths: '600, 900, 1200, 1600',
-                sizes: '(max-width: 1024px) 100vw, 50vw',
-                loading: 'eager',
-                fetchpriority: 'high'
-            }}
-          {%- elsif image_mobile != blank -%}
-            {{
-              image_mobile
-              | image_url: width: 1200
-              | image_tag:
-                width: image_mobile.width,
-                height: image_mobile.height,
-                alt: image_mobile.alt | default: heading | default: 'hero image',
-                loading: 'eager',
-                fetchpriority: 'high'
-            }}
-          {%- endif -%}
-        </picture>
-      {%- elsif image_url_fallback != blank -%}
-        <img src="{{ image_url_fallback }}" alt="{{ heading | default: 'hero image' | escape }}" loading="eager">
-      {%- endif -%}
+      <img src="img/hero-img.png" alt="hero-img">
     </div>
   </div>
 </section>
@@ -239,84 +164,7 @@
 {% schema %}
 {
   "name": "Hero",
-  "settings": [
-    {
-      "type": "header",
-      "content": "Text content"
-    },
-    {
-      "type": "text",
-      "id": "badge_text",
-      "label": "Badge text",
-      "default": "20+ experience"
-    },
-    {
-      "type": "url",
-      "id": "badge_link",
-      "label": "Badge link"
-    },
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "Lorem Ipsum is simply dummy text of the printing"
-    },
-    {
-      "type": "textarea",
-      "id": "description",
-      "label": "Description",
-      "default": "The quality and purity of our product has made us a favorite in kitchens across the country. We’re proud to be a trusted choice for healthy and delicious cooking."
-    },
-    {
-      "type": "text",
-      "id": "button_text",
-      "label": "Button text",
-      "default": "Experience Now"
-    },
-    {
-      "type": "url",
-      "id": "button_link",
-      "label": "Button link"
-    },
-    {
-      "type": "header",
-      "content": "Decorative icon (background)"
-    },
-    {
-      "type": "image_picker",
-      "id": "decor_icon",
-      "label": "Decorative icon image"
-    },
-    {
-      "type": "url",
-      "id": "decor_icon_url",
-      "label": "Decorative icon URL (fallback)",
-      "info": "Used if no icon is uploaded above."
-    },
-    {
-      "type": "header",
-      "content": "Hero images"
-    },
-    {
-      "type": "image_picker",
-      "id": "image_desktop",
-      "label": "Desktop image",
-      "info": "Shown on screens wider than 1024px."
-    },
-    {
-      "type": "image_picker",
-      "id": "image_mobile",
-      "label": "Mobile image",
-      "info": "Shown on screens 1024px and below."
-    },
-    {
-      "type": "url",
-      "id": "image_url_fallback",
-      "label": "Hero image URL (fallback)",
-      "info": "Used if neither desktop nor mobile image is uploaded.",
-      "default": "https://cdn.shopify.com/s/files/1/0742/9839/2711/files/hero-img.png?v=1780314133"
-    }
-  ],
+  "settings": [],
   "presets": [
     {
       "name": "Hero"
