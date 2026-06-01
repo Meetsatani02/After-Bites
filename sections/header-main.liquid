@@ -94,7 +94,8 @@
 
     <div class="header-icons">
       <a href="#" class="user">
-        <img src="/img/User Icon.svg" alt="user">
+        {{- 'icon-search-new.svg' | inline_asset_content -}}
+        {% comment %} <img src="/img/User Icon.svg" alt="user"> {% endcomment %}
       </a>
 
       <a href="#" class="search">
