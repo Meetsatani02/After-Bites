@@ -91,7 +91,7 @@
 
 <section class="announcement-wrapper-{{ section.id }}">
   <div class="announcement-container-{{ section.id }}">
-    {%- if left_text != blank or left_image != blank or left_image_url != blank -%}
+    {%- if left_image != blank or left_image_url != blank -%}
       <div class="announcement-left">
         {%- if left_image != blank -%}
           {{
@@ -116,25 +116,21 @@
             height="17"
           >
         {%- endif -%}
-        {%- if left_text != blank -%}
-          <p>
-            {%- if link != blank -%}<a href="{{ link }}">{%- endif -%}
-              {{ left_text }}
-            {%- if link != blank -%}</a>{%- endif -%}
-          </p>
-        {%- endif -%}
       </div>
     {%- endif -%}
 
-    {%- if right_text != blank or right_image != blank or right_image_url != blank -%}
+    {%- if left_text != blank -%}
+      <div class="announcement-left">
+        <p>
+          {%- if link != blank -%}<a href="{{ link }}">{%- endif -%}
+            {{ left_text }}
+          {%- if link != blank -%}</a>{%- endif -%}
+        </p>
+      </div>
+    {%- endif -%}
+
+    {%- if right_image != blank or right_image_url != blank -%}
       <div class="announcement-right">
-        {%- if right_text != blank -%}
-          <p>
-            {%- if link != blank -%}<a href="{{ link }}">{%- endif -%}
-              {{ right_text }}
-            {%- if link != blank -%}</a>{%- endif -%}
-          </p>
-        {%- endif -%}
         {%- if right_image != blank -%}
           {{
             right_image
