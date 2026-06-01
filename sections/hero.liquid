@@ -114,10 +114,15 @@
   }
 
   @media (max-width: 1024px) {
+      .hero-section {
+          padding: 60px 20px;
+      }
+
       .hero-container {
           flex-direction: column-reverse;
           align-items: flex-start;
           background-image: none;
+          gap: 32px;
       }
 
       .hero-content {
@@ -135,8 +140,13 @@
   }
 
   @media (max-width: 768px) {
+      .hero-section {
+          padding: 50px 20px;
+      }
+
       .hero-container {
           align-items: center;
+          gap: 24px;
       }
 
       .hero-content h1 {
