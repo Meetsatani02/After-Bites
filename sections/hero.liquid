@@ -86,7 +86,12 @@
       top: 0; */
   }
 
-  /* Desktop image only on desktop, mobile image only on mobile */
+  /* Desktop image only on desktop, mobile image only on mobile.
+     Never show both at the same time. */
+  .hero-img .hero-img-desktop {
+      display: block;
+  }
+
   .hero-img .hero-img-mobile {
       display: none;
   }
