@@ -23,7 +23,7 @@
 
   {%- if section.settings.sticky_header_type == 'reduce-logo-size' -%}
     .scrolled-past-header .header-logo img {
-      transform: translateX(-50%) scale(0.75);
+      transform: scale(0.75);
       transform-origin: top center;
     }
   {%- endif -%}
@@ -97,8 +97,9 @@
 
   .header-logo {
     position: absolute;
-    left: 49%;
-    top: -1px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     margin: 0;
     z-index: 2;
   }
