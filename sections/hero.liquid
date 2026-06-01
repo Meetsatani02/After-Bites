@@ -114,10 +114,6 @@
   }
 
   @media (max-width: 1024px) {
-      .hero-section {
-          padding: 60px 20px;
-      }
-
       .hero-container {
           flex-direction: column-reverse;
           align-items: flex-start;
@@ -125,9 +121,10 @@
           gap: 32px;
       }
 
+      /* Padding only on the text section; image stays flush */
       .hero-content {
           width: 100%;
-          padding: 0;
+          padding: 60px 20px;
       }
 
       .hero-img {
@@ -140,13 +137,13 @@
   }
 
   @media (max-width: 768px) {
-      .hero-section {
-          padding: 50px 20px;
-      }
-
       .hero-container {
           align-items: center;
           gap: 24px;
+      }
+
+      .hero-content {
+          padding: 50px 20px;
       }
 
       .hero-content h1 {
