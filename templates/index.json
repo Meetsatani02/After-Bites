@@ -22,9 +22,15 @@
         "image": "shopify://shop_images/hero-img.png",
         "icon_image": "shopify://shop_images/hero_icon_a02ee0c1-b84c-4cef-a1fb-abbbeced1369.svg"
       }
+    },
+    "best_product_ymx3aV": {
+      "type": "best-product",
+      "name": "Best Product",
+      "settings": {}
     }
   },
   "order": [
-    "hero_RqP7bt"
+    "hero_RqP7bt",
+    "best_product_ymx3aV"
   ]
 }
