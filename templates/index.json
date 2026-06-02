@@ -103,7 +103,9 @@
     "image_banner_ypywDX": {
       "type": "image-banner",
       "name": "Image Banner",
-      "settings": {}
+      "settings": {
+        "image": "shopify://shop_images/product_main.png"
+      }
     }
   },
   "order": [
