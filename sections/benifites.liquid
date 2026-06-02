@@ -5,36 +5,33 @@
 
         .benifites {
             background: var(--beige);
-            height: 607px;
-            position: relative;
-            overflow: hidden;
             width: 100%;
+            padding: 108px 40px 90px 40px;
+            overflow: hidden;
+        }
+
+        .benifites-inner {
+            max-width: 1440px;
+            margin: 0 auto;
         }
 
         .benifites-heading {
-            position: absolute;
-            left: 50%;
-            top: 108px;
-            transform: translateX(-50%);
-            margin: 0;
+            margin: 0 0 90px 0;
             font-family: 'Rasbern', sans-serif;
             font-weight: 700;
             font-size: 88px;
             line-height: 1.1;
             text-align: center;
             text-transform: uppercase;
-            white-space: nowrap;
             color: var(--green);
         }
 
         .benifites-list {
-            position: absolute;
-            left: 50%;
-            top: 390px;
-            transform: translateX(-50%);
             display: flex;
-            align-items: center;
-            gap: 80px;
+            justify-content: center;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 40px 80px;
         }
 
         .benifites-item {
@@ -49,6 +46,17 @@
             height: 120px;
             border-radius: 50%;
             border: 1px solid var(--green);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .benifites-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
         }
 
         .benifites-item p {
@@ -60,35 +68,84 @@
             text-align: center;
             color: var(--green);
         }
+
+        @media (max-width: 1400px) {
+            .benifites-heading {
+                font-size: 64px;
+                margin-bottom: 70px;
+            }
+
+            .benifites-list {
+                gap: 40px 60px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .benifites {
+                padding: 60px 20px;
+            }
+
+            .benifites-heading {
+                font-size: 48px;
+                margin-bottom: 50px;
+            }
+
+            .benifites-list {
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .benifites {
+                padding: 50px 20px;
+            }
+
+            .benifites-heading {
+                font-size: 36px;
+                margin-bottom: 32px;
+            }
+
+            .benifites-list {
+                gap: 28px 40px;
+            }
+
+            .benifites-icon {
+                width: 90px;
+                height: 90px;
+            }
+
+            .benifites-item p {
+                font-size: 16px;
+            }
+        }
     </style>
 
     <section class="benifites">
-        <h2 class="benifites-heading">Everyday after bites<br>goods for the everyday</h2>
+        <div class="benifites-inner">
+            {%- if section.settings.heading != blank -%}
+                <h2 class="benifites-heading">{{ section.settings.heading | newline_to_br }}</h2>
+            {%- endif -%}
 
-        <div class="benifites-list">
-            <div class="benifites-item">
-                <div class="benifites-icon"></div>
-                <p>Organic</p>
-            </div>
-            <div class="benifites-item">
-                <div class="benifites-icon"></div>
-                <p>Organic</p>
-            </div>
-            <div class="benifites-item">
-                <div class="benifites-icon"></div>
-                <p>Organic</p>
-            </div>
-            <div class="benifites-item">
-                <div class="benifites-icon"></div>
-                <p>Organic</p>
-            </div>
-            <div class="benifites-item">
-                <div class="benifites-icon"></div>
-                <p>Organic</p>
-            </div>
-            <div class="benifites-item">
-                <div class="benifites-icon"></div>
-                <p>Organic</p>
+            <div class="benifites-list">
+                {%- for block in section.blocks -%}
+                    <div class="benifites-item" {{ block.shopify_attributes }}>
+                        <div class="benifites-icon">
+                            {%- if block.settings.icon != blank -%}
+                                {{
+                                    block.settings.icon
+                                    | image_url: width: 240
+                                    | image_tag:
+                                        alt: block.settings.label | default: 'icon',
+                                        widths: '120, 240, 360',
+                                        loading: 'lazy'
+                                }}
+                            {%- endif -%}
+                        </div>
+                        {%- if block.settings.label != blank -%}
+                            <p>{{ block.settings.label }}</p>
+                        {%- endif -%}
+                    </div>
+                {%- endfor -%}
             </div>
         </div>
     </section>
@@ -96,10 +153,45 @@
 {% schema %}
 {
   "name": "Benifites",
-  "settings": [],
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Everyday after bites\ngoods for the everyday"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon image"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Organic"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 12,
   "presets": [
     {
-      "name": "Benifites"
+      "name": "Benifites",
+      "blocks": [
+        { "type": "item" },
+        { "type": "item" },
+        { "type": "item" },
+        { "type": "item" },
+        { "type": "item" },
+        { "type": "item" }
+      ]
     }
   ]
 }
