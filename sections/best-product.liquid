@@ -244,17 +244,21 @@
       if product_count <= section.settings.slides_desktop
         assign enable_loop = false
       endif
-
-      if section.settings.border_image != blank
-        assign border_url = section.settings.border_image | image_url: width: 2000
-      endif
     -%}
 
         <section class="product-wrapper" id="BestProduct-{{ section.id }}">
 
-        {%- if border_url != blank -%}
+        {%- if section.settings.border_image != blank -%}
         <div class="hero-border">
-            <img src="{{ border_url }}" alt="border" loading="lazy">
+            {{
+                section.settings.border_image
+                | image_url: width: 3000
+                | image_tag:
+                    alt: section.settings.border_image.alt | default: 'border',
+                    widths: '750, 1100, 1500, 2000, 3000',
+                    sizes: '100vw',
+                    loading: 'lazy'
+            }}
         </div>
         {%- endif -%}
 
@@ -314,9 +318,17 @@
 
         </div>
 
-        {%- if border_url != blank -%}
+        {%- if section.settings.border_image != blank -%}
         <div class="hero-border">
-            <img src="{{ border_url }}" alt="border" loading="lazy">
+            {{
+                section.settings.border_image
+                | image_url: width: 3000
+                | image_tag:
+                    alt: section.settings.border_image.alt | default: 'border',
+                    widths: '750, 1100, 1500, 2000, 3000',
+                    sizes: '100vw',
+                    loading: 'lazy'
+            }}
         </div>
         {%- endif -%}
 
