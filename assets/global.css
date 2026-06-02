@@ -10,6 +10,8 @@ p,h2,h3,h4{
     --beige: #F4EDDB;
     --dark-beige: #E6DCC2;
     --green: #1C3025;
+      --light-green: #17362D;
+    --yellow: #CAA36C;
 }
 
 .global_container {
