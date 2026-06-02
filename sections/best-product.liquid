@@ -244,13 +244,19 @@
       if product_count <= section.settings.slides_desktop
         assign enable_loop = false
       endif
+
+      if section.settings.border_image != blank
+        assign border_url = section.settings.border_image | image_url: width: 2000
+      endif
     -%}
 
         <section class="product-wrapper" id="BestProduct-{{ section.id }}">
 
+        {%- if border_url != blank -%}
         <div class="hero-border">
-            <img src="https://cdn.shopify.com/s/files/1/0742/9839/2711/files/border.png?v=1780384582" alt="border">
+            <img src="{{ border_url }}" alt="border" loading="lazy">
         </div>
+        {%- endif -%}
 
         <div class="product-container">
 
@@ -308,9 +314,11 @@
 
         </div>
 
+        {%- if border_url != blank -%}
         <div class="hero-border">
-            <img src="https://cdn.shopify.com/s/files/1/0742/9839/2711/files/border.png?v=1780384582" alt="border">
+            <img src="{{ border_url }}" alt="border" loading="lazy">
         </div>
+        {%- endif -%}
 
     </section>
 
