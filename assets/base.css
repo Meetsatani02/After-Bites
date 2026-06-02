@@ -131,11 +131,10 @@
 }
 
 @font-face {
-  font-family: 'Rasbern';
+  font-family: 'Moena';
   src: url('https://cdn.shopify.com/s/files/1/0742/9839/2711/files/MOENA_OTF.woff?v=1780389680') format('woff');
-  font-weight: 900;
-  font-style: italic;
-  font-display: swap;
+  font-weight: 400;
+  font-style: normal;
 }
 
 h1,
