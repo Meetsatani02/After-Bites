@@ -24,6 +24,9 @@
       align-items: center;
       gap: 20px;
       width: 100%;
+      /* Align hero's left edge with the header content (centered 1440px container + 40px padding).
+         Image still bleeds to the right edge per design. */
+      padding-left: max(40px, calc((100vw - 1440px) / 2 + 40px));
   }
 
   .hero-content {
@@ -94,10 +97,6 @@
   }
 
   @media (max-width: 1400px) {
-      .hero-content {
-          padding: 0 0 0 40px;
-      }
-
       .hero-img img {
           width: 100%;
           position: static;
@@ -119,6 +118,7 @@
           align-items: flex-start;
           background-image: none;
           gap: 32px;
+          padding-left: 0;
       }
 
       /* Padding only on the text section; image stays flush */
