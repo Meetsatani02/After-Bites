@@ -1,19 +1,106 @@
 {{ 'global.css' | asset_url | stylesheet_tag }}
 
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap');
 
-<style>
-</style>
+        .benifites {
+            background: var(--beige);
+            height: 607px;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
 
+        .benifites-heading {
+            position: absolute;
+            left: 50%;
+            top: 108px;
+            transform: translateX(-50%);
+            margin: 0;
+            font-family: 'Rasbern', sans-serif;
+            font-weight: 700;
+            font-size: 88px;
+            line-height: 1.1;
+            text-align: center;
+            text-transform: uppercase;
+            white-space: nowrap;
+            color: var(--green);
+        }
+
+        .benifites-list {
+            position: absolute;
+            left: 50%;
+            top: 390px;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 80px;
+        }
+
+        .benifites-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .benifites-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 1px solid var(--green);
+        }
+
+        .benifites-item p {
+            margin: 0;
+            font-family: "Inter", sans-serif;
+            font-weight: 500;
+            font-size: 20px;
+            line-height: normal;
+            text-align: center;
+            color: var(--green);
+        }
+    </style>
+
+    <section class="benifites">
+        <h2 class="benifites-heading">Everyday after bites<br>goods for the everyday</h2>
+
+        <div class="benifites-list">
+            <div class="benifites-item">
+                <div class="benifites-icon"></div>
+                <p>Organic</p>
+            </div>
+            <div class="benifites-item">
+                <div class="benifites-icon"></div>
+                <p>Organic</p>
+            </div>
+            <div class="benifites-item">
+                <div class="benifites-icon"></div>
+                <p>Organic</p>
+            </div>
+            <div class="benifites-item">
+                <div class="benifites-icon"></div>
+                <p>Organic</p>
+            </div>
+            <div class="benifites-item">
+                <div class="benifites-icon"></div>
+                <p>Organic</p>
+            </div>
+            <div class="benifites-item">
+                <div class="benifites-icon"></div>
+                <p>Organic</p>
+            </div>
+        </div>
+    </section>
 
 {% schema %}
 {
-  "name": "product_cart",
-  "settings":[],
+  "name": "Benifites",
+  "settings": [],
   "presets": [
     {
-      "name" : "product_cart"
+      "name": "Benifites"
     }
   ]
 }
-
 {% endschema %}
