@@ -106,12 +106,18 @@
       "settings": {
         "image": "shopify://shop_images/product_main.png"
       }
+    },
+    "product_vision_V9CzGW": {
+      "type": "product-vision",
+      "name": "Product Vision",
+      "settings": {}
     }
   },
   "order": [
     "hero_RqP7bt",
     "best_product_ymx3aV",
     "benifites_ceqatM",
-    "image_banner_ypywDX"
+    "image_banner_ypywDX",
+    "product_vision_V9CzGW"
   ]
 }
