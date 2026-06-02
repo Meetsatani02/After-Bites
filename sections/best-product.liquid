@@ -165,6 +165,20 @@
             user-select: none;
         }
 
+        /* Hover effects */
+        .view-btn:hover {
+            background: var(--beige);
+            color: var(--green);
+        }
+
+        .arrow-btn:hover {
+            background: var(--beige);
+        }
+
+        .arrow-btn:hover img {
+            filter: brightness(0) saturate(100%) invert(11%) sepia(18%) saturate(1093%) hue-rotate(86deg) brightness(95%) contrast(88%);
+        }
+
         /* Disabled state for slider arrows (e.g. when there are 2 or fewer products) */
         .arrow-btn.is-disabled {
             opacity: .35;
