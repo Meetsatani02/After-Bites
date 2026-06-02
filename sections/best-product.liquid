@@ -1,5 +1,7 @@
 {{ 'global.css' | asset_url | stylesheet_tag }}
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap');
 
@@ -12,18 +14,17 @@
             display: flex;
         }
 
-        
+        .hero-border img {
+            width: 100%;
+            display: block;
+        }
+
         .product-image img {
             width: 100%;
             display: block;
-            border-radius:50%;
-            height: fit-content;
+            border-radius: 50%;
+            height: 427px;
             object-fit: cover;
-        }
-
-        .hero-border img,{
-              width: 100%;
-            display: block;
         }
 
         .product-wrapper {
@@ -68,33 +69,16 @@
         .product-grid {
             max-width: 896px;
             margin: auto;
-            display: flex;
-            gap: 40px;
-            overflow-x: auto;
-            scroll-behavior: smooth;
-            scroll-snap-type: x mandatory;
-            scrollbar-width: none;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .product-grid::-webkit-scrollbar {
-            display: none;
         }
 
         .product-card {
-            flex: 0 0 calc(50% - 20px);
             text-align: center;
-            scroll-snap-align: start;
+            height: auto;
         }
 
         .product-image {
             max-width: 360px;
             margin: auto;
-        }
-
-        .product-image img {
-            height: 427px;
-            object-fit: cover;
         }
 
         .product-content {
@@ -179,7 +163,7 @@
             filter: brightness(0) saturate(100%) invert(11%) sepia(18%) saturate(1093%) hue-rotate(86deg) brightness(95%) contrast(88%);
         }
 
-        /* Disabled state for slider arrows (e.g. when there are 2 or fewer products) */
+        /* Disabled state for slider arrows (Swiper adds this class automatically) */
         .arrow-btn.is-disabled {
             opacity: .35;
             pointer-events: none;
@@ -204,14 +188,6 @@
         @media (max-width:768px) {
             .product-container {
                 padding: 30px 20px;
-            }
-
-            .product-grid {
-                gap: 20px;
-            }
-
-            .product-card {
-                flex: 0 0 100%;
             }
 
             .product-title {
@@ -262,9 +238,10 @@
         assign best_collection = collections['best-product']
       endif
       assign product_count = best_collection.all_products_count
-      assign disable_arrows = false
-      if product_count <= 2
-        assign disable_arrows = true
+
+      assign enable_loop = section.settings.loop
+      if product_count <= section.settings.slides_desktop
+        assign enable_loop = false
       endif
     -%}
 
@@ -281,33 +258,35 @@
                 <h3>{{ section.settings.heading | escape }}</h3>
             </div>
 
-            <div class="product-grid">
-                {%- for product in best_collection.products -%}
-                    <div class="product-card">
-                        <div class="product-image">
-                            <a href="{{ product.url }}">
-                                {%- if product.featured_image != blank -%}
-                                    {{
-                                        product.featured_image
-                                        | image_url: width: 720
-                                        | image_tag:
-                                            alt: product.featured_image.alt | default: product.title,
-                                            widths: '180, 360, 540, 720',
-                                            sizes: '360px',
-                                            loading: 'lazy'
-                                    }}
-                                {%- else -%}
-                                    {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
-                                {%- endif -%}
-                            </a>
-                        </div>
+            <div class="product-grid swiper">
+                <div class="swiper-wrapper">
+                    {%- for product in best_collection.products -%}
+                        <div class="product-card swiper-slide">
+                            <div class="product-image">
+                                <a href="{{ product.url }}">
+                                    {%- if product.featured_image != blank -%}
+                                        {{
+                                            product.featured_image
+                                            | image_url: width: 720
+                                            | image_tag:
+                                                alt: product.featured_image.alt | default: product.title,
+                                                widths: '180, 360, 540, 720',
+                                                sizes: '360px',
+                                                loading: 'lazy'
+                                        }}
+                                    {%- else -%}
+                                        {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                                    {%- endif -%}
+                                </a>
+                            </div>
 
-                        <div class="product-content">
-                            <h3><a href="{{ product.url }}">{{ product.title | escape }}</a></h3>
-                            <p>{{ product.description | strip_html | truncatewords: 20 }}</p>
+                            <div class="product-content">
+                                <h3><a href="{{ product.url }}">{{ product.title | escape }}</a></h3>
+                                <p>{{ product.description | strip_html | truncatewords: 20 }}</p>
+                            </div>
                         </div>
-                    </div>
-                {%- endfor -%}
+                    {%- endfor -%}
+                </div>
             </div>
 
             <div class="product-bottom">
@@ -315,11 +294,11 @@
                 <a href="{{ best_collection.url | default: '#' }}" class="view-btn">{{ section.settings.button_label | escape }}</a>
 
                 <div class="arrow-group">
-                    <div class="arrow-btn{% if disable_arrows %} is-disabled{% endif %}" data-prev>
+                    <div class="arrow-btn" data-prev>
                         <img src="https://cdn.shopify.com/s/files/1/0742/9839/2711/files/left.svg?v=1780384654" alt="left-arrow">
                     </div>
 
-                    <div class="arrow-btn{% if disable_arrows %} is-disabled{% endif %}" data-next>
+                    <div class="arrow-btn" data-next>
                         <img src="https://cdn.shopify.com/s/files/1/0742/9839/2711/files/right.svg?v=1780384660" alt="right-arrow">
                     </div>
                 </div>
@@ -334,30 +313,33 @@
 
     </section>
 
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
         (function () {
-            var section = document.getElementById('BestProduct-{{ section.id }}');
-            if (!section) return;
+            var root = document.getElementById('BestProduct-{{ section.id }}');
+            if (!root || typeof Swiper === 'undefined') return;
 
-            var slider = section.querySelector('.product-grid'),
-                card = section.querySelector('.product-card'),
-                next = section.querySelector('[data-next]'),
-                prev = section.querySelector('[data-prev]');
-
-            if (!slider || !card || !next || !prev) return;
-
-            var slideAmount = function () {
-                return card.offsetWidth + (window.innerWidth <= 768 ? 20 : 40);
-            };
-
-            next.addEventListener('click', function () {
-                if (next.classList.contains('is-disabled')) return;
-                slider.scrollBy({ left: slideAmount(), behavior: 'smooth' });
-            });
-
-            prev.addEventListener('click', function () {
-                if (prev.classList.contains('is-disabled')) return;
-                slider.scrollBy({ left: -slideAmount(), behavior: 'smooth' });
+            new Swiper(root.querySelector('.swiper'), {
+                slidesPerView: {{ section.settings.slides_mobile }},
+                spaceBetween: {{ section.settings.space_mobile }},
+                loop: {{ enable_loop }},
+                {% if section.settings.autoplay %}
+                autoplay: {
+                    delay: {{ section.settings.autoplay_speed | times: 1000 }},
+                    disableOnInteraction: false
+                },
+                {% endif %}
+                navigation: {
+                    nextEl: root.querySelector('[data-next]'),
+                    prevEl: root.querySelector('[data-prev]'),
+                    disabledClass: 'is-disabled'
+                },
+                breakpoints: {
+                    769: {
+                        slidesPerView: {{ section.settings.slides_desktop }},
+                        spaceBetween: {{ section.settings.space_desktop }}
+                    }
+                }
             });
         })();
     </script>
@@ -389,6 +371,70 @@
       "id": "button_label",
       "label": "Button label",
       "default": "View All Product"
+    },
+    {
+      "type": "header",
+      "content": "Slider"
+    },
+    {
+      "type": "checkbox",
+      "id": "loop",
+      "label": "Enable loop",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Enable autoplay",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "label": "Autoplay speed",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "slides_desktop",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "label": "Slides per view (desktop)",
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "slides_mobile",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "label": "Slides per view (mobile)",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "space_desktop",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Space between slides (desktop)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "space_mobile",
+      "min": 0,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "label": "Space between slides (mobile)",
+      "default": 20
     }
   ],
   "presets": [
