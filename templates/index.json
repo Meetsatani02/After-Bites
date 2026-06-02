@@ -110,7 +110,11 @@
     "product_vision_V9CzGW": {
       "type": "product-vision",
       "name": "Product Vision",
-      "settings": {}
+      "settings": {
+        "background_text": "Afterbites",
+        "heading": "Our Product Vision",
+        "border_image": "shopify://shop_images/border_image.svg"
+      }
     }
   },
   "order": [
