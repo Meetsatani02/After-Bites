@@ -53,24 +53,31 @@
             align-items: center;
             margin-bottom: 45px;
             text-align: center;
+            overflow: hidden;
         }
 
         .product-title h2 {
-            font-size: 195px;
+            font-size: clamp(56px, 14vw, 195px);
             font-weight: 400;
             line-height: 1.28;
             color: var(--yellow);
             opacity: .1;
-             font-family: 'Moena', sans-serif;
+            font-family: 'Moena', sans-serif;
+            white-space: nowrap;
+            margin: 0;
         }
 
         .product-title h3 {
             position: absolute;
-            top: 85px;
-            font-size: 72px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            font-size: clamp(28px, 6vw, 72px);
             font-weight: 600;
             line-height: 1.1;
             color: var(--beige);
+            margin: 0;
         }
 
         .product-grid {
@@ -181,15 +188,6 @@
             .product-container {
                 padding: 40px 30px;
             }
-
-            .product-title h2 {
-                font-size: 160px;
-            }
-
-            .product-title h3 {
-                top: 70px;
-                font-size: 62px;
-            }
         }
 
         @media (max-width:768px) {
@@ -199,15 +197,6 @@
 
             .product-title {
                 margin-bottom: 20px;
-            }
-
-            .product-title h2 {
-                font-size: 120px;
-            }
-
-            .product-title h3 {
-                top: 55px;
-                font-size: 42px;
             }
 
             .product-content h3 {
@@ -220,19 +209,6 @@
         }
 
         @media (max-width:480px) {
-            .product-title {
-                margin-bottom: 40px;
-            }
-
-            .product-title h2 {
-                display: none;
-            }
-
-            .product-title h3 {
-                position: static;
-                font-size: 36px;
-            }
-
             .product-content h3 {
                 font-size: 24px;
             }
