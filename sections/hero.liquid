@@ -24,10 +24,10 @@
       align-items: center;
       gap: 40px;
       width: 100%;
-      max-width: 1440px;
-      margin: 0 auto;
-      /* Match header side padding for a clean, contained 50/50 layout */
-      padding: 0 40px;
+      /* Left padding aligns text with the header; NO right padding so the
+         image bleeds to the full right edge of the screen. */
+      padding-left: max(40px, calc((100vw - 1440px) / 2 + 40px));
+      padding-right: 0;
   }
 
   .hero-content {
