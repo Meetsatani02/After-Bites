@@ -30,7 +30,14 @@
         "collection": "best-product",
         "background_text": "Afterbites",
         "heading": "Our best Product",
-        "button_label": "View All Product"
+        "button_label": "View All Product",
+        "loop": false,
+        "autoplay": false,
+        "autoplay_speed": 4,
+        "slides_desktop": 2,
+        "slides_mobile": 1,
+        "space_desktop": 40,
+        "space_mobile": 20
       }
     }
   },
