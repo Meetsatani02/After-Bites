@@ -1,19 +1,191 @@
 {{ 'global.css' | asset_url | stylesheet_tag }}
 
-<style>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
 
-</style>
+        .product-vision {
+            background: var(--beige);
+            width: 100%;
+            padding: 108px 40px 100px 40px;
+            overflow: hidden;
+        }
 
+        .product-vision-inner {
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        /* Heading (reference: best-product .product-title) */
+        .product-vision-title {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 70px;
+            overflow: hidden;
+        }
+
+        .product-vision-title h2 {
+            margin: 0;
+            font-family: 'Rasbern', sans-serif;
+            font-weight: 700;
+            font-size: 160px;
+            line-height: 1.1;
+            color: var(--green);
+            opacity: .08;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .product-vision-title h3 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            margin: 0;
+            font-family: 'Rasbern', sans-serif;
+            font-weight: 700;
+            font-size: 72px;
+            line-height: 1.1;
+            color: var(--green);
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        /* Vision card on the background line panel */
+        .product-vision-card {
+            max-width: 1296px;
+            margin: 0 auto;
+            background-image: url('https://cdn.shopify.com/s/files/1/0742/9839/2711/files/background_line.png?v=1780404929');
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            gap: 64px;
+            padding: 56px 64px;
+        }
+
+        .product-vision-media {
+            flex: 0 0 480px;
+            position: relative;
+        }
+
+        .product-vision-media img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 20px;
+        }
+
+        .product-vision-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .product-vision-logo img {
+            height: 56px;
+            width: auto;
+            display: block;
+            border-radius: 8px;
+        }
+
+        .product-vision-body h4 {
+            margin: 0;
+            font-family: 'Rasbern', sans-serif;
+            font-weight: 700;
+            font-size: 40px;
+            line-height: 1.2;
+            color: var(--green);
+        }
+
+        .product-vision-body p {
+            margin: 0;
+            max-width: 520px;
+            font-family: "Inter", sans-serif;
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 1.6;
+            color: var(--green);
+        }
+
+        .product-vision-icon {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .product-vision-icon img {
+            width: 45px;
+            height: 45px;
+            display: block;
+        }
+
+        .product-vision-icon span {
+            font-family: "Inter", sans-serif;
+            font-weight: 500;
+            font-size: 16px;
+            color: var(--green);
+        }
+    </style>
+
+    <section class="product-vision">
+        <div class="product-vision-inner">
+
+            <div class="product-vision-title">
+                <h2>After Bites</h2>
+                <h3>Product Vision</h3>
+            </div>
+
+            <div class="product-vision-card">
+                <div class="product-vision-media">
+                    <img
+                        src="https://cdn.shopify.com/s/files/1/0742/9839/2711/files/car_image.png?v=1780404933"
+                        alt="product vision"
+                    >
+                </div>
+
+                <div class="product-vision-body">
+                    <div class="product-vision-logo">
+                        <img
+                            src="https://cdn.shopify.com/s/files/1/0742/9839/2711/files/car_image.png?v=1780404933"
+                            alt="After Bites logo"
+                        >
+                    </div>
+
+                    <h4>Crafted for the everyday journey</h4>
+
+                    <p>
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                        Our vision is to bring quality, purity and comfort into every ride and every
+                        moment, trusted by people across the country.
+                    </p>
+
+                    <div class="product-vision-icon">
+                        <img
+                            src="https://cdn.shopify.com/s/files/1/0742/9839/2711/files/abc3b16b3c71e236e7f99b635601ed0f.png?v=1780405212"
+                            alt="icon"
+                        >
+                        <span>Trusted &amp; premium quality</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
 
 {% schema %}
 {
   "name": "Product Vision",
-  "settings":[],
+  "settings": [],
   "presets": [
     {
-      "name" : "Product Vision"
+      "name": "Product Vision"
     }
   ]
 }
-
 {% endschema %}
