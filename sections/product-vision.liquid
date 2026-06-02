@@ -1,179 +1,255 @@
 {{ 'global.css' | asset_url | stylesheet_tag }}
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 
-        .product-vision {
-            background: var(--beige);
+        .pv {
+            background: var(--green);
             width: 100%;
-            padding: 108px 40px 100px 40px;
             overflow: hidden;
-        }
-
-        .product-vision-inner {
-            max-width: 1440px;
-            margin: 0 auto;
-        }
-
-        /* Heading (reference: best-product .product-title) */
-        .product-vision-title {
-            position: relative;
             display: flex;
             justify-content: center;
-            align-items: center;
-            text-align: center;
-            margin-bottom: 70px;
-            overflow: hidden;
         }
 
-        .product-vision-title h2 {
-            margin: 0;
-            font-family: 'Rasbern', sans-serif;
-            font-weight: 700;
-            font-size: 160px;
-            line-height: 1.1;
-            color: var(--green);
-            opacity: .08;
-            text-transform: uppercase;
-            white-space: nowrap;
+        /* Fixed desktop frame (1440 x 1107) */
+        .pv-frame {
+            position: relative;
+            width: 1440px;
+            height: 1107px;
+            flex: 0 0 1440px;
         }
 
-        .product-vision-title h3 {
+        /* Top & bottom dotted strips */
+        .pv-strip {
             position: absolute;
-            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 32px;
+            z-index: 5;
+            object-fit: cover;
+        }
+        .pv-strip--top { top: 0; }
+        .pv-strip--bottom { bottom: 0; }
+
+        /* Watermark + heading */
+        .pv-watermark {
+            position: absolute;
+            top: 72px;
             left: 50%;
-            transform: translate(-50%, -50%);
+            transform: translateX(-50%);
             margin: 0;
-            font-family: 'Rasbern', sans-serif;
-            font-weight: 700;
-            font-size: 72px;
-            line-height: 1.1;
-            color: var(--green);
-            text-transform: uppercase;
+            width: 791px;
+            font-family: 'Moena', 'Rasbern', sans-serif;
+            font-weight: 400;
+            font-size: 195.349px;
+            line-height: 110%;
+            text-align: center;
             white-space: nowrap;
+            color: #CAA36C;
+            opacity: .1;
         }
 
-        /* Vision card on the background line panel */
-        .product-vision-card {
-            max-width: 1296px;
-            margin: 0 auto;
+        .pv-heading {
+            position: absolute;
+            top: 140px;
+            left: 50%;
+            transform: translateX(-50%);
+            margin: 0;
+            width: 636px;
+            font-family: 'Rasbern', sans-serif;
+            font-weight: 600;
+            font-size: 72px;
+            line-height: 110%;
+            text-align: center;
+            color: var(--beige);
+        }
+
+        /* Grid card */
+        .pv-card {
+            position: absolute;
+            left: 72px;
+            top: 341px;
+            width: 1296px;
+            height: 568px;
+            box-sizing: border-box;
+            border: 2px solid var(--beige);
+            border-radius: 24px;
             background-image: url('https://cdn.shopify.com/s/files/1/0742/9839/2711/files/background_line.png?v=1780404929');
             background-position: center;
             background-size: cover;
             background-repeat: no-repeat;
-            border-radius: 24px;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        /* Polaroid image cards */
+        .pv-photo {
+            position: absolute;
+            box-sizing: border-box;
+            border: 4px solid var(--beige);
+            border-radius: 32px;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+            object-fit: cover;
+            z-index: 2;
+        }
+        .pv-photo--a {
+            width: 233px;
+            height: 233px;
+            left: 43px;
+            top: 609px;
+            transform: rotate(-15deg);
+        }
+        .pv-photo--b {
+            width: 281px;
+            height: 194px;
+            left: 1040px;
+            top: 637px;
+            transform: rotate(5.76deg);
+        }
+        .pv-photo--c {
+            width: 207.67px;
+            height: 207.67px;
+            left: 675px;
+            top: 363px;
+            transform: rotate(12.86deg);
+        }
+
+        /* Text pills */
+        .pv-pill {
+            position: absolute;
+            box-sizing: border-box;
             display: flex;
             align-items: center;
-            gap: 64px;
-            padding: 56px 64px;
-        }
-
-        .product-vision-media {
-            flex: 0 0 480px;
-            position: relative;
-        }
-
-        .product-vision-media img {
-            width: 100%;
-            height: auto;
-            display: block;
-            border-radius: 20px;
-        }
-
-        .product-vision-body {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
-
-        .product-vision-logo img {
-            height: 56px;
-            width: auto;
-            display: block;
-            border-radius: 8px;
-        }
-
-        .product-vision-body h4 {
-            margin: 0;
-            font-family: 'Rasbern', sans-serif;
-            font-weight: 700;
-            font-size: 40px;
-            line-height: 1.2;
-            color: var(--green);
-        }
-
-        .product-vision-body p {
-            margin: 0;
-            max-width: 520px;
-            font-family: "Inter", sans-serif;
-            font-weight: 400;
-            font-size: 18px;
-            line-height: 1.6;
-            color: var(--green);
-        }
-
-        .product-vision-icon {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .product-vision-icon img {
-            width: 45px;
-            height: 45px;
-            display: block;
-        }
-
-        .product-vision-icon span {
-            font-family: "Inter", sans-serif;
+            justify-content: center;
+            padding: 12px;
+            height: 74px;
+            border-radius: 16px;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+            font-family: 'Inter', sans-serif;
             font-weight: 500;
-            font-size: 16px;
+            font-size: 18px;
+            line-height: 140%;
+            text-align: center;
             color: var(--green);
+            background: var(--beige);
+            z-index: 3;
+        }
+        .pv-pill span.pv-pin {
+            position: absolute;
+            top: -20px;
+            left: -10px;
+            font-family: 'Rasbern', sans-serif;
+            font-size: 32.5764px;
+            line-height: 110%;
+            transform: rotate(-30deg);
+        }
+        .pv-pill--1 {
+            width: 402.46px;
+            left: 262px;
+            top: 575px;
+            transform: rotate(4.84deg);
+        }
+        .pv-pill--2 {
+            width: 357px;
+            left: 706px;
+            top: 731px;
+            background: #F2E4BF;
+            transform: rotate(4.78deg);
+        }
+        .pv-pill--3 {
+            width: 369.25px;
+            left: 885px;
+            top: 302px;
+            transform: rotate(-8.39deg);
+        }
+        .pv-pill--3 span.pv-pin {
+            transform: rotate(-43deg);
+        }
+
+        /* Logo badge */
+        .pv-logo {
+            position: absolute;
+            left: 18px;
+            top: 277px;
+            width: 135px;
+            height: 135px;
+            transform: rotate(-21.31deg);
+            z-index: 4;
+        }
+
+        /* Bottom tagline */
+        .pv-tagline {
+            position: absolute;
+            top: 980px;
+            left: 50%;
+            transform: translateX(-50%);
+            margin: 0;
+            width: 986px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 20px;
+            line-height: 140%;
+            text-align: center;
+            color: var(--beige);
         }
     </style>
 
-    <section class="product-vision">
-        <div class="product-vision-inner">
+    <section class="pv">
+        <div class="pv-frame">
 
-            <div class="product-vision-title">
-                <h2>After Bites</h2>
-                <h3>Product Vision</h3>
+            <img
+                class="pv-strip pv-strip--top"
+                src="https://cdn.shopify.com/s/files/1/0742/9839/2711/files/border_image.svg?v=1780392352"
+                alt=""
+            >
+
+            <h2 class="pv-watermark">Afterbites</h2>
+            <h3 class="pv-heading">Our Product Vision</h3>
+
+            <div class="pv-card"></div>
+
+            <img
+                class="pv-logo"
+                src="https://cdn.shopify.com/s/files/1/0742/9839/2711/files/logo_whole.svg?v=1780404930"
+                alt="After Bites"
+            >
+
+            <img
+                class="pv-photo pv-photo--c"
+                src="https://cdn.shopify.com/s/files/1/0742/9839/2711/files/car_image.png?v=1780404933"
+                alt="product vision"
+            >
+            <img
+                class="pv-photo pv-photo--a"
+                src="https://cdn.shopify.com/s/files/1/0742/9839/2711/files/car_image.png?v=1780404933"
+                alt="product vision"
+            >
+            <img
+                class="pv-photo pv-photo--b"
+                src="https://cdn.shopify.com/s/files/1/0742/9839/2711/files/car_image.png?v=1780404933"
+                alt="product vision"
+            >
+
+            <div class="pv-pill pv-pill--1">
+                <span class="pv-pin">&#128279;</span>
+                Jo apni car premium rakhte hain woh mukhwas bhi After Bites rakhte hain.
+            </div>
+            <div class="pv-pill pv-pill--2">
+                <span class="pv-pin">&#128279;</span>
+                Ek chutki mein tradition, taste, aur ek yaad jo rehti hai
+            </div>
+            <div class="pv-pill pv-pill--3">
+                <span class="pv-pin">&#128205;</span>
+                Shaadi mein sabse zyada poochha gaya 'Yeh mukhwas kahan se liya?
             </div>
 
-            <div class="product-vision-card">
-                <div class="product-vision-media">
-                    <img
-                        src="https://cdn.shopify.com/s/files/1/0742/9839/2711/files/car_image.png?v=1780404933"
-                        alt="product vision"
-                    >
-                </div>
+            <p class="pv-tagline">From the wedding mandap to the front seat After Bites belongs where life's best moments happen</p>
 
-                <div class="product-vision-body">
-                    <div class="product-vision-logo">
-                        <img
-                            src="https://cdn.shopify.com/s/files/1/0742/9839/2711/files/car_image.png?v=1780404933"
-                            alt="After Bites logo"
-                        >
-                    </div>
-
-                    <h4>Crafted for the everyday journey</h4>
-
-                    <p>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                        Our vision is to bring quality, purity and comfort into every ride and every
-                        moment, trusted by people across the country.
-                    </p>
-
-                    <div class="product-vision-icon">
-                        <img
-                            src="https://cdn.shopify.com/s/files/1/0742/9839/2711/files/abc3b16b3c71e236e7f99b635601ed0f.png?v=1780405212"
-                            alt="icon"
-                        >
-                        <span>Trusted &amp; premium quality</span>
-                    </div>
-                </div>
-            </div>
+            <img
+                class="pv-strip pv-strip--bottom"
+                src="https://cdn.shopify.com/s/files/1/0742/9839/2711/files/border_image.svg?v=1780392352"
+                alt=""
+            >
 
         </div>
     </section>
