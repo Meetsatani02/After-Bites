@@ -55,6 +55,7 @@
             line-height: 1.28;
             color: var(--yellow);
             opacity: .1;
+             font-family: 'Moena', sans-serif;
         }
 
         .product-title h3 {
@@ -243,18 +244,12 @@
       if product_count <= section.settings.slides_desktop
         assign enable_loop = false
       endif
-
-      if section.settings.border_image != blank
-        assign border_url = section.settings.border_image | image_url: width: 2000
-      else
-        assign border_url = 'https://cdn.shopify.com/s/files/1/0742/9839/2711/files/border.png?v=1780384582'
-      endif
     -%}
 
         <section class="product-wrapper" id="BestProduct-{{ section.id }}">
 
         <div class="hero-border">
-            <img src="{{ border_url }}" alt="border" loading="lazy">
+            <img src="https://cdn.shopify.com/s/files/1/0742/9839/2711/files/border.png?v=1780384582" alt="border">
         </div>
 
         <div class="product-container">
@@ -314,7 +309,7 @@
         </div>
 
         <div class="hero-border">
-            <img src="{{ border_url }}" alt="border" loading="lazy">
+            <img src="https://cdn.shopify.com/s/files/1/0742/9839/2711/files/border.png?v=1780384582" alt="border">
         </div>
 
     </section>
@@ -377,12 +372,6 @@
       "id": "button_label",
       "label": "Button label",
       "default": "View All Product"
-    },
-    {
-      "type": "image_picker",
-      "id": "border_image",
-      "label": "Border image (top & bottom)",
-      "info": "Decorative border shown above and below the section."
     },
     {
       "type": "header",
