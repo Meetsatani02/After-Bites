@@ -99,11 +99,17 @@
       "settings": {
         "heading": "Everyday after bites\ngoods for the everyday"
       }
+    },
+    "image_banner_ypywDX": {
+      "type": "image-banner",
+      "name": "Image Banner",
+      "settings": {}
     }
   },
   "order": [
     "hero_RqP7bt",
     "best_product_ymx3aV",
-    "benifites_ceqatM"
+    "benifites_ceqatM",
+    "image_banner_ypywDX"
   ]
 }
