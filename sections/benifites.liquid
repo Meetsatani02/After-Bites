@@ -1,155 +1,155 @@
 {{ 'global.css' | asset_url | stylesheet_tag }}
 
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap');
+<style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap');
 
-        .benifites {
-            background: var(--beige);
-            width: 100%;
-            padding: 108px 40px 90px 40px;
-            overflow: hidden;
-        }
+      .benifites {
+          background: var(--beige);
+          width: 100%;
+          padding: 108px 40px 90px 40px;
+          overflow: hidden;
+      }
 
-        .benifites-inner {
-            max-width: 1440px;
-            margin: 0 auto;
-        }
+      .benifites-inner {
+          max-width: 1440px;
+          margin: 0 auto;
+      }
 
-        .benifites-heading {
-            margin: 0 0 90px 0;
-            font-family: 'Rasbern', sans-serif;
-            font-weight: 700;
-            font-size: 88px;
-            line-height: 1.1;
-            text-align: center;
-            text-transform: uppercase;
-            color: var(--green);
-        }
+      .benifites-heading {
+          margin: 0 0 90px 0;
+          font-family: 'Rasbern', sans-serif;
+          font-weight: 700;
+          font-size: 88px;
+          line-height: 1.1;
+          text-align: center;
+          text-transform: uppercase;
+          color: var(--green);
+      }
 
-        .benifites-list {
-            display: flex;
-            justify-content: space-Between;
-            align-items: flex-start;
-            flex-wrap: wrap;
-            {% comment %} gap: 40px 80px; {% endcomment %}
-        }
+      .benifites-list {
+          display: flex;
+          justify-content: space-Between;
+          align-items: flex-start;
+          flex-wrap: wrap;
+          max-width: 1220px;
+          margin: auto;
+          {% comment %} gap: 40px 80px; {% endcomment %}
+      }
 
-        .benifites-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-             width: 120px;
-        }
+      .benifites-item {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 12px;
+           width: 120px;
+      }
 
-        .benifites-icon {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            border: 1px solid var(--green);
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+      .benifites-icon {
+          width: 120px;
+          height: 120px;
+          border-radius: 50%;
+          border: 1px solid var(--green);
+          overflow: hidden;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+      }
 
-        .benifites-icon img {
-        width: 56px;
-    height: auto;
-            object-fit: contain;
-            display: block;
-        }
+      .benifites-icon img {
+      width: 56px;
+  height: auto;
+          object-fit: contain;
+          display: block;
+      }
 
-        .benifites-item p {
-            margin: 0;
-            font-family: "Inter", sans-serif;
-            font-weight: 500;
-            font-size: 20px;
-            line-height: normal;
-            text-align: center;
-            color: var(--green);
-        }
+      .benifites-item p {
+          margin: 0;
+          font-family: "Inter", sans-serif;
+          font-weight: 500;
+          font-size: 20px;
+          line-height: normal;
+          text-align: center;
+          color: var(--green);
+      }
 
-        @media (max-width: 1400px) {
-            .benifites-heading {
-                font-size: 64px;
-                margin-bottom: 70px;
-            }
+      @media (max-width: 1400px) {
+          .benifites-heading {
+              font-size: 64px;
+              margin-bottom: 70px;
+          }
 
-            .benifites-list {
-                gap: 40px 60px;
-            }
-        }
+          .benifites-list {
+              gap: 40px 60px;
+          }
+      }
 
-        @media (max-width: 1024px) {
-            .benifites {
-                padding: 60px 20px;
-            }
+      @media (max-width: 1024px) {
+          .benifites {
+              padding: 60px 20px;
+          }
 
-            .benifites-heading {
-                font-size: 48px;
-                margin-bottom: 50px;
-            }
+          .benifites-heading {
+              font-size: 48px;
+              margin-bottom: 50px;
+          }
 
-            .benifites-list {
-                gap: 40px;
-            }
-        }
+          .benifites-list {
+              gap: 40px;
+          }
+      }
 
-        @media (max-width: 768px) {
-            .benifites {
-                padding: 50px 20px;
-            }
+      @media (max-width: 768px) {
+          .benifites {
+              padding: 50px 20px;
+          }
 
-            .benifites-heading {
-                font-size: 36px;
-                margin-bottom: 32px;
-            }
+          .benifites-heading {
+              font-size: 36px;
+              margin-bottom: 32px;
+          }
 
-            .benifites-list {
-                gap: 28px 40px;
-            }
+          .benifites-list {
+              gap: 28px 40px;
+          }
 
-            .benifites-icon {
-                width: 90px;
-                height: 90px;
-            }
+          .benifites-icon {
+              width: 90px;
+              height: 90px;
+          }
 
-            .benifites-item p {
-                font-size: 16px;
-            }
-        }
-    </style>
+          .benifites-item p {
+              font-size: 16px;
+          }
+      }
+</style>
 
-    <section class="benifites">
-        <div class="benifites-inner">
-            {%- if section.settings.heading != blank -%}
-                <h2 class="benifites-heading">{{ section.settings.heading | newline_to_br }}</h2>
+<section class="benifites">
+  <div class="benifites-inner">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="benifites-heading">{{ section.settings.heading | newline_to_br }}</h2>
+    {%- endif -%}
+
+    <div class="benifites-list">
+      {%- for block in section.blocks -%}
+        <div class="benifites-item" {{ block.shopify_attributes }}>
+          <div class="benifites-icon">
+            {%- if block.settings.icon != blank -%}
+              {{
+                block.settings.icon
+                | image_url: width: 240
+                | image_tag: alt: block.settings.label
+                | default: 'icon', widths: '120, 240, 360', loading: 'lazy'
+              }}
             {%- endif -%}
-
-            <div class="benifites-list">
-                {%- for block in section.blocks -%}
-                    <div class="benifites-item" {{ block.shopify_attributes }}>
-                        <div class="benifites-icon">
-                            {%- if block.settings.icon != blank -%}
-                                {{
-                                    block.settings.icon
-                                    | image_url: width: 240
-                                    | image_tag:
-                                        alt: block.settings.label | default: 'icon',
-                                        widths: '120, 240, 360',
-                                        loading: 'lazy'
-                                }}
-                            {%- endif -%}
-                        </div>
-                        {%- if block.settings.label != blank -%}
-                            <p>{{ block.settings.label }}</p>
-                        {%- endif -%}
-                    </div>
-                {%- endfor -%}
-            </div>
+          </div>
+          {%- if block.settings.label != blank -%}
+            <p>{{ block.settings.label }}</p>
+          {%- endif -%}
         </div>
-    </section>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
 
 {% schema %}
 {
