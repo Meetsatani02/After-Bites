@@ -19,10 +19,6 @@
   }
 
   .hero-container {
-      /* background-image: url("img/hero-bg.png");
-      background-position: 3% 100%;
-      background-repeat: no-repeat;
-      background-size: auto; */
       display: flex;
       justify-content: left;
       align-items: center;
@@ -158,7 +154,7 @@
 </style>
 
 <section class="hero-section">
-  <div class="hero-container global_container">
+  <div class="hero-container">
     <div class="hero-content">
       {%- if section.settings.badge_text != blank -%}
         <a href="{{ section.settings.badge_link }}">{{ section.settings.badge_text }}</a>
