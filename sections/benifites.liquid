@@ -28,12 +28,12 @@
 
       .benifites-list {
           display: flex;
-          justify-content: space-Between;
+          justify-content: space-between;
           align-items: flex-start;
           flex-wrap: wrap;
           max-width: 1220px;
           margin: auto;
-          {% comment %} gap: 40px 80px; {% endcomment %}
+          row-gap: 48px;
       }
 
       .benifites-item {
@@ -41,7 +41,7 @@
           flex-direction: column;
           align-items: center;
           gap: 12px;
-           width: 120px;
+          width: 120px;
       }
 
       .benifites-icon {
@@ -77,10 +77,6 @@
               font-size: 64px;
               margin-bottom: 70px;
           }
-
-          .benifites-list {
-              gap: 40px 60px;
-          }
       }
 
       @media (max-width: 1024px) {
@@ -93,8 +89,11 @@
               margin-bottom: 50px;
           }
 
+          /* Center the wrapped rows instead of stretching them */
           .benifites-list {
-              gap: 40px;
+              justify-content: center;
+              column-gap: 60px;
+              row-gap: 40px;
           }
       }
 
@@ -109,7 +108,12 @@
           }
 
           .benifites-list {
-              gap: 28px 40px;
+              column-gap: 40px;
+              row-gap: 32px;
+          }
+
+          .benifites-item {
+              width: 90px;
           }
 
           .benifites-icon {
@@ -119,6 +123,31 @@
 
           .benifites-item p {
               font-size: 16px;
+          }
+      }
+
+      @media (max-width: 480px) {
+          .benifites-heading {
+              font-size: 26px;
+              margin-bottom: 28px;
+          }
+
+          .benifites-list {
+              column-gap: 28px;
+              row-gap: 28px;
+          }
+
+          .benifites-item {
+              width: 80px;
+          }
+
+          .benifites-icon {
+              width: 80px;
+              height: 80px;
+          }
+
+          .benifites-item p {
+              font-size: 14px;
           }
       }
 </style>
@@ -137,8 +166,10 @@
               {{
                 block.settings.icon
                 | image_url: width: 240
-                | image_tag: alt: block.settings.label
-                | default: 'icon', widths: '120, 240, 360', loading: 'lazy'
+                | image_tag:
+                    alt: block.settings.label | default: 'icon',
+                    widths: '120, 240, 360',
+                    loading: 'lazy'
               }}
             {%- endif -%}
           </div>
