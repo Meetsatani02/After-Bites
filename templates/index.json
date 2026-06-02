@@ -26,7 +26,12 @@
     "best_product_ymx3aV": {
       "type": "best-product",
       "name": "Best Product",
-      "settings": {}
+      "settings": {
+        "collection": "best-product",
+        "background_text": "Afterbites",
+        "heading": "Our best Product",
+        "button_label": "View All Product"
+      }
     }
   },
   "order": [
