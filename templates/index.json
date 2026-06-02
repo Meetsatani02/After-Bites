@@ -40,10 +40,16 @@
         "space_desktop": 40,
         "space_mobile": 20
       }
+    },
+    "benifites_ceqatM": {
+      "type": "benifites",
+      "name": "Benifites",
+      "settings": {}
     }
   },
   "order": [
     "hero_RqP7bt",
-    "best_product_ymx3aV"
+    "best_product_ymx3aV",
+    "benifites_ceqatM"
   ]
 }
