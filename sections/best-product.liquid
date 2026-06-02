@@ -12,11 +12,17 @@
 
         .hero-border {
             display: flex;
+            line-height: 0;
         }
 
         .hero-border img {
             width: 100%;
             display: block;
+        }
+
+        /* Flip the bottom border so it mirrors the top one */
+        .hero-border--bottom img {
+            transform: scaleY(-1);
         }
 
         .product-image img {
@@ -319,7 +325,7 @@
         </div>
 
         {%- if section.settings.border_image != blank -%}
-        <div class="hero-border">
+        <div class="hero-border hero-border--bottom">
             {{
                 section.settings.border_image
                 | image_url: width: 3000
