@@ -1,7 +1,6 @@
 {{ 'global.css' | asset_url | stylesheet_tag }}
 
 <style>
-
   /* section heading */
   .pv-title {
       font-family: "Cormorant Garamond", serif;
@@ -523,58 +522,61 @@
 </section>
 
 <script>
-        (function () {
-            var box = document.querySelector('.pv-main-box-inner');
-            if (!box) return;
+  (function () {
+    var box = document.querySelector('.pv-main-box-inner');
+    if (!box) return;
 
-            var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            // No animation for reduced-motion users — leave the layout static & visible.
-            if (reduceMotion) return;
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // No animation for reduced-motion users — leave the layout static & visible.
+    if (reduceMotion) return;
 
-            var items = Array.prototype.slice.call(box.querySelectorAll('.pv-item'));
+    var items = Array.prototype.slice.call(box.querySelectorAll('.pv-item'));
 
-            // 1) Staggered scroll-reveal: arm hidden state, then reveal when in view.
-            box.classList.add('pv-animate');
+    // 1) Staggered scroll-reveal: arm hidden state, then reveal when in view.
+    box.classList.add('pv-animate');
 
-            if ('IntersectionObserver' in window) {
-                var io = new IntersectionObserver(function (entries) {
-                    entries.forEach(function (e) {
-                        if (e.isIntersecting) {
-                            box.classList.add('is-visible');
-                            io.disconnect();
-                        }
-                    });
-                }, { threshold: 0.2 });
-                io.observe(box);
-            } else {
-                box.classList.add('is-visible'); // fallback: just show it
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              box.classList.add('is-visible');
+              io.disconnect();
             }
+          });
+        },
+        { threshold: 0.2 }
+      );
+      io.observe(box);
+    } else {
+      box.classList.add('is-visible'); // fallback: just show it
+    }
 
-            // 2) Subtle scroll-linked parallax: items drift at different depths.
-            var ticking = false;
-            function update() {
-                ticking = false;
-                var rect = box.getBoundingClientRect();
-                var vh = window.innerHeight || document.documentElement.clientHeight;
-                // progress ~ -0.6..0.6 as the panel's center crosses the viewport center
-                var progress = ((rect.top + rect.height / 2) - vh / 2) / vh;
-                progress = Math.max(-0.6, Math.min(0.6, progress));
-                for (var i = 0; i < items.length; i++) {
-                    var depth = parseFloat(getComputedStyle(items[i]).getPropertyValue('--depth')) || 0;
-                    items[i].style.setProperty('--pv-px', (progress * depth).toFixed(1) + 'px');
-                }
-            }
-            function onScroll() {
-                if (!ticking) {
-                    ticking = true;
-                    window.requestAnimationFrame(update);
-                }
-            }
-            window.addEventListener('scroll', onScroll, { passive: true });
-            window.addEventListener('resize', onScroll, { passive: true });
-            update();
-        })();
-    </script>
+    // 2) Subtle scroll-linked parallax: items drift at different depths.
+    var ticking = false;
+    function update() {
+      ticking = false;
+      var rect = box.getBoundingClientRect();
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      // progress ~ -0.6..0.6 as the panel's center crosses the viewport center
+      var progress = (rect.top + rect.height / 2 - vh / 2) / vh;
+      progress = Math.max(-0.6, Math.min(0.6, progress));
+      for (var i = 0; i < items.length; i++) {
+        var depth = parseFloat(getComputedStyle(items[i]).getPropertyValue('--depth')) || 0;
+        items[i].style.setProperty('--pv-px', (progress * depth).toFixed(1) + 'px');
+      }
+    }
+    function onScroll() {
+      if (!ticking) {
+        ticking = true;
+        window.requestAnimationFrame(update);
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    update();
+  })();
+</script>
 
 {% schema %}
 {
