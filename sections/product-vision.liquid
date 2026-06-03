@@ -25,7 +25,7 @@
         /* the bordered grid panel everything sits inside */
         .pv-main-box-inner {
             position: relative;
-            background-image: url('{% if section.settings.bg_desktop != blank %}{{ section.settings.bg_desktop | image_url: width: 2000 }}{% else %}https://cdn.shopify.com/s/files/1/0742/9839/2711/files/background_line.png?v=1780404929{% endif %}');
+            background-image: url('{{ section.settings.bg_desktop | image_url: width: 2000 }}');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -281,7 +281,7 @@
                 aspect-ratio: 343 / 565;
                 /* overflow: hidden; */
                 /* clip stray edges since the logo is hidden here */
-                background-image: url('{% if section.settings.bg_mobile != blank %}{{ section.settings.bg_mobile | image_url: width: 1200 }}{% else %}https://cdn.shopify.com/s/files/1/0742/9839/2711/files/background_line.png?v=1780404929{% endif %}');
+                background-image: url('{{ section.settings.bg_mobile | image_url: width: 1200 }}');
                 background-size: 100% 100%;
             }
 
@@ -412,22 +412,30 @@
 
                     <!-- brand badge -->
                     <div class="pv-item pv-logo">
-                        <img src="{% if section.settings.logo != blank %}{{ section.settings.logo | image_url: width: 300 }}{% else %}https://cdn.shopify.com/s/files/1/0742/9839/2711/files/logo_whole.svg?v=1780404930{% endif %}" alt="After Bites">
+                        {%- if section.settings.logo != blank -%}
+                            <img src="{{ section.settings.logo | image_url: width: 300 }}" alt="After Bites">
+                        {%- endif -%}
                     </div>
 
 
                     <!-- photos -->
+                    {%- if section.settings.photo_wedding != blank -%}
                     <div class="pv-item pv-photo pv-photo--wedding">
-                        <img src="{% if section.settings.photo_wedding != blank %}{{ section.settings.photo_wedding | image_url: width: 600 }}{% else %}https://cdn.shopify.com/s/files/1/0742/9839/2711/files/car_image.png?v=1780404933{% endif %}" alt="Wedding mandap">
+                        <img src="{{ section.settings.photo_wedding | image_url: width: 600 }}" alt="Wedding mandap">
                     </div>
+                    {%- endif -%}
 
+                    {%- if section.settings.photo_car != blank -%}
                     <div class="pv-item pv-photo pv-photo--car">
-                        <img src="{% if section.settings.photo_car != blank %}{{ section.settings.photo_car | image_url: width: 600 }}{% else %}https://cdn.shopify.com/s/files/1/0742/9839/2711/files/car_image.png?v=1780404933{% endif %}" alt="Premium car interior">
+                        <img src="{{ section.settings.photo_car | image_url: width: 600 }}" alt="Premium car interior">
                     </div>
+                    {%- endif -%}
 
+                    {%- if section.settings.photo_couple != blank -%}
                     <div class="pv-item pv-photo pv-photo--couple">
-                        <img src="{% if section.settings.photo_couple != blank %}{{ section.settings.photo_couple | image_url: width: 600 }}{% else %}https://cdn.shopify.com/s/files/1/0742/9839/2711/files/car_image.png?v=1780404933{% endif %}" alt="Couple">
+                        <img src="{{ section.settings.photo_couple | image_url: width: 600 }}" alt="Couple">
                     </div>
+                    {%- endif -%}
 
                     <!-- sticky notes -->
                     <div class="pv-item pv-note pv-note--top">
