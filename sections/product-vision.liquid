@@ -25,7 +25,7 @@
         /* the bordered grid panel everything sits inside */
         .pv-main-box-inner {
             position: relative;
-            background-image: url('img/background line.png');
+            background-image: url('{% if section.settings.bg_desktop != blank %}{{ section.settings.bg_desktop | image_url: width: 2000 }}{% else %}https://cdn.shopify.com/s/files/1/0742/9839/2711/files/background_line.png?v=1780404929{% endif %}');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -281,7 +281,7 @@
                 aspect-ratio: 343 / 565;
                 /* overflow: hidden; */
                 /* clip stray edges since the logo is hidden here */
-                background-image: url('img/background-image-mobile.png');
+                background-image: url('{% if section.settings.bg_mobile != blank %}{{ section.settings.bg_mobile | image_url: width: 1200 }}{% else %}https://cdn.shopify.com/s/files/1/0742/9839/2711/files/background_line.png?v=1780404929{% endif %}');
                 background-size: 100% 100%;
             }
 
@@ -412,56 +412,53 @@
 
                     <!-- brand badge -->
                     <div class="pv-item pv-logo">
-                        <img src="img/logo whole.svg" alt="After Bites">
+                        <img src="{% if section.settings.logo != blank %}{{ section.settings.logo | image_url: width: 300 }}{% else %}https://cdn.shopify.com/s/files/1/0742/9839/2711/files/logo_whole.svg?v=1780404930{% endif %}" alt="After Bites">
                     </div>
 
 
                     <!-- photos -->
                     <div class="pv-item pv-photo pv-photo--wedding">
-                        <img src="img/car image.png" alt="Wedding mandap">
+                        <img src="{% if section.settings.photo_wedding != blank %}{{ section.settings.photo_wedding | image_url: width: 600 }}{% else %}https://cdn.shopify.com/s/files/1/0742/9839/2711/files/car_image.png?v=1780404933{% endif %}" alt="Wedding mandap">
                     </div>
 
                     <div class="pv-item pv-photo pv-photo--car">
-                        <img src="img/car image.png" alt="Premium car interior">
+                        <img src="{% if section.settings.photo_car != blank %}{{ section.settings.photo_car | image_url: width: 600 }}{% else %}https://cdn.shopify.com/s/files/1/0742/9839/2711/files/car_image.png?v=1780404933{% endif %}" alt="Premium car interior">
                     </div>
 
                     <div class="pv-item pv-photo pv-photo--couple">
-                        <img src="img/car image.png" alt="Couple">
+                        <img src="{% if section.settings.photo_couple != blank %}{{ section.settings.photo_couple | image_url: width: 600 }}{% else %}https://cdn.shopify.com/s/files/1/0742/9839/2711/files/car_image.png?v=1780404933{% endif %}" alt="Couple">
                     </div>
 
                     <!-- sticky notes -->
                     <div class="pv-item pv-note pv-note--top">
                         <div class="pv-pin">
-                            📍
+                            {{ section.settings.note_top_pin }}
                         </div>
                         <!-- <img class="pv-pin" src="img/pin.svg" alt=""> -->
                         <p>
-                            Shaadi mein sabse zyada poochha gaya
-                            'Yeh mukhwas kahan se liya?'
+                            {{ section.settings.note_top_text }}
                         </p>
 
                     </div>
 
                     <div class="pv-item pv-note pv-note--mid-left">
                         <div class="pv-pin">
-                            🖇️
+                            {{ section.settings.note_mid_pin }}
                         </div>
 
                         <p>
-                            Jo apni car premium rakhte hain
-                            woh mukhwas bhi After Bites rakhte hain.
+                            {{ section.settings.note_mid_text }}
                         </p>
 
                     </div>
 
                     <div class="pv-item pv-note pv-note--center">
                         <div class="pv-pin">
-                            🖇️
+                            {{ section.settings.note_center_pin }}
                         </div>
                         <!-- <img class="pv-pin" src="img/pin.svg" alt=""> -->
                         <p>
-                            Ek chutki mein tradition, taste,
-                            aur ek yaad jo rehti hai
+                            {{ section.settings.note_center_text }}
                         </p>
 
                     </div>
@@ -508,6 +505,92 @@
       "type": "image_picker",
       "id": "border_image",
       "label": "Border image (top & bottom)"
+    },
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_desktop",
+      "label": "Background image (desktop)"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_mobile",
+      "label": "Background image (mobile)"
+    },
+    {
+      "type": "header",
+      "content": "Logo & photos"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "photo_wedding",
+      "label": "Photo 1 (wedding)"
+    },
+    {
+      "type": "image_picker",
+      "id": "photo_car",
+      "label": "Photo 2 (car)"
+    },
+    {
+      "type": "image_picker",
+      "id": "photo_couple",
+      "label": "Photo 3 (couple)"
+    },
+    {
+      "type": "header",
+      "content": "Note 1 (top)"
+    },
+    {
+      "type": "text",
+      "id": "note_top_pin",
+      "label": "Note 1 pin",
+      "default": "📍"
+    },
+    {
+      "type": "textarea",
+      "id": "note_top_text",
+      "label": "Note 1 text",
+      "default": "Shaadi mein sabse zyada poochha gaya 'Yeh mukhwas kahan se liya?'"
+    },
+    {
+      "type": "header",
+      "content": "Note 2 (mid-left)"
+    },
+    {
+      "type": "text",
+      "id": "note_mid_pin",
+      "label": "Note 2 pin",
+      "default": "🖇️"
+    },
+    {
+      "type": "textarea",
+      "id": "note_mid_text",
+      "label": "Note 2 text",
+      "default": "Jo apni car premium rakhte hain woh mukhwas bhi After Bites rakhte hain."
+    },
+    {
+      "type": "header",
+      "content": "Note 3 (center)"
+    },
+    {
+      "type": "text",
+      "id": "note_center_pin",
+      "label": "Note 3 pin",
+      "default": "🖇️"
+    },
+    {
+      "type": "textarea",
+      "id": "note_center_text",
+      "label": "Note 3 text",
+      "default": "Ek chutki mein tradition, taste, aur ek yaad jo rehti hai"
     }
   ],
   "presets": [
