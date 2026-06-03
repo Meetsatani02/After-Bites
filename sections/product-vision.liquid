@@ -413,7 +413,11 @@
                     <!-- brand badge -->
                     <div class="pv-item pv-logo">
                         {%- if section.settings.logo != blank -%}
-                            <img src="{{ section.settings.logo | image_url: width: 300 }}" alt="After Bites">
+                            {{
+                                section.settings.logo
+                                | image_url: width: 300
+                                | image_tag: alt: 'After Bites', widths: '90, 140, 300', loading: 'lazy'
+                            }}
                         {%- endif -%}
                     </div>
 
@@ -421,19 +425,31 @@
                     <!-- photos -->
                     {%- if section.settings.photo_wedding != blank -%}
                     <div class="pv-item pv-photo pv-photo--wedding">
-                        <img src="{{ section.settings.photo_wedding | image_url: width: 600 }}" alt="Wedding mandap">
+                        {{
+                            section.settings.photo_wedding
+                            | image_url: width: 600
+                            | image_tag: alt: 'Wedding mandap', widths: '180, 360, 600', loading: 'lazy'
+                        }}
                     </div>
                     {%- endif -%}
 
                     {%- if section.settings.photo_car != blank -%}
                     <div class="pv-item pv-photo pv-photo--car">
-                        <img src="{{ section.settings.photo_car | image_url: width: 600 }}" alt="Premium car interior">
+                        {{
+                            section.settings.photo_car
+                            | image_url: width: 600
+                            | image_tag: alt: 'Premium car interior', widths: '180, 360, 600', loading: 'lazy'
+                        }}
                     </div>
                     {%- endif -%}
 
                     {%- if section.settings.photo_couple != blank -%}
                     <div class="pv-item pv-photo pv-photo--couple">
-                        <img src="{{ section.settings.photo_couple | image_url: width: 600 }}" alt="Couple">
+                        {{
+                            section.settings.photo_couple
+                            | image_url: width: 600
+                            | image_tag: alt: 'Couple', widths: '180, 360, 600', loading: 'lazy'
+                        }}
                     </div>
                     {%- endif -%}
 
