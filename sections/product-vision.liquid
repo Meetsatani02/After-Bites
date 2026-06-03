@@ -386,7 +386,7 @@
 
     <section class="product-wrapper" id="ProductVision-{{ section.id }}">
 
-        {%- if section.settings.border_image != blank -%}
+        {% comment %} {%- if section.settings.border_image != blank -%}
         <div class="hero-border">
             {{
                 section.settings.border_image
@@ -398,7 +398,7 @@
                     loading: 'lazy'
             }}
         </div>
-        {%- endif -%}
+        {%- endif -%} {% endcomment %}
 
         <div class="product-container">
 
