@@ -1,5 +1,389 @@
 {{ 'global.css' | asset_url | stylesheet_tag }}
 
+ <style>
+        
+        /* section heading */
+        .pv-title {
+            font-family: "Cormorant Garamond", serif;
+            font-weight: 600;
+            font-size: clamp(30px, 5vw, 64px);
+            color: var(--beige);
+            text-align: center;
+            margin-bottom: clamp(20px, 3vw, 40px);
+        }
+
+        /* section caption */
+        .pv-caption {
+            font: 400 clamp(13px, 1.4vw, 16px)/1.6 "Inter", sans-serif;
+            color: var(--beige);
+            text-align: center;
+            max-width: 720px;
+            margin: clamp(20px, 3vw, 40px) auto 0;
+            opacity: .85;
+        }
+
+        /* the bordered grid panel everything sits inside */
+        .pv-main-box-inner {
+            position: relative;
+            background-image: url('img/background line.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            aspect-ratio: 1296 / 568;
+            /* border: 1px solid var(--beige); */
+            border-radius: clamp(16px, 2vw, 24px);
+            animation: pv-glow 6s ease-in-out infinite;
+        }
+
+        /* registered props so the reveal can smoothly transition transform pieces */
+        @property --pv-y {
+            syntax: '<length>';
+            inherits: false;
+            initial-value: 0px;
+        }
+
+        @property --pv-s {
+            syntax: '<number>';
+            inherits: false;
+            initial-value: 1;
+        }
+
+        @property --pv-o {
+            syntax: '<number>';
+            inherits: false;
+            initial-value: 1;
+        }
+
+        @property --pv-px {
+            syntax: '<length>';
+            inherits: false;
+            initial-value: 0px;
+        }
+
+        /* every scattered item is positioned by % so it scales with the box.
+           --r is the resting tilt; reveal + parallax compose into one transform. */
+        .pv-item {
+            position: absolute;
+            z-index: 111;
+            transform: rotate(var(--r, 0deg));
+        }
+
+        /* JS adds .pv-animate once it's safe (skipped under reduced-motion / no-JS),
+           which arms the hidden start state + scroll parallax. */
+        .pv-animate .pv-item {
+            opacity: var(--pv-o);
+            transform:
+                translate3d(0, calc(var(--pv-y) + var(--pv-px)), 0) scale(var(--pv-s)) rotate(var(--r, 0deg));
+            transition:
+                --pv-y .85s cubic-bezier(.22, .9, .28, 1.2) var(--ed, 0s),
+                --pv-s .85s cubic-bezier(.22, .9, .28, 1.2) var(--ed, 0s),
+                --pv-o .6s ease var(--ed, 0s);
+        }
+
+        /* hidden start state (before the section scrolls into view) */
+        .pv-animate:not(.is-visible) .pv-item {
+            --pv-y: 48px;
+            --pv-s: .82;
+            --pv-o: 0;
+        }
+
+        /* photo cards */
+        .pv-photo {
+            border: 5px solid #F4EDDB;
+            border-radius: 32px;
+            overflow: hidden;
+            box-shadow: 0 14px 30px rgba(0, 0, 0, .35);
+        }
+
+        .pv-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* sticky note text cards */
+        .pv-note p {
+
+            font-weight: 500;
+            font-style: Medium;
+            font-size: 18px;
+            line-height: 1.4;
+            letter-spacing: 0%;
+            text-align: center;
+
+
+            background: var(--beige);
+            border-radius: 9px;
+            padding: 14px;
+            box-shadow: 0px 4px 20px 0px #00000040;
+
+            color: var(--green);
+
+        }
+
+        /* little pin on each note */
+        .pv-pin {
+            position: absolute;
+            top: -10px;
+            left: -13px;
+            font-weight: 600;
+            font-size: clamp(22px, 2.7vw, 33.58px);
+            line-height: 1.1;
+            transform: rotate(2deg);
+            transform-origin: top center;
+            animation: pv-pin-wiggle 3.5s ease-in-out infinite;
+        }
+
+        /* --- placement + resting tilt (--r), stagger order (--ed), parallax depth (--depth) --- */
+        .pv-logo {
+            top: -64px;
+            left: -54px;
+            /* width: clamp(90px, 9vw, 140px); */
+            --r: 0deg;
+            --ed: .05s;
+            --depth: 20;
+        }
+
+        .pv-logo img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .pv-photo--wedding {
+            top: 10%;
+            right: 34.7%;
+            width: 14.4%;
+            --r: 12deg;
+            --ed: .18s;
+            --depth: -40;
+        }
+
+        .pv-photo--car {
+            top: 56%;
+            left: -0.5%;
+            width: 16.2%;
+            --r: -17deg;
+            --ed: .3s;
+            --depth: 55;
+        }
+
+        .pv-photo--couple {
+            top: 55%;
+            left: 77%;
+            width: 19.5%;
+            aspect-ratio: 281 / 194;
+            --r: 5.76deg;
+            --ed: .42s;
+            --depth: -35;
+        }
+
+        .pv-note--top {
+            top: -2%;
+            left: 65%;
+            width: 25.6%;
+            --r: -8.39deg;
+            --ed: .54s;
+            --depth: 30;
+        }
+
+        .pv-note--mid-left {
+            top: 46%;
+            left: 11%;
+            width: 27.9%;
+            --r: 4.84deg;
+            --ed: .66s;
+            --depth: -25;
+        }
+
+        .pv-note--center {
+            top: 73%;
+            left: 53%;
+            width: 24.8%;
+            --r: 4.78deg;
+            --ed: .78s;
+            --depth: 22;
+        }
+
+        .pv-note--center p {
+            background-color: #F2E4BF;
+        }
+
+        /* ---------- keyframes (ambient only) ---------- */
+        @keyframes pv-pin-wiggle {
+
+            0%,
+            100% {
+                transform: rotate(2deg);
+            }
+
+            50% {
+                transform: rotate(-7deg);
+            }
+        }
+
+        @keyframes pv-glow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 rgba(202, 163, 108, 0);
+            }
+
+            50% {
+                box-shadow: 0 0 45px rgba(202, 163, 108, .18);
+            }
+        }
+
+        /* =====================================================================
+           TABLET — keep the wide scatter but give the panel a little more height
+           ===================================================================== */
+        @media (max-width: 1024px) {
+            .pv-main-box-inner {
+                /* match the desktop image's real ratio (1296x568) so it shows
+                   perfectly with no cropping */
+                aspect-ratio: 1296 / 568;
+            }
+
+            /* photos scaled up so they don't look tiny on the wider panel */
+            .pv-photo--wedding {
+                top: 4%;
+                width: 22%;
+            }
+
+            .pv-photo--car {
+                width: 24%;
+            }
+
+            .pv-photo--couple {
+                width: 28%;
+                left: 75%;
+            }
+
+            .pv-note--top {
+                top: 0%;
+            }
+
+            .pv-note--center {
+                top: 78%;
+            }
+        }
+
+        /* =====================================================================
+           MOBILE — portrait scatter (cards stacked, alternating left / right)
+           matching the uploaded mockup
+           ===================================================================== */
+        @media (max-width: 768px) {
+
+            .pv-main-box-inner {
+                /* match the mobile image's real ratio (343x565) so the
+                   whole image shows with no cropping and no gaps */
+                aspect-ratio: 343 / 565;
+                /* overflow: hidden; */
+                /* clip stray edges since the logo is hidden here */
+                background-image: url('img/background-image-mobile.png');
+                background-size: 100% 100%;
+            }
+
+            /* hide the corner seal on small screens */
+            .pv-logo {
+                display: none;
+            }
+
+            /* top: "Jo apni car premium..." note */
+            .pv-note--mid-left {
+                top: 9%;
+                left: 33%;
+                right: auto;
+                width: 56%;
+                --r: 4.84deg;
+                --ed: .08s;
+
+            }
+
+            /* car photo (left) */
+            .pv-photo--car {
+                top: 10%;
+                left: 0%;
+                right: auto;
+                width: 40%;
+                height: auto;
+                --r: -15deg;
+                --ed: .2s;
+
+            }
+
+            /* couple photo (right) */
+            .pv-photo--couple {
+                top: 39%;
+                left: auto;
+                right: 0%;
+                width: 54%;
+                --r: 4deg;
+                --ed: .32s;
+            }
+
+            /* "Ek chutki mein tradition..." note (left) */
+            .pv-note--center {
+                top: 52%;
+                left: -2%;
+                right: auto;
+                width: 56%;
+                --r: 4deg;
+                --ed: .44s;
+            }
+
+            /* wedding / food photo (left) */
+            .pv-photo--wedding {
+                top: 69%;
+                left: 0%;
+                right: auto;
+                width: 43%;
+                --r: 12deg;
+                --ed: .56s;
+            }
+
+            /* "Shaadi mein sabse zyada..." note (right) */
+            .pv-note--top {
+                top: 74%;
+                left: auto;
+                right: 0%;
+                width: 60%;
+                --r: -8deg;
+                --ed: .68s;
+            }
+
+            .pv-pin {
+                font-size: 22px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .pv-main-box-inner {
+                /* keep matching the mobile image ratio so it stays fully visible */
+                aspect-ratio: 343 / 565;
+            }
+
+            .pv-note p {
+                font-size: 12px;
+            }
+
+            .pv-photo {
+                border: 2.5px solid var(--beige);
+            }
+
+        }
+
+        /* respect users who prefer no motion: everything static + visible */
+        @media (prefers-reduced-motion: reduce) {
+
+            .pv-pin,
+            .pv-main-box-inner {
+                animation: none;
+            }
+        }
+    </style>
+
     <section class="product-wrapper" id="ProductVision-{{ section.id }}">
 
         {%- if section.settings.border_image != blank -%}
