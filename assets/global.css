@@ -167,6 +167,8 @@ p,h1,h2,h3,h4{
 .product-new-content {
     padding-left: max(40px, calc((100vw - 1440px) / 2 + 40px));
     padding-right: 40px;
+    padding-top: 56px;
+    padding-bottom: 80px;
 }
 
 /* Image-left variant: text is on the right, so mirror the alignment padding
