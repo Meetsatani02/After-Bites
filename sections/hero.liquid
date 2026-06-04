@@ -24,24 +24,36 @@
       align-items: center;
       {% comment %} gap: 40px; {% endcomment %}
       width: 100%;
-      /* Left padding aligns text with the header; NO right padding so the
-         image bleeds to the full right edge of the screen. */
-      padding-left: max(40px, calc((100vw - 1440px) / 2 + 40px));
-      padding-right: 0;
   }
 
-  /* Image-left variant: flip the row so the image bleeds to the left edge
-     and move the alignment padding to the right side instead. */
+  /* Image-left variant: flip the row so the image bleeds to the left edge. */
   .hero-container--image-left {
       flex-direction: row-reverse;
-      padding-left: 0;
-      padding-right: max(40px, calc((100vw - 1440px) / 2 + 40px));
   }
 
-  .hero-content {
-      /* padding: 110px 0 170px 0px; */
-      flex: 1 1 45%;
+  /* Both halves are locked to exactly 50% on every screen — no grow/shrink,
+     so the image always takes half the width regardless of viewport size. */
+  .hero-content,
+  .hero-img {
+      flex: 0 0 50%;
+      max-width: 50%;
       min-width: 0;
+      box-sizing: border-box;
+  }
+
+  /* Align the text with the 1440px-centered layout: on wide screens the inner
+     padding grows so the text starts at the same edge as the centered
+     container, while the image half still bleeds to the screen edge. */
+  .hero-content {
+      padding-left: max(40px, calc((100vw - 1440px) / 2 + 40px));
+      padding-right: 40px;
+  }
+
+  /* Image-left variant: text is on the right, so mirror the alignment padding
+     to the right edge instead. */
+  .hero-container--image-left .hero-content {
+      padding-left: 40px;
+      padding-right: max(40px, calc((100vw - 1440px) / 2 + 40px));
   }
 
   .hero-content a {
@@ -88,17 +100,6 @@
       margin-top: 64px;
   }
 
-  .hero-img {
-      flex: 1 1 50%;
-      min-width: 0;
-  }
-
-  .hero-img img {
-      /* position: absolute;
-      right: 0;
-      top: 0; */
-  }
-
   .hero-img picture,
   .hero-img img {
       display: block;
@@ -141,21 +142,20 @@
           flex-direction: column;
       }
 
-      /* Padding only on the text section; image stays flush */
-      .hero-content {
-          flex: none;
-          width: 100%;
-          padding: 60px 20px;
-      }
-
+      /* Stacked: each half spans the full width below the breakpoint. */
+      .hero-content,
       .hero-img {
           flex: none;
           width: 100%;
+          max-width: 100%;
       }
 
-      {% comment %} .hero-img {
-          width: auto;
-      } {% endcomment %}
+      /* Padding only on the text section; image stays flush. The image-left
+         selector is included so the desktop mirror padding can't leak here. */
+      .hero-content,
+      .hero-container--image-left .hero-content {
+          padding: 60px 20px;
+      }
   }
 
   @media (max-width: 768px) {
@@ -164,7 +164,8 @@
           gap: 24px;
       }
 
-      .hero-content {
+      .hero-content,
+      .hero-container--image-left .hero-content {
           padding: 10px 20px 40px 20px;
       }
 
