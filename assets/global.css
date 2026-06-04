@@ -141,8 +141,9 @@ p,h2,h3,h4{
 
 .product-new-container {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     width: 100%;
+
 }
 
 /* Image-left variant: flip the row so the image sits on the left side. */
