@@ -513,6 +513,44 @@
   </div>
 </section>
 
+    <script>
+        (function () {
+            const wrap = document.querySelector('.product-quntity-button-input');
+            if (!wrap) return;
+            const value = wrap.querySelector('.qty-value');
+            const minus = wrap.querySelector('.qty-minus');
+            const plus = wrap.querySelector('.qty-plus');
+            let qty = 1;
+
+            function render() {
+                value.value = String(qty).padStart(2, '0');
+            }
+
+            minus.addEventListener('click', function () {
+                if (qty > 1) qty--;
+                render();
+            });
+
+            plus.addEventListener('click', function () {
+                qty++;
+                render();
+            });
+
+            render();
+        })();
+
+        (function () {
+            const items = document.querySelectorAll('.product-ingri-dec-toggle .product-ingredients');
+            items.forEach(function (item) {
+                const header = item.querySelector('.product-ingredients-inner');
+                if (!header) return;
+                header.addEventListener('click', function () {
+                    item.classList.toggle('is-open');
+                });
+            });
+        })();
+    </script>
+
 {% schema %}
 {
   "name": "Product New",
