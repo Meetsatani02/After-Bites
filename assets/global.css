@@ -180,11 +180,20 @@ p,h2,h3,h4{
 }
 
 @media (max-width: 1024px) {
-    .product-new-container,
-    .product-new-container--image-left {
-        flex-direction: column;
+    .product-new-container {
         align-items: flex-start;
         gap: 32px;
+    }
+
+    /* Mobile stacking order is controlled independently of the desktop
+       left/right choice. "Below text" = image after text, "Above text" =
+       image before text. These override the desktop row-reverse rule. */
+    .product-new-container--image-mobile-bottom {
+        flex-direction: column;
+    }
+
+    .product-new-container--image-mobile-top {
+        flex-direction: column-reverse;
     }
 
     /* Stacked: each half spans the full width below the breakpoint. */

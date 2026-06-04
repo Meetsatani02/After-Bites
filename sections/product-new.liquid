@@ -1,7 +1,7 @@
 {{ 'global.css' | asset_url | stylesheet_tag }}
 
 <section class="product-new-section">
-  <div class="product-new-container product-new-container--image-{{ section.settings.image_position }}">
+  <div class="product-new-container product-new-container--image-{{ section.settings.image_position }} product-new-container--image-mobile-{{ section.settings.image_position_mobile }}">
     <div class="product-new-content">
       <h2>{{ section.settings.heading | default: 'product' }}</h2>
     </div>
@@ -74,6 +74,23 @@
         }
       ],
       "default": "right"
+    },
+    {
+      "type": "select",
+      "id": "image_position_mobile",
+      "label": "Image position (mobile)",
+      "info": "On mobile the layout stacks. Choose whether the image sits above or below the text.",
+      "options": [
+        {
+          "value": "bottom",
+          "label": "Below text"
+        },
+        {
+          "value": "top",
+          "label": "Above text"
+        }
+      ],
+      "default": "bottom"
     },
     {
       "type": "image_picker",
