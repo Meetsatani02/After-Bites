@@ -469,7 +469,13 @@
                 </div>
               </div>
 
-              {%- comment -%} Ingredients / Benefits (static design) {%- endcomment -%}
+              {%- comment -%}
+                Ingredients / Benefits — driven by the product metafields
+                custom.ingredients and custom.benefits (editable in the product
+                admin). Falls back to the demo list if a product has none set.
+              {%- endcomment -%}
+              {%- assign ingredients_list = product.metafields.custom.ingredients.value -%}
+              {%- assign benefits_list = product.metafields.custom.benefits.value -%}
               <div class="product-ingri-dec-toggle">
                 <div class="product-ingredients border-bottom">
                   <div class="product-ingrdients-first-inner">
@@ -481,21 +487,27 @@
                     </div>
                     <div class="product-ingredients-description">
                       <ul>
-                        <li>Variyali</li>
-                        <li>Dhana</li>
-                        <li>Pan</li>
-                        <li>Manpasand</li>
-                        <li>Navrang</li>
-                        <li>Kesri</li>
-                        <li>Kharek</li>
-                        <li>Lovely</li>
-                        <li>Katho</li>
-                        <li>Chuno</li>
-                        <li>Ijmet</li>
-                        <li>Haripatti</li>
-                        <li>Cheri</li>
-                        <li>Gulkandh</li>
-                        <li>Chatney</li>
+                        {%- if ingredients_list != blank -%}
+                          {%- for item in ingredients_list -%}
+                            <li>{{ item }}</li>
+                          {%- endfor -%}
+                        {%- else -%}
+                          <li>Variyali</li>
+                          <li>Dhana</li>
+                          <li>Pan</li>
+                          <li>Manpasand</li>
+                          <li>Navrang</li>
+                          <li>Kesri</li>
+                          <li>Kharek</li>
+                          <li>Lovely</li>
+                          <li>Katho</li>
+                          <li>Chuno</li>
+                          <li>Ijmet</li>
+                          <li>Haripatti</li>
+                          <li>Cheri</li>
+                          <li>Gulkandh</li>
+                          <li>Chatney</li>
+                        {%- endif -%}
                       </ul>
                     </div>
                   </div>
@@ -510,12 +522,18 @@
                     </div>
                     <div class="product-ingredients-description">
                       <ul>
-                        <li>Mind & Mood</li>
-                        <li>Degestion</li>
-                        <li>Body Cooling</li>
-                        <li>Mouth & Oral Health</li>
-                        <li>Energy & Nutrition</li>
-                        <li>Immunity & Antioxidants</li>
+                        {%- if benefits_list != blank -%}
+                          {%- for item in benefits_list -%}
+                            <li>{{ item }}</li>
+                          {%- endfor -%}
+                        {%- else -%}
+                          <li>Mind & Mood</li>
+                          <li>Degestion</li>
+                          <li>Body Cooling</li>
+                          <li>Mouth & Oral Health</li>
+                          <li>Energy & Nutrition</li>
+                          <li>Immunity & Antioxidants</li>
+                        {%- endif -%}
                       </ul>
                     </div>
                   </div>
