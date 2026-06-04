@@ -19,6 +19,8 @@
         "text": "The quality and purity of our product has made us a favorite in kitchens across the country. We're proud to be a trusted choice for healthy and delicious cooking.",
         "button_label": "Experience Now",
         "button_link": "",
+        "image_position": "right",
+        "image_position_mobile": "top",
         "image": "shopify://shop_images/hero-img.png",
         "icon_image": "shopify://shop_images/hero_icon_a02ee0c1-b84c-4cef-a1fb-abbbeced1369.svg"
       }
@@ -132,8 +134,8 @@
       "type": "product-new",
       "name": "Product New",
       "settings": {
-        "heading": "product",
-        "image_position": "right",
+        "heading": "",
+        "image_position": "left",
         "image_position_mobile": "top",
         "image": "shopify://shop_images/01.jpg"
       }
