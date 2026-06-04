@@ -191,11 +191,21 @@
       width: 100%;
       height: 100%;
       cursor: pointer;
+      box-shadow: inset 0 0 0 1.5px var(--green);
+      transition: background-color 0.25s ease, color 0.25s ease;
   }
 
-  .product-buy-button button[disabled] {
+  .product-buy-button button:hover {
+      background-color: var(--beige);
+      color: var(--green);
+  }
+
+  .product-buy-button button[disabled],
+  .product-buy-button button[disabled]:hover {
       opacity: 0.5;
       cursor: not-allowed;
+      background-color: var(--green);
+      color: #ffff;
   }
 
   .product-form__error-message-wrapper {
