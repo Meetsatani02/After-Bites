@@ -465,7 +465,12 @@
                             Sold out
                           {%- endif -%}
                         </span>
-                        {%- render 'loading-spinner' -%}
+                        {%- comment -%}
+                          Empty, permanently-hidden spinner: product-form.js calls
+                          .loading__spinner.classList on submit, so the element must
+                          exist — but it renders nothing, so no loading icon shows.
+                        {%- endcomment -%}
+                        <span class="loading__spinner" style="display: none !important;"></span>
                       </button>
                     </div>
                   </div>
