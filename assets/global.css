@@ -230,3 +230,98 @@ p,h1,h2,h3,h4{
         line-height: 1em;
     }
 }
+
+/* ===== Cart drawer themed beige / green to match the site ===== */
+/* Panel background + base text */
+.cart-drawer .drawer__inner {
+    background: var(--beige) !important;
+    background-image: none !important;
+    color: var(--green);
+    border-left: 2px solid var(--green);
+}
+
+/* Dim overlay behind the drawer */
+.cart-drawer .cart-drawer__overlay {
+    background: rgba(28, 48, 37, 0.45);
+}
+
+/* Header */
+.cart-drawer .drawer__header {
+    border-bottom: 1px solid rgba(28, 48, 37, 0.15);
+}
+
+.cart-drawer .drawer__heading,
+.cart-drawer .cart__empty-text {
+    color: var(--green);
+    font-family: 'Rasbern', sans-serif;
+}
+
+/* Close / remove / stepper icons */
+.cart-drawer .drawer__close .svg-wrapper,
+.cart-drawer .drawer__close svg,
+.cart-drawer .cart-remove-button .svg-wrapper,
+.cart-drawer .cart-remove-button svg,
+.cart-drawer .quantity__button .svg-wrapper,
+.cart-drawer .quantity__button svg {
+    color: var(--green);
+}
+
+/* Line item text: title, options (weight), prices */
+.cart-drawer .cart-item__name,
+.cart-drawer .cart-item__name:hover,
+.cart-drawer .product-option,
+.cart-drawer .product-option dt,
+.cart-drawer .product-option dd,
+.cart-drawer .cart-item dt,
+.cart-drawer .cart-item dd,
+.cart-drawer .price,
+.cart-drawer .cart-item__old-price,
+.cart-drawer .totals__total,
+.cart-drawer .totals__total-value,
+.cart-drawer .tax-note {
+    color: var(--green);
+    font-family: 'Inter', sans-serif;
+}
+
+.cart-drawer .totals__total,
+.cart-drawer .totals__total-value {
+    font-weight: 600;
+}
+
+/* Divider between items */
+.cart-drawer .cart-item {
+    border-bottom: 1px solid rgba(28, 48, 37, 0.12);
+}
+
+/* Quantity stepper box */
+.cart-drawer .quantity {
+    border: 1px solid var(--green);
+    background: transparent;
+}
+
+.cart-drawer .quantity__input {
+    color: var(--green);
+    background: transparent;
+}
+
+/* Checkout button — green, inverts on hover */
+.cart-drawer .cart__checkout-button {
+    background: var(--green);
+    color: var(--beige);
+    border: none;
+    border-radius: 12px;
+    box-shadow: inset 0 0 0 1.5px var(--green);
+    transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.cart-drawer .cart__checkout-button:hover:not([disabled]) {
+    background: var(--beige);
+    color: var(--green);
+}
+
+/* Continue-shopping button in the empty state */
+.cart-drawer .drawer__inner-empty .button {
+    background: var(--green);
+    color: var(--beige);
+    border-radius: 12px;
+}
