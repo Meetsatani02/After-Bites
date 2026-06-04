@@ -127,6 +127,15 @@
         "note_center_pin": "🖇️",
         "note_center_text": "Ek chutki mein tradition, taste, aur ek yaad jo rehti hai"
       }
+    },
+    "product_new_my4kXP": {
+      "type": "product-new",
+      "name": "Product New",
+      "settings": {
+        "heading": "product",
+        "image_position": "left",
+        "image": "shopify://shop_images/01.jpg"
+      }
     }
   },
   "order": [
@@ -134,6 +143,7 @@
     "best_product_ymx3aV",
     "benifites_ceqatM",
     "image_banner_ypywDX",
-    "product_vision_V9CzGW"
+    "product_vision_V9CzGW",
+    "product_new_my4kXP"
   ]
 }
