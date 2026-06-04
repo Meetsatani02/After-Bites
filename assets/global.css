@@ -143,22 +143,25 @@ p,h2,h3,h4{
     display: flex;
     align-items: center;
     width: 100%;
-    /* Left padding aligns text with the header; image bleeds to the edge. */
-    padding-left: max(40px, calc((100vw - 1440px) / 2 + 40px));
-    padding-right: 0;
 }
 
-/* Image-left variant: flip the row so the image sits on the left edge
-   and add the padding on the right side instead. */
+/* Image-left variant: flip the row so the image sits on the left side. */
 .product-new-container--image-left {
     flex-direction: row-reverse;
-    padding-left: 0;
-    padding-right: max(40px, calc((100vw - 1440px) / 2 + 40px));
+}
+
+/* Both halves are locked to exactly 50% on every screen — no grow/shrink,
+   so the image always takes half the width regardless of viewport size. */
+.product-new-content,
+.product-new-img {
+    flex: 0 0 50%;
+    max-width: 50%;
+    min-width: 0;
+    box-sizing: border-box;
 }
 
 .product-new-content {
-    flex: 1 1 50%;
-    min-width: 0;
+    padding: 0 40px;
 }
 
 .product-new-content h2 {
@@ -167,11 +170,6 @@ p,h2,h3,h4{
     line-height: 110%;
     color: var(--green);
     margin: 0;
-}
-
-.product-new-img {
-    flex: 1 1 50%;
-    min-width: 0;
 }
 
 .product-new-img picture,
@@ -187,18 +185,18 @@ p,h2,h3,h4{
         flex-direction: column;
         align-items: flex-start;
         gap: 32px;
-        padding: 0;
+    }
+
+    /* Stacked: each half spans the full width below the breakpoint. */
+    .product-new-content,
+    .product-new-img {
+        flex: 0 0 100%;
+        max-width: 100%;
+        width: 100%;
     }
 
     .product-new-content {
-        flex: none;
-        width: 100%;
         padding: 60px 20px;
-    }
-
-    .product-new-img {
-        flex: none;
-        width: 100%;
     }
 }
 
