@@ -432,15 +432,18 @@
                         type="submit"
                         name="add"
                         data-add-button
-                        {% if current_variant.available == false %}disabled{% endif %}
+                        {% if current_variant.available == false or current_variant == null %}disabled{% endif %}
                       >
                         <span data-add-button-text>
-                          {%- if current_variant.available -%}
+                          {%- if current_variant == null -%}
+                            Unavailable
+                          {%- elsif current_variant.available -%}
                             Add to Cart
                           {%- else -%}
                             Sold out
                           {%- endif -%}
                         </span>
+                        {%- render 'loading-spinner' -%}
                       </button>
                     </div>
                   </div>
@@ -636,18 +639,34 @@
       selected[i] = sel ? sel.getAttribute('data-value') : null;
     });
 
-    function findVariant() {
+    /* Find the variant matching a given selection array. */
+    function findVariantFor(sel) {
       return variants.find(function (v) {
-        return v.options.every(function (opt, i) { return opt === selected[i]; });
+        return v.options.every(function (opt, i) { return opt === sel[i]; });
+      });
+    }
+
+    /* Mark each weight option as unavailable when the variant it would
+       produce (combined with the other current selections) is sold out or
+       does not exist. Unavailable options get the .is-unavailable style. */
+    function refreshAvailability() {
+      groups.forEach(function (group, gIndex) {
+        group.querySelectorAll('.weight-opt').forEach(function (opt) {
+          var candidate = selected.slice();
+          candidate[gIndex] = opt.getAttribute('data-value');
+          var v = findVariantFor(candidate);
+          var unavailable = !v || !v.available;
+          opt.classList.toggle('is-unavailable', unavailable);
+        });
       });
     }
 
     function update() {
-      var variant = findVariant();
+      var variant = findVariantFor(selected);
 
       if (!variant) {
         if (idInput) idInput.setAttribute('disabled', 'disabled');
-        if (addButton) { addButton.setAttribute('disabled', 'disabled'); }
+        if (addButton) addButton.setAttribute('disabled', 'disabled');
         if (addButtonText) addButtonText.textContent = 'Unavailable';
         return;
       }
@@ -667,6 +686,7 @@
       if (addButton && addButtonText) {
         if (variant.available) {
           addButton.removeAttribute('disabled');
+          addButton.removeAttribute('aria-disabled');
           addButtonText.textContent = 'Add to Cart';
         } else {
           addButton.setAttribute('disabled', 'disabled');
@@ -684,10 +704,12 @@
         selected[index] = opt.getAttribute('data-value');
         group.querySelectorAll('.weight-opt').forEach(function (o) { o.classList.remove('is-selected'); });
         opt.classList.add('is-selected');
+        refreshAvailability();
         update();
       });
     });
 
+    refreshAvailability();
     update();
   })();
 </script>
