@@ -232,6 +232,11 @@ p,h1,h2,h3,h4{
 }
 
 /* ===== Cart drawer themed beige / green to match the site ===== */
+/* Hide the loading spinner so cart updates look normal (no spinner icon). */
+.cart-drawer .loading__spinner {
+    display: none !important;
+}
+
 /* Panel background + base text */
 .cart-drawer .drawer__inner {
     background: var(--beige) !important;
