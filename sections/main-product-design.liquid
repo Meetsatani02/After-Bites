@@ -1,0 +1,719 @@
+{{ 'global.css' | asset_url | stylesheet_tag }}
+
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+
+<style>
+  body {
+      background-color: var(--beige);
+  }
+
+  .product-heading h1,
+  .product-heading h2 {
+      font-family: 'Rasbern';
+      font-weight: 600;
+      font-size: 56px;
+      line-height: 1.1;
+      color: var(--green);
+  }
+
+  .product-review {
+      display: flex;
+      gap: 12px;
+      margin: 16px 0px 20px 0px;
+  }
+
+  .pro-review-start {
+      gap: 5px;
+      display: flex;
+  }
+
+  .product-description-content {
+      width: 100%;
+  }
+
+  .product-description-content p {
+      font-family: 'Inter';
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 1.4;
+      color: var(--green);
+  }
+
+  .product-price {
+      margin: 32px 0px 56px 0px;
+      display: flex;
+      gap: 10px;
+  }
+
+  .product-price-main span {
+      font-family: 'Rasbern';
+      font-weight: 700;
+      font-size: 44px;
+      line-height: 1.15;
+      letter-spacing: 2%;
+      text-transform: uppercase;
+      color: var(--green);
+  }
+
+  .product-price-compare {
+      font-family: 'Rasbern';
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 1.15;
+      letter-spacing: 2%;
+      text-transform: uppercase;
+      color: #312409;
+      display: flex;
+      align-items: self-end;
+      text-decoration: line-through;
+  }
+
+  .product-weight {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+  }
+
+  .product-weight-text {
+      font-family: Inter;
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 26px;
+  }
+
+  .product-weight-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+  }
+
+  .product-weight-buttons span {
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 26px;
+      color: var(--green);
+      padding: 10px 26px;
+      border: 1px solid var(--green);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: color 0.2s ease, background-color 0.2s ease;
+  }
+
+  .product-weight-buttons span:hover,
+  .product-weight-buttons span.is-selected {
+      color: var(--beige);
+      background-color: var(--green);
+  }
+
+  .product-weight-buttons span.is-unavailable {
+      opacity: 0.4;
+      text-decoration: line-through;
+  }
+
+  .product-quantity-cart-button {
+      margin-block: 48px;
+      display: flex;
+      gap: 16px;
+      align-items: stretch;
+  }
+
+  .product-quntity-button-input {
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      border: 1.5px solid #1C3025;
+      padding: 14px 20px;
+      background-color: var(--beige);
+  }
+
+  .product-quntity-button-input .qty-btn {
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      padding: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+  }
+
+  .product-quntity-button-input .qty-btn img {
+      display: block;
+      width: 16px;
+      height: 16px;
+  }
+
+  .product-quntity-button-input .qty-value {
+      color: var(--green);
+      border: none;
+      background: transparent;
+      outline: none;
+      width: 75px;
+      padding: 0;
+      font-family: 'Inter';
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 1.5;
+      text-align: center;
+  }
+
+  .product-buy-button {
+      flex: 1 1 auto;
+  }
+
+  .product-buy-button .product-form,
+  .product-buy-button .product-form .form {
+      height: 100%;
+  }
+
+  .product-buy-button button {
+      font-family: 'Inter';
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 1.5;
+      color: #ffff;
+      background-color: var(--green);
+      padding-block: 15px;
+      border: none;
+      border-radius: 12px;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+  }
+
+  .product-buy-button button[disabled] {
+      opacity: 0.5;
+      cursor: not-allowed;
+  }
+
+  .product-form__error-message-wrapper {
+      margin-bottom: 12px;
+      color: #b00020;
+      font-family: 'Inter';
+      font-size: 14px;
+  }
+
+  .product-buy-shipping-inner {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      padding-bottom: 32px;
+      border-bottom: 1px solid #1C3025
+  }
+
+  .product-icon-text span {
+      font-family: 'Inter';
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 24px;
+      text-align: center;
+  }
+
+  .product-buy-shipping-icon-text {
+      display: flex;
+      justify-content: center;
+  }
+
+  .border-right {
+      border-right: 2px solid rgba(28, 48, 37, 0.5);
+  }
+
+  .product-icon-text {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      width: 160px;
+      justify-content: center;
+      text-align: center;
+  }
+
+  .product-icon-text img {
+      width: fit-content;
+      height: auto;
+  }
+
+  .product-ingredients-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+  }
+
+  .product-ingredients-inner p {
+      font-family: 'Inter';
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 26px;
+  }
+
+  .product-ingredients-inner svg {
+      margin-top: 2px;
+      transition: transform 0.3s ease;
+  }
+
+  .product-ingredients.is-open .product-ingredients-inner svg {
+      transform: rotate(180deg);
+  }
+
+  .border-bottom {
+      border-bottom: 1px solid #1C3025;
+  }
+
+  .product-ingrdients-first-inner {
+      padding: 24px 8px;
+  }
+
+  .product-ingredients-description {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.3s ease;
+  }
+
+  .product-ingredients-description > ul {
+      overflow: hidden;
+      min-height: 0;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      transition: margin-top 0.3s ease;
+  }
+
+  .product-ingredients-description li {
+      font-family: 'Inter';
+      font-weight: 400;
+      font-size: 15px;
+      line-height: 1;
+      color: var(--green);
+      padding: 9px 16px;
+      border: 1px solid var(--green);
+      border-radius: 999px;
+      background-color: var(--beige);
+      transition: color 0.2s ease, background-color 0.2s ease;
+  }
+
+  .product-ingredients-description li:hover {
+      color: var(--beige);
+      background-color: var(--green);
+  }
+
+  .product-ingredients.is-open .product-ingredients-description {
+      grid-template-rows: 1fr;
+  }
+
+  .product-ingredients.is-open .product-ingredients-description > ul {
+      margin-top: 20px;
+  }
+</style>
+
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign product_form_id = 'product-form-' | append: section.id
+  if current_variant.featured_media
+    assign main_media = current_variant.featured_media
+  else
+    assign main_media = product.featured_media
+  endif
+-%}
+
+<product-info
+  id="MainProduct-{{ section.id }}"
+  data-section="{{ section.id }}"
+  data-product-id="{{ product.id }}"
+  data-url="{{ product.url }}"
+>
+  <section class="product-new-section">
+    <div class="product-new-container product-new-container--image-{{ section.settings.image_position }} product-new-container--image-mobile-{{ section.settings.image_position_mobile }}">
+      <div class="product-new-content">
+        <div class="product-section">
+          <div class="product-sec-inner">
+            <div class="product-content-custom">
+
+              {%- comment -%} Title (dynamic) {%- endcomment -%}
+              <div class="product-heading">
+                <h1>{{ product.title | escape }}</h1>
+              </div>
+
+              {%- comment -%} Reviews (static design; uses metafield count if present) {%- endcomment -%}
+              <div class="product-review">
+                <div class="pro-review-start">
+                  {% render 'start' %}
+                  {% render 'start' %}
+                  {% render 'start' %}
+                  {% render 'start' %}
+                  {% render 'start' %}
+                </div>
+                <div class="pro-how-many-review-content">
+                  ({{ product.metafields.reviews.rating_count.value | default: 36 }} reviews)
+                </div>
+              </div>
+
+              {%- comment -%} Description (dynamic) {%- endcomment -%}
+              {%- if product.description != blank -%}
+                <div class="product-description-content">
+                  {{ product.description }}
+                </div>
+              {%- endif -%}
+
+              {%- comment -%} Price (dynamic; updated on variant change) {%- endcomment -%}
+              <div class="product-price" id="price-{{ section.id }}">
+                <div class="product-price-main">
+                  <span data-price-main>{{ current_variant.price | money }}</span>
+                </div>
+                <div
+                  class="product-price-compare"
+                  data-price-compare
+                  {% unless current_variant.compare_at_price > current_variant.price %}hidden{% endunless %}
+                >
+                  {{ current_variant.compare_at_price | money }}
+                </div>
+              </div>
+
+              {%- comment -%} Variants as the design's weight buttons (dynamic) {%- endcomment -%}
+              {%- unless product.has_only_default_variant -%}
+                <div class="product-weight" data-variant-picker>
+                  {%- for option in product.options_with_values -%}
+                    <span class="product-weight-text">{{ option.name }}:</span>
+                    <div class="product-weight-buttons" data-option-index="{{ forloop.index0 }}">
+                      {%- for value in option.values -%}
+                        <span
+                          class="weight-opt{% if option.selected_value == value %} is-selected{% endif %}"
+                          data-value="{{ value | escape }}"
+                        >{{ value }}</span>
+                      {%- endfor -%}
+                    </div>
+                  {%- endfor -%}
+                </div>
+              {%- endunless -%}
+
+              {%- comment -%} Quantity + working Add to Cart (dynamic) {%- endcomment -%}
+              <product-form class="product-form" data-section-id="{{ section.id }}">
+                <div class="product-form__error-message-wrapper" role="alert" hidden>
+                  <span class="product-form__error-message"></span>
+                </div>
+
+                {%- form 'product',
+                  product,
+                  id: product_form_id,
+                  class: 'form',
+                  novalidate: 'novalidate',
+                  data-type: 'add-to-cart-form'
+                -%}
+                  <input
+                    type="hidden"
+                    name="id"
+                    value="{{ current_variant.id }}"
+                    class="product-variant-id"
+                    data-variant-id-input
+                    {% if current_variant.available == false %}disabled{% endif %}
+                  >
+
+                  <div class="product-quantity-cart-button">
+                    <div class="product-quntity-button-input">
+                      <button type="button" class="qty-btn qty-minus" aria-label="Decrease quantity">
+                        {% render 'minus' %}
+                      </button>
+                      <input
+                        type="text"
+                        class="qty-value"
+                        name="quantity"
+                        value="01"
+                        inputmode="numeric"
+                        aria-label="Quantity"
+                      >
+                      <button type="button" class="qty-btn qty-plus" aria-label="Increase quantity">
+                        {% render 'plus' %}
+                      </button>
+                    </div>
+
+                    <div class="product-buy-button">
+                      <button
+                        type="submit"
+                        name="add"
+                        data-add-button
+                        {% if current_variant.available == false %}disabled{% endif %}
+                      >
+                        <span data-add-button-text>
+                          {%- if current_variant.available -%}
+                            Add to Cart
+                          {%- else -%}
+                            Sold out
+                          {%- endif -%}
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                {%- endform -%}
+              </product-form>
+
+              {%- comment -%} Shipping info (static design) {%- endcomment -%}
+              <div class="product-buy-shipping">
+                <div class="product-buy-shipping-inner">
+                  <div class="product-buy-shipping-icon-text border-right">
+                    <div class="product-icon-text">
+                      <div class="product-icon-package-truck">
+                        {% render 'shipping' %}
+                      </div>
+                      <span>Free shipping for <br> orders over $60</span>
+                    </div>
+                  </div>
+                  <div class="product-buy-shipping-icon-text">
+                    <div class="product-icon-text">
+                      <div class="product-icon-package-truck">
+                        {% render 'truck' %}
+                      </div>
+                      <span>Ships in 1 <br> business day</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {%- comment -%} Ingredients / Benefits (static design) {%- endcomment -%}
+              <div class="product-ingri-dec-toggle">
+                <div class="product-ingredients border-bottom">
+                  <div class="product-ingrdients-first-inner">
+                    <div class="product-ingredients-inner">
+                      <p>Ingredients</p>
+                      <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0.530273 0.530321L6.53032 6.53027L12.5303 0.530273" stroke="#1C3025" stroke-width="1.5" stroke-miterlimit="16" />
+                      </svg>
+                    </div>
+                    <div class="product-ingredients-description">
+                      <ul>
+                        <li>Variyali</li>
+                        <li>Dhana</li>
+                        <li>Pan</li>
+                        <li>Manpasand</li>
+                        <li>Navrang</li>
+                        <li>Kesri</li>
+                        <li>Kharek</li>
+                        <li>Lovely</li>
+                        <li>Katho</li>
+                        <li>Chuno</li>
+                        <li>Ijmet</li>
+                        <li>Haripatti</li>
+                        <li>Cheri</li>
+                        <li>Gulkandh</li>
+                        <li>Chatney</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="product-ingredients border-bottom">
+                  <div class="product-ingrdients-first-inner">
+                    <div class="product-ingredients-inner">
+                      <p>Benifites</p>
+                      <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0.530273 0.530321L6.53032 6.53027L12.5303 0.530273" stroke="#1C3025" stroke-width="1.5" stroke-miterlimit="16" />
+                      </svg>
+                    </div>
+                    <div class="product-ingredients-description">
+                      <ul>
+                        <li>Mind & Mood</li>
+                        <li>Degestion</li>
+                        <li>Body Cooling</li>
+                        <li>Mouth & Oral Health</li>
+                        <li>Energy & Nutrition</li>
+                        <li>Immunity & Antioxidants</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {%- comment -%} Product image (dynamic; swaps on variant change) {%- endcomment -%}
+      <div class="product-new-img">
+        {%- if main_media -%}
+          <img
+            src="{{ main_media | image_url: width: 1500 }}"
+            alt="{{ main_media.alt | default: product.title | escape }}"
+            width="{{ main_media.preview_image.width }}"
+            height="{{ main_media.preview_image.height }}"
+            data-product-image
+            fetchpriority="high"
+          >
+        {%- else -%}
+          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} Variant data for client-side selection {%- endcomment -%}
+  <script type="application/json" data-product-variants>
+    [
+      {%- for v in product.variants -%}
+        {
+          "id": {{ v.id }},
+          "options": {{ v.options | json }},
+          "available": {{ v.available }},
+          "price": {{ v.price | money | json }},
+          "compare_at_price": {{ v.compare_at_price | money | json }},
+          "has_compare": {% if v.compare_at_price > v.price %}true{% else %}false{% endif %},
+          "image": {{ v.featured_image | image_url: width: 1500 | json }}
+        }{%- unless forloop.last -%},{%- endunless -%}
+      {%- endfor -%}
+    ]
+  </script>
+
+  <script type="application/ld+json">
+    {{ product | structured_data }}
+  </script>
+</product-info>
+
+<script>
+  (function () {
+    var root = document.getElementById('MainProduct-{{ section.id }}');
+    if (!root) return;
+
+    /* ---- Quantity stepper ---- */
+    var wrap = root.querySelector('.product-quntity-button-input');
+    if (wrap) {
+      var value = wrap.querySelector('.qty-value');
+      var minus = wrap.querySelector('.qty-minus');
+      var plus = wrap.querySelector('.qty-plus');
+      var qty = 1;
+      function renderQty() { value.value = String(qty).padStart(2, '0'); }
+      minus.addEventListener('click', function () { if (qty > 1) qty--; renderQty(); });
+      plus.addEventListener('click', function () { qty++; renderQty(); });
+      value.addEventListener('change', function () {
+        var n = parseInt(value.value, 10);
+        qty = isNaN(n) || n < 1 ? 1 : n;
+        renderQty();
+      });
+      renderQty();
+    }
+
+    /* ---- Ingredients / benefits accordion ---- */
+    root.querySelectorAll('.product-ingri-dec-toggle .product-ingredients').forEach(function (item) {
+      var header = item.querySelector('.product-ingredients-inner');
+      if (!header) return;
+      header.addEventListener('click', function () { item.classList.toggle('is-open'); });
+    });
+
+    /* ---- Variant selection ---- */
+    var picker = root.querySelector('[data-variant-picker]');
+    var variantsScript = root.querySelector('[data-product-variants]');
+    if (!picker || !variantsScript) return;
+
+    var variants = JSON.parse(variantsScript.textContent);
+    var idInput = root.querySelector('[data-variant-id-input]');
+    var priceMain = root.querySelector('[data-price-main]');
+    var priceCompare = root.querySelector('[data-price-compare]');
+    var addButton = root.querySelector('[data-add-button]');
+    var addButtonText = root.querySelector('[data-add-button-text]');
+    var productImage = root.querySelector('[data-product-image]');
+
+    /* Build current selection from the pre-selected buttons */
+    var groups = picker.querySelectorAll('.product-weight-buttons');
+    var selected = [];
+    groups.forEach(function (group, i) {
+      var sel = group.querySelector('.weight-opt.is-selected') || group.querySelector('.weight-opt');
+      selected[i] = sel ? sel.getAttribute('data-value') : null;
+    });
+
+    function findVariant() {
+      return variants.find(function (v) {
+        return v.options.every(function (opt, i) { return opt === selected[i]; });
+      });
+    }
+
+    function update() {
+      var variant = findVariant();
+
+      if (!variant) {
+        if (idInput) idInput.setAttribute('disabled', 'disabled');
+        if (addButton) { addButton.setAttribute('disabled', 'disabled'); }
+        if (addButtonText) addButtonText.textContent = 'Unavailable';
+        return;
+      }
+
+      if (idInput) { idInput.value = variant.id; idInput.removeAttribute('disabled'); }
+
+      if (priceMain) priceMain.textContent = variant.price;
+      if (priceCompare) {
+        if (variant.has_compare) {
+          priceCompare.textContent = variant.compare_at_price;
+          priceCompare.removeAttribute('hidden');
+        } else {
+          priceCompare.setAttribute('hidden', 'hidden');
+        }
+      }
+
+      if (addButton && addButtonText) {
+        if (variant.available) {
+          addButton.removeAttribute('disabled');
+          addButtonText.textContent = 'Add to Cart';
+        } else {
+          addButton.setAttribute('disabled', 'disabled');
+          addButtonText.textContent = 'Sold out';
+        }
+      }
+
+      if (productImage && variant.image) productImage.src = variant.image;
+    }
+
+    picker.querySelectorAll('.weight-opt').forEach(function (opt) {
+      opt.addEventListener('click', function () {
+        var group = opt.closest('.product-weight-buttons');
+        var index = parseInt(group.getAttribute('data-option-index'), 10);
+        selected[index] = opt.getAttribute('data-value');
+        group.querySelectorAll('.weight-opt').forEach(function (o) { o.classList.remove('is-selected'); });
+        opt.classList.add('is-selected');
+        update();
+      });
+    });
+
+    update();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Product (design)",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image position",
+      "info": "Choose which side the product image appears on (desktop).",
+      "options": [
+        { "value": "right", "label": "Right" },
+        { "value": "left", "label": "Left" }
+      ],
+      "default": "right"
+    },
+    {
+      "type": "select",
+      "id": "image_position_mobile",
+      "label": "Image position (mobile)",
+      "info": "On mobile the layout stacks. Choose whether the image sits above or below the text.",
+      "options": [
+        { "value": "bottom", "label": "Below text" },
+        { "value": "top", "label": "Above text" }
+      ],
+      "default": "top"
+    }
+  ],
+  "enabled_on": {
+    "templates": ["product"]
+  },
+  "presets": [
+    {
+      "name": "Product (design)"
+    }
+  ]
+}
+{% endschema %}
