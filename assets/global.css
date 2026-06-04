@@ -160,8 +160,19 @@ p,h2,h3,h4{
     box-sizing: border-box;
 }
 
+/* Align the text with the 1440px-centered layout (like the hero): on wide
+   screens the inner padding grows so the text starts at the same edge as the
+   centered container, while the image half still bleeds to the screen edge. */
 .product-new-content {
-    padding: 0 40px;
+    padding-left: max(40px, calc((100vw - 1440px) / 2 + 40px));
+    padding-right: 40px;
+}
+
+/* Image-left variant: text is on the right, so mirror the alignment padding
+   to the right edge instead. */
+.product-new-container--image-left .product-new-content {
+    padding-left: 40px;
+    padding-right: max(40px, calc((100vw - 1440px) / 2 + 40px));
 }
 
 .product-new-content h2 {
@@ -204,7 +215,8 @@ p,h2,h3,h4{
         width: 100%;
     }
 
-    .product-new-content {
+    .product-new-content,
+    .product-new-container--image-left .product-new-content {
         padding: 60px 20px;
     }
 }
