@@ -105,9 +105,21 @@
       background-color: var(--green);
   }
 
-  .product-weight-buttons span.is-unavailable {
-      opacity: 0.4;
-      text-decoration: line-through;
+  /* Sold-out / unavailable weight: light-green, not-allowed cursor, and a
+     diagonal line running from the top-right corner to the bottom-left. */
+  .product-weight-buttons span.is-unavailable,
+  .product-weight-buttons span.is-unavailable:hover {
+      color: #9DB2A4;
+      border-color: #9DB2A4;
+      background-color: transparent;
+      cursor: not-allowed;
+      background-image: linear-gradient(
+          to top left,
+          transparent calc(50% - 1px),
+          #9DB2A4 calc(50% - 1px),
+          #9DB2A4 calc(50% + 1px),
+          transparent calc(50% + 1px)
+      );
   }
 
   .product-quantity-cart-button {
@@ -699,6 +711,8 @@
 
     picker.querySelectorAll('.weight-opt').forEach(function (opt) {
       opt.addEventListener('click', function () {
+        /* Unavailable weights can't be selected. */
+        if (opt.classList.contains('is-unavailable')) return;
         var group = opt.closest('.product-weight-buttons');
         var index = parseInt(group.getAttribute('data-option-index'), 10);
         selected[index] = opt.getAttribute('data-value');
