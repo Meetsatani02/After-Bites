@@ -593,9 +593,13 @@
     [
       {%- for v in product.variants -%}
         {
-          "id": {{ v.id }},
-          "options": {{ v.options | json }},
-          "available": {{ v.available }},
+          "id": {{ v.id | json }},
+          "options": [
+            {{ v.option1 | json }}
+            {%- if v.option2 %}, {{ v.option2 | json }}{% endif -%}
+            {%- if v.option3 %}, {{ v.option3 | json }}{% endif -%}
+          ],
+          "available": {{ v.available | json }},
           "price": {{ v.price | money | json }},
           "compare_at_price": {{ v.compare_at_price | money | json }},
           "has_compare": {% if v.compare_at_price > v.price %}true{% else %}false{% endif %},
@@ -645,7 +649,12 @@
     var variantsScript = root.querySelector('[data-product-variants]');
     if (!picker || !variantsScript) return;
 
-    var variants = JSON.parse(variantsScript.textContent);
+    var variants = [];
+    try {
+      variants = JSON.parse(variantsScript.textContent) || [];
+    } catch (e) {
+      variants = [];
+    }
     var idInput = root.querySelector('[data-variant-id-input]');
     var priceMain = root.querySelector('[data-price-main]');
     var priceCompare = root.querySelector('[data-price-compare]');
@@ -661,17 +670,22 @@
       selected[i] = sel ? sel.getAttribute('data-value') : null;
     });
 
-    /* Find the variant matching a given selection array. */
+    /* Find the variant matching a given selection array. Iterate over the
+       selection (one entry per option group) so extra/missing entries in a
+       variant's options array can never break the match. */
     function findVariantFor(sel) {
       return variants.find(function (v) {
-        return v.options.every(function (opt, i) { return opt === sel[i]; });
+        var opts = v.options || [];
+        return sel.every(function (val, i) { return opts[i] === val; });
       });
     }
 
     /* Mark each weight option as unavailable when the variant it would
        produce (combined with the other current selections) is sold out or
-       does not exist. Unavailable options get the .is-unavailable style. */
+       does not exist. Skipped entirely if variant data is unavailable, so
+       the buttons never all get disabled by accident. */
     function refreshAvailability() {
+      if (!variants.length) return;
       groups.forEach(function (group, gIndex) {
         group.querySelectorAll('.weight-opt').forEach(function (opt) {
           var candidate = selected.slice();
@@ -684,6 +698,9 @@
     }
 
     function update() {
+      /* No variant data: leave the server-rendered price / button as-is. */
+      if (!variants.length) return;
+
       var variant = findVariantFor(selected);
 
       if (!variant) {
