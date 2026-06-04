@@ -131,3 +131,80 @@ p,h2,h3,h4{
         margin-bottom: 16px;
     }
 }
+
+/* ===== Product New section (image left/right alternative) ===== */
+.product-new-section {
+    background-color: var(--beige);
+    position: relative;
+    overflow: hidden;
+}
+
+.product-new-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    /* Left padding aligns text with the header; image bleeds to the edge. */
+    padding-left: max(40px, calc((100vw - 1440px) / 2 + 40px));
+    padding-right: 0;
+}
+
+/* Image-left variant: flip the row so the image sits on the left edge
+   and add the padding on the right side instead. */
+.product-new-container--image-left {
+    flex-direction: row-reverse;
+    padding-left: 0;
+    padding-right: max(40px, calc((100vw - 1440px) / 2 + 40px));
+}
+
+.product-new-content {
+    flex: 1 1 50%;
+    min-width: 0;
+}
+
+.product-new-content h2 {
+    font-size: 72px;
+    font-weight: 600;
+    line-height: 110%;
+    color: var(--green);
+    margin: 0;
+}
+
+.product-new-img {
+    flex: 1 1 50%;
+    min-width: 0;
+}
+
+.product-new-img picture,
+.product-new-img img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+@media (max-width: 1024px) {
+    .product-new-container,
+    .product-new-container--image-left {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 32px;
+        padding: 0;
+    }
+
+    .product-new-content {
+        flex: none;
+        width: 100%;
+        padding: 60px 20px;
+    }
+
+    .product-new-img {
+        flex: none;
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .product-new-content h2 {
+        font-size: 40px;
+        line-height: 1em;
+    }
+}
