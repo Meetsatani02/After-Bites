@@ -133,8 +133,8 @@
       "name": "Product New",
       "settings": {
         "heading": "product",
-        "image_position": "right",
-        "image": "shopify://shop_images/hero-img.png"
+        "image_position": "left",
+        "image": "shopify://shop_images/01.jpg"
       }
     }
   },
