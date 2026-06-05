@@ -40,6 +40,24 @@
   }
 </style>
 
+{%- style -%}
+  .feature-spacing-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top_mobile }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    margin-top: {{ section.settings.margin_top_mobile }}px;
+    margin-bottom: {{ section.settings.margin_bottom_mobile }}px;
+  }
+
+  @media screen and (min-width: 1025px) {
+    .feature-spacing-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+      margin-top: {{ section.settings.margin_top }}px;
+      margin-bottom: {{ section.settings.margin_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
 {%- liquid
   # Use the product chosen in the section settings. If none is chosen and we're
   # on a product page, fall back to that page's product so it still fills in.
@@ -59,7 +77,7 @@
     data-product-id="{{ product.id }}"
     data-url="{{ product.url }}"
   >
-    <section class="product-feature-custom global_container">
+    <section class="product-feature-custom global_container feature-spacing-{{ section.id }}">
 
       <div>
         <div class="product-feature-custom-image">
@@ -468,7 +486,7 @@
   </script>
 
 {%- else -%}
-  <section class="product-feature-custom global_container">
+  <section class="product-feature-custom global_container feature-spacing-{{ section.id }}">
     <p style="padding: 40px 20px; text-align: center; color: var(--green); font-family: 'Inter';">
       Select a product for this section in the theme editor.
     </p>
@@ -489,6 +507,94 @@
       "id": "feature_image",
       "label": "Feature image",
       "info": "Optional. Shown in the image card. If empty, the selected product's image is used."
+    },
+    {
+      "type": "header",
+      "content": "Spacing — Desktop"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Margin top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Margin bottom",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Spacing — Mobile"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "margin_top_mobile",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Margin top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom_mobile",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Margin bottom",
+      "default": 0
     }
   ],
   "presets": [
