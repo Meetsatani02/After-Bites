@@ -68,6 +68,13 @@
       text-decoration: line-through;
   }
 
+  /* Properly hide the compare price when the selected variant has no
+     compare-at price set (the display:flex above otherwise overrides the
+     hidden attribute, so it would never hide). */
+  .product-price-compare[hidden] {
+      display: none !important;
+  }
+
   .product-weight {
       display: flex;
       flex-direction: column;
