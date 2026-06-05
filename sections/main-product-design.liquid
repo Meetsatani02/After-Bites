@@ -1,5 +1,7 @@
 {{ 'global.css' | asset_url | stylesheet_tag }}
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer="defer"></script>
 <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
 
 <style>
@@ -591,38 +593,67 @@
         </div>
       </div>
 
-      {%- comment -%} Desktop: stacked sticky slide-over. Mobile (<=1024px): swipe slider with arrows + dots. Tap any image to zoom. {%- endcomment -%}
+      {%- comment -%}
+        Desktop: stacked sticky slide-over (each slide pins, next covers it).
+        Mobile (<=1024px): Swiper thumbs gallery — large main image + a synced
+        thumbnail strip below. Swiper classes are added by JS only on mobile, so
+        they never affect the desktop stack. Tap the main image to zoom.
+      {%- endcomment -%}
       <div class="product-new-img">
-        <div class="product-new-img__viewport">
-          <button class="product-new-img__arrow product-new-img__arrow--prev" type="button" aria-label="Previous image">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-          <div class="product-new-img__track">
+        {%- comment -%} Main image slider (also the desktop scroll-stack) {%- endcomment -%}
+        <div class="product-new-img__main" data-img-main>
+          <div class="product-new-img__main-wrapper" data-img-main-wrapper>
             {%- if product.media.size > 0 -%}
               {%- for media in product.media -%}
                 {%- if media.media_type == 'image' -%}
-                  <img
-                    class="product-new-img__item"
-                    src="{{ media | image_url: width: 1500 }}"
-                    data-zoom-src="{{ media | image_url: width: 2048 }}"
-                    alt="{{ media.alt | default: product.title | escape }}"
-                    width="{{ media.preview_image.width }}"
-                    height="{{ media.preview_image.height }}"
-                    loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
-                    {% if forloop.first %}data-product-image fetchpriority="high"{% endif %}
-                  >
+                  <div class="product-new-img__slide" data-img-slide>
+                    <img
+                      class="product-new-img__item"
+                      src="{{ media | image_url: width: 1500 }}"
+                      data-zoom-src="{{ media | image_url: width: 2048 }}"
+                      alt="{{ media.alt | default: product.title | escape }}"
+                      width="{{ media.preview_image.width }}"
+                      height="{{ media.preview_image.height }}"
+                      loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                      {% if forloop.first %}data-product-image fetchpriority="high"{% endif %}
+                    >
+                  </div>
                 {%- endif -%}
               {%- endfor -%}
             {%- else -%}
-              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+              <div class="product-new-img__slide" data-img-slide>
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+              </div>
             {%- endif -%}
           </div>
-          <button class="product-new-img__arrow product-new-img__arrow--next" type="button" aria-label="Next image">
+          <button class="product-new-img__arrow product-new-img__arrow--prev" type="button" data-img-prev aria-label="Previous image">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button class="product-new-img__arrow product-new-img__arrow--next" type="button" data-img-next aria-label="Next image">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
         </div>
-        {%- comment -%} Pagination dots — filled by JS, only visible on mobile {%- endcomment -%}
-        <div class="product-new-img__dots" aria-hidden="true"></div>
+
+        {%- comment -%} Thumbnail strip — mobile only, synced to the main slider {%- endcomment -%}
+        {%- if product.media.size > 1 -%}
+          <div class="product-new-img__thumbs" data-img-thumbs aria-hidden="true">
+            <div class="product-new-img__thumbs-wrapper" data-img-thumbs-wrapper>
+              {%- for media in product.media -%}
+                {%- if media.media_type == 'image' -%}
+                  <div class="product-new-img__thumb" data-img-thumb>
+                    <img
+                      src="{{ media | image_url: width: 300 }}"
+                      alt="{{ media.alt | default: product.title | escape }}"
+                      loading="lazy"
+                      width="{{ media.preview_image.width }}"
+                      height="{{ media.preview_image.height }}"
+                    >
+                  </div>
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+          </div>
+        {%- endif -%}
       </div>
     </div>
   </section>
@@ -697,10 +728,10 @@
       header.addEventListener('click', function () { item.classList.toggle('is-open'); });
     });
 
-    /* ---- Image slider (mobile) + tap-to-zoom modal ---- */
-    var track = root.querySelector('.product-new-img__track');
-    var slides = track
-      ? Array.prototype.slice.call(track.querySelectorAll('.product-new-img__item'))
+    /* ---- Image gallery: tap-to-zoom + Swiper thumbs gallery on mobile ---- */
+    var imgMain = root.querySelector('[data-img-main]');
+    var slides = imgMain
+      ? Array.prototype.slice.call(imgMain.querySelectorAll('.product-new-img__item'))
       : [];
 
     /* Tap-to-zoom fullscreen modal (works on every screen size) */
@@ -737,43 +768,88 @@
       });
     }
 
-    /* Mobile slider: dots + arrows + scroll sync */
-    var dotsWrap = root.querySelector('.product-new-img__dots');
-    if (track && dotsWrap && slides.length > 1) {
-      var current = 0;
-      var goTo = function (i) {
-        i = Math.max(0, Math.min(slides.length - 1, i));
-        slides[i].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+    /* Swiper thumbs gallery on <=1024px; desktop keeps the scroll-stack.
+       Swiper classes are added/removed by breakpoint so they never affect the
+       desktop sticky stack. */
+    var imgMainWrapper = root.querySelector('[data-img-main-wrapper]');
+    var mainSlides = imgMain
+      ? Array.prototype.slice.call(imgMain.querySelectorAll('[data-img-slide]'))
+      : [];
+    var imgThumbs = root.querySelector('[data-img-thumbs]');
+    var imgThumbsWrapper = root.querySelector('[data-img-thumbs-wrapper]');
+    var thumbItems = imgThumbs
+      ? Array.prototype.slice.call(imgThumbs.querySelectorAll('[data-img-thumb]'))
+      : [];
+
+    if (imgMain && imgMainWrapper && mainSlides.length > 1) {
+      var mainSwiper = null;
+      var thumbsSwiper = null;
+      var galleryMq = window.matchMedia('(max-width: 1024px)');
+
+      var buildGallery = function () {
+        if (mainSwiper) return;
+        if (typeof Swiper === 'undefined') {
+          return window.setTimeout(buildGallery, 60);
+        }
+
+        imgMain.classList.add('swiper');
+        imgMainWrapper.classList.add('swiper-wrapper');
+        mainSlides.forEach(function (s) { s.classList.add('swiper-slide'); });
+
+        var thumbsConfig;
+        if (imgThumbs && imgThumbsWrapper && thumbItems.length) {
+          imgThumbs.classList.add('swiper');
+          imgThumbsWrapper.classList.add('swiper-wrapper');
+          thumbItems.forEach(function (t) { t.classList.add('swiper-slide'); });
+          thumbsSwiper = new Swiper(imgThumbs, {
+            slidesPerView: 4,
+            spaceBetween: 10,
+            freeMode: true,
+            watchSlidesProgress: true,
+            breakpoints: {
+              480: { slidesPerView: 5 },
+              768: { slidesPerView: 6 }
+            }
+          });
+          thumbsConfig = { swiper: thumbsSwiper };
+        }
+
+        mainSwiper = new Swiper(imgMain, {
+          slidesPerView: 1,
+          spaceBetween: 10,
+          grabCursor: true,
+          speed: 450,
+          watchOverflow: true,
+          navigation: {
+            prevEl: root.querySelector('[data-img-prev]'),
+            nextEl: root.querySelector('[data-img-next]')
+          },
+          thumbs: thumbsConfig
+        });
       };
 
-      slides.forEach(function (slide, i) {
-        var dot = document.createElement('button');
-        dot.type = 'button';
-        dot.className = 'product-new-img__dot' + (i === 0 ? ' is-active' : '');
-        dot.setAttribute('aria-label', 'Go to image ' + (i + 1));
-        dot.addEventListener('click', function () { goTo(i); });
-        dotsWrap.appendChild(dot);
-      });
-      var dots = dotsWrap.querySelectorAll('.product-new-img__dot');
+      var destroyGallery = function () {
+        if (mainSwiper) { mainSwiper.destroy(true, true); mainSwiper = null; }
+        if (thumbsSwiper) { thumbsSwiper.destroy(true, true); thumbsSwiper = null; }
+        imgMain.classList.remove('swiper');
+        imgMainWrapper.classList.remove('swiper-wrapper');
+        mainSlides.forEach(function (s) { s.classList.remove('swiper-slide'); });
+        if (imgThumbs) {
+          imgThumbs.classList.remove('swiper');
+          imgThumbsWrapper.classList.remove('swiper-wrapper');
+          thumbItems.forEach(function (t) { t.classList.remove('swiper-slide'); });
+        }
+      };
 
-      var prevBtn = root.querySelector('.product-new-img__arrow--prev');
-      var nextBtn = root.querySelector('.product-new-img__arrow--next');
-      if (prevBtn) prevBtn.addEventListener('click', function () { goTo(current - 1); });
-      if (nextBtn) nextBtn.addEventListener('click', function () { goTo(current + 1); });
+      var applyGallery = function () {
+        if (galleryMq.matches) { buildGallery(); } else { destroyGallery(); }
+      };
 
-      if ('IntersectionObserver' in window) {
-        var io = new IntersectionObserver(
-          function (entries) {
-            entries.forEach(function (entry) {
-              if (!entry.isIntersecting) return;
-              current = slides.indexOf(entry.target);
-              dots.forEach(function (d) { d.classList.remove('is-active'); });
-              if (dots[current]) dots[current].classList.add('is-active');
-            });
-          },
-          { root: track, threshold: 0.6 }
-        );
-        slides.forEach(function (slide) { io.observe(slide); });
+      applyGallery();
+      if (galleryMq.addEventListener) {
+        galleryMq.addEventListener('change', applyGallery);
+      } else if (galleryMq.addListener) {
+        galleryMq.addListener(applyGallery);
       }
     }
 
