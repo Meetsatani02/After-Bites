@@ -7,6 +7,11 @@
       grid-template-columns: repeat(2, 1fr);
       gap: 48px;
       position: relative;
+      box-sizing: border-box;
+      /* Container gutters — same 1440px-centered alignment as the other
+         sections: content stays off the screen edges on every width. */
+      padding-left: 40px;
+      padding-right: 40px;
   }
 
   .product-feature-custom-image {
@@ -31,11 +36,20 @@
       .product-feature-custom {
           grid-template-columns: 1fr;
           gap: 32px;
+          padding-left: 30px;
+          padding-right: 30px;
       }
 
       .product-feature-logo {
           bottom: -4%;
           right: 2%;
+      }
+  }
+
+  @media (max-width: 768px) {
+      .product-feature-custom {
+          padding-left: 20px;
+          padding-right: 20px;
       }
   }
 </style>
