@@ -27,8 +27,19 @@
 
   .product-feature-logo {
       position: absolute;
-      bottom: -6%;
-      right: -4%;
+      bottom: -24px;
+      right: -16px;
+      width: 140px;
+      line-height: 0;
+      z-index: 2;
+  }
+
+  /* The logo SVG is a fixed 176px; force it to fill the box so it scales. */
+  .product-feature-logo svg,
+  .product-feature-logo img {
+      display: block;
+      width: 100%;
+      height: auto;
   }
 
   /* Stack to a single column on tablet / mobile. */
@@ -41,8 +52,9 @@
       }
 
       .product-feature-logo {
-          bottom: -4%;
-          right: 2%;
+          width: 120px;
+          bottom: -20px;
+          right: 12px;
       }
   }
 
@@ -50,6 +62,20 @@
       .product-feature-custom {
           padding-left: 20px;
           padding-right: 20px;
+      }
+
+      .product-feature-logo {
+          width: 96px;
+          bottom: -16px;
+          right: 12px;
+      }
+  }
+
+  @media (max-width: 480px) {
+      .product-feature-logo {
+          width: 80px;
+          bottom: -14px;
+          right: 10px;
       }
   }
 </style>
