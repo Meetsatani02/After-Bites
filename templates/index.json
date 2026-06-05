@@ -144,7 +144,8 @@
       "type": "product-feature-new",
       "name": "Product feature new",
       "settings": {
-        "product": "wet-product"
+        "product": "wet-product",
+        "feature_image": "shopify://shop_images/product-bg.png"
       }
     }
   },
