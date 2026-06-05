@@ -183,12 +183,10 @@ p,h1,h2,h3,h4{
     padding-right: max(40px, calc((100vw - 1440px) / 2 + 40px));
 }
 
-/* Image side: show every product image, stacked vertically (Allbirds /
-   Glossier / Squarespace pattern — scroll through all images, no slider). */
+/* Image side: every image is a full-height panel in normal flow; each pins to
+   the top so the next scrolls up and covers it (see .product-new-img__item). */
 .product-new-img {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
+    display: block;
 }
 
 .product-new-content h2 {
@@ -204,6 +202,19 @@ p,h1,h2,h3,h4{
     display: block;
     width: 100%;
     height: auto;
+}
+
+/* Apple-style stacked slide-over: each image fills the viewport and pins to the
+   top, so as you scroll the next image slides up and covers the previous one.
+   Rounded corners + soft shadow give the premium "stack of cards" feel. */
+.product-new-img img.product-new-img__item {
+    position: sticky;
+    top: calc(var(--header-height, 90px) + 24px);
+    height: calc(100vh - var(--header-height, 90px) - 48px);
+    object-fit: cover;
+    object-position: center;
+    border-radius: 18px;
+    box-shadow: 0 18px 45px rgba(28, 48, 37, 0.16);
 }
 
 @media (max-width: 1024px) {
@@ -235,6 +246,14 @@ p,h1,h2,h3,h4{
     .product-new-content {
         position: static;
         top: auto;
+    }
+
+    /* No slide-over on mobile: natural images stacked with a small gap. */
+    .product-new-img img.product-new-img__item {
+        position: static;
+        height: auto;
+        object-fit: initial;
+        margin-bottom: 16px;
     }
 
     .product-new-content,
