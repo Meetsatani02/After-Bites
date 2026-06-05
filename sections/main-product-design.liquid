@@ -591,32 +591,55 @@
         </div>
       </div>
 
-      {%- comment -%} Desktop: stacked sticky slide-over. Mobile (<=1024px): swipe slider with dots. {%- endcomment -%}
+      {%- comment -%} Desktop: stacked sticky slide-over. Mobile (<=1024px): swipe slider with arrows + dots. Tap any image to zoom. {%- endcomment -%}
       <div class="product-new-img">
-        <div class="product-new-img__track">
-          {%- if product.media.size > 0 -%}
-            {%- for media in product.media -%}
-              {%- if media.media_type == 'image' -%}
-                <img
-                  class="product-new-img__item"
-                  src="{{ media | image_url: width: 1500 }}"
-                  alt="{{ media.alt | default: product.title | escape }}"
-                  width="{{ media.preview_image.width }}"
-                  height="{{ media.preview_image.height }}"
-                  loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
-                  {% if forloop.first %}data-product-image fetchpriority="high"{% endif %}
-                >
-              {%- endif -%}
-            {%- endfor -%}
-          {%- else -%}
-            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-          {%- endif -%}
+        <div class="product-new-img__viewport">
+          <button class="product-new-img__arrow product-new-img__arrow--prev" type="button" aria-label="Previous image">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="product-new-img__track">
+            {%- if product.media.size > 0 -%}
+              {%- for media in product.media -%}
+                {%- if media.media_type == 'image' -%}
+                  <img
+                    class="product-new-img__item"
+                    src="{{ media | image_url: width: 1500 }}"
+                    data-zoom-src="{{ media | image_url: width: 2048 }}"
+                    alt="{{ media.alt | default: product.title | escape }}"
+                    width="{{ media.preview_image.width }}"
+                    height="{{ media.preview_image.height }}"
+                    loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                    {% if forloop.first %}data-product-image fetchpriority="high"{% endif %}
+                  >
+                {%- endif -%}
+              {%- endfor -%}
+            {%- else -%}
+              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+          </div>
+          <button class="product-new-img__arrow product-new-img__arrow--next" type="button" aria-label="Next image">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
         </div>
         {%- comment -%} Pagination dots — filled by JS, only visible on mobile {%- endcomment -%}
         <div class="product-new-img__dots" aria-hidden="true"></div>
       </div>
     </div>
   </section>
+
+  {%- comment -%} Fullscreen zoom modal — opened by tapping any image {%- endcomment -%}
+  <div class="product-zoom" data-zoom hidden>
+    <button class="product-zoom__close" type="button" data-zoom-close aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <button class="product-zoom__nav product-zoom__nav--prev" type="button" data-zoom-prev aria-label="Previous">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <img class="product-zoom__img" data-zoom-img alt="{{ product.title | escape }}">
+    <button class="product-zoom__nav product-zoom__nav--next" type="button" data-zoom-next aria-label="Next">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
 
   {%- comment -%} Variant data for client-side selection {%- endcomment -%}
   <script type="application/json" data-product-variants>
@@ -674,38 +697,83 @@
       header.addEventListener('click', function () { item.classList.toggle('is-open'); });
     });
 
-    /* ---- Mobile image slider: pagination dots + scroll sync ---- */
+    /* ---- Image slider (mobile) + tap-to-zoom modal ---- */
     var track = root.querySelector('.product-new-img__track');
-    var dotsWrap = root.querySelector('.product-new-img__dots');
-    if (track && dotsWrap) {
-      var slides = track.querySelectorAll('.product-new-img__item');
-      if (slides.length > 1) {
-        slides.forEach(function (slide, i) {
-          var dot = document.createElement('button');
-          dot.type = 'button';
-          dot.className = 'product-new-img__dot' + (i === 0 ? ' is-active' : '');
-          dot.setAttribute('aria-label', 'Go to image ' + (i + 1));
-          dot.addEventListener('click', function () {
-            slide.scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
-          });
-          dotsWrap.appendChild(dot);
-        });
+    var slides = track
+      ? Array.prototype.slice.call(track.querySelectorAll('.product-new-img__item'))
+      : [];
 
-        var dots = dotsWrap.querySelectorAll('.product-new-img__dot');
-        if ('IntersectionObserver' in window) {
-          var io = new IntersectionObserver(
-            function (entries) {
-              entries.forEach(function (entry) {
-                if (!entry.isIntersecting) return;
-                var idx = Array.prototype.indexOf.call(slides, entry.target);
-                dots.forEach(function (d) { d.classList.remove('is-active'); });
-                if (dots[idx]) dots[idx].classList.add('is-active');
-              });
-            },
-            { root: track, threshold: 0.6 }
-          );
-          slides.forEach(function (slide) { io.observe(slide); });
-        }
+    /* Tap-to-zoom fullscreen modal (works on every screen size) */
+    var zoom = root.querySelector('[data-zoom]');
+    if (zoom && slides.length) {
+      var zoomImg = zoom.querySelector('[data-zoom-img]');
+      var zoomSrcs = slides.map(function (s) { return s.getAttribute('data-zoom-src') || s.src; });
+      var zoomIndex = 0;
+      var zShow = function (i) {
+        zoomIndex = (i + zoomSrcs.length) % zoomSrcs.length;
+        zoomImg.src = zoomSrcs[zoomIndex];
+      };
+      var zOpen = function (i) {
+        zShow(i);
+        zoom.removeAttribute('hidden');
+        document.documentElement.style.overflow = 'hidden';
+      };
+      var zClose = function () {
+        zoom.setAttribute('hidden', 'hidden');
+        document.documentElement.style.overflow = '';
+      };
+      slides.forEach(function (s, i) {
+        s.addEventListener('click', function () { zOpen(i); });
+      });
+      zoom.querySelector('[data-zoom-close]').addEventListener('click', zClose);
+      zoom.querySelector('[data-zoom-prev]').addEventListener('click', function () { zShow(zoomIndex - 1); });
+      zoom.querySelector('[data-zoom-next]').addEventListener('click', function () { zShow(zoomIndex + 1); });
+      zoom.addEventListener('click', function (e) { if (e.target === zoom) zClose(); });
+      document.addEventListener('keydown', function (e) {
+        if (zoom.hasAttribute('hidden')) return;
+        if (e.key === 'Escape') zClose();
+        if (e.key === 'ArrowLeft') zShow(zoomIndex - 1);
+        if (e.key === 'ArrowRight') zShow(zoomIndex + 1);
+      });
+    }
+
+    /* Mobile slider: dots + arrows + scroll sync */
+    var dotsWrap = root.querySelector('.product-new-img__dots');
+    if (track && dotsWrap && slides.length > 1) {
+      var current = 0;
+      var goTo = function (i) {
+        i = Math.max(0, Math.min(slides.length - 1, i));
+        slides[i].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+      };
+
+      slides.forEach(function (slide, i) {
+        var dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'product-new-img__dot' + (i === 0 ? ' is-active' : '');
+        dot.setAttribute('aria-label', 'Go to image ' + (i + 1));
+        dot.addEventListener('click', function () { goTo(i); });
+        dotsWrap.appendChild(dot);
+      });
+      var dots = dotsWrap.querySelectorAll('.product-new-img__dot');
+
+      var prevBtn = root.querySelector('.product-new-img__arrow--prev');
+      var nextBtn = root.querySelector('.product-new-img__arrow--next');
+      if (prevBtn) prevBtn.addEventListener('click', function () { goTo(current - 1); });
+      if (nextBtn) nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (!entry.isIntersecting) return;
+              current = slides.indexOf(entry.target);
+              dots.forEach(function (d) { d.classList.remove('is-active'); });
+              if (dots[current]) dots[current].classList.add('is-active');
+            });
+          },
+          { root: track, threshold: 0.6 }
+        );
+        slides.forEach(function (slide) { io.observe(slide); });
       }
     }
 
