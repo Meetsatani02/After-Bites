@@ -12,7 +12,7 @@
     "main": {
       "type": "main-product-design",
       "settings": {
-        "image_position": "right",
+        "image_position": "left",
         "image_position_mobile": "top"
       }
     },
