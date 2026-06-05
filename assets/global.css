@@ -216,6 +216,28 @@ p,h1,h2,h3,h4{
     object-position: center;
 }
 
+/* Pagination dots: hidden on desktop, shown for the mobile slider. */
+.product-new-img__dots {
+    display: none;
+}
+
+.product-new-img__dot {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: rgba(28, 48, 37, 0.3);
+    cursor: pointer;
+    transition: width 0.25s ease, background-color 0.25s ease;
+}
+
+.product-new-img__dot.is-active {
+    width: 22px;
+    border-radius: 4px;
+    background: var(--green);
+}
+
 @media (max-width: 1024px) {
     .product-new-container {
         align-items: flex-start;
@@ -247,12 +269,34 @@ p,h1,h2,h3,h4{
         top: auto;
     }
 
-    /* No slide-over on mobile: natural images stacked with a small gap. */
+    /* Mobile: horizontal swipe slider with snap (one image at a time). */
+    .product-new-img__track {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .product-new-img__track::-webkit-scrollbar {
+        display: none;
+    }
+
     .product-new-img img.product-new-img__item {
         position: static;
+        flex: 0 0 100%;
+        width: 100%;
         height: auto;
         object-fit: initial;
-        margin-bottom: 16px;
+        scroll-snap-align: start;
+    }
+
+    .product-new-img__dots {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 14px;
     }
 
     .product-new-content,

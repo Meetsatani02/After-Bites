@@ -591,25 +591,29 @@
         </div>
       </div>
 
-      {%- comment -%} All product images, stacked vertically (details stay pinned beside them) {%- endcomment -%}
+      {%- comment -%} Desktop: stacked sticky slide-over. Mobile (<=1024px): swipe slider with dots. {%- endcomment -%}
       <div class="product-new-img">
-        {%- if product.media.size > 0 -%}
-          {%- for media in product.media -%}
-            {%- if media.media_type == 'image' -%}
-              <img
-                class="product-new-img__item"
-                src="{{ media | image_url: width: 1500 }}"
-                alt="{{ media.alt | default: product.title | escape }}"
-                width="{{ media.preview_image.width }}"
-                height="{{ media.preview_image.height }}"
-                loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
-                {% if forloop.first %}data-product-image fetchpriority="high"{% endif %}
-              >
-            {%- endif -%}
-          {%- endfor -%}
-        {%- else -%}
-          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-        {%- endif -%}
+        <div class="product-new-img__track">
+          {%- if product.media.size > 0 -%}
+            {%- for media in product.media -%}
+              {%- if media.media_type == 'image' -%}
+                <img
+                  class="product-new-img__item"
+                  src="{{ media | image_url: width: 1500 }}"
+                  alt="{{ media.alt | default: product.title | escape }}"
+                  width="{{ media.preview_image.width }}"
+                  height="{{ media.preview_image.height }}"
+                  loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                  {% if forloop.first %}data-product-image fetchpriority="high"{% endif %}
+                >
+              {%- endif -%}
+            {%- endfor -%}
+          {%- else -%}
+            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </div>
+        {%- comment -%} Pagination dots — filled by JS, only visible on mobile {%- endcomment -%}
+        <div class="product-new-img__dots" aria-hidden="true"></div>
       </div>
     </div>
   </section>
@@ -669,6 +673,41 @@
       if (!header) return;
       header.addEventListener('click', function () { item.classList.toggle('is-open'); });
     });
+
+    /* ---- Mobile image slider: pagination dots + scroll sync ---- */
+    var track = root.querySelector('.product-new-img__track');
+    var dotsWrap = root.querySelector('.product-new-img__dots');
+    if (track && dotsWrap) {
+      var slides = track.querySelectorAll('.product-new-img__item');
+      if (slides.length > 1) {
+        slides.forEach(function (slide, i) {
+          var dot = document.createElement('button');
+          dot.type = 'button';
+          dot.className = 'product-new-img__dot' + (i === 0 ? ' is-active' : '');
+          dot.setAttribute('aria-label', 'Go to image ' + (i + 1));
+          dot.addEventListener('click', function () {
+            slide.scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+          });
+          dotsWrap.appendChild(dot);
+        });
+
+        var dots = dotsWrap.querySelectorAll('.product-new-img__dot');
+        if ('IntersectionObserver' in window) {
+          var io = new IntersectionObserver(
+            function (entries) {
+              entries.forEach(function (entry) {
+                if (!entry.isIntersecting) return;
+                var idx = Array.prototype.indexOf.call(slides, entry.target);
+                dots.forEach(function (d) { d.classList.remove('is-active'); });
+                if (dots[idx]) dots[idx].classList.add('is-active');
+              });
+            },
+            { root: track, threshold: 0.6 }
+          );
+          slides.forEach(function (slide) { io.observe(slide); });
+        }
+      }
+    }
 
     /* ---- Variant selection ---- */
     var picker = root.querySelector('[data-variant-picker]');
