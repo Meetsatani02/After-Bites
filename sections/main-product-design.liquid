@@ -345,6 +345,72 @@
   .product-ingredients.is-open .product-ingredients-description > ul {
       margin-top: 20px;
   }
+
+  /* ===== Entrance + interaction animations ===== */
+  @keyframes pnFadeUp {
+      from { opacity: 0; transform: translateY(26px); }
+      to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes pnFadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+  }
+
+  /* Staggered fade-up on the product details (added by JS, so no-JS shows all). */
+  .product-content-custom.pn-stagger > * {
+      opacity: 0;
+  }
+
+  .product-content-custom.pn-stagger > .pn-in {
+      animation: pnFadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  /* Soft fade-in for the image side once it's marked ready. */
+  .product-new-img.pn-fade {
+      animation: pnFadeIn 0.9s ease both;
+  }
+
+  /* Subtle hover lift on the weight buttons + Add to Cart. */
+  .product-weight-buttons span {
+      transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .product-weight-buttons span:hover {
+      transform: translateY(-2px);
+  }
+
+  .product-weight-buttons span.is-unavailable:hover {
+      transform: none;
+  }
+
+  .product-buy-button button {
+      transition: background-color 0.25s ease, color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+  }
+
+  .product-buy-button button:hover:not([disabled]) {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(28, 48, 37, 0.18), inset 0 0 0 1.5px var(--green);
+  }
+
+  /* Gentle zoom on the ingredient/benefit tags. */
+  .product-ingredients-description li {
+      transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .product-ingredients-description li:hover {
+      transform: translateY(-2px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+      .product-content-custom.pn-stagger > *,
+      .product-content-custom.pn-stagger > .pn-in,
+      .product-new-img.pn-fade {
+          animation: none !important;
+          opacity: 1 !important;
+          transform: none !important;
+      }
+  }
 </style>
 
 {%- liquid
@@ -702,6 +768,36 @@
   (function () {
     var root = document.getElementById('MainProduct-{{ section.id }}');
     if (!root) return;
+
+    var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* ---- Entrance animations: staggered fade-up on details, fade-in on image ---- */
+    if (!reducedMotion) {
+      var content = root.querySelector('.product-content-custom');
+      if (content) {
+        content.classList.add('pn-stagger');
+        var kids = Array.prototype.slice.call(content.children);
+        var revealKids = function () {
+          kids.forEach(function (kid, i) {
+            kid.style.animationDelay = (i * 0.08) + 's';
+            kid.classList.add('pn-in');
+          });
+        };
+        if ('IntersectionObserver' in window) {
+          var contentObserver = new IntersectionObserver(function (entries, obs) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) { revealKids(); obs.disconnect(); }
+            });
+          }, { threshold: 0.12 });
+          contentObserver.observe(content);
+        } else {
+          revealKids();
+        }
+      }
+
+      var imgWrap = root.querySelector('.product-new-img');
+      if (imgWrap) imgWrap.classList.add('pn-fade');
+    }
 
     /* ---- Quantity stepper ---- */
     var wrap = root.querySelector('.product-quntity-button-input');
