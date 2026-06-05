@@ -143,7 +143,9 @@
     "product_feature_new_4pfRLw": {
       "type": "product-feature-new",
       "name": "Product feature new",
-      "settings": {}
+      "settings": {
+        "product": "wet-product"
+      }
     }
   },
   "order": [
