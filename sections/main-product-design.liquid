@@ -1,7 +1,5 @@
 {{ 'global.css' | asset_url | stylesheet_tag }}
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer="defer"></script>
 <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
 
 <style>
@@ -593,46 +591,38 @@
         </div>
       </div>
 
-      {%- comment -%}
-        Desktop: stacked sticky slide-over (each slide pins, next covers it).
-        Mobile/tablet (<=1024px): Swiper.js slider — the swiper classes are added
-        by JS only on responsive, so they never interfere with the desktop stack.
-        Tap any image to zoom.
-      {%- endcomment -%}
+      {%- comment -%} Desktop: stacked sticky slide-over. Mobile (<=1024px): swipe slider with arrows + dots. Tap any image to zoom. {%- endcomment -%}
       <div class="product-new-img">
-        <div class="product-new-img__track" data-img-track>
-          <div class="product-new-img__wrapper" data-img-wrapper>
+        <div class="product-new-img__viewport">
+          <button class="product-new-img__arrow product-new-img__arrow--prev" type="button" aria-label="Previous image">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="product-new-img__track">
             {%- if product.media.size > 0 -%}
               {%- for media in product.media -%}
                 {%- if media.media_type == 'image' -%}
-                  <div class="product-new-img__slide" data-img-slide>
-                    <img
-                      class="product-new-img__item"
-                      src="{{ media | image_url: width: 1500 }}"
-                      data-zoom-src="{{ media | image_url: width: 2048 }}"
-                      alt="{{ media.alt | default: product.title | escape }}"
-                      width="{{ media.preview_image.width }}"
-                      height="{{ media.preview_image.height }}"
-                      loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
-                      {% if forloop.first %}data-product-image fetchpriority="high"{% endif %}
-                    >
-                  </div>
+                  <img
+                    class="product-new-img__item"
+                    src="{{ media | image_url: width: 1500 }}"
+                    data-zoom-src="{{ media | image_url: width: 2048 }}"
+                    alt="{{ media.alt | default: product.title | escape }}"
+                    width="{{ media.preview_image.width }}"
+                    height="{{ media.preview_image.height }}"
+                    loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                    {% if forloop.first %}data-product-image fetchpriority="high"{% endif %}
+                  >
                 {%- endif -%}
               {%- endfor -%}
             {%- else -%}
-              <div class="product-new-img__slide" data-img-slide>
-                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-              </div>
+              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
             {%- endif -%}
           </div>
-          <div class="product-new-img__dots" data-img-dots aria-hidden="true"></div>
+          <button class="product-new-img__arrow product-new-img__arrow--next" type="button" aria-label="Next image">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
         </div>
-        <button class="product-new-img__arrow product-new-img__arrow--prev" type="button" data-img-prev aria-label="Previous image">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <button class="product-new-img__arrow product-new-img__arrow--next" type="button" data-img-next aria-label="Next image">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
+        {%- comment -%} Pagination dots — filled by JS, only visible on mobile {%- endcomment -%}
+        <div class="product-new-img__dots" aria-hidden="true"></div>
       </div>
     </div>
   </section>
@@ -747,62 +737,43 @@
       });
     }
 
-    /* Responsive slider: Swiper.js on <=1024px; desktop keeps the scroll-stack.
-       Swiper classes are added/removed by breakpoint so they never affect the
-       desktop sticky stack. */
-    var imgWrapper = root.querySelector('[data-img-wrapper]');
-    var imgSlides = track
-      ? Array.prototype.slice.call(track.querySelectorAll('[data-img-slide]'))
-      : [];
+    /* Mobile slider: dots + arrows + scroll sync */
+    var dotsWrap = root.querySelector('.product-new-img__dots');
+    if (track && dotsWrap && slides.length > 1) {
+      var current = 0;
+      var goTo = function (i) {
+        i = Math.max(0, Math.min(slides.length - 1, i));
+        slides[i].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+      };
 
-    if (track && imgWrapper && imgSlides.length > 1) {
-      var swiper = null;
-      var mq = window.matchMedia('(max-width: 1024px)');
+      slides.forEach(function (slide, i) {
+        var dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'product-new-img__dot' + (i === 0 ? ' is-active' : '');
+        dot.setAttribute('aria-label', 'Go to image ' + (i + 1));
+        dot.addEventListener('click', function () { goTo(i); });
+        dotsWrap.appendChild(dot);
+      });
+      var dots = dotsWrap.querySelectorAll('.product-new-img__dot');
 
-      var buildSwiper = function () {
-        if (swiper) return;
-        if (typeof Swiper === 'undefined') {
-          return window.setTimeout(buildSwiper, 60);
-        }
-        track.classList.add('swiper');
-        imgWrapper.classList.add('swiper-wrapper');
-        imgSlides.forEach(function (s) { s.classList.add('swiper-slide'); });
-        swiper = new Swiper(track, {
-          slidesPerView: 1,
-          spaceBetween: 14,
-          grabCursor: true,
-          speed: 500,
-          watchOverflow: true,
-          pagination: { el: root.querySelector('[data-img-dots]'), clickable: true },
-          navigation: {
-            prevEl: root.querySelector('[data-img-prev]'),
-            nextEl: root.querySelector('[data-img-next]')
+      var prevBtn = root.querySelector('.product-new-img__arrow--prev');
+      var nextBtn = root.querySelector('.product-new-img__arrow--next');
+      if (prevBtn) prevBtn.addEventListener('click', function () { goTo(current - 1); });
+      if (nextBtn) nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (!entry.isIntersecting) return;
+              current = slides.indexOf(entry.target);
+              dots.forEach(function (d) { d.classList.remove('is-active'); });
+              if (dots[current]) dots[current].classList.add('is-active');
+            });
           },
-          breakpoints: {
-            600: { slidesPerView: 1.18, spaceBetween: 18, centeredSlides: true },
-            768: { slidesPerView: 1.35, spaceBetween: 22, centeredSlides: true }
-          }
-        });
-      };
-
-      var destroySwiper = function () {
-        if (!swiper) return;
-        swiper.destroy(true, true);
-        swiper = null;
-        track.classList.remove('swiper');
-        imgWrapper.classList.remove('swiper-wrapper');
-        imgSlides.forEach(function (s) { s.classList.remove('swiper-slide'); });
-      };
-
-      var applyMode = function () {
-        if (mq.matches) { buildSwiper(); } else { destroySwiper(); }
-      };
-
-      applyMode();
-      if (mq.addEventListener) {
-        mq.addEventListener('change', applyMode);
-      } else if (mq.addListener) {
-        mq.addListener(applyMode);
+          { root: track, threshold: 0.6 }
+        );
+        slides.forEach(function (slide) { io.observe(slide); });
       }
     }
 
