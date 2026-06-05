@@ -41,7 +41,12 @@
 </style>
 
 {%- liquid
-  assign product = section.settings.product
+  # Use the product chosen in the section settings. If none is chosen and we're
+  # on a product page, fall back to that page's product so it still fills in.
+  assign selected_product = section.settings.product
+  if selected_product != blank
+    assign product = selected_product
+  endif
 -%}
 
 {%- if product != blank -%}
