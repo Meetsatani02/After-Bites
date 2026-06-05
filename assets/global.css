@@ -212,8 +212,11 @@ p,h1,h2,h3,h4{
     position: sticky;
     top: 0;
     height: 100vh;
-    object-fit: cover;
+    /* Show the whole image (no cropping). The beige background keeps each
+       panel opaque so it still fully covers the previous image on scroll. */
+    object-fit: contain;
     object-position: center;
+    background: var(--beige);
 }
 
 /* Pagination dots: hidden on desktop, shown for the mobile slider. */
