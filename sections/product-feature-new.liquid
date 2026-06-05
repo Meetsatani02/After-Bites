@@ -31,6 +31,10 @@
       right: -4%;
   }
 
+  .product-description-content-para p{
+      margin-top:24px;
+}
+
   /* Stack to a single column on tablet / mobile. */
   @media (max-width: 1024px) {
       .product-feature-custom {
@@ -41,8 +45,8 @@
       }
 
       .product-feature-logo {
-          bottom: -4%;
-          right: 2%;
+            bottom: -4%;
+            right: -4%;
       }
   }
 
@@ -54,9 +58,9 @@
 
       /* Mobile only: shrink the fixed 176px logo SVG to a clean size. */
       .product-feature-logo {
-          width: 96px;
+          width: 138px;
           bottom: -16px;
-          right: 12px;
+          right: -20px;
       }
 
       .product-feature-logo svg,
@@ -69,9 +73,9 @@
 
   @media (max-width: 480px) {
       .product-feature-logo {
-          width: 80px;
-          bottom: -14px;
-          right: 10px;
+          {% comment %} width: 80px; {% endcomment %}
+          bottom: -34px;
+          right: -21px;
       }
   }
 </style>
@@ -114,7 +118,6 @@
     data-url="{{ product.url }}"
   >
     <section class="product-feature-custom global_container feature-spacing-{{ section.id }}">
-
       <div>
         <div class="product-feature-custom-image">
           {%- if section.settings.feature_image != blank -%}
@@ -139,30 +142,30 @@
       <div class="product-section-content-custom">
         <div class="product-sec-inner">
           <div class="product-content-custom">
-
             {%- comment -%} Title (dynamic) {%- endcomment -%}
             <div class="product-heading">
               <h1>{{ product.title | escape }}</h1>
             </div>
 
-            {%- comment -%} Reviews hidden for this section
-            <div class="product-review">
-              <div class="pro-review-start">
-                {% render 'start' %}
-                {% render 'start' %}
-                {% render 'start' %}
-                {% render 'start' %}
-                {% render 'start' %}
+            {%- comment -%}
+              Reviews hidden for this section
+              <div class="product-review">
+                <div class="pro-review-start">
+                  {% render 'start' %}
+                  {% render 'start' %}
+                  {% render 'start' %}
+                  {% render 'start' %}
+                  {% render 'start' %}
+                </div>
+                <div class="pro-how-many-review-content">
+                  ({{ product.metafields.reviews.rating_count.value | default: 36 }} reviews)
+                </div>
               </div>
-              <div class="pro-how-many-review-content">
-                ({{ product.metafields.reviews.rating_count.value | default: 36 }} reviews)
-              </div>
-            </div>
             {%- endcomment -%}
 
             {%- comment -%} Description (dynamic) {%- endcomment -%}
             {%- if product.description != blank -%}
-              <div class="product-description-content">
+              <div class="product-description-content product-description-content-para">
                 {{ product.description }}
               </div>
             {%- endif -%}
@@ -175,7 +178,9 @@
               <div
                 class="product-price-compare"
                 data-price-compare
-                {% unless current_variant.compare_at_price > current_variant.price %}hidden{% endunless %}
+                {% unless current_variant.compare_at_price > current_variant.price %}
+                  hidden
+                {% endunless %}
               >
                 {{ current_variant.compare_at_price | money }}
               </div>
@@ -191,7 +196,9 @@
                       <span
                         class="weight-opt{% if option.selected_value == value %} is-selected{% endif %}"
                         data-value="{{ value | escape }}"
-                      >{{ value }}</span>
+                      >
+                        {{- value -}}
+                      </span>
                     {%- endfor -%}
                   </div>
                 {%- endfor -%}
@@ -217,7 +224,9 @@
                   value="{{ current_variant.id }}"
                   class="product-variant-id"
                   data-variant-id-input
-                  {% if current_variant.available == false %}disabled{% endif %}
+                  {% if current_variant.available == false %}
+                    disabled
+                  {% endif %}
                 >
 
                 <div class="product-quantity-cart-button">
@@ -243,7 +252,9 @@
                       type="submit"
                       name="add"
                       data-add-button
-                      {% if current_variant.available == false or current_variant == null %}disabled{% endif %}
+                      {% if current_variant.available == false or current_variant == null %}
+                        disabled
+                      {% endif %}
                     >
                       <span data-add-button-text>
                         {%- if current_variant == null -%}
@@ -266,96 +277,96 @@
               {%- endform -%}
             </product-form>
 
-            {%- comment -%} Shipping + ingredients hidden for this section
-            <div class="product-buy-shipping">
-              <div class="product-buy-shipping-inner">
-                <div class="product-buy-shipping-icon-text border-right">
-                  <div class="product-icon-text">
-                    <div class="product-icon-package-truck">
-                      {% render 'shipping' %}
+            {%- comment -%}
+              Shipping + ingredients hidden for this section
+              <div class="product-buy-shipping">
+                <div class="product-buy-shipping-inner">
+                  <div class="product-buy-shipping-icon-text border-right">
+                    <div class="product-icon-text">
+                      <div class="product-icon-package-truck">
+                        {% render 'shipping' %}
+                      </div>
+                      <span>Free shipping for <br> orders over $60</span>
                     </div>
-                    <span>Free shipping for <br> orders over $60</span>
                   </div>
-                </div>
-                <div class="product-buy-shipping-icon-text">
-                  <div class="product-icon-text">
-                    <div class="product-icon-package-truck">
-                      {% render 'truck' %}
+                  <div class="product-buy-shipping-icon-text">
+                    <div class="product-icon-text">
+                      <div class="product-icon-package-truck">
+                        {% render 'truck' %}
+                      </div>
+                      <span>Ships in 1 <br> business day</span>
                     </div>
-                    <span>Ships in 1 <br> business day</span>
                   </div>
                 </div>
               </div>
-            </div>
 
-              Ingredients / Benefits (hidden)
-            {%- assign ingredients_list = product.metafields.custom.ingredients.value -%}
-            {%- assign benefits_list = product.metafields.custom.benefits.value -%}
-            <div class="product-ingri-dec-toggle">
-              <div class="product-ingredients border-bottom">
-                <div class="product-ingrdients-first-inner">
-                  <div class="product-ingredients-inner">
-                    <p>Ingredients</p>
-                    <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M0.530273 0.530321L6.53032 6.53027L12.5303 0.530273" stroke="#1C3025" stroke-width="1.5" stroke-miterlimit="16" />
-                    </svg>
+                Ingredients / Benefits (hidden)
+              {%- assign ingredients_list = product.metafields.custom.ingredients.value -%}
+              {%- assign benefits_list = product.metafields.custom.benefits.value -%}
+              <div class="product-ingri-dec-toggle">
+                <div class="product-ingredients border-bottom">
+                  <div class="product-ingrdients-first-inner">
+                    <div class="product-ingredients-inner">
+                      <p>Ingredients</p>
+                      <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0.530273 0.530321L6.53032 6.53027L12.5303 0.530273" stroke="#1C3025" stroke-width="1.5" stroke-miterlimit="16" />
+                      </svg>
+                    </div>
+                    <div class="product-ingredients-description">
+                      <ul>
+                        {%- if ingredients_list != blank -%}
+                          {%- for item in ingredients_list -%}
+                            <li>{{ item }}</li>
+                          {%- endfor -%}
+                        {%- else -%}
+                          <li>Variyali</li>
+                          <li>Dhana</li>
+                          <li>Pan</li>
+                          <li>Manpasand</li>
+                          <li>Navrang</li>
+                          <li>Kesri</li>
+                          <li>Kharek</li>
+                          <li>Lovely</li>
+                          <li>Katho</li>
+                          <li>Chuno</li>
+                          <li>Ijmet</li>
+                          <li>Haripatti</li>
+                          <li>Cheri</li>
+                          <li>Gulkandh</li>
+                          <li>Chatney</li>
+                        {%- endif -%}
+                      </ul>
+                    </div>
                   </div>
-                  <div class="product-ingredients-description">
-                    <ul>
-                      {%- if ingredients_list != blank -%}
-                        {%- for item in ingredients_list -%}
-                          <li>{{ item }}</li>
-                        {%- endfor -%}
-                      {%- else -%}
-                        <li>Variyali</li>
-                        <li>Dhana</li>
-                        <li>Pan</li>
-                        <li>Manpasand</li>
-                        <li>Navrang</li>
-                        <li>Kesri</li>
-                        <li>Kharek</li>
-                        <li>Lovely</li>
-                        <li>Katho</li>
-                        <li>Chuno</li>
-                        <li>Ijmet</li>
-                        <li>Haripatti</li>
-                        <li>Cheri</li>
-                        <li>Gulkandh</li>
-                        <li>Chatney</li>
-                      {%- endif -%}
-                    </ul>
+                </div>
+                <div class="product-ingredients border-bottom">
+                  <div class="product-ingrdients-first-inner">
+                    <div class="product-ingredients-inner">
+                      <p>Benifites</p>
+                      <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0.530273 0.530321L6.53032 6.53027L12.5303 0.530273" stroke="#1C3025" stroke-width="1.5" stroke-miterlimit="16" />
+                      </svg>
+                    </div>
+                    <div class="product-ingredients-description">
+                      <ul>
+                        {%- if benefits_list != blank -%}
+                          {%- for item in benefits_list -%}
+                            <li>{{ item }}</li>
+                          {%- endfor -%}
+                        {%- else -%}
+                          <li>Mind & Mood</li>
+                          <li>Degestion</li>
+                          <li>Body Cooling</li>
+                          <li>Mouth & Oral Health</li>
+                          <li>Energy & Nutrition</li>
+                          <li>Immunity & Antioxidants</li>
+                        {%- endif -%}
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div class="product-ingredients border-bottom">
-                <div class="product-ingrdients-first-inner">
-                  <div class="product-ingredients-inner">
-                    <p>Benifites</p>
-                    <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M0.530273 0.530321L6.53032 6.53027L12.5303 0.530273" stroke="#1C3025" stroke-width="1.5" stroke-miterlimit="16" />
-                    </svg>
-                  </div>
-                  <div class="product-ingredients-description">
-                    <ul>
-                      {%- if benefits_list != blank -%}
-                        {%- for item in benefits_list -%}
-                          <li>{{ item }}</li>
-                        {%- endfor -%}
-                      {%- else -%}
-                        <li>Mind & Mood</li>
-                        <li>Degestion</li>
-                        <li>Body Cooling</li>
-                        <li>Mouth & Oral Health</li>
-                        <li>Energy & Nutrition</li>
-                        <li>Immunity & Antioxidants</li>
-                      {%- endif -%}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
             {%- endcomment -%}
-
           </div>
         </div>
       </div>
@@ -395,9 +406,17 @@
         var minus = wrap.querySelector('.qty-minus');
         var plus = wrap.querySelector('.qty-plus');
         var qty = 1;
-        function renderQty() { value.value = String(qty).padStart(2, '0'); }
-        minus.addEventListener('click', function () { if (qty > 1) qty--; renderQty(); });
-        plus.addEventListener('click', function () { qty++; renderQty(); });
+        function renderQty() {
+          value.value = String(qty).padStart(2, '0');
+        }
+        minus.addEventListener('click', function () {
+          if (qty > 1) qty--;
+          renderQty();
+        });
+        plus.addEventListener('click', function () {
+          qty++;
+          renderQty();
+        });
         value.addEventListener('change', function () {
           var n = parseInt(value.value, 10);
           qty = isNaN(n) || n < 1 ? 1 : n;
@@ -410,7 +429,9 @@
       root.querySelectorAll('.product-ingri-dec-toggle .product-ingredients').forEach(function (item) {
         var header = item.querySelector('.product-ingredients-inner');
         if (!header) return;
-        header.addEventListener('click', function () { item.classList.toggle('is-open'); });
+        header.addEventListener('click', function () {
+          item.classList.toggle('is-open');
+        });
       });
 
       /* ---- Variant selection ---- */
@@ -444,7 +465,9 @@
       function findVariantFor(sel) {
         return variants.find(function (v) {
           var opts = v.options || [];
-          return sel.every(function (val, i) { return opts[i] === val; });
+          return sel.every(function (val, i) {
+            return opts[i] === val;
+          });
         });
       }
 
@@ -478,7 +501,10 @@
           return;
         }
 
-        if (idInput) { idInput.value = variant.id; idInput.removeAttribute('disabled'); }
+        if (idInput) {
+          idInput.value = variant.id;
+          idInput.removeAttribute('disabled');
+        }
 
         if (priceMain) priceMain.textContent = variant.price;
         if (priceCompare) {
@@ -509,7 +535,9 @@
           var group = opt.closest('.product-weight-buttons');
           var index = parseInt(group.getAttribute('data-option-index'), 10);
           selected[index] = opt.getAttribute('data-value');
-          group.querySelectorAll('.weight-opt').forEach(function (o) { o.classList.remove('is-selected'); });
+          group.querySelectorAll('.weight-opt').forEach(function (o) {
+            o.classList.remove('is-selected');
+          });
           opt.classList.add('is-selected');
           refreshAvailability();
           update();
