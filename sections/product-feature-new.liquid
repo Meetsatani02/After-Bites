@@ -63,7 +63,12 @@
 
       <div>
         <div class="product-feature-custom-image">
-          {%- if product.featured_image != blank -%}
+          {%- if section.settings.feature_image != blank -%}
+            <img
+              src="{{ section.settings.feature_image | image_url: width: 1200 }}"
+              alt="{{ section.settings.feature_image.alt | default: product.title | escape }}"
+            >
+          {%- elsif product.featured_image != blank -%}
             <img
               src="{{ product.featured_image | image_url: width: 1200 }}"
               alt="{{ product.featured_image.alt | default: product.title | escape }}"
@@ -86,7 +91,7 @@
               <h1>{{ product.title | escape }}</h1>
             </div>
 
-            {%- comment -%} Reviews (static design; uses metafield count if present) {%- endcomment -%}
+            {%- comment -%} Reviews hidden for this section
             <div class="product-review">
               <div class="pro-review-start">
                 {% render 'start' %}
@@ -99,6 +104,7 @@
                 ({{ product.metafields.reviews.rating_count.value | default: 36 }} reviews)
               </div>
             </div>
+            {%- endcomment -%}
 
             {%- comment -%} Description (dynamic) {%- endcomment -%}
             {%- if product.description != blank -%}
@@ -206,7 +212,7 @@
               {%- endform -%}
             </product-form>
 
-            {%- comment -%} Shipping info (static design) {%- endcomment -%}
+            {%- comment -%} Shipping + ingredients hidden for this section
             <div class="product-buy-shipping">
               <div class="product-buy-shipping-inner">
                 <div class="product-buy-shipping-icon-text border-right">
@@ -228,11 +234,7 @@
               </div>
             </div>
 
-            {%- comment -%}
-              Ingredients / Benefits — driven by the product metafields
-              custom.ingredients and custom.benefits (editable in the product
-              admin). Falls back to the demo list if a product has none set.
-            {%- endcomment -%}
+              Ingredients / Benefits (hidden)
             {%- assign ingredients_list = product.metafields.custom.ingredients.value -%}
             {%- assign benefits_list = product.metafields.custom.benefits.value -%}
             <div class="product-ingri-dec-toggle">
@@ -298,6 +300,7 @@
                 </div>
               </div>
             </div>
+            {%- endcomment -%}
 
           </div>
         </div>
@@ -480,6 +483,12 @@
       "type": "product",
       "id": "product",
       "label": "Product"
+    },
+    {
+      "type": "image_picker",
+      "id": "feature_image",
+      "label": "Feature image",
+      "info": "Optional. Shown in the image card. If empty, the selected product's image is used."
     }
   ],
   "presets": [
