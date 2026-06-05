@@ -210,6 +210,108 @@
 
     </style>
 
+      <section class="product-feature-custom global_container">
+
+        <div>
+            <div class="product-feature-custom-image">
+                <img src="/img/product-bg.png" alt="product">
+                <div class="product-feature-logo">
+                    <img src="/img/gray-logo.svg" alt="logo">
+                </div>
+            </div>
+
+        </div>
+        <div class="product-section-content-custom">
+            <div class="product-sec-inner">
+                <div class="product-content">
+                    <div class="product-heading">
+                        <h1>Lorem Ipsum is simply </h1>
+                        <!-- <h2>lorem Ipsum is simply</h2> -->
+                    </div>
+                    <div class="product-review">
+                        <div class="pro-review-start">
+                            <img src="/img/Start.svg" alt="start">
+                            <img src="/img/Start.svg" alt="start">
+                            <img src="/img/Start.svg" alt="start">
+                            <img src="/img/Start.svg" alt="start">
+                            <img src="/img/Start.svg" alt="start">
+                        </div>
+                        <div class="pro-how-many-review-content">
+                            (36 reviews)
+                        </div>
+                    </div>
+                    <div class="product-description-content">
+                        <p>
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+                            been
+                            the industry's standard dummy text ever since the 1500s, when an unknown printer took a
+                            galley
+                            of type and scrambled.
+                        </p>
+                    </div>
+                    <div class="product-price">
+                        <div class="product-price-main">
+                            <span>₹50.00</span>
+                        </div>
+                        <div class="product-price-compare">
+                            (₹49.00)
+                        </div>
+                    </div>
+                    <div class="product-weight">
+                        <span class="product-weight-text">Pack Size/Weight:</span>
+                        <div class="product-weight-buttons">
+                            <span>50g</span>
+                            <span>100g</span>
+                            <span>180g</span>
+                            <span>200g</span>
+                        </div>
+                    </div>
+                    <div class="product-quantity-cart-button">
+                        <div class="product-quntity-button-input">
+                            <button type="button" class="qty-btn qty-minus">
+                                <img src="/img/minus.svg" alt="decrease">
+                            </button>
+                            <input type="text" class="qty-value" value="01" readonly>
+                            <button type="button" class="qty-btn qty-plus">
+                                <img src="/img/plus.svg" alt="increase">
+                            </button>
+                        </div>
+
+                        <div class="product-buy-button">
+                            <button>Add to Cart</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+ <script>
+        (function () {
+            const wrap = document.querySelector('.product-quntity-button-input');
+            if (!wrap) return;
+            const value = wrap.querySelector('.qty-value');
+            const minus = wrap.querySelector('.qty-minus');
+            const plus = wrap.querySelector('.qty-plus');
+            let qty = 1;
+
+            function render() {
+                value.value = String(qty).padStart(2, '0');
+            }
+
+            minus.addEventListener('click', function () {
+                if (qty > 1) qty--;
+                render();
+            });
+
+            plus.addEventListener('click', function () {
+                qty++;
+                render();
+            });
+
+            render();
+        })();
+    </script>
 
 {% schema %}
 {
