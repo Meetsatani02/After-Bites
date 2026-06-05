@@ -31,6 +31,23 @@
       right: -4%;
   }
 
+  /* Continuously spin the logo badge in a full circle (loops forever). */
+  .product-feature-logo svg {
+      transform-origin: center center;
+      animation: pfl-logo-spin 14s linear infinite;
+  }
+
+  @keyframes pfl-logo-spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+      .product-feature-logo svg {
+          animation: none;
+      }
+  }
+
   .product-description-content-para p{
       margin-top:24px;
 }
