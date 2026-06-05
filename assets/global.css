@@ -344,9 +344,70 @@ p,h1,h2,h3,h4{
         top: auto;
     }
 
-    /* Same scroll-driven sticky stack as desktop: each image fills the screen
-       and pins, so the next slides up and covers it. (Dots/arrows stay hidden;
-       tap-to-zoom still works.) Images are full-width here, so less cropping. */
+    /* Mobile: horizontal swipe slider with snap (one image at a time) — like
+       the reference. Overrides the desktop sticky stack. */
+    .product-new-img__track {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .product-new-img__track::-webkit-scrollbar {
+        display: none;
+    }
+
+    .product-new-img img.product-new-img__item {
+        position: static;
+        flex: 0 0 100%;
+        width: 100%;
+        height: auto;
+        object-fit: initial;
+        scroll-snap-align: start;
+    }
+
+    /* Pagination dots */
+    .product-new-img__dots {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 14px;
+    }
+
+    /* Prev / next arrows over the slider */
+    .product-new-img__arrow {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 2;
+        width: 40px;
+        height: 40px;
+        padding: 0;
+        border: none;
+        border-radius: 50%;
+        background: rgba(244, 237, 219, 0.92);
+        color: var(--green);
+        cursor: pointer;
+        box-shadow: 0 2px 10px rgba(28, 48, 37, 0.2);
+    }
+
+    .product-new-img__arrow svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .product-new-img__arrow--prev {
+        left: 12px;
+    }
+
+    .product-new-img__arrow--next {
+        right: 12px;
+    }
 
     .product-new-content,
     .product-new-container--image-left .product-new-content {
