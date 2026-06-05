@@ -210,8 +210,8 @@ p,h1,h2,h3,h4{
    Rounded corners + soft shadow give the premium "stack of cards" feel. */
 .product-new-img img.product-new-img__item {
     position: sticky;
-    top: calc(var(--header-height, 90px) + 24px);
-    height: calc(100vh - var(--header-height, 90px) - 48px);
+    top: 0;
+    height: 100vh;
     object-fit: cover;
     object-position: center;
 }
