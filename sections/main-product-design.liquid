@@ -68,6 +68,15 @@
       text-decoration: line-through;
   }
 
+  /* Wrap the compare price in parentheses, e.g. (Rs. 65.00). */
+  .product-price-compare::before {
+      content: '(';
+  }
+
+  .product-price-compare::after {
+      content: ')';
+  }
+
   /* Properly hide the compare price when the selected variant has no
      compare-at price set (the display:flex above otherwise overrides the
      hidden attribute, so it would never hide). */
