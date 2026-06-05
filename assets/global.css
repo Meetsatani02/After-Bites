@@ -133,10 +133,11 @@ p,h1,h2,h3,h4{
 }
 
 /* ===== Product New section (image left/right alternative) ===== */
+/* NOTE: no overflow:hidden here — an ancestor with a non-visible overflow
+   silently breaks position:sticky for the image stack / pinned details. */
 .product-new-section {
     background-color: var(--beige);
     position: relative;
-    overflow: hidden;
 }
 
 .product-new-container {
