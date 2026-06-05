@@ -342,7 +342,6 @@ p,h1,h2,h3,h4{
     .product-new-img__main {
         position: relative;
         overflow: hidden;
-        border-radius: 16px;
     }
 
     .product-new-img__slide {
@@ -356,7 +355,6 @@ p,h1,h2,h3,h4{
     .product-new-img__slide .product-new-img__item {
         width: 100%;
         height: auto;
-        border-radius: 16px;
     }
 
     /* Thumbnail strip */
@@ -364,6 +362,11 @@ p,h1,h2,h3,h4{
         display: block;
         margin-top: 12px;
         overflow: hidden;
+    }
+
+    /* Left inset for the thumbnail row (keeps the active thumb border off the edge). */
+    .product-new-img__thumbs-wrapper {
+        padding-left: 4px;
     }
 
     .product-new-img__thumb {
