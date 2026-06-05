@@ -412,11 +412,15 @@
       }
   }
 
-  /* ===== Responsive content (font-size + padding), referencing hero.liquid ===== */
+  /* ===== Responsive content — mirrors hero.liquid font-size + padding =====
+     Hero scales its title 72 -> 64 (1400) -> 40/line-height:1em (768), keeps the
+     paragraph at 16px, and steps content padding calc -> 60px 20px (1024) ->
+     10px 20px 40px 20px (768). The product title, paragraph and content padding
+     follow the same steps; the extra product elements scale to match. */
   @media (max-width: 1400px) {
       .product-heading h1,
       .product-heading h2 {
-          font-size: 50px;
+          font-size: 48px;
       }
 
       .product-price-main span {
@@ -425,15 +429,6 @@
   }
 
   @media (max-width: 1024px) {
-      .product-heading h1,
-      .product-heading h2 {
-          font-size: 44px;
-      }
-
-      .product-price-main span {
-          font-size: 38px;
-      }
-
       .product-price {
           margin: 24px 0 40px 0;
       }
@@ -444,22 +439,20 @@
   }
 
   @media (max-width: 768px) {
-      .product-new-content {
-          padding: 40px 20px 48px;
+      /* Hero-style tight top padding on the stacked text block */
+      .product-new-content,
+      .product-new-container--image-left .product-new-content {
+          padding: 10px 20px 40px 20px;
       }
 
       .product-heading h1,
       .product-heading h2 {
-          font-size: 34px;
-          line-height: 1.15;
-      }
-
-      .product-description-content p {
-          font-size: 15px;
+          font-size: 40px;
+          line-height: 1em;
       }
 
       .product-price-main span {
-          font-size: 30px;
+          font-size: 32px;
       }
 
       .product-price-compare {
@@ -506,17 +499,13 @@
   }
 
   @media (max-width: 480px) {
-      .product-new-content {
-          padding: 32px 16px 40px;
-      }
-
       .product-heading h1,
       .product-heading h2 {
-          font-size: 28px;
+          font-size: 32px;
       }
 
       .product-price-main span {
-          font-size: 26px;
+          font-size: 28px;
       }
 
       .product-weight-buttons {
