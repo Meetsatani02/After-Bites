@@ -183,11 +183,12 @@ p,h1,h2,h3,h4{
     padding-right: max(40px, calc((100vw - 1440px) / 2 + 40px));
 }
 
-/* Image side: show every product image, stacked vertically. */
+/* Image side: show every product image, stacked vertically (Allbirds /
+   Glossier / Squarespace pattern — scroll through all images, no slider). */
 .product-new-img {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 24px;
 }
 
 .product-new-content h2 {
