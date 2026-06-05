@@ -169,6 +169,11 @@ p,h1,h2,h3,h4{
     padding-right: 40px;
     padding-top: 56px;
     padding-bottom: 80px;
+    /* Pin the details on screen while the taller image column scrolls past.
+       align-self keeps the sticky item from stretching to full row height. */
+    position: sticky;
+    top: calc(var(--header-height, 90px) + 16px);
+    align-self: flex-start;
 }
 
 /* Image-left variant: text is on the right, so mirror the alignment padding
@@ -176,6 +181,13 @@ p,h1,h2,h3,h4{
 .product-new-container--image-left .product-new-content {
     padding-left: 40px;
     padding-right: max(40px, calc((100vw - 1440px) / 2 + 40px));
+}
+
+/* Image side: show every product image, stacked vertically. */
+.product-new-img {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
 .product-new-content h2 {
@@ -216,6 +228,12 @@ p,h1,h2,h3,h4{
         flex: 0 0 100%;
         max-width: 100%;
         width: 100%;
+    }
+
+    /* Single column on mobile — no sticky details. */
+    .product-new-content {
+        position: static;
+        top: auto;
     }
 
     .product-new-content,
