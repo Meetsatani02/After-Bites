@@ -19,7 +19,7 @@
         "text": "The quality and purity of our product has made us a favorite in kitchens across the country. We're proud to be a trusted choice for healthy and delicious cooking.",
         "button_label": "Experience Now",
         "button_link": "",
-        "image_position": "left",
+        "image_position": "right",
         "image_position_mobile": "top",
         "image": "shopify://shop_images/hero-img.png",
         "icon_image": "shopify://shop_images/hero_icon_a02ee0c1-b84c-4cef-a1fb-abbbeced1369.svg"
@@ -133,19 +133,22 @@
     "product_new_my4kXP": {
       "type": "product-new",
       "name": "Product New",
-      "settings": {
-        "heading": "",
-        "image_position": "left",
-        "image_position_mobile": "top",
-        "image": "shopify://shop_images/01.jpg"
-      }
+      "settings": {}
     },
     "product_feature_new_4pfRLw": {
       "type": "product-feature-new",
       "name": "Product feature new",
       "settings": {
         "product": "wet-product",
-        "feature_image": "shopify://shop_images/product-bg.png"
+        "feature_image": "shopify://shop_images/product-bg.png",
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "padding_top_mobile": 36,
+        "padding_bottom_mobile": 36,
+        "margin_top_mobile": 0,
+        "margin_bottom_mobile": 0
       }
     }
   },
