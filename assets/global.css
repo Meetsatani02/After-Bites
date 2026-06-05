@@ -169,11 +169,6 @@ p,h1,h2,h3,h4{
     padding-right: 40px;
     padding-top: 56px;
     padding-bottom: 80px;
-    /* Pin the details on screen while the taller image column scrolls past.
-       align-self keeps the sticky item from stretching to full row height. */
-    position: sticky;
-    top: calc(var(--header-height, 90px) + 16px);
-    align-self: flex-start;
 }
 
 /* Image-left variant: text is on the right, so mirror the alignment padding
@@ -183,11 +178,10 @@ p,h1,h2,h3,h4{
     padding-right: max(40px, calc((100vw - 1440px) / 2 + 40px));
 }
 
-/* Image side: show every product image, stacked vertically. */
+/* Image side: every image stacks in normal flow; each pins to the top and the
+   next scrolls up over it (see .product-new-img__item below). */
 .product-new-img {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+    display: block;
 }
 
 .product-new-content h2 {
@@ -203,6 +197,16 @@ p,h1,h2,h3,h4{
     display: block;
     width: 100%;
     height: auto;
+}
+
+/* Sticky-stack: each image fills the viewport and pins to the top, so only one
+   shows at a time. As you scroll, the next image rises up and covers it. */
+.product-new-img img.product-new-img__item {
+    position: sticky;
+    top: calc(var(--header-height, 90px) + 16px);
+    height: calc(100vh - var(--header-height, 90px) - 32px);
+    object-fit: contain;
+    background: var(--beige);
 }
 
 @media (max-width: 1024px) {
@@ -230,10 +234,11 @@ p,h1,h2,h3,h4{
         width: 100%;
     }
 
-    /* Single column on mobile — no sticky details. */
-    .product-new-content {
+    /* Single column on mobile — no sticky image stack, natural image height. */
+    .product-new-img img.product-new-img__item {
         position: static;
-        top: auto;
+        height: auto;
+        object-fit: initial;
     }
 
     .product-new-content,
