@@ -517,12 +517,26 @@
           border-radius: 12px;
       }
 
+      /* ----- Shipping info: fit the two columns cleanly on small screens ----- */
+      .product-buy-shipping-inner {
+          padding-bottom: 24px;
+      }
+
       .product-icon-text {
-          width: auto;
+          width: 100%;
+          gap: 10px;
+          padding: 0 6px;
       }
 
       .product-icon-text span {
-          font-size: 15px;
+          font-size: 14px;
+          line-height: 1.35;
+      }
+
+      .product-icon-text img,
+      .product-icon-text svg {
+          max-width: 32px;
+          height: auto;
       }
 
       .product-ingredients-inner p {
@@ -555,6 +569,25 @@
 
       .product-quantity-cart-button {
           flex-wrap: wrap;
+      }
+
+      /* Shipping info: tighten further on very small phones */
+      .product-icon-text {
+          gap: 8px;
+          padding: 0 4px;
+      }
+
+      .product-icon-text span {
+          font-size: 12.5px;
+      }
+
+      .product-icon-text img,
+      .product-icon-text svg {
+          max-width: 28px;
+      }
+
+      .border-right {
+          border-right-width: 1px;
       }
   }
 </style>
