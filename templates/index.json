@@ -149,6 +149,13 @@
     "faq_MfXVhh": {
       "type": "faq",
       "blocks": {
+        "faq_item_8TATJe": {
+          "type": "faq_item",
+          "settings": {
+            "question": "When should I eat it?",
+            "answer": "A teaspoon after meals, or anytime you want a quick, refreshing treat."
+          }
+        },
         "faq_item_nbrJgY": {
           "type": "faq_item",
           "settings": {
@@ -179,6 +186,7 @@
         }
       },
       "block_order": [
+        "faq_item_8TATJe",
         "faq_item_nbrJgY",
         "faq_item_HNtDr3",
         "faq_item_paFVFT",
