@@ -149,27 +149,6 @@
     "faq_MfXVhh": {
       "type": "faq",
       "blocks": {
-        "faq_item_8TATJe": {
-          "type": "faq_item",
-          "settings": {
-            "question": "When should I eat it?",
-            "answer": "A teaspoon after meals, or anytime you want a quick, refreshing treat."
-          }
-        },
-        "faq_item_nbrJgY": {
-          "type": "faq_item",
-          "settings": {
-            "question": "How do I store it?",
-            "answer": "Keep it in an airtight container in a cool, dry place. Stays fresh for months."
-          }
-        },
-        "faq_item_HNtDr3": {
-          "type": "faq_item",
-          "settings": {
-            "question": "Does it contain tobacco or supari?",
-            "answer": "No. It's 100% tobacco-free and made with natural ingredients only."
-          }
-        },
         "faq_item_paFVFT": {
           "type": "faq_item",
           "settings": {
@@ -183,14 +162,35 @@
             "question": "Does it help with digestion?",
             "answer": "Yes. Fennel and betel leaf soothe the stomach and freshen your breath after meals."
           }
+        },
+        "faq_item_HNtDr3": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Does it contain tobacco or supari?",
+            "answer": "No. It's 100% tobacco-free and made with natural ingredients only."
+          }
+        },
+        "faq_item_nbrJgY": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How do I store it?",
+            "answer": "Keep it in an airtight container in a cool, dry place. Stays fresh for months."
+          }
+        },
+        "faq_item_8TATJe": {
+          "type": "faq_item",
+          "settings": {
+            "question": "When should I eat it?",
+            "answer": "A teaspoon after meals, or anytime you want a quick, refreshing treat."
+          }
         }
       },
       "block_order": [
-        "faq_item_8TATJe",
-        "faq_item_nbrJgY",
-        "faq_item_HNtDr3",
         "faq_item_paFVFT",
-        "faq_item_eNcUVW"
+        "faq_item_eNcUVW",
+        "faq_item_HNtDr3",
+        "faq_item_nbrJgY",
+        "faq_item_8TATJe"
       ],
       "name": "FAQ",
       "settings": {
