@@ -130,11 +130,6 @@
         "note_center_text": "Ek chutki mein tradition, taste, aur ek yaad jo rehti hai"
       }
     },
-    "product_new_my4kXP": {
-      "type": "product-new",
-      "name": "Product New",
-      "settings": {}
-    },
     "product_feature_new_4pfRLw": {
       "type": "product-feature-new",
       "name": "Product feature new",
@@ -150,6 +145,11 @@
         "margin_top_mobile": 0,
         "margin_bottom_mobile": 0
       }
+    },
+    "faq_MfXVhh": {
+      "type": "faq",
+      "name": "FAQ",
+      "settings": {}
     }
   },
   "order": [
@@ -158,7 +158,7 @@
     "benifites_ceqatM",
     "image_banner_ypywDX",
     "product_vision_V9CzGW",
-    "product_new_my4kXP",
-    "product_feature_new_4pfRLw"
+    "product_feature_new_4pfRLw",
+    "faq_MfXVhh"
   ]
 }
