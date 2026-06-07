@@ -148,8 +148,23 @@
     },
     "faq_MfXVhh": {
       "type": "faq",
+      "blocks": {
+        "faq_item_paFVFT": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What is Paan Mukhwas?",
+            "answer": "A traditional after-meal mouth freshener with the sweet, cooling taste of classic paan — ready to eat, no mess."
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_paFVFT"
+      ],
       "name": "FAQ",
-      "settings": {}
+      "settings": {
+        "heading": "Frequently Asked Questions",
+        "border_image": "shopify://shop_images/border_image.svg"
+      }
     }
   },
   "order": [
