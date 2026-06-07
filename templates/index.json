@@ -149,6 +149,13 @@
     "faq_MfXVhh": {
       "type": "faq",
       "blocks": {
+        "faq_item_nbrJgY": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How do I store it?",
+            "answer": "Keep it in an airtight container in a cool, dry place. Stays fresh for months."
+          }
+        },
         "faq_item_HNtDr3": {
           "type": "faq_item",
           "settings": {
@@ -172,6 +179,7 @@
         }
       },
       "block_order": [
+        "faq_item_nbrJgY",
         "faq_item_HNtDr3",
         "faq_item_paFVFT",
         "faq_item_eNcUVW"
