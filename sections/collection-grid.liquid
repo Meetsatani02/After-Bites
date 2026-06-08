@@ -1,0 +1,550 @@
+{{ 'global.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign heading = section.settings.heading
+  if heading == blank
+    assign heading = collection.title
+  endif
+  assign subtitle = section.settings.subtitle
+  if subtitle == blank
+    assign subtitle = collection.description
+  endif
+-%}
+
+<style>
+  #CollectionGrid-{{ section.id }} {
+    background-color: var(--beige);
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  #CollectionGrid-{{ section.id }} .cg-inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---- Header ---- */
+  #CollectionGrid-{{ section.id }} .cg-header {
+    text-align: center;
+    max-width: 760px;
+    margin: 0 auto 48px;
+  }
+
+  #CollectionGrid-{{ section.id }} .cg-header h1 {
+    font-family: 'Rasbern', sans-serif;
+    color: var(--green);
+    font-size: 56px;
+    line-height: 1.05;
+    margin: 0;
+    letter-spacing: 0.01em;
+  }
+
+  #CollectionGrid-{{ section.id }} .cg-header p {
+    font-family: 'Inter', sans-serif;
+    color: var(--green);
+    opacity: 0.85;
+    font-size: 17px;
+    line-height: 1.6;
+    margin: 16px auto 0;
+    max-width: 620px;
+  }
+
+  /* ---- Grid ---- */
+  #CollectionGrid-{{ section.id }} .cg-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+
+  @media (min-width: 750px) {
+    #CollectionGrid-{{ section.id }} .cg-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+    }
+  }
+
+  @media (min-width: 1025px) {
+    #CollectionGrid-{{ section.id }} .cg-grid {
+      grid-template-columns: repeat({{ section.settings.columns_desktop }}, 1fr);
+      gap: 28px;
+    }
+  }
+
+  /* ---- Card ---- */
+  #CollectionGrid-{{ section.id }} .cg-card {
+    display: flex;
+    flex-direction: column;
+    background: {{ section.settings.card_bg }};
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 14px 34px rgba(28, 48, 37, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+  }
+
+  #CollectionGrid-{{ section.id }} .cg-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 44px rgba(28, 48, 37, 0.14);
+  }
+
+  /* ---- Image ---- */
+  #CollectionGrid-{{ section.id }} .cg-media {
+    position: relative;
+    display: block;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background: var(--dark-beige);
+  }
+
+  #CollectionGrid-{{ section.id }} .cg-media img,
+  #CollectionGrid-{{ section.id }} .cg-media svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  #CollectionGrid-{{ section.id }} .cg-media .cg-img-secondary {
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  #CollectionGrid-{{ section.id }} .cg-card:hover .cg-media .cg-img-secondary {
+    opacity: 1;
+  }
+
+  /* ---- Sale badge ---- */
+  #CollectionGrid-{{ section.id }} .cg-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 2;
+    background: var(--green);
+    color: var(--beige);
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 1;
+    padding: 8px 12px;
+    border-radius: 999px;
+    letter-spacing: 0.02em;
+  }
+
+  /* ---- Body ---- */
+  #CollectionGrid-{{ section.id }} .cg-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    padding: 20px;
+    gap: 12px;
+  }
+
+  #CollectionGrid-{{ section.id }} .cg-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 0;
+  }
+
+  #CollectionGrid-{{ section.id }} .cg-title a {
+    color: var(--green);
+    text-decoration: none;
+  }
+
+  #CollectionGrid-{{ section.id }} .cg-title a:hover {
+    text-decoration: underline;
+  }
+
+  /* ---- Rating ---- */
+  #CollectionGrid-{{ section.id }} .cg-rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  #CollectionGrid-{{ section.id }} .cg-stars {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+  }
+
+  #CollectionGrid-{{ section.id }} .cg-stars svg {
+    width: 15px;
+    height: 14px;
+    display: block;
+  }
+
+  #CollectionGrid-{{ section.id }} .cg-reviews {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: var(--green);
+    opacity: 0.65;
+  }
+
+  /* ---- Price ---- */
+  #CollectionGrid-{{ section.id }} .cg-price {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-top: auto;
+  }
+
+  #CollectionGrid-{{ section.id }} .cg-price-main {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 19px;
+    color: var(--green);
+  }
+
+  #CollectionGrid-{{ section.id }} .cg-price-compare {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: var(--green);
+    opacity: 0.55;
+    text-decoration: line-through;
+  }
+
+  /* ---- Add to cart / view options button ---- */
+  #CollectionGrid-{{ section.id }} .cg-action {
+    margin-top: 4px;
+  }
+
+  #CollectionGrid-{{ section.id }} .cg-action .product-form,
+  #CollectionGrid-{{ section.id }} .cg-action .product-form .form {
+    width: 100%;
+  }
+
+  #CollectionGrid-{{ section.id }} .cg-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 1.2;
+    letter-spacing: 0.01em;
+    text-decoration: none;
+    text-align: center;
+    color: var(--beige);
+    background-color: var(--green);
+    padding: 13px 20px;
+    min-height: 50px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: inset 0 0 0 1.5px var(--green);
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+
+  #CollectionGrid-{{ section.id }} .cg-button:hover {
+    background-color: var(--beige);
+    color: var(--green);
+  }
+
+  #CollectionGrid-{{ section.id }} .cg-button[disabled],
+  #CollectionGrid-{{ section.id }} .cg-button[disabled]:hover {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: var(--green);
+    color: var(--beige);
+  }
+
+  /* ---- Pagination ---- */
+  #CollectionGrid-{{ section.id }} .cg-pagination {
+    margin-top: 48px;
+    text-align: center;
+  }
+
+  #CollectionGrid-{{ section.id }} .pagination .list,
+  #CollectionGrid-{{ section.id }} .cg-pagination .list {
+    list-style: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0;
+    margin: 0;
+  }
+
+  #CollectionGrid-{{ section.id }} .cg-pagination a,
+  #CollectionGrid-{{ section.id }} .cg-pagination span {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: var(--green);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    padding: 0 10px;
+    border-radius: 10px;
+    border: 1px solid var(--green);
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  #CollectionGrid-{{ section.id }} .cg-pagination a:hover {
+    background-color: var(--green);
+    color: var(--beige);
+  }
+
+  #CollectionGrid-{{ section.id }} .cg-pagination .pagination__item--current,
+  #CollectionGrid-{{ section.id }} .cg-pagination span[aria-current] {
+    background-color: var(--green);
+    color: var(--beige);
+  }
+
+  /* ---- Empty state ---- */
+  #CollectionGrid-{{ section.id }} .cg-empty {
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    color: var(--green);
+    padding: 60px 0;
+  }
+
+  @media (max-width: 749px) {
+    #CollectionGrid-{{ section.id }} .cg-header h1 {
+      font-size: 38px;
+    }
+    #CollectionGrid-{{ section.id }} .cg-header {
+      margin-bottom: 32px;
+    }
+    #CollectionGrid-{{ section.id }} .cg-body {
+      padding: 16px;
+      gap: 10px;
+    }
+  }
+</style>
+
+<section id="CollectionGrid-{{ section.id }}">
+  <div class="cg-inner">
+
+    {%- comment -%} Header {%- endcomment -%}
+    <div class="cg-header">
+      <h1>{{ heading | escape }}</h1>
+      {%- if subtitle != blank -%}
+        <p>{{ subtitle }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- if collection.products.size == 0 -%}
+      <p class="cg-empty">No products found.</p>
+    {%- else -%}
+      {%- paginate collection.products by section.settings.products_per_page -%}
+        <div class="cg-grid">
+          {%- for product in collection.products -%}
+            {%- liquid
+              assign on_sale = false
+              if product.compare_at_price > product.price
+                assign on_sale = true
+              endif
+            -%}
+            <div class="cg-card">
+
+              {%- comment -%} Image {%- endcomment -%}
+              <a href="{{ product.url }}" class="cg-media">
+                {%- if on_sale -%}
+                  {%- assign save_pct = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round -%}
+                  <span class="cg-badge">Save {{ save_pct }}%</span>
+                {%- endif -%}
+
+                {%- if product.featured_image != blank -%}
+                  <img
+                    class="cg-img-primary"
+                    src="{{ product.featured_image | image_url: width: 800 }}"
+                    alt="{{ product.featured_image.alt | default: product.title | escape }}"
+                    width="800"
+                    height="800"
+                    loading="lazy"
+                  >
+                  {%- if product.images[1] != blank -%}
+                    <img
+                      class="cg-img-secondary"
+                      src="{{ product.images[1] | image_url: width: 800 }}"
+                      alt="{{ product.images[1].alt | default: product.title | escape }}"
+                      width="800"
+                      height="800"
+                      loading="lazy"
+                    >
+                  {%- endif -%}
+                {%- else -%}
+                  {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                {%- endif -%}
+              </a>
+
+              {%- comment -%} Body {%- endcomment -%}
+              <div class="cg-body">
+                <h3 class="cg-title"><a href="{{ product.url }}">{{ product.title | escape }}</a></h3>
+
+                {%- if section.settings.show_rating -%}
+                  <div class="cg-rating">
+                    <span class="cg-stars">
+                      {% render 'start' %}
+                      {% render 'start' %}
+                      {% render 'start' %}
+                      {% render 'start' %}
+                      {% render 'start' %}
+                    </span>
+                    <span class="cg-reviews">({{ product.metafields.reviews.rating_count.value | default: 0 }} reviews)</span>
+                  </div>
+                {%- endif -%}
+
+                <div class="cg-price">
+                  <span class="cg-price-main">{{ product.price | money }}</span>
+                  {%- if on_sale -%}
+                    <span class="cg-price-compare">{{ product.compare_at_price | money }}</span>
+                  {%- endif -%}
+                </div>
+
+                {%- comment -%} Add to cart (single variant) vs View options (multi-variant) {%- endcomment -%}
+                <div class="cg-action">
+                  {%- if product.has_only_default_variant -%}
+                    <product-form class="product-form" data-section-id="{{ section.id }}">
+                      <div class="product-form__error-message-wrapper" role="alert" hidden>
+                        <span class="product-form__error-message"></span>
+                      </div>
+                      {%- form 'product',
+                        product,
+                        id: 'product-form-collection-grid-',
+                        class: 'form',
+                        novalidate: 'novalidate',
+                        data-type: 'add-to-cart-form'
+                      -%}
+                        <input
+                          type="hidden"
+                          name="id"
+                          value="{{ product.selected_or_first_available_variant.id }}"
+                          {% if product.available == false %}disabled{% endif %}
+                        >
+                        <button
+                          type="submit"
+                          name="add"
+                          class="cg-button"
+                          {% if product.available == false %}disabled{% endif %}
+                        >
+                          <span>
+                            {%- if product.available -%}Add to cart{%- else -%}Sold out{%- endif -%}
+                          </span>
+                          {%- comment -%}
+                            Empty, permanently-hidden spinner: product-form.js calls
+                            .loading__spinner.classList on submit, so the element must exist.
+                          {%- endcomment -%}
+                          <span class="loading__spinner" style="display: none !important;"></span>
+                        </button>
+                      {%- endform -%}
+                    </product-form>
+                  {%- else -%}
+                    <a href="{{ product.url }}" class="cg-button">View options</a>
+                  {%- endif -%}
+                </div>
+              </div>
+
+            </div>
+          {%- endfor -%}
+        </div>
+
+        {%- if paginate.pages > 1 -%}
+          <div class="cg-pagination">
+            {{ paginate | default_pagination }}
+          </div>
+        {%- endif -%}
+      {%- endpaginate -%}
+    {%- endif -%}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection grid",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "info": "Leave blank to use the collection title.",
+      "default": ""
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "info": "Leave blank to use the collection description.",
+      "default": ""
+    },
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "min": 8,
+      "max": 24,
+      "step": 4,
+      "label": "Products per page",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "label": "Columns (desktop)",
+      "default": 3
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Card background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "label": "Show rating row",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 64
+    }
+  ],
+  "enabled_on": {
+    "templates": ["collection"]
+  },
+  "presets": [
+    {
+      "name": "Collection grid"
+    }
+  ]
+}
+{% endschema %}
