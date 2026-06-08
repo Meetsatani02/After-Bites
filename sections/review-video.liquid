@@ -287,7 +287,7 @@
       // wide screens (works for any number of blocks; guard prevents infinite loop)
       var slideHTML = wrapper.innerHTML;
       var dupGuard = 0;
-      while (wrapper.children.length < 10 && dupGuard < 12) {
+      while (wrapper.children.length < 14 && dupGuard < 14) {
         wrapper.insertAdjacentHTML('beforeend', slideHTML);
         dupGuard++;
       }
@@ -308,13 +308,15 @@
 
       var swiper = new Swiper(swiperEl, {
         loop: true,
-        loopAdditionalSlides: 4,
+        loopAdditionalSlides: 6,
         centeredSlides: true,
         slidesPerView: 'auto',
         spaceBetween: 80,
         speed: {{ section.settings.transition_speed }},
         grabCursor: true,
         watchSlidesProgress: true,
+        observer: true,
+        observeParents: true,
         breakpoints: {
           0: { spaceBetween: 28 },
           601: { spaceBetween: 48 },
@@ -327,7 +329,15 @@
         }
       });
 
-      requestAnimationFrame(function () { swiper.loopFix(); swiper.update(); });
+      // Fill BOTH sides of the centered loop on first paint — Swiper doesn't
+      // position all loop clones until an update, which left one side empty.
+      function fillLoop() {
+        swiper.update();
+        swiper.loopFix();
+        swiper.slideToLoop(0, 0, false);
+      }
+      requestAnimationFrame(function () { requestAnimationFrame(fillLoop); });
+      window.addEventListener('load', fillLoop);
 
       function muteAll() {
         swiperEl.querySelectorAll('video').forEach(function (v) { v.muted = true; });
