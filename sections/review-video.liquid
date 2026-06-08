@@ -285,12 +285,17 @@
 
       // duplicate the slides until there are enough to fill the centered loop on
       // wide screens (works for any number of blocks; guard prevents infinite loop)
+      var baseCount = wrapper.children.length;
       var slideHTML = wrapper.innerHTML;
       var dupGuard = 0;
       while (wrapper.children.length < 14 && dupGuard < 14) {
         wrapper.insertAdjacentHTML('beforeend', slideHTML);
         dupGuard++;
       }
+      // Start on a middle copy of the first review, so on first paint both sides
+      // are already filled with real slides (no waiting for Swiper's loop clones).
+      var copies = Math.max(1, Math.round(wrapper.children.length / baseCount));
+      var startIndex = Math.floor(copies / 2) * baseCount;
 
       // add a mute/unmute speaker icon to every video (shows only on the active one)
       var muteBtnHTML =
@@ -334,8 +339,9 @@
       function fillLoop() {
         swiper.update();
         swiper.loopFix();
-        swiper.slideToLoop(0, 0, false);
+        swiper.slideToLoop(startIndex, 0, false);
       }
+      fillLoop();
       requestAnimationFrame(function () { requestAnimationFrame(fillLoop); });
       window.addEventListener('load', fillLoop);
 
