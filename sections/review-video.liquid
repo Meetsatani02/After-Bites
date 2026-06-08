@@ -336,13 +336,19 @@
 
       // Fill BOTH sides of the centered loop on first paint — Swiper doesn't
       // position all loop clones until an update, which left one side empty.
+      // Fill both sides of the centered loop on load, independent of autoplay.
+      // (With autoplay off nothing else triggers the loop-fix, so run it on a few
+      // timings and re-center on a middle copy so real slides are on both sides.)
       function fillLoop() {
+        if (!swiper || swiper.destroyed) return;
         swiper.update();
         swiper.loopFix();
         swiper.slideToLoop(startIndex, 0, false);
+        swiper.loopFix();
       }
-      fillLoop();
       requestAnimationFrame(function () { requestAnimationFrame(fillLoop); });
+      setTimeout(fillLoop, 200);
+      setTimeout(fillLoop, 600);
       window.addEventListener('load', fillLoop);
 
       function muteAll() {
