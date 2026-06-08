@@ -406,46 +406,43 @@
                   {%- endif -%}
                 </div>
 
-                {%- comment -%} Add to cart (single variant) vs View options (multi-variant) {%- endcomment -%}
+                {%- comment -%} Direct add to cart for every product (adds the first available variant) {%- endcomment -%}
                 <div class="cg-action">
-                  {%- if product.has_only_default_variant -%}
-                    <product-form class="product-form" data-section-id="{{ section.id }}">
-                      <div class="product-form__error-message-wrapper" role="alert" hidden>
-                        <span class="product-form__error-message"></span>
-                      </div>
-                      {%- form 'product',
-                        product,
-                        id: 'product-form-collection-grid-',
-                        class: 'form',
-                        novalidate: 'novalidate',
-                        data-type: 'add-to-cart-form'
-                      -%}
-                        <input
-                          type="hidden"
-                          name="id"
-                          value="{{ product.selected_or_first_available_variant.id }}"
-                          {% if product.available == false %}disabled{% endif %}
-                        >
-                        <button
-                          type="submit"
-                          name="add"
-                          class="cg-button"
-                          {% if product.available == false %}disabled{% endif %}
-                        >
-                          <span>
-                            {%- if product.available -%}Add to cart{%- else -%}Sold out{%- endif -%}
-                          </span>
-                          {%- comment -%}
-                            Empty, permanently-hidden spinner: product-form.js calls
-                            .loading__spinner.classList on submit, so the element must exist.
-                          {%- endcomment -%}
-                          <span class="loading__spinner" style="display: none !important;"></span>
-                        </button>
-                      {%- endform -%}
-                    </product-form>
-                  {%- else -%}
-                    <a href="{{ product.url }}" class="cg-button">View options</a>
-                  {%- endif -%}
+                  {%- assign cg_form_id = 'cg-form-' | append: section.id | append: '-' | append: product.id -%}
+                  <product-form class="product-form" data-section-id="{{ section.id }}">
+                    <div class="product-form__error-message-wrapper" role="alert" hidden>
+                      <span class="product-form__error-message"></span>
+                    </div>
+                    {%- form 'product',
+                      product,
+                      id: cg_form_id,
+                      class: 'form',
+                      novalidate: 'novalidate',
+                      data-type: 'add-to-cart-form'
+                    -%}
+                      <input
+                        type="hidden"
+                        name="id"
+                        value="{{ product.selected_or_first_available_variant.id }}"
+                        {% if product.available == false %}disabled{% endif %}
+                      >
+                      <button
+                        type="submit"
+                        name="add"
+                        class="cg-button"
+                        {% if product.available == false %}disabled{% endif %}
+                      >
+                        <span>
+                          {%- if product.available -%}Add to cart{%- else -%}Sold out{%- endif -%}
+                        </span>
+                        {%- comment -%}
+                          Empty, permanently-hidden spinner: product-form.js calls
+                          .loading__spinner.classList on submit, so the element must exist.
+                        {%- endcomment -%}
+                        <span class="loading__spinner" style="display: none !important;"></span>
+                      </button>
+                    {%- endform -%}
+                  </product-form>
                 </div>
               </div>
 
