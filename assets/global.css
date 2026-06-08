@@ -621,6 +621,27 @@ p,h1,h2,h3,h4{
     display: none !important;
 }
 
+/* "Save X%" label, shown after the compare price. */
+.product-price-save {
+    display: inline-flex;
+    align-items: center;
+    align-self: center;
+    background-color: var(--green);
+    color: var(--beige);
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    padding: 6px 12px;
+    border-radius: 999px;
+    white-space: nowrap;
+}
+
+.product-price-save[hidden] {
+    display: none !important;
+}
+
 .product-weight {
     display: flex;
     flex-direction: column;
