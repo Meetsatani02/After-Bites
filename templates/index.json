@@ -197,6 +197,14 @@
         "heading": "Frequently Asked Questions",
         "border_image": "shopify://shop_images/border_image.svg"
       }
+    },
+    "review_video_TYB8Qp": {
+      "type": "review-video",
+      "name": "Review Video",
+      "settings": {
+        "heading": "What’s say about",
+        "background_text": "Afterbites"
+      }
     }
   },
   "order": [
@@ -206,6 +214,7 @@
     "image_banner_ypywDX",
     "product_vision_V9CzGW",
     "product_feature_new_4pfRLw",
-    "faq_MfXVhh"
+    "faq_MfXVhh",
+    "review_video_TYB8Qp"
   ]
 }
