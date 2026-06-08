@@ -1,15 +1,35 @@
 {{ 'global.css' | asset_url | stylesheet_tag }}
 
+<section class="product-wrapper" id="ReviewVideo-{{ section.id }}">
+  <div class="product-container">
+    <div class="product-title">
+      <h2>{{ section.settings.background_text | escape }}</h2>
+      <h3>{{ section.settings.heading | escape }}</h3>
+    </div>
+  </div>
+</section>
 
 {% schema %}
 {
   "name": "Review Video",
-  "settings":[],
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Review Video"
+    },
+    {
+      "type": "text",
+      "id": "background_text",
+      "label": "Background text",
+      "default": "Reviews"
+    }
+  ],
   "presets": [
     {
-      "name" : "Review Video"
+      "name": "Review Video"
     }
   ]
 }
-
 {% endschema %}
