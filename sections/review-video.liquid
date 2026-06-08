@@ -1,6 +1,11 @@
 {{ 'global.css' | asset_url | stylesheet_tag }}
 
   <style>
+
+        .customer-review-section-main .product-title{
+            margin-top:42px;
+        }
+
         .customer-review-section {
             background-color: var(--green);
             {% comment %} padding-block: 64px 72px; {% endcomment %}
@@ -210,7 +215,7 @@
         }
     </style>
 
-<section class="product-wrapper" id="ReviewVideo-{{ section.id }}">
+<section class="product-wrapper customer-review-section-main" id="ReviewVideo-{{ section.id }}">
   <div class="product-container">
     <div class="product-title">
       <h2>{{ section.settings.background_text | escape }}</h2>
