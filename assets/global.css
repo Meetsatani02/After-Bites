@@ -449,6 +449,13 @@ p,h1,h2,h3,h4{
     display: none !important;
 }
 
+/* Faster cart drawer open: 200ms (--duration-default) -> 110ms. Scoped to the
+   cart drawer (tag selector) so the global duration variable is untouched. */
+cart-drawer.drawer,
+cart-drawer .drawer__inner {
+    transition-duration: 110ms !important;
+}
+
 /* Panel background + base text */
 .cart-drawer .drawer__inner {
     background: var(--beige) !important;
