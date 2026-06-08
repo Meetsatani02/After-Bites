@@ -283,8 +283,14 @@
       var wrapper = swiperEl ? swiperEl.querySelector('.swiper-wrapper') : null;
       if (!swiperEl || !wrapper || !wrapper.children.length) return;
 
-      // duplicate the slides so the centered loop always stays filled on wide screens
-      wrapper.insertAdjacentHTML('beforeend', wrapper.innerHTML);
+      // duplicate the slides until there are enough to fill the centered loop on
+      // wide screens (works for any number of blocks; guard prevents infinite loop)
+      var slideHTML = wrapper.innerHTML;
+      var dupGuard = 0;
+      while (wrapper.children.length < 10 && dupGuard < 12) {
+        wrapper.insertAdjacentHTML('beforeend', slideHTML);
+        dupGuard++;
+      }
 
       // add a mute/unmute speaker icon to every video (shows only on the active one)
       var muteBtnHTML =
