@@ -285,17 +285,12 @@
 
       // duplicate the slides until there are enough to fill the centered loop on
       // wide screens (works for any number of blocks; guard prevents infinite loop)
-      var baseCount = wrapper.children.length;
       var slideHTML = wrapper.innerHTML;
       var dupGuard = 0;
       while (wrapper.children.length < 14 && dupGuard < 14) {
         wrapper.insertAdjacentHTML('beforeend', slideHTML);
         dupGuard++;
       }
-      // Start on a middle copy of the first review, so on first paint both sides
-      // are already filled with real slides (no waiting for Swiper's loop clones).
-      var copies = Math.max(1, Math.round(wrapper.children.length / baseCount));
-      var startIndex = Math.floor(copies / 2) * baseCount;
 
       // add a mute/unmute speaker icon to every video (shows only on the active one)
       var muteBtnHTML =
@@ -313,15 +308,13 @@
 
       var swiper = new Swiper(swiperEl, {
         loop: true,
-        loopAdditionalSlides: 6,
+        loopAdditionalSlides: 4,
         centeredSlides: true,
         slidesPerView: 'auto',
         spaceBetween: 80,
         speed: {{ section.settings.transition_speed }},
         grabCursor: true,
         watchSlidesProgress: true,
-        observer: true,
-        observeParents: true,
         breakpoints: {
           0: { spaceBetween: 28 },
           601: { spaceBetween: 48 },
@@ -334,22 +327,12 @@
         }
       });
 
-      // Fill BOTH sides of the centered loop on first paint — Swiper doesn't
-      // position all loop clones until an update, which left one side empty.
-      // Fill both sides of the centered loop on load, independent of autoplay.
-      // (With autoplay off nothing else triggers the loop-fix, so run it on a few
-      // timings and re-center on a middle copy so real slides are on both sides.)
-      function fillLoop() {
-        if (!swiper || swiper.destroyed) return;
+      // fix Swiper's empty side on first load (loop clones aren't positioned
+      // until an update with loop + centeredSlides + slidesPerView:'auto')
+      requestAnimationFrame(function () {
+        swiper.loopFix();
         swiper.update();
-        swiper.loopFix();
-        swiper.slideToLoop(startIndex, 0, false);
-        swiper.loopFix();
-      }
-      requestAnimationFrame(function () { requestAnimationFrame(fillLoop); });
-      setTimeout(fillLoop, 200);
-      setTimeout(fillLoop, 600);
-      window.addEventListener('load', fillLoop);
+      });
 
       function muteAll() {
         swiperEl.querySelectorAll('video').forEach(function (v) { v.muted = true; });
