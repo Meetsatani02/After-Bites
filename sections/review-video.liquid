@@ -1,5 +1,231 @@
 {{ 'global.css' | asset_url | stylesheet_tag }}
 
+  <style>
+        .customer-review-section {
+            background-color: var(--green);
+            padding-block: 64px 72px;
+            overflow: hidden;
+        }
+
+        .cusotmer-review-title {
+            font-family: 'Rasbern';
+            font-weight: 600;
+            font-size: 48px;
+            line-height: 1.2;
+            text-align: center;
+            color: var(--beige);
+            margin-bottom: 48px;
+        }
+
+        /* ---------- Swiper ---------- */
+        .review-swiper {
+            width: 100%;
+            padding-block: 64px;
+            overflow: visible;
+        }
+
+        .review-swiper .swiper-slide {
+            width: 268.51px;
+            transition: transform 0.45s ease;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* active scales 268.51x352 -> 357x468 (1.33x) */
+        .review-swiper .swiper-slide-active {
+            transform: scale(1.33);
+            z-index: 3;
+        }
+
+        .review-video-oval {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 268.51 / 352;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid rgba(244, 237, 219, 0.85);
+            background-color: #000;
+        }
+
+        .review-video-oval video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* play / unmute overlay — only on active slide while muted */
+        .review-play-btn {
+            position: absolute;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.12);
+            border: none;
+            padding: 0;
+        }
+
+        .review-play-btn img {
+            width: 44px;
+            height: 44px;
+        }
+
+        .swiper-slide-active .review-play-btn {
+            display: flex;
+        }
+
+        .swiper-slide-active.is-unmuted .review-play-btn {
+            display: none;
+        }
+
+        /* mute / unmute speaker icon — only on the active (main) video */
+        .review-mute-btn {
+            position: absolute;
+            left: 50%;
+            bottom: 12%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(28, 48, 37, 0.55);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            padding: 0;
+            z-index: 4;
+        }
+
+        .swiper-slide-active .review-mute-btn {
+            display: flex;
+        }
+
+        .review-mute-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* default = muted (show the slashed speaker) */
+        .review-mute-btn .icon-on {
+            display: none;
+        }
+
+        .swiper-slide-active.is-unmuted .review-mute-btn .icon-off {
+            display: none;
+        }
+
+        .swiper-slide-active.is-unmuted .review-mute-btn .icon-on {
+            display: block;
+        }
+
+        /* ---------- Bottom controls (arrows + caption) ---------- */
+        .review-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 62px;
+            max-width: 1100px;
+            margin: 40px auto 0;
+            padding-inline: 20px;
+        }
+
+        .review-arrow {
+            flex-shrink: 0;
+            width: 44px;
+            height: 44px;
+            border: 1px solid rgba(244, 237, 219, 0.6);
+            border-radius: 12px;
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.25s ease, opacity 0.25s ease;
+        }
+
+        .review-arrow:hover {
+            background-color: rgba(244, 237, 219, 0.12);
+        }
+
+        .review-arrow img {
+            width: 16px;
+            height: 16px;
+        }
+
+        .review-arrow.swiper-button-disabled {
+            opacity: 0.4;
+            cursor: default;
+        }
+
+        .review-caption {
+            flex: 0 1 auto;
+            max-width: 835px;
+            text-align: center;
+            font-family: 'Inter';
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--beige);
+            transition: opacity 0.3s ease;
+        }
+
+        /* ---------- Responsive ---------- */
+        @media (max-width: 1024px) {
+            .cusotmer-review-title {
+                font-size: 38px;
+            }
+
+            .review-swiper {
+                padding-block: 48px;
+            }
+
+            .review-swiper .swiper-slide {
+                width: 200px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .customer-review-section {
+                padding-block: 44px 52px;
+            }
+
+            .cusotmer-review-title {
+                font-size: 28px;
+                margin-bottom: 32px;
+            }
+
+            .review-swiper {
+                padding-block: 36px;
+            }
+
+            .review-swiper .swiper-slide {
+                width: 160px;
+            }
+
+            .review-swiper .swiper-slide-active {
+                transform: scale(1.3);
+            }
+
+            .review-controls {
+                gap: 14px;
+                margin-top: 28px;
+                padding-inline: 20px;
+            }
+
+            .review-arrow {
+                width: 38px;
+                height: 38px;
+            }
+
+            .review-caption {
+                font-size: 14px;
+            }
+        }
+    </style>
+
 <section class="product-wrapper" id="ReviewVideo-{{ section.id }}">
   <div class="product-container">
     <div class="product-title">
@@ -7,7 +233,7 @@
       <h3>{{ section.settings.heading | escape }}</h3>
     </div>
   </div>
-  
+
 </section>
 
 {% schema %}
