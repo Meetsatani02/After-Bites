@@ -200,10 +200,35 @@
     },
     "review_video_TYB8Qp": {
       "type": "review-video",
+      "blocks": {
+        "review_xQfYQF": {
+          "type": "review",
+          "settings": {
+            "video": "shopify://files/videos/mukhawas.mov",
+            "video_url": "",
+            "caption": "same words"
+          }
+        },
+        "review_EtrX7w": {
+          "type": "review",
+          "settings": {
+            "video": "shopify://files/videos/mukhawas.mov",
+            "video_url": "",
+            "caption": "founder for xyz firm."
+          }
+        }
+      },
+      "block_order": [
+        "review_xQfYQF",
+        "review_EtrX7w"
+      ],
       "name": "Review Video",
       "settings": {
         "heading": "What’s say about",
-        "background_text": "Afterbites"
+        "background_text": "Afterbites",
+        "autoplay": true,
+        "autoplay_speed": 4,
+        "transition_speed": 800
       }
     }
   },
