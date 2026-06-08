@@ -3,7 +3,7 @@
   <style>
         .customer-review-section {
             background-color: var(--green);
-            padding-block: 64px 72px;
+            {% comment %} padding-block: 64px 72px; {% endcomment %}
             overflow: hidden;
         }
 
@@ -177,9 +177,9 @@
         }
 
         @media (max-width: 600px) {
-            .customer-review-section {
+            {% comment %} .customer-review-section {
                 padding-block: 44px 52px;
-            }
+            } {% endcomment %}
 
             .review-swiper {
                 padding-block: 36px;
