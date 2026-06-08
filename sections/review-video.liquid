@@ -1,457 +1,516 @@
 {{ 'global.css' | asset_url | stylesheet_tag }}
 
-  <style>
+<style>
+      .product-container-video-review{
+          max-width: 1440px;
+  margin: auto;
+  padding: 0 60px 32px 50px;
+  position: relative;
+  z-index: 2;
+      }
 
-        .customer-review-section-main{
-            padding-block : 42px;
-        }
+      .customer-review-section-main{
+          padding-block : 42px;
+      }
 
-        .customer-review-section {
-            background-color: var(--green);
-            {% comment %} padding-block: 64px 72px; {% endcomment %}
-            overflow: hidden;
-        }
+      .customer-review-section {
+          background-color: var(--green);
+          {% comment %} padding-block: 64px 72px; {% endcomment %}
+          overflow: hidden;
+      }
 
-    
 
-        /* ---------- Swiper ---------- */
-        .review-swiper {
-            width: 100%;
-            padding-block: 64px;
-            overflow: visible;
-        }
 
-        .review-swiper .swiper-slide {
-            width: 268.51px;
-            transition: transform 0.45s ease;
-            display: flex;
-            justify-content: center;
-        }
+      /* ---------- Swiper ---------- */
+      .review-swiper {
+          width: 100%;
+          padding-block: 64px;
+          overflow: visible;
+      }
 
-        /* active scales 268.51x352 -> 357x468 (1.33x) */
-        .review-swiper .swiper-slide-active {
-            transform: scale(1.33);
-            z-index: 3;
-        }
+      .review-swiper .swiper-slide {
+          width: 268.51px;
+          transition: transform 0.45s ease;
+          display: flex;
+          justify-content: center;
+      }
 
-        .review-video-oval {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 268.51 / 352;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 2px solid rgba(244, 237, 219, 0.85);
-            background-color: #000;
-        }
+      /* active scales 268.51x352 -> 357x468 (1.33x) */
+      .review-swiper .swiper-slide-active {
+          transform: scale(1.33);
+          z-index: 3;
+      }
 
-        .review-video-oval video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
+      .review-video-oval {
+          position: relative;
+          width: 100%;
+          aspect-ratio: 268.51 / 352;
+          border-radius: 50%;
+          overflow: hidden;
+          border: 2px solid rgba(244, 237, 219, 0.85);
+          background-color: #000;
+      }
 
-        /* play / unmute overlay — only on active slide while muted */
-        .review-play-btn {
-            position: absolute;
-            inset: 0;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            background: rgba(0, 0, 0, 0.12);
-            border: none;
-            padding: 0;
-        }
+      .review-video-oval video {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+      }
 
-        .review-play-btn img {
-            width: 44px;
-            height: 44px;
-        }
+      /* play / unmute overlay — only on active slide while muted */
+      .review-play-btn {
+          position: absolute;
+          inset: 0;
+          display: none;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          background: rgba(0, 0, 0, 0.12);
+          border: none;
+          padding: 0;
+      }
 
-        .swiper-slide-active .review-play-btn {
-            display: flex;
-        }
+      .review-play-btn img {
+          width: 44px;
+          height: 44px;
+      }
 
-        .swiper-slide-active.is-unmuted .review-play-btn {
-            display: none;
-        }
+      .swiper-slide-active .review-play-btn {
+          display: flex;
+      }
 
-        /* mute / unmute speaker icon — only on the active (main) video */
-        .review-mute-btn {
-            position: absolute;
-            left: 50%;
-            bottom: 12%;
-            transform: translateX(-50%);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            border: none;
-            background: rgba(28, 48, 37, 0.55);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            padding: 0;
-            z-index: 4;
-        }
+      .swiper-slide-active.is-unmuted .review-play-btn {
+          display: none;
+      }
 
-        .swiper-slide-active .review-mute-btn {
-            display: flex;
-        }
+      /* mute / unmute speaker icon — only on the active (main) video */
+      .review-mute-btn {
+          position: absolute;
+          left: 50%;
+          bottom: 12%;
+          transform: translateX(-50%);
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          border: none;
+          background: rgba(28, 48, 37, 0.55);
+          display: none;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          padding: 0;
+          z-index: 4;
+      }
 
-        .review-mute-btn svg {
-            width: 20px;
-            height: 20px;
-        }
+      .swiper-slide-active .review-mute-btn {
+          display: flex;
+      }
 
-        /* default = muted (show the slashed speaker) */
-        .review-mute-btn .icon-on {
-            display: none;
-        }
+      .review-mute-btn svg {
+          width: 20px;
+          height: 20px;
+      }
 
-        .swiper-slide-active.is-unmuted .review-mute-btn .icon-off {
-            display: none;
-        }
+      /* default = muted (show the slashed speaker) */
+      .review-mute-btn .icon-on {
+          display: none;
+      }
 
-        .swiper-slide-active.is-unmuted .review-mute-btn .icon-on {
-            display: block;
-        }
+      .swiper-slide-active.is-unmuted .review-mute-btn .icon-off {
+          display: none;
+      }
 
-        /* ---------- Bottom controls (arrows + caption) ---------- */
-        .review-controls {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 62px;
-            max-width: 1100px;
-            margin: 40px auto 0;
-            padding-inline: 20px;
-        }
+      .swiper-slide-active.is-unmuted .review-mute-btn .icon-on {
+          display: block;
+      }
 
-        .review-arrow {
-            flex-shrink: 0;
-            width: 44px;
-            height: 44px;
-            border: 1px solid rgba(244, 237, 219, 0.6);
-            border-radius: 12px;
-            background: transparent;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: background-color 0.25s ease, opacity 0.25s ease;
-        }
+      /* ---------- Bottom controls (arrows + caption) ---------- */
+      .review-controls {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 62px;
+          max-width: 1100px;
+          margin: 40px auto 0;
+          padding-inline: 20px;
+      }
 
-        .review-arrow:hover {
-            background-color: rgba(244, 237, 219, 0.12);
-        }
+      .review-arrow {
+          flex-shrink: 0;
+          width: 44px;
+          height: 44px;
+          border: 1px solid rgba(244, 237, 219, 0.6);
+          border-radius: 12px;
+          background: transparent;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: background-color 0.25s ease, opacity 0.25s ease;
+      }
 
-        .review-arrow img {
-            width: 16px;
-            height: 16px;
-        }
+      .review-arrow:hover {
+          background-color: rgba(244, 237, 219, 0.12);
+      }
 
-        .review-arrow.swiper-button-disabled {
-            opacity: 0.4;
-            cursor: default;
-        }
+      .review-arrow img {
+          width: 16px;
+          height: 16px;
+      }
 
-        .review-caption {
-            flex: 0 1 auto;
-            max-width: 835px;
-            text-align: center;
-            font-family: 'Inter';
-            font-weight: 400;
-            font-size: 16px;
-            line-height: 1.6;
-            color: var(--beige);
-            transition: opacity 0.3s ease;
-        }
+      .review-arrow.swiper-button-disabled {
+          opacity: 0.4;
+          cursor: default;
+      }
 
-        /* ---------- Responsive ---------- */
-        @media (max-width: 1024px) {
+      .review-caption {
+          flex: 0 1 auto;
+          max-width: 835px;
+          text-align: center;
+          font-family: 'Inter';
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 1.6;
+          color: var(--beige);
+          transition: opacity 0.3s ease;
+      }
 
-            .review-swiper {
-                padding-block: 48px;
-            }
+      /* ---------- Responsive ---------- */
+      @media (max-width: 1024px) {
 
-            .review-swiper .swiper-slide {
-                width: 200px;
-            }
-        }
+          .review-swiper {
+              padding-block: 48px;
+          }
 
-        @media (max-width: 600px) {
-            {% comment %} .customer-review-section {
-                padding-block: 44px 52px;
-            } {% endcomment %}
+          .review-swiper .swiper-slide {
+              width: 200px;
+          }
+      }
 
-            .review-swiper {
-                padding-block: 36px;
-            }
+      @media (max-width: 600px) {
+          {% comment %} .customer-review-section {
+              padding-block: 44px 52px;
+          } {% endcomment %}
 
-            .review-swiper .swiper-slide {
-                width: 160px;
-            }
+          .review-swiper {
+              padding-block: 36px;
+          }
 
-            .review-swiper .swiper-slide-active {
-                transform: scale(1.3);
-            }
+          .review-swiper .swiper-slide {
+              width: 160px;
+          }
 
-            .review-controls {
-                gap: 14px;
-                margin-top: 28px;
-                padding-inline: 20px;
-            }
+          .review-swiper .swiper-slide-active {
+              transform: scale(1.3);
+          }
 
-            .review-arrow {
-                width: 38px;
-                height: 38px;
-            }
+          .review-controls {
+              gap: 14px;
+              margin-top: 28px;
+              padding-inline: 20px;
+          }
 
-            .review-caption {
-                font-size: 14px;
-            }
-        }
-    </style>
+          .review-arrow {
+              width: 38px;
+              height: 38px;
+          }
+
+          .review-caption {
+              font-size: 14px;
+          }
+      }
+</style>
 
 <section class="product-wrapper customer-review-section-main" id="ReviewVideo-{{ section.id }}">
-  <div class="product-container">
+  <div class="product-container-video-review">
     <div class="product-title">
       <h2>{{ section.settings.background_text | escape }}</h2>
       <h3>{{ section.settings.heading | escape }}</h3>
     </div>
   </div>
- <div class="customer-review-section">
-    
-        <div class="customer-swiperslider-video-text">
-            <div class="swiper review-swiper">
-                <div class="swiper-wrapper">
-
-                    <div class="swiper-slide"
-                        data-caption="The quality and purity of our product has made us a favorite in kitchens across the country. We're proud to be a trusted choice for healthy and delicious cooking.">
-                        <div class="review-video-oval">
-                            <video src="https://cdn.shopify.com/videos/c/o/v/d49e6b5bcd434c5db48393df3f6711ea.mov"
-                                muted autoplay loop playsinline preload="auto"></video>
-                            <button class="review-play-btn" type="button" aria-label="Toggle sound">
-                                {% render 'play-button' %}
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="swiper-slide"
-                        data-caption="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Our customers love how fresh and authentic every single bite tastes.">
-                        <div class="review-video-oval">
-                            <video src="https://cdn.shopify.com/videos/c/o/v/d49e6b5bcd434c5db48393df3f6711ea.mov"
-                                muted autoplay loop playsinline preload="auto"></video>
-                            <button class="review-play-btn" type="button" aria-label="Toggle sound">
-                                {% render 'play-button' %}
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="swiper-slide"
-                        data-caption="From everyday meals to special occasions, this has become an essential part of my family's kitchen. Highly recommended to everyone.">
-                        <div class="review-video-oval">
-                            <video src="https://cdn.shopify.com/videos/c/o/v/d49e6b5bcd434c5db48393df3f6711ea.mov"
-                                muted autoplay loop playsinline preload="auto"></video>
-                            <button class="review-play-btn" type="button" aria-label="Toggle sound">
-                                {% render 'play-button' %}
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="swiper-slide"
-                        data-caption="I switched a year ago and never looked back. The taste, the quality, and the care behind it truly stand out from the rest.">
-                        <div class="review-video-oval">
-                            <video src="https://cdn.shopify.com/videos/c/o/v/d49e6b5bcd434c5db48393df3f6711ea.mov"
-                                muted autoplay loop playsinline preload="auto"></video>
-                            <button class="review-play-btn" type="button" aria-label="Toggle sound">
-                                {% render 'play-button' %}
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="swiper-slide"
-                        data-caption="A trusted choice for healthy and delicious cooking. My whole family notices the difference, and so will yours.">
-                        <div class="review-video-oval">
-                            <video src="https://cdn.shopify.com/videos/c/o/v/d49e6b5bcd434c5db48393df3f6711ea.mov"
-                                muted autoplay loop playsinline preload="auto"></video>
-                            <button class="review-play-btn" type="button" aria-label="Toggle sound">
-                                {% render 'play-button' %}
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="swiper-slide"
-                        data-caption="Consistently fresh and full of flavor. It has earned a permanent spot in our pantry and our hearts.">
-                        <div class="review-video-oval">
-                            <video src="https://cdn.shopify.com/videos/c/o/v/d49e6b5bcd434c5db48393df3f6711ea.mov"
-                                muted autoplay loop playsinline preload="auto"></video>
-                            <button class="review-play-btn" type="button" aria-label="Toggle sound">
-                                {% render 'play-button' %}
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="swiper-slide"
-                        data-caption="Quality you can taste in every dish. We're proud to be part of so many family kitchens across the country.">
-                        <div class="review-video-oval">
-                            <video src="https://cdn.shopify.com/videos/c/o/v/d49e6b5bcd434c5db48393df3f6711ea.mov"
-                                muted autoplay loop playsinline preload="auto"></video>
-                            <button class="review-play-btn" type="button" aria-label="Toggle sound">
-                                {% render 'play-button' %}
-                                
-                            </button>
-                        </div>
-                    </div>
-
-                </div>
+  <div class="customer-review-section">
+    <div class="customer-swiperslider-video-text">
+      <div class="swiper review-swiper">
+        <div class="swiper-wrapper">
+          <div
+            class="swiper-slide"
+            data-caption="The quality and purity of our product has made us a favorite in kitchens across the country. We're proud to be a trusted choice for healthy and delicious cooking."
+          >
+            <div class="review-video-oval">
+              <video
+                src="https://cdn.shopify.com/videos/c/o/v/d49e6b5bcd434c5db48393df3f6711ea.mov"
+                muted
+                autoplay
+                loop
+                playsinline
+                preload="auto"
+              ></video>
+              <button class="review-play-btn" type="button" aria-label="Toggle sound">
+                {% render 'play-button' %}
+              </button>
             </div>
+          </div>
 
-            <div class="review-controls">
-                <button class="review-arrow review-prev" type="button" aria-label="Previous">
-                    {% render 'slider-left-arrow' %}
-                </button>
-
-                <p class="review-caption"></p>
-
-                <button class="review-arrow review-next" type="button" aria-label="Next">
-                    {% render 'slider-right-arrow' %}
-                </button>
+          <div
+            class="swiper-slide"
+            data-caption="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Our customers love how fresh and authentic every single bite tastes."
+          >
+            <div class="review-video-oval">
+              <video
+                src="https://cdn.shopify.com/videos/c/o/v/d49e6b5bcd434c5db48393df3f6711ea.mov"
+                muted
+                autoplay
+                loop
+                playsinline
+                preload="auto"
+              ></video>
+              <button class="review-play-btn" type="button" aria-label="Toggle sound">
+                {% render 'play-button' %}
+              </button>
             </div>
+          </div>
+
+          <div
+            class="swiper-slide"
+            data-caption="From everyday meals to special occasions, this has become an essential part of my family's kitchen. Highly recommended to everyone."
+          >
+            <div class="review-video-oval">
+              <video
+                src="https://cdn.shopify.com/videos/c/o/v/d49e6b5bcd434c5db48393df3f6711ea.mov"
+                muted
+                autoplay
+                loop
+                playsinline
+                preload="auto"
+              ></video>
+              <button class="review-play-btn" type="button" aria-label="Toggle sound">
+                {% render 'play-button' %}
+              </button>
+            </div>
+          </div>
+
+          <div
+            class="swiper-slide"
+            data-caption="I switched a year ago and never looked back. The taste, the quality, and the care behind it truly stand out from the rest."
+          >
+            <div class="review-video-oval">
+              <video
+                src="https://cdn.shopify.com/videos/c/o/v/d49e6b5bcd434c5db48393df3f6711ea.mov"
+                muted
+                autoplay
+                loop
+                playsinline
+                preload="auto"
+              ></video>
+              <button class="review-play-btn" type="button" aria-label="Toggle sound">
+                {% render 'play-button' %}
+              </button>
+            </div>
+          </div>
+
+          <div
+            class="swiper-slide"
+            data-caption="A trusted choice for healthy and delicious cooking. My whole family notices the difference, and so will yours."
+          >
+            <div class="review-video-oval">
+              <video
+                src="https://cdn.shopify.com/videos/c/o/v/d49e6b5bcd434c5db48393df3f6711ea.mov"
+                muted
+                autoplay
+                loop
+                playsinline
+                preload="auto"
+              ></video>
+              <button class="review-play-btn" type="button" aria-label="Toggle sound">
+                {% render 'play-button' %}
+              </button>
+            </div>
+          </div>
+
+          <div
+            class="swiper-slide"
+            data-caption="Consistently fresh and full of flavor. It has earned a permanent spot in our pantry and our hearts."
+          >
+            <div class="review-video-oval">
+              <video
+                src="https://cdn.shopify.com/videos/c/o/v/d49e6b5bcd434c5db48393df3f6711ea.mov"
+                muted
+                autoplay
+                loop
+                playsinline
+                preload="auto"
+              ></video>
+              <button class="review-play-btn" type="button" aria-label="Toggle sound">
+                {% render 'play-button' %}
+              </button>
+            </div>
+          </div>
+
+          <div
+            class="swiper-slide"
+            data-caption="Quality you can taste in every dish. We're proud to be part of so many family kitchens across the country."
+          >
+            <div class="review-video-oval">
+              <video
+                src="https://cdn.shopify.com/videos/c/o/v/d49e6b5bcd434c5db48393df3f6711ea.mov"
+                muted
+                autoplay
+                loop
+                playsinline
+                preload="auto"
+              ></video>
+              <button class="review-play-btn" type="button" aria-label="Toggle sound">
+                {% render 'play-button' %}
+              </button>
+            </div>
+          </div>
         </div>
+      </div>
+
+      <div class="review-controls">
+        <button class="review-arrow review-prev" type="button" aria-label="Previous">
+          {% render 'slider-left-arrow' %}
+        </button>
+
+        <p class="review-caption"></p>
+
+        <button class="review-arrow review-next" type="button" aria-label="Next">
+          {% render 'slider-right-arrow' %}
+        </button>
+      </div>
     </div>
+  </div>
 </section>
 
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script>
-        (function () {
-            const captionEl = document.querySelector('.review-caption');
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+  (function () {
+    const captionEl = document.querySelector('.review-caption');
 
-            // duplicate the slides so the centered loop always stays filled on wide screens
-            const wrapper = document.querySelector('.review-swiper .swiper-wrapper');
-            wrapper.insertAdjacentHTML('beforeend', wrapper.innerHTML);
+    // duplicate the slides so the centered loop always stays filled on wide screens
+    const wrapper = document.querySelector('.review-swiper .swiper-wrapper');
+    wrapper.insertAdjacentHTML('beforeend', wrapper.innerHTML);
 
-            // add a mute/unmute speaker icon to every video (shows only on the active one)
-            const muteBtnHTML =
-                '<button class="review-mute-btn" type="button" aria-label="Toggle sound">' +
-                '<svg class="icon-off" viewBox="0 0 24 24" fill="none" stroke="#F4EDDB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
-                '<path d="M11 5 6 9H2v6h4l5 4z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>' +
-                '</svg>' +
-                '<svg class="icon-on" viewBox="0 0 24 24" fill="none" stroke="#F4EDDB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
-                '<path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a9 9 0 0 1 0 14"/>' +
-                '</svg>' +
-                '</button>';
-            wrapper.querySelectorAll('.review-video-oval').forEach(function (oval) {
-                oval.insertAdjacentHTML('beforeend', muteBtnHTML);
-            });
+    // add a mute/unmute speaker icon to every video (shows only on the active one)
+    const muteBtnHTML =
+      '<button class="review-mute-btn" type="button" aria-label="Toggle sound">' +
+      '<svg class="icon-off" viewBox="0 0 24 24" fill="none" stroke="#F4EDDB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+      '<path d="M11 5 6 9H2v6h4l5 4z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>' +
+      '</svg>' +
+      '<svg class="icon-on" viewBox="0 0 24 24" fill="none" stroke="#F4EDDB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+      '<path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a9 9 0 0 1 0 14"/>' +
+      '</svg>' +
+      '</button>';
+    wrapper.querySelectorAll('.review-video-oval').forEach(function (oval) {
+      oval.insertAdjacentHTML('beforeend', muteBtnHTML);
+    });
 
-            const swiper = new Swiper('.review-swiper', {
-                loop: true,
-                loopAdditionalSlides: 4,
-                centeredSlides: true,
-                slidesPerView: 'auto',
-                spaceBetween: 80,
-                speed: 800,
-                grabCursor: true,
-                watchSlidesProgress: true,
-                breakpoints: {
-                    0: { spaceBetween: 28 },
-                    601: { spaceBetween: 48 },
-                    1025: { spaceBetween: 80 },
-                },
-                // continuous right-to-left auto scroll
-                autoplay: {
-                    delay: 3500,
-                    disableOnInteraction: false,
-                },
-                navigation: {
-                    nextEl: '.review-next',
-                    prevEl: '.review-prev',
-                },
-            });
+    const swiper = new Swiper('.review-swiper', {
+      loop: true,
+      loopAdditionalSlides: 4,
+      centeredSlides: true,
+      slidesPerView: 'auto',
+      spaceBetween: 80,
+      speed: 800,
+      grabCursor: true,
+      watchSlidesProgress: true,
+      breakpoints: {
+        0: { spaceBetween: 28 },
+        601: { spaceBetween: 48 },
+        1025: { spaceBetween: 80 },
+      },
+      // continuous right-to-left auto scroll
+      autoplay: {
+        delay: 3500,
+        disableOnInteraction: false,
+      },
+      navigation: {
+        nextEl: '.review-next',
+        prevEl: '.review-prev',
+      },
+    });
 
-            // fix Swiper's empty left side on first load (loop clones aren't prepended
-            // until the first interaction with loop + centeredSlides + slidesPerView:'auto')
-            requestAnimationFrame(function () {
-                swiper.loopFix();
-                swiper.update();
-            });
+    // fix Swiper's empty left side on first load (loop clones aren't prepended
+    // until the first interaction with loop + centeredSlides + slidesPerView:'auto')
+    requestAnimationFrame(function () {
+      swiper.loopFix();
+      swiper.update();
+    });
 
-            // mute every video and clear the "unmuted" marker
-            function muteAll() {
-                document.querySelectorAll('.review-swiper video').forEach(function (v) {
-                    v.muted = true;
-                });
-                document.querySelectorAll('.review-swiper .swiper-slide').forEach(function (s) {
-                    s.classList.remove('is-unmuted');
-                });
-            }
+    // mute every video and clear the "unmuted" marker
+    function muteAll() {
+      document.querySelectorAll('.review-swiper video').forEach(function (v) {
+        v.muted = true;
+      });
+      document.querySelectorAll('.review-swiper .swiper-slide').forEach(function (s) {
+        s.classList.remove('is-unmuted');
+      });
+    }
 
-            // update caption text from the active slide
-            function updateCaption() {
-                const active = swiper.slides[swiper.activeIndex];
-                if (!active) return;
-                captionEl.style.opacity = 0;
-                window.setTimeout(function () {
-                    captionEl.textContent = active.getAttribute('data-caption') || '';
-                    captionEl.style.opacity = 1;
-                }, 150);
-            }
+    // update caption text from the active slide
+    function updateCaption() {
+      const active = swiper.slides[swiper.activeIndex];
+      if (!active) return;
+      captionEl.style.opacity = 0;
+      window.setTimeout(function () {
+        captionEl.textContent = active.getAttribute('data-caption') || '';
+        captionEl.style.opacity = 1;
+      }, 150);
+    }
 
-            // play only the videos currently in view, pause the rest (saves bandwidth -> no stutter)
-            function updatePlayback() {
-                document.querySelectorAll('.review-swiper .swiper-slide').forEach(function (s) {
-                    const v = s.querySelector('video');
-                    if (!v) return;
-                    if (s.classList.contains('swiper-slide-visible')) {
-                        const p = v.play();
-                        if (p && p.catch) p.catch(function () { });
-                    } else {
-                        v.pause();
-                    }
-                });
-            }
+    // play only the videos currently in view, pause the rest (saves bandwidth -> no stutter)
+    function updatePlayback() {
+      document.querySelectorAll('.review-swiper .swiper-slide').forEach(function (s) {
+        const v = s.querySelector('video');
+        if (!v) return;
+        if (s.classList.contains('swiper-slide-visible')) {
+          const p = v.play();
+          if (p && p.catch) p.catch(function () {});
+        } else {
+          v.pause();
+        }
+      });
+    }
 
-            // when the active slide changes: mute everything, resume autoplay, refresh caption
-            swiper.on('slideChange', function () {
-                muteAll();
-                swiper.autoplay.start();
-                updateCaption();
-            });
+    // when the active slide changes: mute everything, resume autoplay, refresh caption
+    swiper.on('slideChange', function () {
+      muteAll();
+      swiper.autoplay.start();
+      updateCaption();
+    });
 
-            // manage which videos are playing once each transition settles
-            swiper.on('slideChangeTransitionEnd', updatePlayback);
+    // manage which videos are playing once each transition settles
+    swiper.on('slideChangeTransitionEnd', updatePlayback);
 
-            // click the active video (or its play button) to toggle its sound.
-            // delegated so every duplicated / cloned slide responds too.
-            const swiperEl = document.querySelector('.review-swiper');
-            swiperEl.addEventListener('click', function (e) {
-                const slide = e.target.closest('.swiper-slide');
-                if (!slide || !slide.classList.contains('swiper-slide-active')) return;
+    // click the active video (or its play button) to toggle its sound.
+    // delegated so every duplicated / cloned slide responds too.
+    const swiperEl = document.querySelector('.review-swiper');
+    swiperEl.addEventListener('click', function (e) {
+      const slide = e.target.closest('.swiper-slide');
+      if (!slide || !slide.classList.contains('swiper-slide-active')) return;
 
-                const video = slide.querySelector('video');
-                if (!video) return;
+      const video = slide.querySelector('video');
+      if (!video) return;
 
-                if (video.muted) {
-                    muteAll();              // ensure only this one has sound
-                    video.muted = false;
-                    video.play();
-                    slide.classList.add('is-unmuted');
-                    swiper.autoplay.stop();  // pause scrolling while listening
-                } else {
-                    video.muted = true;
-                    slide.classList.remove('is-unmuted');
-                    swiper.autoplay.start();
-                }
-            });
+      if (video.muted) {
+        muteAll(); // ensure only this one has sound
+        video.muted = false;
+        video.play();
+        slide.classList.add('is-unmuted');
+        swiper.autoplay.stop(); // pause scrolling while listening
+      } else {
+        video.muted = true;
+        slide.classList.remove('is-unmuted');
+        swiper.autoplay.start();
+      }
+    });
 
-            // initial caption + playback state
-            updateCaption();
-            updatePlayback();
-        })();
-    </script>
+    // initial caption + playback state
+    updateCaption();
+    updatePlayback();
+  })();
+</script>
 
 {% schema %}
 {
