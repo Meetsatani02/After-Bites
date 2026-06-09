@@ -29,34 +29,17 @@
     "review_video_6AKwJt": {
       "type": "review-video",
       "blocks": {
-        "review_FbxVqD": {
+        "review_4Hp88G": {
           "type": "review",
           "settings": {
             "video": "shopify://files/videos/mukhawas.mov",
             "video_url": "",
-            "caption": "The quality and purity of our product has made us a favorite in kitchens across the country."
-          }
-        },
-        "review_fcETnk": {
-          "type": "review",
-          "settings": {
-            "video": "shopify://files/videos/mukhawas.mov",
-            "video_url": "",
-            "caption": "Our customers love how fresh and authentic every single bite tastes."
-          }
-        },
-        "review_6YRYGV": {
-          "type": "review",
-          "settings": {
-            "video_url": "https://cdn.shopify.com/videos/c/o/v/d49e6b5bcd434c5db48393df3f6711ea.mov",
-            "caption": "From everyday meals to special occasions, this has become an essential part of my family's kitchen."
+            "caption": ""
           }
         }
       },
       "block_order": [
-        "review_FbxVqD",
-        "review_fcETnk",
-        "review_6YRYGV"
+        "review_4Hp88G"
       ],
       "name": "Review Video",
       "settings": {
