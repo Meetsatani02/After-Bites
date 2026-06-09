@@ -13,19 +13,19 @@
         .footer-brand {
             position: relative;
             display: grid;
-            grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+            /* equal halves keep the logo dead-center; gap stops the words touching it */
+            grid-template-columns: 1fr auto 1fr;
             align-items: center;
+            column-gap: clamp(12px, 3vw, 48px);
             padding-top: 58px;
             max-width: 1440px;
             margin: 0 auto;
         }
 
-        /* equal-width halves so the logo lands dead-center with equal gaps each side */
         .footer-title {
-            flex: 1 1 0;
             font-family: 'Rasbern', 'Cormorant Garamond', serif;
             font-weight: 600;
-            font-size: clamp(40px, 12vw, 190px);
+            font-size: clamp(34px, 9.5vw, 150px);
             line-height: 1.1;
             letter-spacing: 0;
             text-transform: uppercase;
