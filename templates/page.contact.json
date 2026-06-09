@@ -32,16 +32,6 @@
         "form_position": "right"
       }
     },
-    "form": {
-      "type": "contact-form",
-      "settings": {
-        "heading": "",
-        "heading_size": "h1",
-        "color_scheme": "scheme-1",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
     "faq_wHbKUP": {
       "type": "faq",
       "blocks": {
@@ -133,7 +123,6 @@
   "order": [
     "main",
     "contact_form_hero_4DTNKB",
-    "form",
     "faq_wHbKUP",
     "review_video_6AKwJt"
   ]
