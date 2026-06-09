@@ -13,25 +13,32 @@
   "sections": {
     "footer_main_MpLeJV": {
       "type": "footer-main",
+      "disabled": true,
       "name": "Footer Main",
-      "settings": {}
+      "settings": {
+        "brand_word_1": "After",
+        "brand_word_2": "Bites",
+        "menu": "footer",
+        "newsletter_enable": true,
+        "newsletter_placeholder": "Enter Your Email ID",
+        "newsletter_button_label": "Submit",
+        "footer_description": "<p>The quality and purity of our product has made us a favorite in kitchens across the country. We're proud to be a trusted choice for healthy and delicious cooking.</p>",
+        "rights_text": "All rights reserved.",
+        "show_social": true
+      }
     },
     "footer": {
       "type": "footer",
-      "disabled": true,
       "settings": {
-        "color_scheme": "scheme-1",
+        "brand_word_1": "After",
+        "brand_word_2": "Bites",
+        "menu": "footer",
         "newsletter_enable": true,
-        "newsletter_heading": "Subscribe to our emails",
-        "enable_follow_on_shop": true,
-        "show_social": true,
-        "enable_country_selector": true,
-        "enable_language_selector": true,
-        "payment_enable": true,
-        "show_policy": true,
-        "margin_top": 0,
-        "padding_top": 36,
-        "padding_bottom": 36
+        "newsletter_placeholder": "Enter Your Email ID",
+        "newsletter_button_label": "Submit",
+        "footer_description": "<p>The quality and purity of our product has made us a favorite in kitchens across the country. We're proud to be a trusted choice for healthy and delicious cooking.</p>",
+        "rights_text": "All rights reserved.",
+        "show_social": true
       }
     }
   },
