@@ -34,6 +34,42 @@
         "padding_bottom": 28
       }
     },
+    "faq_FdDkeG": {
+      "type": "faq",
+      "blocks": {
+        "faq_item_ihN9Cr": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Ingredients",
+            "answer": "Variyali, Dhana, Pan, Manpasand, Navrang, Kesri, Kharek, Lovely, Katho, Chuno, Ijmet, Haripatti, Cheri, Gulkandh, Chatney."
+          }
+        },
+        "faq_item_AHUhew": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Question",
+            "answer": "Answer text goes here."
+          }
+        },
+        "faq_item_qT3TUi": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Question",
+            "answer": "Answer text goes here."
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_ihN9Cr",
+        "faq_item_AHUhew",
+        "faq_item_qT3TUi"
+      ],
+      "name": "FAQ",
+      "settings": {
+        "heading": "Frequently Asked Questions",
+        "border_image": "shopify://shop_images/border_image.svg"
+      }
+    },
     "review_video_qwjQyQ": {
       "type": "review-video",
       "blocks": {
@@ -71,41 +107,6 @@
         "autoplay": true,
         "autoplay_speed": 4,
         "transition_speed": 800
-      }
-    },
-    "faq_FdDkeG": {
-      "type": "faq",
-      "blocks": {
-        "faq_item_ihN9Cr": {
-          "type": "faq_item",
-          "settings": {
-            "question": "Ingredients",
-            "answer": "Variyali, Dhana, Pan, Manpasand, Navrang, Kesri, Kharek, Lovely, Katho, Chuno, Ijmet, Haripatti, Cheri, Gulkandh, Chatney."
-          }
-        },
-        "faq_item_AHUhew": {
-          "type": "faq_item",
-          "settings": {
-            "question": "Question",
-            "answer": "Answer text goes here."
-          }
-        },
-        "faq_item_qT3TUi": {
-          "type": "faq_item",
-          "settings": {
-            "question": "Question",
-            "answer": "Answer text goes here."
-          }
-        }
-      },
-      "block_order": [
-        "faq_item_ihN9Cr",
-        "faq_item_AHUhew",
-        "faq_item_qT3TUi"
-      ],
-      "name": "FAQ",
-      "settings": {
-        "heading": "Frequently Asked Questions"
       }
     }
   },
