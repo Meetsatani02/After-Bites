@@ -62,37 +62,35 @@
         "border_image": "shopify://shop_images/border_image.svg"
       }
     },
-    "review_video_Mqf7Xm": {
+    "review_video_MdyiHD": {
       "type": "review-video",
       "blocks": {
-        "review_RjyHtK": {
+        "review_BLNFzR": {
           "type": "review",
           "settings": {
-            "video": "shopify://files/videos/mukhawas.mov",
-            "video_url": "",
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/d49e6b5bcd434c5db48393df3f6711ea.mov",
             "caption": "The quality and purity of our product has made us a favorite in kitchens across the country."
           }
         },
-        "review_xt6fJY": {
+        "review_UkENJj": {
           "type": "review",
           "settings": {
-            "video": "shopify://files/videos/mukhawas.mov",
-            "video_url": "",
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/d49e6b5bcd434c5db48393df3f6711ea.mov",
             "caption": "Our customers love how fresh and authentic every single bite tastes."
           }
         },
-        "review_44T4BM": {
+        "review_Afg4A7": {
           "type": "review",
           "settings": {
-            "video_url": "",
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/d49e6b5bcd434c5db48393df3f6711ea.mov",
             "caption": "From everyday meals to special occasions, this has become an essential part of my family's kitchen."
           }
         }
       },
       "block_order": [
-        "review_RjyHtK",
-        "review_xt6fJY",
-        "review_44T4BM"
+        "review_BLNFzR",
+        "review_UkENJj",
+        "review_Afg4A7"
       ],
       "name": "Review Video",
       "settings": {
@@ -108,6 +106,6 @@
     "main",
     "form",
     "faq_DU6zgJ",
-    "review_video_Mqf7Xm"
+    "review_video_MdyiHD"
   ]
 }
