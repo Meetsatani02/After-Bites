@@ -308,6 +308,12 @@ p,h1,h2,h3,h4{
 }
 
 @media (max-width: 1024px) {
+    /* Guard against horizontal scroll on mobile (details column is not sticky
+       here, so clipping overflow-x is safe). */
+    .product-new-section {
+        overflow-x: hidden;
+    }
+
     .product-new-container {
         align-items: flex-start;
         gap: 32px;
