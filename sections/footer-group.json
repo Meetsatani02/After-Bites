@@ -24,7 +24,11 @@
         "newsletter_button_label": "Submit",
         "footer_description": "<p>The quality and purity of our product has made us a favorite in kitchens across the country. We're proud to be a trusted choice for healthy and delicious cooking.</p>",
         "rights_text": "All rights reserved.",
-        "show_social": true
+        "show_social": true,
+        "tiktok_url": "",
+        "instagram_url": "",
+        "twitter_url": "",
+        "youtube_url": ""
       }
     },
     "footer": {
@@ -38,7 +42,11 @@
         "newsletter_button_label": "Submit",
         "footer_description": "<p>The quality and purity of our product has made us a favorite in kitchens across the country. We're proud to be a trusted choice for healthy and delicious cooking.</p>",
         "rights_text": "All rights reserved.",
-        "show_social": true
+        "show_social": true,
+        "tiktok_url": "",
+        "instagram_url": "",
+        "twitter_url": "",
+        "youtube_url": ""
       }
     }
   },
