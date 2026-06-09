@@ -209,6 +209,14 @@ p,h1,h2,h3,h4{
     display: block;
 }
 
+/* When Swiper activates on mobile it adds .swiper-wrapper (display:flex) to
+   make the slides a horizontal track. The scoped block rule above is more
+   specific than Swiper's own rule, so without this the slides would stack and
+   every image would show at once. Keep the active track flex. */
+#product-slider-main-product .product-new-img__main-wrapper.swiper-wrapper {
+    display: flex;
+}
+
 /* Desktop (>=1025px): Apple-style stacked slide-over — each slide pins to the
    top so the next image slides up and covers the previous one. (Swiper classes
    are never added at this width, so they don't interfere.) */
