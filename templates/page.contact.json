@@ -26,6 +26,7 @@
         "heading": "Get In touch With Afterbites",
         "text": "Have a question or just want to say hello? Fill out the form and our team will get back to you as soon as possible.",
         "form_heading": "Contact With Afterbites",
+        "ornament_image": "shopify://shop_images/contact_form.svg",
         "button_label": "Send Message",
         "success_message": "Thanks for reaching out — we will get back to you soon.",
         "form_position": "right"
