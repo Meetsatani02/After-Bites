@@ -155,7 +155,7 @@ p,h1,h2,h3,h4{
 /* Both halves are locked to exactly 50% on every screen — no grow/shrink,
    so the image always takes half the width regardless of viewport size. */
 .product-new-content,
-.product-new-img {
+#product-slider-main-product .product-new-img {
     flex: 0 0 50%;
     max-width: 50%;
     min-width: 0;
@@ -186,7 +186,7 @@ p,h1,h2,h3,h4{
 
 /* Image side: every image is a full-height panel in normal flow; each pins to
    the top so the next scrolls up and covers it (see .product-new-img__item). */
-.product-new-img {
+#product-slider-main-product .product-new-img {
     display: block;
 }
 
@@ -198,14 +198,14 @@ p,h1,h2,h3,h4{
     margin: 0;
 }
 
-.product-new-img picture,
-.product-new-img img {
+#product-slider-main-product .product-new-img picture,
+#product-slider-main-product .product-new-img img {
     display: block;
     width: 100%;
     height: auto;
 }
 
-.product-new-img__main-wrapper {
+#product-slider-main-product .product-new-img__main-wrapper {
     display: block;
 }
 
@@ -213,36 +213,36 @@ p,h1,h2,h3,h4{
    top so the next image slides up and covers the previous one. (Swiper classes
    are never added at this width, so they don't interfere.) */
 @media (min-width: 1025px) {
-    .product-new-img__slide {
+    #product-slider-main-product .product-new-img__slide {
         position: sticky;
         top: 0;
         height: 100vh;
     }
 
-    .product-new-img__slide .product-new-img__item {
+    #product-slider-main-product .product-new-img__slide .product-new-img__item {
         width: 100%;
         height: 100%;
         object-fit: cover;
         object-position: center;
     }
 
-    .product-new-img__thumbs,
-    .product-new-img__arrow {
+    #product-slider-main-product .product-new-img__thumbs,
+    #product-slider-main-product .product-new-img__arrow {
         display: none !important;
     }
 }
 
 /* Thumbnail strip + arrows hidden by default; shown on the mobile gallery. */
-.product-new-img__thumbs {
+#product-slider-main-product .product-new-img__thumbs {
     display: none;
 }
 
-.product-new-img__arrow {
+#product-slider-main-product .product-new-img__arrow {
     display: none;
 }
 
 /* Images are tappable to open the zoom modal. */
-.product-new-img__item {
+#product-slider-main-product .product-new-img__item {
     cursor: zoom-in;
 }
 
@@ -332,7 +332,7 @@ p,h1,h2,h3,h4{
 
     /* Stacked: each half spans the full width below the breakpoint. */
     .product-new-content,
-    .product-new-img {
+    #product-slider-main-product .product-new-img {
         flex: 0 0 100%;
         max-width: 100%;
         width: 100%;
@@ -345,12 +345,12 @@ p,h1,h2,h3,h4{
     }
 
     /* ----- Mobile / tablet: Swiper thumbs gallery ----- */
-    .product-new-img__main {
+    #product-slider-main-product .product-new-img__main {
         position: relative;
         overflow: hidden;
     }
 
-    .product-new-img__slide {
+    #product-slider-main-product .product-new-img__slide {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -358,24 +358,24 @@ p,h1,h2,h3,h4{
         box-sizing: border-box;
     }
 
-    .product-new-img__slide .product-new-img__item {
+    #product-slider-main-product .product-new-img__slide .product-new-img__item {
         width: 100%;
         height: auto;
     }
 
     /* Thumbnail strip */
-    .product-new-img__thumbs {
+    #product-slider-main-product .product-new-img__thumbs {
         display: block;
         margin-top: 12px;
         overflow: hidden;
     }
 
     /* Left inset for the thumbnail row (keeps the active thumb border off the edge). */
-    .product-new-img__thumbs-wrapper {
+    #product-slider-main-product .product-new-img__thumbs-wrapper {
         padding-left: 4px;
     }
 
-    .product-new-img__thumb {
+    #product-slider-main-product .product-new-img__thumb {
         box-sizing: border-box;
         cursor: pointer;
         opacity: 0.45;
@@ -385,7 +385,7 @@ p,h1,h2,h3,h4{
         transition: opacity 0.25s ease, border-color 0.25s ease;
     }
 
-    .product-new-img__thumb img {
+    #product-slider-main-product .product-new-img__thumb img {
         display: block;
         width: 100%;
         height: 100%;
@@ -393,13 +393,13 @@ p,h1,h2,h3,h4{
         object-fit: cover;
     }
 
-    .product-new-img__thumb.swiper-slide-thumb-active {
+    #product-slider-main-product .product-new-img__thumb.swiper-slide-thumb-active {
         opacity: 1;
         border-color: var(--green);
     }
 
     /* Prev / next arrows over the main image */
-    .product-new-img__arrow {
+    #product-slider-main-product .product-new-img__arrow {
         display: inline-flex;
         align-items: center;
         justify-content: center;
@@ -418,20 +418,20 @@ p,h1,h2,h3,h4{
         box-shadow: 0 2px 10px rgba(28, 48, 37, 0.2);
     }
 
-    .product-new-img__arrow svg {
+    #product-slider-main-product .product-new-img__arrow svg {
         width: 20px;
         height: 20px;
     }
 
-    .product-new-img__arrow--prev {
+    #product-slider-main-product .product-new-img__arrow--prev {
         left: 10px;
     }
 
-    .product-new-img__arrow--next {
+    #product-slider-main-product .product-new-img__arrow--next {
         right: 10px;
     }
 
-    .product-new-img__arrow.swiper-button-disabled {
+    #product-slider-main-product .product-new-img__arrow.swiper-button-disabled {
         opacity: 0.4;
         cursor: default;
     }
@@ -954,7 +954,7 @@ cart-drawer .drawer__inner-empty .button {
 }
 
 /* Soft fade-in for the image side once it's marked ready. */
-.product-new-img.pn-fade {
+#product-slider-main-product .product-new-img.pn-fade {
     animation: pnFadeIn 0.9s ease both;
 }
 
@@ -992,7 +992,7 @@ cart-drawer .drawer__inner-empty .button {
 @media (prefers-reduced-motion: reduce) {
     .product-content-custom.pn-stagger > *,
     .product-content-custom.pn-stagger > .pn-in,
-    .product-new-img.pn-fade {
+    #product-slider-main-product .product-new-img.pn-fade {
         animation: none !important;
         opacity: 1 !important;
         transform: none !important;
