@@ -3744,11 +3744,17 @@ details-disclosure > details {
   }
 }
 
-/* ===== Legal policy pages (templates/policy.json -> sections/main-policy.liquid) ===== */
+/* ===== Legal policy pages =====
+   Styles both Shopify's default policy markup (.shopify-policy__container /
+   __title / __body — what the live /policies/* pages use) and the theme
+   policy template (.policy-page). The pasted content classes
+   (.policy__lead / .policy__heading / .policy__text / .policy__list /
+   .policy__item) are styled inside either body. ===== */
+
+/* --- container + page spacing --- */
 .policy-page {
   background-color: #F4EDDB;
   color: #1C3025;
-  /* extra top so the title clears the header + the logo that dips down */
   padding: clamp(88px, 12vw, 170px) 20px clamp(72px, 9vw, 130px);
 }
 
@@ -3757,13 +3763,27 @@ details-disclosure > details {
   margin: 0 auto;
 }
 
-.policy-page__title {
+.shopify-policy__container {
+  max-width: 880px;
+  margin: 0 auto;
+  /* generous top clears the header + dipping logo; balanced bottom */
+  padding: clamp(88px, 12vw, 170px) 20px clamp(72px, 9vw, 130px);
+}
+
+/* --- title --- */
+.policy-page__title,
+.shopify-policy__title h1 {
   font-family: 'Rasbern', 'Cormorant Garamond', serif;
   font-weight: 600;
   font-size: clamp(36px, 6vw, 64px);
   line-height: 1.1;
   text-transform: capitalize;
+  text-align: left;
   color: #1C3025;
+  margin: 0 0 32px;
+}
+
+.shopify-policy__title {
   margin: 0;
 }
 
@@ -3772,19 +3792,37 @@ details-disclosure > details {
   border: 0;
   background-color: #1C3025;
   opacity: 0.18;
-  margin: 18px 0 36px;
+  margin: 0 0 36px;
 }
 
-/* policy body (Shopify policy.body) */
-.policy-rte {
+/* --- body base typography --- */
+.policy-rte,
+.shopify-policy__body {
   font-family: 'Inter', sans-serif;
   font-size: 16px;
   line-height: 1.75;
   color: #1C3025;
 }
 
+/* first element shouldn't carry the big section-heading top gap */
+.policy-rte > :first-child,
+.shopify-policy__body .rte > :first-child,
+.shopify-policy__body > :first-child {
+  margin-top: 0;
+}
+
+/* --- intro / lead paragraph --- */
+.policy-rte .policy__lead,
+.shopify-policy__body .policy__lead {
+  font-size: 17px;
+  margin: 0 0 22px;
+}
+
+/* --- section headings --- */
 .policy-rte h2,
-.policy-rte .policy__heading {
+.policy-rte .policy__heading,
+.shopify-policy__body h2,
+.shopify-policy__body .policy__heading {
   font-family: 'Rasbern', 'Cormorant Garamond', serif;
   font-weight: 600;
   font-size: clamp(22px, 3vw, 30px);
@@ -3793,52 +3831,56 @@ details-disclosure > details {
   margin: 52px 0 14px;
 }
 
-/* first heading/paragraph shouldn't carry the big top gap */
-.policy-rte > :first-child {
-  margin-top: 0;
-}
-
-.policy-rte h3 {
+.policy-rte h3,
+.shopify-policy__body h3 {
   font-family: 'Inter', sans-serif;
   font-weight: 600;
   font-size: 18px;
   color: #1C3025;
-  margin: 26px 0 10px;
+  margin: 30px 0 10px;
 }
 
+/* --- paragraphs --- */
 .policy-rte p,
 .policy-rte .policy__text,
-.policy-rte .policy__lead {
+.shopify-policy__body p,
+.shopify-policy__body .policy__text {
   margin: 0 0 16px;
 }
 
-.policy-rte .policy__lead {
-  font-size: 17px;
-}
-
+/* --- lists --- */
 .policy-rte ul,
 .policy-rte ol,
-.policy-rte .policy__list {
+.policy-rte .policy__list,
+.shopify-policy__body ul,
+.shopify-policy__body ol,
+.shopify-policy__body .policy__list {
   margin: 0 0 18px;
   padding-left: 22px;
 }
 
 .policy-rte li,
-.policy-rte .policy__item {
+.policy-rte .policy__item,
+.shopify-policy__body li,
+.shopify-policy__body .policy__item {
   margin: 0 0 8px;
+  line-height: 1.6;
 }
 
-.policy-rte a {
+/* --- links + emphasis --- */
+.policy-rte a,
+.shopify-policy__body a {
   color: #1C3025;
   text-decoration: underline;
   text-underline-offset: 3px;
 }
 
-.policy-rte strong {
+.policy-rte strong,
+.shopify-policy__body strong {
   font-weight: 600;
 }
 
-/* action buttons */
+/* --- action buttons (theme template only) --- */
 .policy-actions {
   display: flex;
   flex-wrap: wrap;
