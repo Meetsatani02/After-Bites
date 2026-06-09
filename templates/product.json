@@ -33,10 +33,50 @@
         "padding_top": 36,
         "padding_bottom": 28
       }
+    },
+    "review_video_qwjQyQ": {
+      "type": "review-video",
+      "blocks": {
+        "review_nmYaQk": {
+          "type": "review",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/d49e6b5bcd434c5db48393df3f6711ea.mov",
+            "caption": "The quality and purity of our product has made us a favorite in kitchens across the country."
+          }
+        },
+        "review_m8QDkN": {
+          "type": "review",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/d49e6b5bcd434c5db48393df3f6711ea.mov",
+            "caption": "Our customers love how fresh and authentic every single bite tastes."
+          }
+        },
+        "review_mA7TTC": {
+          "type": "review",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/d49e6b5bcd434c5db48393df3f6711ea.mov",
+            "caption": "From everyday meals to special occasions, this has become an essential part of my family's kitchen."
+          }
+        }
+      },
+      "block_order": [
+        "review_nmYaQk",
+        "review_m8QDkN",
+        "review_mA7TTC"
+      ],
+      "name": "Review Video",
+      "settings": {
+        "heading": "Review Video",
+        "background_text": "Reviews",
+        "autoplay": true,
+        "autoplay_speed": 4,
+        "transition_speed": 800
+      }
     }
   },
   "order": [
     "main",
-    "related-products"
+    "related-products",
+    "review_video_qwjQyQ"
   ]
 }
