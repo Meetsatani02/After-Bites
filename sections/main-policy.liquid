@@ -4,8 +4,8 @@
   .policy-page {
     background-color: var(--beige);
     color: var(--green);
-    /* generous, balanced top/bottom; top clears the header logo that dips down */
-    padding: clamp(64px, 9vw, 130px) 20px clamp(64px, 9vw, 130px);
+    /* extra top so the title clears the header + the logo that dips down */
+    padding: clamp(88px, 12vw, 170px) 20px clamp(72px, 9vw, 130px);
   }
 
   .policy-page__inner {
@@ -46,7 +46,12 @@
     font-size: clamp(22px, 3vw, 30px);
     line-height: 1.25;
     color: var(--green);
-    margin: 38px 0 12px;
+    margin: 52px 0 14px;
+  }
+
+  /* first heading/paragraph shouldn't carry the big top gap */
+  .policy-rte > :first-child {
+    margin-top: 0;
   }
 
   .policy-rte h3 {
