@@ -1,0 +1,519 @@
+{{ 'global.css' | asset_url | stylesheet_tag }}
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+  .contact-section {
+      background-color: var(--beige);
+      position: relative;
+      overflow: hidden;
+      z-index: 0;
+  }
+
+  .contact-container {
+      display: flex;
+      align-items: stretch;
+      width: 100%;
+  }
+
+  /* Form-left variant: flip the row so the green panel sits on the left edge. */
+  .contact-container--form-left {
+      flex-direction: row-reverse;
+  }
+
+  /* Both halves are locked to exactly 50% on every screen — mirroring the hero
+     so each side always takes half the width regardless of viewport size. */
+  .contact-content,
+  .contact-form-side {
+      flex: 0 0 50%;
+      max-width: 50%;
+      min-width: 0;
+      box-sizing: border-box;
+  }
+
+  /* ---- Left content: mirrors hero.liquid so it reads identically ---- */
+  .contact-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: 80px;
+      padding-bottom: 80px;
+      padding-left: max(40px, calc((100vw - 1440px) / 2 + 40px));
+      padding-right: 40px;
+  }
+
+  .contact-container--form-left .contact-content {
+      padding-left: 40px;
+      padding-right: max(40px, calc((100vw - 1440px) / 2 + 40px));
+  }
+
+  .contact-content a.contact-badge {
+      padding: 10px 20px;
+      border: 1px solid var(--green);
+      border-radius: 50px;
+      font-family: "Inter", sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 16px;
+      color: var(--green);
+      letter-spacing: 0.03em;
+      display: inline-flex;
+      width: fit-content;
+  }
+
+  .contact-content h2 {
+      max-width: 100%;
+      font-family: 'Rasbern', serif;
+      font-size: 72px;
+      font-weight: 600;
+      line-height: 110%;
+      margin: 24px 0 32px 0;
+      color: var(--green);
+      letter-spacing: 0;
+  }
+
+  .contact-content p {
+      max-width: 506px;
+      font-family: "Inter", sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.4;
+      letter-spacing: 0;
+      color: var(--green);
+  }
+
+  /* ---- Right side: green panel with a dashed inner frame ---- */
+  .contact-form-side {
+      background-color: var(--green);
+      padding: 32px;
+      display: flex;
+  }
+
+  .contact-form-frame {
+      flex: 1;
+      border: 1.5px dashed rgba(244, 237, 219, 0.35);
+      padding: 28px;
+      display: flex;
+  }
+
+  .contact-form-card {
+      flex: 1;
+      background-color: var(--light-green);
+      border-radius: 6px;
+      padding: 40px;
+  }
+
+  .contact-form-heading {
+      font-family: 'Rasbern', serif;
+      font-size: 40px;
+      font-weight: 600;
+      line-height: 1.1;
+      color: var(--beige);
+      text-align: center;
+      margin: 0;
+  }
+
+  /* Decorative ornament divider under the heading. */
+  .contact-ornament {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 14px 0 32px 0;
+      color: var(--yellow);
+  }
+
+  .contact-ornament svg {
+      display: block;
+      width: 260px;
+      max-width: 100%;
+      height: auto;
+  }
+
+  .contact-ornament img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+  }
+
+  .contact-form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px 20px;
+  }
+
+  .contact-field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+  }
+
+  .contact-field--full {
+      grid-column: 1 / -1;
+  }
+
+  .contact-field label {
+      font-family: "Inter", sans-serif;
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.01em;
+      color: rgba(244, 237, 219, 0.85);
+  }
+
+  .contact-field input,
+  .contact-field textarea {
+      width: 100%;
+      box-sizing: border-box;
+      background-color: var(--dark-beige);
+      border: 1px solid transparent;
+      border-radius: 4px;
+      padding: 14px 16px;
+      font-family: "Inter", sans-serif;
+      font-size: 15px;
+      color: var(--green);
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .contact-field input::placeholder,
+  .contact-field textarea::placeholder {
+      color: rgba(28, 48, 37, 0.45);
+  }
+
+  .contact-field input:focus,
+  .contact-field textarea:focus {
+      border-color: var(--yellow);
+      box-shadow: 0 0 0 2px rgba(202, 163, 108, 0.3);
+  }
+
+  .contact-field textarea {
+      min-height: 90px;
+      resize: vertical;
+  }
+
+  .contact-submit {
+      width: 100%;
+      margin-top: 26px;
+      padding: 16px 24px;
+      background-color: var(--green);
+      color: var(--beige);
+      border: 1px solid var(--green);
+      border-radius: 4px;
+      font-family: "Inter", sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      transition: background-color 0.25s ease, color 0.25s ease;
+  }
+
+  .contact-submit:hover {
+      background-color: var(--beige);
+      color: var(--green);
+  }
+
+  .contact-form__message {
+      margin: 0 0 20px 0;
+      padding: 12px 16px;
+      border-radius: 4px;
+      font-family: "Inter", sans-serif;
+      font-size: 14px;
+      line-height: 1.4;
+  }
+
+  .contact-form__message--success {
+      background-color: rgba(202, 163, 108, 0.18);
+      color: var(--beige);
+      border: 1px solid var(--yellow);
+  }
+
+  .contact-form__message--error {
+      background-color: rgba(176, 0, 32, 0.15);
+      color: #ffd9d9;
+      border: 1px solid rgba(176, 0, 32, 0.6);
+  }
+
+  .contact-form__message ul {
+      margin: 6px 0 0 0;
+      padding-left: 18px;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 1400px) {
+      .contact-content h2 {
+          font-size: 64px;
+          margin: 20px 0 20px 0;
+      }
+  }
+
+  @media (max-width: 1024px) {
+      .contact-container,
+      .contact-container--form-left {
+          flex-direction: column;
+      }
+
+      .contact-content,
+      .contact-form-side {
+          flex: none;
+          width: 100%;
+          max-width: 100%;
+      }
+
+      .contact-content,
+      .contact-container--form-left .contact-content {
+          padding: 60px 20px;
+      }
+
+      .contact-form-side {
+          padding: 24px;
+      }
+  }
+
+  @media (max-width: 768px) {
+      .contact-content h2 {
+          font-size: 40px;
+          line-height: 1em;
+      }
+
+      .contact-form-frame {
+          padding: 18px;
+      }
+
+      .contact-form-card {
+          padding: 28px 22px;
+      }
+
+      .contact-form-heading {
+          font-size: 32px;
+      }
+
+      .contact-form-grid {
+          grid-template-columns: 1fr;
+          gap: 16px;
+      }
+  }
+</style>
+
+{%- assign form_id = 'ContactHeroForm-' | append: section.id -%}
+
+<section class="contact-section">
+  <div class="contact-container contact-container--form-{{ section.settings.form_position }}">
+    <div class="contact-content">
+      {%- if section.settings.badge_text != blank -%}
+        <a href="{{ section.settings.badge_link | default: '#' }}" class="contact-badge">
+          {{- section.settings.badge_text -}}
+        </a>
+      {%- endif -%}
+
+      {%- if section.settings.heading != blank -%}
+        <h2>{{ section.settings.heading }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.text != blank -%}
+        <p>{{ section.settings.text }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="contact-form-side">
+      <div class="contact-form-frame">
+        <div class="contact-form-card">
+          {%- if section.settings.form_heading != blank -%}
+            <h3 class="contact-form-heading">{{ section.settings.form_heading }}</h3>
+          {%- endif -%}
+
+          <div class="contact-ornament">
+            {%- if section.settings.ornament_image != blank -%}
+              {{
+                section.settings.ornament_image
+                | image_url: width: 520
+                | image_tag: alt: 'divider', loading: 'lazy'
+              }}
+            {%- else -%}
+              <svg viewBox="0 0 260 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M0 9 H96" stroke="currentColor" stroke-width="1"/>
+                <path d="M260 9 H164" stroke="currentColor" stroke-width="1"/>
+                <path d="M112 9 c6 -7 14 -7 18 0 c-6 7 -14 7 -18 0 z" stroke="currentColor" stroke-width="1" fill="none"/>
+                <path d="M148 9 c-6 -7 -14 -7 -18 0 c6 7 14 7 18 0 z" stroke="currentColor" stroke-width="1" fill="none"/>
+                <circle cx="130" cy="9" r="2.2" fill="currentColor"/>
+                <path d="M104 9 l6 -3.5 v7 z" fill="currentColor"/>
+                <path d="M156 9 l-6 -3.5 v7 z" fill="currentColor"/>
+              </svg>
+            {%- endif -%}
+          </div>
+
+          {%- form 'contact', id: form_id -%}
+            {%- if form.posted_successfully? -%}
+              <p class="contact-form__message contact-form__message--success">
+                {{ section.settings.success_message | default: 'Thanks for reaching out — we will get back to you soon.' }}
+              </p>
+            {%- elsif form.errors -%}
+              <div class="contact-form__message contact-form__message--error">
+                {{ 'templates.contact.form.error_heading' | t }}
+                <ul>
+                  {%- for field in form.errors -%}
+                    <li>
+                      {{ form.errors.translated_fields[field] | capitalize }}
+                      {{ form.errors.messages[field] }}
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              </div>
+            {%- endif -%}
+
+            <div class="contact-form-grid">
+              <div class="contact-field">
+                <label for="{{ form_id }}-first">First name</label>
+                <input
+                  type="text"
+                  id="{{ form_id }}-first"
+                  name="contact[First name]"
+                  value="{% unless form.posted_successfully? %}{{ form['First name'] }}{% endunless %}"
+                  autocomplete="given-name"
+                >
+              </div>
+
+              <div class="contact-field">
+                <label for="{{ form_id }}-last">Last name</label>
+                <input
+                  type="text"
+                  id="{{ form_id }}-last"
+                  name="contact[Last name]"
+                  value="{% unless form.posted_successfully? %}{{ form['Last name'] }}{% endunless %}"
+                  autocomplete="family-name"
+                >
+              </div>
+
+              <div class="contact-field">
+                <label for="{{ form_id }}-email">Email ID</label>
+                <input
+                  type="email"
+                  id="{{ form_id }}-email"
+                  name="contact[email]"
+                  value="{% unless form.posted_successfully? %}{{ form.email }}{% endunless %}"
+                  spellcheck="false"
+                  autocapitalize="off"
+                  autocomplete="email"
+                  aria-required="true"
+                  required
+                >
+              </div>
+
+              <div class="contact-field">
+                <label for="{{ form_id }}-phone">Phone number</label>
+                <input
+                  type="tel"
+                  id="{{ form_id }}-phone"
+                  name="contact[phone]"
+                  value="{% unless form.posted_successfully? %}{{ form.phone }}{% endunless %}"
+                  autocomplete="tel"
+                >
+              </div>
+
+              <div class="contact-field contact-field--full">
+                <label for="{{ form_id }}-body">Write message</label>
+                <textarea
+                  id="{{ form_id }}-body"
+                  name="contact[body]"
+                  rows="4"
+                >{% unless form.posted_successfully? %}{{ form.body }}{% endunless %}</textarea>
+              </div>
+            </div>
+
+            <button type="submit" class="contact-submit">
+              {{ section.settings.button_label | default: 'Send Message' }}
+            </button>
+          {%- endform -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Contact form hero",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Left content"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "default": "Contact With"
+    },
+    {
+      "type": "url",
+      "id": "badge_link",
+      "label": "Badge link"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Get In touch With Afterbites"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "Have a question or just want to say hello? Fill out the form and our team will get back to you as soon as possible."
+    },
+    {
+      "type": "header",
+      "content": "Form panel"
+    },
+    {
+      "type": "text",
+      "id": "form_heading",
+      "label": "Form heading",
+      "default": "Contact With Afterbites"
+    },
+    {
+      "type": "image_picker",
+      "id": "ornament_image",
+      "label": "Ornament divider (optional)",
+      "info": "Leave empty to use the built-in decorative divider."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Send Message"
+    },
+    {
+      "type": "textarea",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "Thanks for reaching out — we will get back to you soon."
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "form_position",
+      "label": "Form position (desktop)",
+      "info": "Choose which side the form panel appears on.",
+      "options": [
+        {
+          "value": "right",
+          "label": "Right"
+        },
+        {
+          "value": "left",
+          "label": "Left"
+        }
+      ],
+      "default": "right"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact form hero"
+    }
+  ]
+}
+{% endschema %}
