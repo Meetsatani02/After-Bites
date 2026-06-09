@@ -25,87 +25,10 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
-    },
-    "faq_DU6zgJ": {
-      "type": "faq",
-      "blocks": {
-        "faq_item_dhf93R": {
-          "type": "faq_item",
-          "settings": {
-            "question": "Ingredients",
-            "answer": "Variyali, Dhana, Pan, Manpasand, Navrang, Kesri, Kharek, Lovely, Katho, Chuno, Ijmet, Haripatti, Cheri, Gulkandh, Chatney."
-          }
-        },
-        "faq_item_JR4EAV": {
-          "type": "faq_item",
-          "settings": {
-            "question": "Question",
-            "answer": "Answer text goes here."
-          }
-        },
-        "faq_item_A6ExcD": {
-          "type": "faq_item",
-          "settings": {
-            "question": "Question",
-            "answer": "Answer text goes here."
-          }
-        }
-      },
-      "block_order": [
-        "faq_item_dhf93R",
-        "faq_item_JR4EAV",
-        "faq_item_A6ExcD"
-      ],
-      "name": "FAQ",
-      "settings": {
-        "heading": "Frequently Asked Questions",
-        "border_image": "shopify://shop_images/border_image.svg"
-      }
-    },
-    "review_video_MdyiHD": {
-      "type": "review-video",
-      "blocks": {
-        "review_BLNFzR": {
-          "type": "review",
-          "settings": {
-            "video_url": "https://cdn.shopify.com/videos/c/o/v/d49e6b5bcd434c5db48393df3f6711ea.mov",
-            "caption": "The quality and purity of our product has made us a favorite in kitchens across the country."
-          }
-        },
-        "review_UkENJj": {
-          "type": "review",
-          "settings": {
-            "video_url": "https://cdn.shopify.com/videos/c/o/v/d49e6b5bcd434c5db48393df3f6711ea.mov",
-            "caption": "Our customers love how fresh and authentic every single bite tastes."
-          }
-        },
-        "review_Afg4A7": {
-          "type": "review",
-          "settings": {
-            "video_url": "https://cdn.shopify.com/videos/c/o/v/d49e6b5bcd434c5db48393df3f6711ea.mov",
-            "caption": "From everyday meals to special occasions, this has become an essential part of my family's kitchen."
-          }
-        }
-      },
-      "block_order": [
-        "review_BLNFzR",
-        "review_UkENJj",
-        "review_Afg4A7"
-      ],
-      "name": "Review Video",
-      "settings": {
-        "heading": "Review Video",
-        "background_text": "Reviews",
-        "autoplay": true,
-        "autoplay_speed": 4,
-        "transition_speed": 800
-      }
     }
   },
   "order": [
     "main",
-    "form",
-    "faq_DU6zgJ",
-    "review_video_MdyiHD"
+    "form"
   ]
 }
