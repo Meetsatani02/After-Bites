@@ -1,5 +1,299 @@
 {{ 'global.css' | asset_url | stylesheet_tag }}
 
+<style>
+        .site-footer {
+            background-color: var(--beige);
+        }
+
+        /* ---------- Top (green) brand area ---------- */
+        .footer-top {
+            background-color: var(--green);
+        }
+
+        .footer-brand {
+            position: relative;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+            align-items: center;
+            /* gap: clamp(8px, 2vw, 36px); */
+            padding-top: 58px;
+            /* padding: 58px clamp(20px, 4vw, 55px) 0; */
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        /* equal-width halves so the logo lands dead-center with equal gaps each side */
+        .footer-title {
+            flex: 1 1 0;
+            font-family: 'Rasbern', 'Cormorant Garamond', serif;
+            font-weight: 600;
+            font-size: clamp(40px, 12vw, 190px);
+            line-height: 1.1;
+            letter-spacing: 0;
+            text-transform: uppercase;
+            white-space: nowrap;
+            color: var(--beige);
+        }
+
+        .footer-title:first-child {
+            text-align: right;
+        }
+
+        .footer-title:last-child {
+            text-align: left;
+        }
+
+        /* logo: exact Figma size, centered, dipped ~47% down across the zigzag */
+        .footer-logo {
+            flex-shrink: 0;
+            width: clamp(61px, 10.05vw, 144.71px);
+            height: auto;
+            transform: translateY(47%);
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ---------- Zigzag border (self-made SVG) ---------- */
+        .footer-zigzag {
+            height: 14px;
+            background-color: var(--green);
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 14' preserveAspectRatio='none'%3E%3Cpath d='M0 14 L8 0 L16 14 Z' fill='%23F4EDDB'/%3E%3C/svg%3E");
+            background-repeat: repeat-x;
+            background-position: bottom center;
+            background-size: 16px 14px;
+        }
+
+        /* ---------- Bottom (beige) area ---------- */
+        .footer-bottom {
+            padding: 40px clamp(20px, 4vw, 55px) 32px;
+        }
+
+        /* .footer-bottom-inner {
+            max-width: 1330px;
+            margin: 0 auto;
+        } */
+
+        .footer-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        /* keep menu + form side-by-side until the breakpoint (shrink, don't drop below) */
+        .footer-menu-row {
+            flex-wrap: nowrap;
+        }
+
+        /* menu */
+        .footer-menu {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            column-gap: 32px;
+            max-width: 536px;
+            row-gap: 20px;
+        }
+
+        .footer-menu a {
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 1;
+            letter-spacing: 0;
+            color: var(--green);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        /* subscribe form */
+        .footer-subscribe {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 484px;
+            max-width: 100%;
+            height: auto;
+            padding: 16px 12px;
+            border: 1.5px solid var(--green);
+            border-radius: 12px;
+            background-color: var(--beige);
+            position: relative;
+        }
+
+        .footer-subscribe input {
+            flex: 1;
+            min-width: 0;
+            max-width: 310px;
+            height: 100%;
+            border: none;
+            outline: none;
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 16px;
+            letter-spacing: 0;
+            line-height: 24px;
+            color: var(--green);
+            padding: 0;
+        }
+
+        .footer-subscribe input::placeholder {
+            color: rgba(28, 48, 37, 0.7);
+        }
+
+        .footer-subscribe button {
+            flex-shrink: 0;
+            height: 100%;
+            padding: 14px 47px;
+            border: none;
+            border-radius: 8px;
+            background-color: var(--green);
+            color: #FFFFFF;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 1.5;
+            letter-spacing: -2%;
+            cursor: pointer;
+            position: absolute;
+            right: 0;
+            display: inline-flex;
+            align-items: center;
+
+        }
+
+        /* description */
+        .footer-desc {
+            max-width: 840px;
+            margin: 46px auto;
+            text-align: center;
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 1.5;
+            color: var(--green);
+        }
+
+        /* divider */
+        .footer-divider {
+            border: none;
+            /* border-top: 1px solid rgba(28, 48, 37, 0.35); */
+            border-top: 1px solid #1C3025;
+            margin: 24px 0;
+        }
+
+        /* credit row */
+        .footer-copy {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            color: var(--green);
+            font-style: Regular;
+            font-size: 18px;
+            line-height: 1;
+            letter-spacing: 0%;
+
+        }
+
+        .footer-social {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+        }
+
+        .footer-social a {
+            display: inline-flex;
+            color: var(--green);
+        }
+
+        .footer-social svg {
+            width: auto;
+            height: auto;
+        }
+
+        /* ---------- Responsive ---------- */
+        @media (max-width: 600px) {
+            .footer-title {
+                flex: 0 1 auto;
+            }
+
+            .footer-brand {
+                gap: clamp(2px, 1.5vw, 12px);
+            }
+
+            
+            .footer-menu a {
+                font-size: 14px;
+            }
+
+            .footer-subscribe button{
+                padding: 14px 35px;
+            }
+            .footer-desc{
+                font-size: 12px;
+            }
+
+            .footer-copy{
+                font-size: 12px;
+            }
+
+            .footer-desc{
+                margin-block: 40px 36px;
+            }
+        }
+
+        @media (max-width: 991px) {
+            .footer-row {
+                justify-content: center;
+            }
+
+            /* left/right breathing room once things get tighter */
+            .footer-brand {
+                padding-left: clamp(16px, 4vw, 40px);
+                padding-right: clamp(16px, 4vw, 40px);
+            }
+
+            .footer-bottom {
+                padding-top: 80px;
+            }
+
+            /* menu + form stack and center (below 991px) */
+            .footer-menu-row {
+                flex-direction: column;
+                flex-wrap: wrap;
+                align-items: center;
+                gap: 32px;
+            }
+
+            .footer-menu {
+                justify-content: center;
+                text-align: center;
+                max-width: 100%;
+            }
+
+            .footer-subscribe {
+                width: 100%;
+            }
+
+            /* social icons on top, copyright below — both centered */
+            .footer-credit-row {
+                flex-direction: column-reverse;
+                gap: 24px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer-brand {
+                padding-top: 20px;
+            }
+
+            .footer-bottom {
+                padding-top: 55px;
+            }
+
+        }
+    </style>
+
     <footer class="site-footer">
         <div class="footer-top">
             <div class="footer-brand global_container">
