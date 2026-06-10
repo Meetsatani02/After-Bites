@@ -101,11 +101,19 @@
       "settings": {
         "heading": "Everyday after bites\ngoods for the everyday"
       }
+    },
+    "image_banner_Lpq6BM": {
+      "type": "image-banner",
+      "name": "Image Banner",
+      "settings": {
+        "image": "shopify://shop_images/product_main.png"
+      }
     }
   },
   "order": [
     "hero_8tJLAm",
     "best_product_YdFqd7",
-    "benifites_7et3Vy"
+    "benifites_7et3Vy",
+    "image_banner_Lpq6BM"
   ]
 }
