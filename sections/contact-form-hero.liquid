@@ -82,6 +82,39 @@
       color: var(--green);
   }
 
+  /* Contact details (email / phone / address) — inherits the same green Inter
+     styling as the intro paragraph so it blends into the existing design. */
+  .contact-details {
+      list-style: none;
+      margin: 24px 0 0 0;
+      padding: 0;
+      max-width: 506px;
+      font-family: "Inter", sans-serif;
+      color: var(--green);
+  }
+
+  .contact-details li {
+      font-size: 16px;
+      line-height: 1.6;
+  }
+
+  .contact-details li + li {
+      margin-top: 6px;
+  }
+
+  .contact-details__label {
+      font-weight: 600;
+  }
+
+  .contact-details a {
+      color: var(--green);
+      text-decoration: none;
+  }
+
+  .contact-details a:hover {
+      text-decoration: underline;
+  }
+
   /* ---- Right side: green panel with a dashed inner frame ---- */
   .contact-form-side {
       background-color: var(--green);
@@ -311,6 +344,29 @@
       {%- if section.settings.text != blank -%}
         <p>{{ section.settings.text }}</p>
       {%- endif -%}
+
+      {%- if section.settings.contact_email != blank or section.settings.contact_phone != blank or section.settings.contact_address != blank -%}
+        <ul class="contact-details">
+          {%- if section.settings.contact_email != blank -%}
+            <li>
+              <span class="contact-details__label">Email:</span>
+              <a href="mailto:{{ section.settings.contact_email }}">{{ section.settings.contact_email }}</a>
+            </li>
+          {%- endif -%}
+          {%- if section.settings.contact_phone != blank -%}
+            <li>
+              <span class="contact-details__label">Phone:</span>
+              <a href="tel:{{ section.settings.contact_phone | remove: ' ' }}">{{ section.settings.contact_phone }}</a>
+            </li>
+          {%- endif -%}
+          {%- if section.settings.contact_address != blank -%}
+            <li>
+              <span class="contact-details__label">Address:</span>
+              {{ section.settings.contact_address }}
+            </li>
+          {%- endif -%}
+        </ul>
+      {%- endif -%}
     </div>
 
     <div class="contact-form-side">
@@ -459,6 +515,24 @@
       "id": "text",
       "label": "Text",
       "default": "Have a question or just want to say hello? Fill out the form and our team will get back to you as soon as possible."
+    },
+    {
+      "type": "text",
+      "id": "contact_email",
+      "label": "Contact email",
+      "default": "support.afterbites@gmail.com"
+    },
+    {
+      "type": "text",
+      "id": "contact_phone",
+      "label": "Contact phone",
+      "default": "99980 51832"
+    },
+    {
+      "type": "textarea",
+      "id": "contact_address",
+      "label": "Contact address",
+      "default": "419, Tulsi Arcade, Sudama Chowk, Mota Varachha, Surat - 394101, Gujarat, India"
     },
     {
       "type": "header",
