@@ -38,29 +38,37 @@
         "faq_item_qt4VKj": {
           "type": "faq_item",
           "settings": {
-            "question": "Ingredients",
-            "answer": "Variyali, Dhana, Pan, Manpasand, Navrang, Kesri, Kharek, Lovely, Katho, Chuno, Ijmet, Haripatti, Cheri, Gulkandh, Chatney."
+            "question": "How can I get in touch with the After Bites team?",
+            "answer": "Just fill out the contact form above with your question and we'll reply by email. You can also reach us through our social channels — we're always happy to help with anything about our paan mukhwas."
           }
         },
         "faq_item_VDCK7m": {
           "type": "faq_item",
           "settings": {
-            "question": "Question",
-            "answer": "Answer text goes here."
+            "question": "How soon will I get a reply?",
+            "answer": "We aim to respond to every message within 1–2 business days. For order-related queries, please include your order number so our team can help you faster."
           }
         },
         "faq_item_CTfapT": {
           "type": "faq_item",
           "settings": {
-            "question": "Question",
-            "answer": "Answer text goes here."
+            "question": "Can I place a bulk or wholesale order for weddings and events?",
+            "answer": "Yes! After Bites paan mukhwas is a favourite at weddings, festivals and celebrations. Mention the quantity and date in the form and we'll share bulk pricing and packaging options."
+          }
+        },
+        "faq_item_pRq7Lm": {
+          "type": "faq_item",
+          "settings": {
+            "question": "I have a question about my order — what should I share?",
+            "answer": "Please include your order number, the email used at checkout, and a short note about your question so we can resolve it quickly in one reply."
           }
         }
       },
       "block_order": [
         "faq_item_qt4VKj",
         "faq_item_VDCK7m",
-        "faq_item_CTfapT"
+        "faq_item_CTfapT",
+        "faq_item_pRq7Lm"
       ],
       "name": "FAQ",
       "settings": {
@@ -76,7 +84,7 @@
           "settings": {
             "video": "shopify://files/videos/mukhawas.mov",
             "video_url": "",
-            "caption": ""
+            "caption": "Quick replies and genuine care — the After Bites team really looks after their customers."
           }
         },
         "review_kydRzN": {
@@ -84,7 +92,7 @@
           "settings": {
             "video": "shopify://files/videos/mukhawas.mov",
             "video_url": "",
-            "caption": ""
+            "caption": "Ordered in bulk for a family function and the whole process was smooth and friendly."
           }
         },
         "review_JNAkxi": {
@@ -92,7 +100,7 @@
           "settings": {
             "video": "shopify://files/videos/mukhawas.mov",
             "video_url": "",
-            "caption": ""
+            "caption": "Had a question before buying and got a helpful answer the same day. Lovely experience."
           }
         },
         "review_4Hp88G": {
@@ -100,7 +108,7 @@
           "settings": {
             "video": "shopify://files/videos/mukhawas.mov",
             "video_url": "",
-            "caption": ""
+            "caption": "From the first message to delivery, After Bites made the whole thing effortless."
           }
         }
       },
@@ -112,7 +120,7 @@
       ],
       "name": "Review Video",
       "settings": {
-        "heading": "Review Video",
+        "heading": "What People Say About After Bites",
         "background_text": "Reviews",
         "autoplay": true,
         "autoplay_speed": 4,

@@ -15,8 +15,8 @@
       "settings": {
         "badge_text": "20+ experience",
         "badge_link": "",
-        "heading": "Lorem Ipsum is simply dummy text of the printing",
-        "text": "The quality and purity of our product has made us a favorite in kitchens across the country. We're proud to be a trusted choice for healthy and delicious cooking.",
+        "heading": "After Bites Paan Mukhwas — The Authentic Taste of Tradition",
+        "text": "From sweet wet paan mukhwas to crunchy dry paan mukhwas, After Bites brings you the best pan mukhwas — 100% tobacco-free and made with natural paan leaves, gulkand and fennel for a refreshing taste after every meal.",
         "button_label": "Experience Now",
         "button_link": "",
         "image_position": "right",
@@ -31,8 +31,8 @@
       "settings": {
         "collection": "frontpage",
         "background_text": "Afterbites",
-        "heading": "Our best Product",
-        "button_label": "View All Product",
+        "heading": "Our Best Pan Mukhwas",
+        "button_label": "View All Products",
         "border_image": "shopify://shop_images/border-image.svg",
         "loop": true,
         "autoplay": false,
@@ -99,7 +99,7 @@
       ],
       "name": "Benifites",
       "settings": {
-        "heading": "Everyday after bites\ngoods for the everyday"
+        "heading": "Everyday After Bites\ngoodness in every paan mukhwas"
       }
     },
     "image_banner_Lpq6BM": {
@@ -114,7 +114,7 @@
       "name": "Product Vision",
       "settings": {
         "background_text": "Afterbites",
-        "heading": "Our Product Vision",
+        "heading": "The After Bites Paan Mukhwas Vision",
         "border_image": "shopify://shop_images/border-image.svg",
         "bg_desktop": "shopify://shop_images/background_line_3d9530f6-2d57-4aa6-adfb-281a56c3ccf3.png",
         "bg_mobile": "shopify://shop_images/background-image-mobile.png",
@@ -152,29 +152,36 @@
         "faq_item_ppBybC": {
           "type": "faq_item",
           "settings": {
-            "question": "Ingredients",
-            "answer": "Variyali, Dhana, Pan, Manpasand, Navrang, Kesri, Kharek, Lovely, Katho, Chuno, Ijmet, Haripatti, Cheri, Gulkandh, Chatney."
+            "question": "What is Paan Mukhwas?",
+            "answer": "After Bites Paan Mukhwas is a traditional, tobacco-free after-meal mouth freshener with the sweet, cooling taste of classic paan — ready to eat, no mess."
           }
         },
         "faq_item_jAW8D3": {
           "type": "faq_item",
           "settings": {
-            "question": "Question",
-            "answer": "Answer text goes here."
+            "question": "What's the difference between wet and dry paan mukhwas?",
+            "answer": "Wet paan mukhwas is soft, sweet and cooling, while dry paan mukhwas is crunchy with roasted seeds. Both are 100% tobacco-free and help freshen your breath after meals."
           }
         },
         "faq_item_iF9jPm": {
           "type": "faq_item",
           "settings": {
-            "question": "Question",
-            "answer": "Answer text goes here."
+            "question": "Does paan mukhwas help with digestion?",
+            "answer": "Yes. The fennel and betel leaf in our pan mukhwas soothe the stomach and freshen your breath after meals."
           }
         },
         "faq_item_98fFQB": {
           "type": "faq_item",
           "settings": {
-            "question": "Question",
-            "answer": "Answer text goes here."
+            "question": "Is After Bites paan mukhwas tobacco-free?",
+            "answer": "Yes — our paan mukhwas is 100% tobacco-free and supari-free, made with natural ingredients only."
+          }
+        },
+        "faq_item_5hKpQ2": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How do I store paan mukhwas and when should I eat it?",
+            "answer": "Keep it in an airtight container in a cool, dry place — it stays fresh for 6 months. Enjoy a teaspoon after meals, or anytime you want a quick, refreshing treat."
           }
         }
       },
@@ -182,7 +189,8 @@
         "faq_item_ppBybC",
         "faq_item_jAW8D3",
         "faq_item_iF9jPm",
-        "faq_item_98fFQB"
+        "faq_item_98fFQB",
+        "faq_item_5hKpQ2"
       ],
       "name": "FAQ",
       "settings": {
@@ -222,7 +230,7 @@
       ],
       "name": "Review Video",
       "settings": {
-        "heading": "Review Video",
+        "heading": "What People Say About After Bites",
         "background_text": "Reviews",
         "autoplay": true,
         "autoplay_speed": 4,

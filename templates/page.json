@@ -38,22 +38,22 @@
         "faq_item_4DcQKH": {
           "type": "faq_item",
           "settings": {
-            "question": "Ingredients",
-            "answer": "Variyali, Dhana, Pan, Manpasand, Navrang, Kesri, Kharek, Lovely, Katho, Chuno, Ijmet, Haripatti, Cheri, Gulkandh, Chatney."
+            "question": "What makes After Bites paan mukhwas different?",
+            "answer": "We use natural paan leaves, gulkand and fennel with no tobacco or supari, so every bite is sweet, refreshing and authentically traditional."
           }
         },
         "faq_item_9tUCdE": {
           "type": "faq_item",
           "settings": {
-            "question": "Question",
-            "answer": "Answer text goes here."
+            "question": "How is After Bites paan mukhwas made?",
+            "answer": "It's crafted in small batches using a traditional recipe and carefully selected ingredients, then sealed to keep every pack fresh and full of flavour."
           }
         },
         "faq_item_HJAKba": {
           "type": "faq_item",
           "settings": {
-            "question": "Question",
-            "answer": "Answer text goes here."
+            "question": "Is After Bites a good choice for gifting?",
+            "answer": "Yes — its festive paan flavour makes it a popular pick for weddings, Diwali and everyday gifting to family and friends."
           }
         }
       },
@@ -100,7 +100,7 @@
       ],
       "name": "Review Video",
       "settings": {
-        "heading": "Review Video",
+        "heading": "What People Say About After Bites",
         "background_text": "Reviews",
         "autoplay": true,
         "autoplay_speed": 4,
