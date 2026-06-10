@@ -15,8 +15,8 @@
       "settings": {
         "badge_text": "20+ experience",
         "badge_link": "",
-        "heading": "Lorem Ipsum is simply dummy text of the printing",
-        "text": "The quality and purity of our product has made us a favorite in kitchens across the country. We're proud to be a trusted choice for healthy and delicious cooking.",
+        "heading": "After Bites Paan Mukhwas — The Authentic Taste of Tradition",
+        "text": "From sweet wet paan mukhwas to crunchy dry paan mukhwas, After Bites brings you the best pan mukhwas — 100% tobacco-free and made with natural paan leaves, gulkand and fennel for a refreshing taste after every meal.",
         "button_label": "Experience Now",
         "button_link": "",
         "image_position": "right",
@@ -31,8 +31,8 @@
       "settings": {
         "collection": "best-product",
         "background_text": "Afterbites",
-        "heading": "Our best Product",
-        "button_label": "View All Product",
+        "heading": "Our Best Pan Mukhwas",
+        "button_label": "View All Products",
         "border_image": "shopify://shop_images/border_image.svg",
         "loop": false,
         "autoplay": false,
@@ -99,7 +99,7 @@
       ],
       "name": "Benifites",
       "settings": {
-        "heading": "Everyday after bites\ngoods for the everyday"
+        "heading": "Everyday After Bites\ngoodness in every paan mukhwas"
       }
     },
     "image_banner_ypywDX": {
@@ -114,7 +114,7 @@
       "name": "Product Vision",
       "settings": {
         "background_text": "Afterbites",
-        "heading": "Our Product Vision",
+        "heading": "The After Bites Paan Mukhwas Vision",
         "border_image": "shopify://shop_images/border_image.svg",
         "bg_desktop": "shopify://shop_images/background_line_086e25f1-3a56-49c8-bd1b-37514f7861c4.png",
         "bg_mobile": "shopify://shop_images/background-image-mobile.png",
@@ -242,7 +242,7 @@
       ],
       "name": "Review Video",
       "settings": {
-        "heading": "What’s say about",
+        "heading": "What People Say About After Bites",
         "background_text": "Afterbites",
         "autoplay": true,
         "autoplay_speed": 4,
