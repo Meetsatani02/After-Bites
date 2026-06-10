@@ -63,7 +63,8 @@
       ],
       "name": "FAQ",
       "settings": {
-        "heading": "Frequently Asked Questions"
+        "heading": "Frequently Asked Questions",
+        "border_image": "shopify://shop_images/border-image.svg"
       }
     }
   },
