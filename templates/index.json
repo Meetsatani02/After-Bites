@@ -33,6 +33,7 @@
         "background_text": "Afterbites",
         "heading": "Our best Product",
         "button_label": "View All Product",
+        "border_image": "shopify://shop_images/border-image.svg",
         "loop": true,
         "autoplay": false,
         "autoplay_speed": 4,
