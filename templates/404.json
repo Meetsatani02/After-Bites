@@ -1,1 +1,36 @@
-{"sections":{"main":{"type":"main-404","settings":{}}},"order":["main"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-404",
+      "settings": {}
+    },
+    "hero_BE4cfN": {
+      "type": "hero",
+      "name": "Hero",
+      "settings": {
+        "badge_text": "20+ experience",
+        "badge_link": "",
+        "heading": "Lorem Ipsum is simply dummy text of the printing",
+        "text": "The quality and purity of our product has made us a favorite in kitchens across the country. We're proud to be a trusted choice for healthy and delicious cooking.",
+        "button_label": "Experience Now",
+        "button_link": "",
+        "image_position": "right",
+        "image_position_mobile": "top",
+        "image": "shopify://shop_images/pro-img.png"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "hero_BE4cfN"
+  ]
+}
