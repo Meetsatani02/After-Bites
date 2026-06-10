@@ -42,10 +42,70 @@
         "space_desktop": 40,
         "space_mobile": 20
       }
+    },
+    "benifites_7et3Vy": {
+      "type": "benifites",
+      "blocks": {
+        "item_P8ig8h": {
+          "type": "item",
+          "settings": {
+            "icon": "shopify://shop_images/digestion_99b7d7d8-db5e-4fbc-bf20-8c6043a399fe.svg",
+            "label": "Degestion"
+          }
+        },
+        "item_aRG8XA": {
+          "type": "item",
+          "settings": {
+            "icon": "shopify://shop_images/dental-tooth.svg",
+            "label": "Mouth & Oral Health"
+          }
+        },
+        "item_w8Vbhb": {
+          "type": "item",
+          "settings": {
+            "icon": "shopify://shop_images/snow.svg",
+            "label": "Body Cooling"
+          }
+        },
+        "item_4NXHJR": {
+          "type": "item",
+          "settings": {
+            "icon": "shopify://shop_images/zap.svg",
+            "label": "Energy & Nutrition"
+          }
+        },
+        "item_gecQFc": {
+          "type": "item",
+          "settings": {
+            "icon": "shopify://shop_images/security.svg",
+            "label": "Immunity & Antioxidants"
+          }
+        },
+        "item_8qjckx": {
+          "type": "item",
+          "settings": {
+            "icon": "shopify://shop_images/brain-01.svg",
+            "label": "Mind & Mood"
+          }
+        }
+      },
+      "block_order": [
+        "item_P8ig8h",
+        "item_aRG8XA",
+        "item_w8Vbhb",
+        "item_4NXHJR",
+        "item_gecQFc",
+        "item_8qjckx"
+      ],
+      "name": "Benifites",
+      "settings": {
+        "heading": "Everyday after bites\ngoods for the everyday"
+      }
     }
   },
   "order": [
     "hero_8tJLAm",
-    "best_product_YdFqd7"
+    "best_product_YdFqd7",
+    "benifites_7et3Vy"
   ]
 }
