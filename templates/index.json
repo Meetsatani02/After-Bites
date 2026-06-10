@@ -145,6 +145,41 @@
         "margin_top_mobile": 0,
         "margin_bottom_mobile": 0
       }
+    },
+    "faq_6zMdU7": {
+      "type": "faq",
+      "blocks": {
+        "faq_item_ppBybC": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Ingredients",
+            "answer": "Variyali, Dhana, Pan, Manpasand, Navrang, Kesri, Kharek, Lovely, Katho, Chuno, Ijmet, Haripatti, Cheri, Gulkandh, Chatney."
+          }
+        },
+        "faq_item_jAW8D3": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Question",
+            "answer": "Answer text goes here."
+          }
+        },
+        "faq_item_iF9jPm": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Question",
+            "answer": "Answer text goes here."
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_ppBybC",
+        "faq_item_jAW8D3",
+        "faq_item_iF9jPm"
+      ],
+      "name": "FAQ",
+      "settings": {
+        "heading": "Frequently Asked Questions"
+      }
     }
   },
   "order": [
@@ -153,6 +188,7 @@
     "benifites_7et3Vy",
     "image_banner_Lpq6BM",
     "product_vision_wbWLnE",
-    "product_feature_new_DnUfCY"
+    "product_feature_new_DnUfCY",
+    "faq_6zMdU7"
   ]
 }
