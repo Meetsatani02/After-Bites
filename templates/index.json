@@ -21,7 +21,8 @@
         "button_link": "",
         "image_position": "right",
         "image_position_mobile": "top",
-        "image": "shopify://shop_images/desktop-hero_d5f0f4a6-0224-492f-bffc-9d09fc0f188d.jpg"
+        "image": "shopify://shop_images/desktop-hero_d5f0f4a6-0224-492f-bffc-9d09fc0f188d.jpg",
+        "icon_image": "shopify://shop_images/hero_icon_61921416-5cd6-4c1b-8cbe-2db3561a93dc.svg"
       }
     }
   },
