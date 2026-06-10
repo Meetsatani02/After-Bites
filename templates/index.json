@@ -106,7 +106,7 @@
       "type": "image-banner",
       "name": "Image Banner",
       "settings": {
-        "image": "shopify://shop_images/product_main.png"
+        "image": "shopify://shop_images/banner.png"
       }
     }
   },
