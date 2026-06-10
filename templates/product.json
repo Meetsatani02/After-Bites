@@ -19,7 +19,7 @@
     "related-products": {
       "type": "related-products",
       "settings": {
-        "heading": "You may also like",
+        "heading": "More After Bites Paan Mukhwas",
         "heading_size": "h2",
         "products_to_show": 4,
         "columns_desktop": 4,
@@ -47,15 +47,15 @@
         "faq_item_AHUhew": {
           "type": "faq_item",
           "settings": {
-            "question": "Question",
-            "answer": "Answer text goes here."
+            "question": "Is this paan mukhwas tobacco-free?",
+            "answer": "Yes. After Bites paan mukhwas is 100% tobacco-free and supari-free, made with natural ingredients only."
           }
         },
         "faq_item_qT3TUi": {
           "type": "faq_item",
           "settings": {
-            "question": "Question",
-            "answer": "Answer text goes here."
+            "question": "How should I store it and how long does it stay fresh?",
+            "answer": "Keep your paan mukhwas in an airtight container in a cool, dry place. It stays fresh for up to 6 months."
           }
         }
       },
@@ -77,21 +77,21 @@
           "type": "review",
           "settings": {
             "video_url": "https://cdn.shopify.com/videos/c/o/v/d49e6b5bcd434c5db48393df3f6711ea.mov",
-            "caption": "The quality and purity of our product has made us a favorite in kitchens across the country."
+            "caption": "The authentic taste of After Bites paan mukhwas has made it a family favourite across the country."
           }
         },
         "review_m8QDkN": {
           "type": "review",
           "settings": {
             "video_url": "https://cdn.shopify.com/videos/c/o/v/d49e6b5bcd434c5db48393df3f6711ea.mov",
-            "caption": "Our customers love how fresh and authentic every single bite tastes."
+            "caption": "Our customers love how fresh and authentic every bite of our paan mukhwas tastes."
           }
         },
         "review_mA7TTC": {
           "type": "review",
           "settings": {
             "video_url": "https://cdn.shopify.com/videos/c/o/v/d49e6b5bcd434c5db48393df3f6711ea.mov",
-            "caption": "From everyday meals to special occasions, this has become an essential part of my family's kitchen."
+            "caption": "From everyday meals to special occasions, After Bites paan mukhwas has become essential in my family's kitchen."
           }
         }
       },
@@ -102,7 +102,7 @@
       ],
       "name": "Review Video",
       "settings": {
-        "heading": "Review Video",
+        "heading": "What People Say About After Bites",
         "background_text": "Reviews",
         "autoplay": true,
         "autoplay_speed": 4,
