@@ -169,16 +169,63 @@
             "question": "Question",
             "answer": "Answer text goes here."
           }
+        },
+        "faq_item_98fFQB": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Question",
+            "answer": "Answer text goes here."
+          }
         }
       },
       "block_order": [
         "faq_item_ppBybC",
         "faq_item_jAW8D3",
-        "faq_item_iF9jPm"
+        "faq_item_iF9jPm",
+        "faq_item_98fFQB"
       ],
       "name": "FAQ",
       "settings": {
         "heading": "Frequently Asked Questions"
+      }
+    },
+    "review_video_xV4mNP": {
+      "type": "review-video",
+      "blocks": {
+        "review_zi9Kjk": {
+          "type": "review",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/d49e6b5bcd434c5db48393df3f6711ea.mov",
+            "caption": "The quality and purity of our product has made us a favorite in kitchens across the country."
+          }
+        },
+        "review_idTr8U": {
+          "type": "review",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/d49e6b5bcd434c5db48393df3f6711ea.mov",
+            "caption": "Our customers love how fresh and authentic every single bite tastes."
+          }
+        },
+        "review_prf3JJ": {
+          "type": "review",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/d49e6b5bcd434c5db48393df3f6711ea.mov",
+            "caption": "From everyday meals to special occasions, this has become an essential part of my family's kitchen."
+          }
+        }
+      },
+      "block_order": [
+        "review_zi9Kjk",
+        "review_idTr8U",
+        "review_prf3JJ"
+      ],
+      "name": "Review Video",
+      "settings": {
+        "heading": "Review Video",
+        "background_text": "Reviews",
+        "autoplay": true,
+        "autoplay_speed": 4,
+        "transition_speed": 800
       }
     }
   },
@@ -189,6 +236,7 @@
     "image_banner_Lpq6BM",
     "product_vision_wbWLnE",
     "product_feature_new_DnUfCY",
-    "faq_6zMdU7"
+    "faq_6zMdU7",
+    "review_video_xV4mNP"
   ]
 }
