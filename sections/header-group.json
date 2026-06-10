@@ -16,13 +16,11 @@
       "settings": {
         "background_color": "#1f4d2b",
         "text_color": "#f5ecd9",
-        "left_image": "shopify://shop_images/left_image_svg.svg",
-        "left_image_mobile": "shopify://shop_images/left-header.svg",
+        "left_image": "shopify://shop_images/left-line.png",
         "left_image_url": "https://cdn.shopify.com/s/files/1/0742/9839/2711/files/right-line.png?v=1780039435",
         "left_text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         "right_text": "",
-        "right_image": "shopify://shop_images/right_image_svg.svg",
-        "right_image_mobile": "shopify://shop_images/right_header.svg",
+        "right_image": "shopify://shop_images/right-line.png",
         "right_image_url": "https://cdn.shopify.com/s/files/1/0742/9839/2711/files/left-line.png?v=1780039435",
         "link": ""
       }
