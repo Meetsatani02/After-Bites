@@ -108,12 +108,34 @@
       "settings": {
         "image": "shopify://shop_images/banner.png"
       }
+    },
+    "product_vision_wbWLnE": {
+      "type": "product-vision",
+      "name": "Product Vision",
+      "settings": {
+        "background_text": "Afterbites",
+        "heading": "Our Product Vision",
+        "border_image": "shopify://shop_images/border-image.svg",
+        "bg_desktop": "shopify://shop_images/background_line_3d9530f6-2d57-4aa6-adfb-281a56c3ccf3.png",
+        "bg_mobile": "shopify://shop_images/background-image-mobile.png",
+        "logo": "shopify://shop_images/Group_2085663236.svg",
+        "photo_wedding": "shopify://shop_images/celebration_image_diwali.png",
+        "photo_car": "shopify://shop_images/car_image.png",
+        "photo_couple": "shopify://shop_images/celebration_image..png",
+        "note_top_pin": "📍",
+        "note_top_text": "Shaadi mein sabse zyada poochha gaya 'Yeh mukhwas kahan se liya?'",
+        "note_mid_pin": "🖇️",
+        "note_mid_text": "Jo apni car premium rakhte hain woh mukhwas bhi After Bites rakhte hain.",
+        "note_center_pin": "🖇️",
+        "note_center_text": "Ek chutki mein tradition, taste, aur ek yaad jo rehti hai"
+      }
     }
   },
   "order": [
     "hero_8tJLAm",
     "best_product_YdFqd7",
     "benifites_7et3Vy",
-    "image_banner_Lpq6BM"
+    "image_banner_Lpq6BM",
+    "product_vision_wbWLnE"
   ]
 }
