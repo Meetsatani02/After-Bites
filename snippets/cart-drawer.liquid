@@ -155,33 +155,36 @@
     font-size: 13px;
     color: rgba(28, 48, 37, 0.6);
   }
-  .cart-drawer .ab-cart-item__row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    margin-top: 18px;
-  }
+  /* Price on its own line: final price + struck compare, inline. */
   .cart-drawer .ab-cart-item__price {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .cart-drawer .ab-cart-item__price-final {
     font-family: 'Rasbern', serif;
     font-weight: 600;
-    font-size: 24px;
+    font-size: 22px;
+    line-height: 1.1;
     color: var(--green);
-    white-space: nowrap;
   }
-  .cart-drawer .ab-cart-item__price s {
-    display: block;
-    font-size: 13px;
-    opacity: 0.5;
+  .cart-drawer .ab-cart-item__price-compare {
     font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: rgba(28, 48, 37, 0.45);
+    text-decoration: line-through;
   }
+  /* Quantity stepper on its own line below the price. */
+  .cart-drawer .ab-cart-item__qty { margin-top: 14px; }
 
   /* ---- Quantity stepper (rectangular) ---- */
   .cart-drawer .ab-qty {
     display: inline-flex;
     align-items: center;
     border: 1px solid var(--green);
-    border-radius: 6px;
+    border-radius: 12px;
     overflow: hidden;
     background: transparent;
     width: auto;
@@ -225,8 +228,9 @@
   /* ---- Remove button ---- */
   .cart-drawer .ab-cart-item__remove {
     position: absolute;
-    top: 22px;
+    top: 50%;
     right: 0;
+    transform: translateY(-50%);
   }
   .cart-drawer .ab-cart-item__remove button {
     border: none;
@@ -441,16 +445,13 @@
     .cart-drawer .ab-cart-item__info { padding-right: 24px; }
     .cart-drawer .ab-totals__subtotal .ab-totals__subtotal-label { font-size: 28px; }
 
-    /* Quantity + price: keep the stepper whole; price wraps below if tight. */
-    .cart-drawer .ab-cart-item__row {
-      flex-wrap: wrap;
-      gap: 12px 14px;
-      margin-top: 14px;
-    }
+    /* Description hidden on mobile per request. */
+    .cart-drawer .ab-cart-item__desc { display: none; }
+
+    .cart-drawer .ab-cart-item__price-final { font-size: 20px; }
     .cart-drawer .ab-qty { height: 42px; }
     .cart-drawer .ab-qty .quantity__button { width: 38px; font-size: 18px; }
     .cart-drawer .ab-qty .quantity__input { width: 34px; font-size: 15px; }
-    .cart-drawer .ab-cart-item__price { font-size: 20px; }
   }
 </style>
 
@@ -535,7 +536,16 @@
                       </p>
                     {%- endunless -%}
 
-                    <div class="ab-cart-item__row">
+                    <div class="ab-cart-item__price">
+                      {%- if item.original_line_price != item.final_line_price -%}
+                        <span class="ab-cart-item__price-final">{{ item.final_line_price | money }}</span>
+                        <s class="ab-cart-item__price-compare">{{ item.original_line_price | money }}</s>
+                      {%- else -%}
+                        <span class="ab-cart-item__price-final">{{ item.original_line_price | money }}</span>
+                      {%- endif -%}
+                    </div>
+
+                    <div class="ab-cart-item__qty">
                       <quantity-input class="quantity cart-quantity ab-qty">
                         <button class="quantity__button" name="minus" type="button" aria-label="Decrease quantity">−</button>
                         <input
@@ -557,15 +567,6 @@
                         >
                         <button class="quantity__button" name="plus" type="button" aria-label="Increase quantity">+</button>
                       </quantity-input>
-
-                      <div class="ab-cart-item__price">
-                        {%- if item.original_line_price != item.final_line_price -%}
-                          <s>{{ item.original_line_price | money }}</s>
-                          {{ item.final_line_price | money }}
-                        {%- else -%}
-                          {{ item.original_line_price | money }}
-                        {%- endif -%}
-                      </div>
                     </div>
 
                     <div
