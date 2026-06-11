@@ -15,7 +15,7 @@
 <style>
   .drawer { visibility: hidden; }
 
-  /* ---- Shell ---- */
+  /* ---- Shell + open animation ---- */
   .cart-drawer .drawer__inner {
     background-color: var(--beige);
     color: var(--green);
@@ -24,6 +24,12 @@
     padding: 0;
     height: 100%;
     width: 100%;
+    transition: transform 0.42s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
+  }
+  .cart-drawer .cart-drawer__overlay { transition: opacity 0.42s ease; }
+  @media (prefers-reduced-motion: reduce) {
+    .cart-drawer .drawer__inner { transition: none; }
   }
   @media screen and (min-width: 750px) {
     .cart-drawer .drawer__inner { width: 600px; max-width: 100vw; }

@@ -8,6 +8,18 @@
   body {
       background-color: var(--beige);
   }
+
+  /* Add to Cart loading feedback — spinner shows, label hides while adding */
+  .product-buy-button button { position: relative; }
+  .product-buy-button button .loading__spinner { display: none; }
+  .product-buy-button button.loading .loading__spinner {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+  }
+  .product-buy-button button.loading [data-add-button-text] { visibility: hidden; }
+  .product-buy-button button .loading__spinner svg { width: 24px; height: 24px; }
+  .product-buy-button button .loading__spinner .path { stroke: currentColor; }
 </style>
 
 {%- liquid
@@ -158,11 +170,13 @@
                           {%- endif -%}
                         </span>
                         {%- comment -%}
-                          Empty, permanently-hidden spinner: product-form.js calls
-                          .loading__spinner.classList on submit, so the element must
-                          exist — but it renders nothing, so no loading icon shows.
+                          Loading spinner — shown the instant the button is clicked
+                          (product-form.js removes .hidden on submit, re-adds on
+                          finish) so Add to Cart feels responsive during the request.
                         {%- endcomment -%}
-                        <span class="loading__spinner" style="display: none !important;"></span>
+                        <span class="loading__spinner hidden">
+                          {{- 'loading-spinner.svg' | inline_asset_content -}}
+                        </span>
                       </button>
                     </div>
                   </div>
