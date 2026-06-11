@@ -1149,8 +1149,25 @@ cart-drawer .drawer__inner-empty .button {
         font-size: 32px;
     }
 
+    /* Price row: keep main price on one line, pin Save badge right, wrap the
+       compare price below cleanly instead of breaking the main price. */
+    .product-price {
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px 10px;
+    }
+
     .product-price-main span {
         font-size: 28px;
+        white-space: nowrap;
+    }
+
+    .product-price-compare {
+        white-space: nowrap;
+    }
+
+    .product-price-save {
+        margin-left: auto;
     }
 
     .product-weight-buttons {
@@ -1183,5 +1200,21 @@ cart-drawer .drawer__inner-empty .button {
 
     .border-right {
         border-right-width: 1px;
+    }
+}
+
+/* ===== Extra-small phones (≤400px): shrink price so it fits cleanly ===== */
+@media (max-width: 400px) {
+    .product-price-main span {
+        font-size: 24px;
+    }
+
+    .product-price-compare {
+        font-size: 13px;
+    }
+
+    .product-price-save {
+        font-size: 12px;
+        padding: 5px 9px;
     }
 }
