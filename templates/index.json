@@ -29,7 +29,7 @@
       "type": "best-product",
       "name": "Best Product",
       "settings": {
-        "collection": "frontpage",
+        "collection": "our-best-products",
         "background_text": "Afterbites",
         "heading": "Our Best Pan Mukhwas",
         "button_label": "View All Products",
