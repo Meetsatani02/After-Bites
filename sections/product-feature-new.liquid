@@ -97,6 +97,50 @@
           right: -21px;
       }
   }
+
+  /* ===== Mobile polish — price / variant / add-to-cart block ===== */
+  @media (max-width: 768px) {
+      .product-feature-custom .product-heading h2 {
+          font-size: 30px;
+          line-height: 1.1;
+      }
+
+      /* Price: keep main + compare inline (baseline aligned) and pin the
+         Save badge to the right; wraps cleanly on very small screens. */
+      .product-feature-custom .product-price {
+          flex-wrap: wrap;
+          align-items: center;
+          gap: 8px 10px;
+          margin: 12px 0 22px;
+      }
+      .product-feature-custom .product-price-main span { font-size: 30px; }
+      .product-feature-custom .product-price-compare {
+          font-size: 15px;
+          align-items: center;
+      }
+      .product-feature-custom .product-price-save {
+          margin-left: auto;
+          padding: 5px 11px;
+          font-size: 13px;
+      }
+
+      .product-feature-custom .product-weight { gap: 12px; }
+
+      /* Quantity stepper (fixed) + Add to Cart (fills the rest), one row. */
+      .product-feature-custom .product-quantity-cart-button {
+          margin-block: 24px 0;
+          gap: 10px;
+          align-items: stretch;
+      }
+      .product-feature-custom .product-buy-button { flex: 1 1 auto; }
+      .product-feature-custom .product-buy-button button { width: 100%; }
+  }
+
+  /* Very small phones: let the button drop below the stepper full-width. */
+  @media (max-width: 360px) {
+      .product-feature-custom .product-quantity-cart-button { flex-wrap: wrap; }
+      .product-feature-custom .product-buy-button { flex: 1 1 100%; }
+  }
 </style>
 
 {%- style -%}
