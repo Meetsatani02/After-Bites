@@ -569,16 +569,6 @@
               {%- endfor -%}
             </div>
 
-            <cart-note class="ab-cart-note field">
-              <label class="ab-cart-note__label" for="CartDrawer-Note">Add A note to your order</label>
-              <textarea
-                id="CartDrawer-Note"
-                class="ab-cart-note__input text-area"
-                name="note"
-                placeholder=""
-              >{{ cart.note }}</textarea>
-            </cart-note>
-
             <p id="CartDrawer-LiveRegionText" class="visually-hidden" role="status"></p>
             <p id="CartDrawer-LineItemStatus" class="visually-hidden" aria-hidden="true" role="status">
               {{ 'accessibility.loading' | t }}
