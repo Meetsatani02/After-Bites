@@ -576,6 +576,7 @@
     var addButton = root.querySelector('[data-add-button]');
     var addButtonText = root.querySelector('[data-add-button-text]');
     var productImage = root.querySelector('[data-product-image]');
+    var productUrl = root.getAttribute('data-url');
 
     /* Build current selection from the pre-selected buttons */
     var groups = picker.querySelectorAll('.product-weight-buttons');
@@ -676,8 +677,30 @@
       });
     });
 
+    /* Re-sync each variant's availability from Shopify's live product JSON so
+       the button reflects current stock even when this page was served from a
+       cache. Prices stay server-rendered; only the availability flags refresh.
+       Any failure falls back silently to the server-rendered data. */
+    function revalidateFromLiveData() {
+      if (!productUrl || !variants.length || typeof fetch !== 'function') return;
+      fetch(productUrl + '.js', { headers: { Accept: 'application/json' } })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (data) {
+          if (!data || !data.variants) return;
+          var liveById = {};
+          data.variants.forEach(function (v) { liveById[v.id] = v; });
+          variants.forEach(function (v) {
+            if (liveById.hasOwnProperty(v.id)) v.available = liveById[v.id].available;
+          });
+          refreshAvailability();
+          update();
+        })
+        .catch(function () {});
+    }
+
     refreshAvailability();
     update();
+    revalidateFromLiveData();
   })();
 </script>
 
