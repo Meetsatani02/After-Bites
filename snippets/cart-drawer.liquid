@@ -47,8 +47,11 @@
     color: var(--green);
   }
   .cart-drawer .drawer__close {
+    position: static;          /* override Dawn's absolute corner pin */
     width: 40px;
     height: 40px;
+    min-width: 40px;
+    min-height: 40px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -57,8 +60,13 @@
     color: var(--green);
     cursor: pointer;
     border-radius: 6px;
+    box-shadow: none;
     transition: background-color 0.2s ease;
   }
+  /* Keep the header (and its close button) visible + correctly laid out in the
+     empty state too — Dawn hides it and switches the inner to a grid. */
+  cart-drawer.is-empty .drawer__inner { display: flex; flex-direction: column; padding: 0; }
+  cart-drawer.is-empty .drawer__header { display: flex; }
   .cart-drawer .drawer__close:hover { background-color: rgba(28, 48, 37, 0.08); }
   .cart-drawer .drawer__close .svg-wrapper,
   .cart-drawer .drawer__close svg { width: 18px; height: 18px; }
@@ -221,8 +229,9 @@
   .cart-drawer .ab-cart-item__remove .svg-wrapper,
   .cart-drawer .ab-cart-item__remove svg { width: 14px; height: 14px; }
 
+  /* Error row stays hidden (icon included) unless there's a real message. */
   .cart-drawer .cart-item__error {
-    display: flex;
+    display: none;
     align-items: center;
     gap: 4px;
     color: #b00020;
@@ -230,8 +239,7 @@
     font-size: 12px;
     margin-top: 8px;
   }
-  .cart-drawer .cart-item__error:empty,
-  .cart-drawer .cart-item__error .cart-item__error-text:empty { display: none; }
+  .cart-drawer .cart-item__error:has(.cart-item__error-text:not(:empty)) { display: flex; }
   .cart-drawer .cart-item__error svg { width: 14px; height: 14px; }
 
   /* ---- Note (textarea 536 x 150 on desktop) ---- */
