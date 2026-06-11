@@ -54,12 +54,22 @@ if (!customElements.get('product-form')) {
               });
               this.handleErrorMessage(response.description);
 
-              const soldOutMessage = this.submitButton.querySelector('.sold-out-message');
-              if (!soldOutMessage) return;
-              this.submitButton.setAttribute('aria-disabled', true);
-              this.submitButtonText.classList.add('hidden');
-              soldOutMessage.classList.remove('hidden');
+              /* The cart API rejected the add (e.g. the variant sold out after
+                 the page was rendered/cached). Reflect that in the button so it
+                 never stays a clickable "Add to Cart" for a sold-out variant.
+                 Switching to an available variant re-enables it via the
+                 product section's update(). */
               this.error = true;
+              this.submitButton.setAttribute('aria-disabled', true);
+              this.submitButton.setAttribute('disabled', 'disabled');
+
+              const soldOutMessage = this.submitButton.querySelector('.sold-out-message');
+              if (soldOutMessage) {
+                this.submitButtonText.classList.add('hidden');
+                soldOutMessage.classList.remove('hidden');
+              } else if (this.submitButtonText) {
+                this.submitButtonText.textContent = window.variantStrings?.soldOut || 'Sold out';
+              }
               return;
             } else if (!this.cart) {
               window.location = window.routes.cart_url;
