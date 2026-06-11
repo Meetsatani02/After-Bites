@@ -186,6 +186,7 @@
     background: transparent;
     width: auto;
     height: 48px;
+    flex-shrink: 0;            /* never let the stepper collapse */
   }
   .cart-drawer .ab-qty .quantity__button {
     width: 46px;
@@ -435,9 +436,21 @@
     .cart-drawer .drawer__header { padding: 24px 20px 16px; }
     .cart-drawer cart-drawer-items { padding: 6px 20px 4px; }
     .cart-drawer .cart-drawer__footer { padding: 20px 20px 28px; }
-    .cart-drawer .ab-cart-item { grid-template-columns: 104px 1fr; gap: 16px; }
+    .cart-drawer .ab-cart-item { grid-template-columns: 96px 1fr; gap: 14px; }
     .cart-drawer .ab-cart-item__title { font-size: 20px; }
+    .cart-drawer .ab-cart-item__info { padding-right: 24px; }
     .cart-drawer .ab-totals__subtotal .ab-totals__subtotal-label { font-size: 28px; }
+
+    /* Quantity + price: keep the stepper whole; price wraps below if tight. */
+    .cart-drawer .ab-cart-item__row {
+      flex-wrap: wrap;
+      gap: 12px 14px;
+      margin-top: 14px;
+    }
+    .cart-drawer .ab-qty { height: 42px; }
+    .cart-drawer .ab-qty .quantity__button { width: 38px; font-size: 18px; }
+    .cart-drawer .ab-qty .quantity__input { width: 34px; font-size: 15px; }
+    .cart-drawer .ab-cart-item__price { font-size: 20px; }
   }
 </style>
 
