@@ -227,16 +227,7 @@
                   </a>
                 </li>
               {%- endif -%}
-              {%- if settings.social_instagram_link != blank -%}
-                <li class="list-social__item">
-                  <a href="{{ settings.social_instagram_link }}" class="list-social__link link">
-                    <span class="svg-wrapper">
-                      {{- 'icon-instagram.svg' | inline_asset_content -}}
-                    </span>
-                    <span class="visually-hidden">{{ 'general.social.links.instagram' | t }}</span>
-                  </a>
-                </li>
-              {%- endif -%}
+              {%- comment -%} Instagram icon removed from the mobile menu per request. {%- endcomment -%}
               {%- if settings.social_tiktok_link != blank -%}
                 <li class="list-social__item">
                   <a href="{{ settings.social_tiktok_link }}" class="list-social__link link">
@@ -267,16 +258,7 @@
                   </a>
                 </li>
               {%- endif -%}
-              {%- if settings.social_youtube_link != blank -%}
-                <li class="list-social__item">
-                  <a href="{{ settings.social_youtube_link }}" class="list-social__link link">
-                    <span class="svg-wrapper">
-                      {{- 'icon-youtube.svg' | inline_asset_content -}}
-                    </span>
-                    <span class="visually-hidden">{{ 'general.social.links.youtube' | t }}</span>
-                  </a>
-                </li>
-              {%- endif -%}
+              {%- comment -%} YouTube icon removed from the mobile menu per request. {%- endcomment -%}
               {%- if settings.social_vimeo_link != blank -%}
                 <li class="list-social__item">
                   <a href="{{ settings.social_vimeo_link }}" class="list-social__link link">
