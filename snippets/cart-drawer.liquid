@@ -1,5 +1,5 @@
 {% comment %}
-  Renders cart drawer — custom After Bites design.
+  Renders cart drawer — custom After Bites design (matches Figma spec).
 
   Keeps every JS hook cart.js / cart-drawer.js rely on:
   cart-drawer, cart-drawer-items, #CartDrawer-Form, .js-contents,
@@ -10,7 +10,6 @@
   {% render 'cart-drawer' %}
 {% endcomment %}
 
-{{ 'component-card.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
 
 <style>
@@ -24,23 +23,27 @@
     flex-direction: column;
     padding: 0;
     height: 100%;
+    width: 100%;
+  }
+  @media screen and (min-width: 750px) {
+    .cart-drawer .drawer__inner { width: 600px; max-width: 100vw; }
   }
 
-  /* ---- Header ---- */
+  /* ---- Header (top inset 33px, sides 32px) ---- */
   .cart-drawer .drawer__header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 22px;
+    padding: 33px 32px 18px;
     margin: 0;
     border-bottom: 1px solid rgba(28, 48, 37, 0.15);
   }
   .cart-drawer .drawer__heading {
     margin: 0;
-    font-family: var(--font-heading-family, inherit);
+    font-family: 'Rasbern', serif;
     font-weight: 600;
-    font-size: 22px;
-    line-height: 1.2;
+    font-size: 26px;
+    line-height: 1.1;
     color: var(--green);
   }
   .cart-drawer .drawer__close {
@@ -53,36 +56,39 @@
     background: transparent;
     color: var(--green);
     cursor: pointer;
-    border-radius: 8px;
+    border-radius: 6px;
     transition: background-color 0.2s ease;
   }
   .cart-drawer .drawer__close:hover { background-color: rgba(28, 48, 37, 0.08); }
   .cart-drawer .drawer__close .svg-wrapper,
   .cart-drawer .drawer__close svg { width: 18px; height: 18px; }
 
-  /* ---- Scrollable items area ---- */
+  /* ---- Scrollable items area (sides 32px) ---- */
   .cart-drawer cart-drawer-items {
     display: block;
     flex: 1 1 auto;
     overflow-y: auto;
-    padding: 8px 22px 4px;
+    padding: 6px 32px 4px;
   }
   .cart-drawer .ab-cart-list { display: flex; flex-direction: column; }
 
   /* ---- Line item ---- */
   .cart-drawer .ab-cart-item {
     display: grid;
-    grid-template-columns: 72px 1fr auto;
-    gap: 14px;
+    grid-template-columns: 120px 1fr;
+    gap: 22px;
     align-items: start;
-    padding: 18px 0;
+    padding: 22px 0;
     border-bottom: 1px solid rgba(28, 48, 37, 0.12);
     position: relative;
   }
+  @media screen and (min-width: 750px) {
+    .cart-drawer .ab-cart-item { grid-template-columns: 132px 1fr; }
+  }
   .cart-drawer .ab-cart-item__media {
-    width: 72px;
-    height: 72px;
-    border-radius: 10px;
+    width: 100%;
+    aspect-ratio: 132 / 174;
+    border-radius: 6px;
     overflow: hidden;
     background: #fff;
     display: block;
@@ -93,31 +99,37 @@
     object-fit: cover;
     display: block;
   }
-  .cart-drawer .ab-cart-item__info { min-width: 0; }
+  .cart-drawer .ab-cart-item__info {
+    min-width: 0;
+    padding-right: 28px; /* room for the remove button */
+  }
   .cart-drawer .ab-cart-item__title {
     display: block;
-    font-family: var(--font-heading-family, inherit);
+    font-family: 'Rasbern', serif;
     font-weight: 600;
-    font-size: 17px;
-    line-height: 1.3;
+    font-size: 24px;
+    line-height: 1.15;
     color: var(--green);
     text-decoration: none;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
   }
   .cart-drawer .ab-cart-item__title:hover { text-decoration: underline; }
   .cart-drawer .ab-cart-item__desc {
-    margin: 0 0 4px;
-    font-size: 12.5px;
+    margin: 0 0 6px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
     line-height: 1.45;
-    color: rgba(28, 48, 37, 0.62);
+    color: rgba(28, 48, 37, 0.6);
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
   .cart-drawer .ab-cart-item__variant {
-    margin: 0 0 8px;
-    font-size: 12px;
+    margin: 0 0 4px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
     color: rgba(28, 48, 37, 0.6);
   }
   .cart-drawer .ab-cart-item__row {
@@ -125,35 +137,36 @@
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    margin-top: 10px;
+    margin-top: 18px;
   }
   .cart-drawer .ab-cart-item__price {
+    font-family: 'Rasbern', serif;
     font-weight: 600;
-    font-size: 16px;
+    font-size: 24px;
     color: var(--green);
     white-space: nowrap;
   }
   .cart-drawer .ab-cart-item__price s {
     display: block;
-    font-weight: 400;
-    font-size: 12px;
-    opacity: 0.55;
+    font-size: 13px;
+    opacity: 0.5;
+    font-family: 'Inter', sans-serif;
   }
 
-  /* ---- Quantity stepper ---- */
+  /* ---- Quantity stepper (rectangular) ---- */
   .cart-drawer .ab-qty {
     display: inline-flex;
     align-items: center;
-    border: 1.5px solid var(--green);
-    border-radius: 10px;
+    border: 1px solid var(--green);
+    border-radius: 6px;
     overflow: hidden;
     background: transparent;
     width: auto;
-    min-height: 40px;
+    height: 48px;
   }
   .cart-drawer .ab-qty .quantity__button {
-    width: 38px;
-    height: 38px;
+    width: 46px;
+    height: 100%;
     border: none;
     background: transparent;
     color: var(--green);
@@ -167,13 +180,15 @@
   }
   .cart-drawer .ab-qty .quantity__button:hover { background: rgba(28, 48, 37, 0.08); }
   .cart-drawer .ab-qty .quantity__input {
-    width: 38px;
+    width: 46px;
+    height: 100%;
     border: none;
     background: transparent;
     text-align: center;
     color: var(--green);
+    font-family: 'Inter', sans-serif;
     font-weight: 600;
-    font-size: 15px;
+    font-size: 16px;
     padding: 0;
     -moz-appearance: textfield;
   }
@@ -186,13 +201,13 @@
   /* ---- Remove button ---- */
   .cart-drawer .ab-cart-item__remove {
     position: absolute;
-    top: 16px;
+    top: 22px;
     right: 0;
   }
   .cart-drawer .ab-cart-item__remove button {
     border: none;
     background: transparent;
-    color: rgba(28, 48, 37, 0.55);
+    color: rgba(28, 48, 37, 0.5);
     cursor: pointer;
     width: 26px;
     height: 26px;
@@ -211,49 +226,55 @@
     align-items: center;
     gap: 4px;
     color: #b00020;
+    font-family: 'Inter', sans-serif;
     font-size: 12px;
-    margin-top: 6px;
+    margin-top: 8px;
   }
   .cart-drawer .cart-item__error:empty,
   .cart-drawer .cart-item__error .cart-item__error-text:empty { display: none; }
   .cart-drawer .cart-item__error svg { width: 14px; height: 14px; }
 
-  /* ---- Note ---- */
-  .cart-drawer .ab-cart-note { display: block; margin: 18px 0 6px; }
+  /* ---- Note (textarea 536 x 150 on desktop) ---- */
+  .cart-drawer .ab-cart-note { display: block; margin: 24px 0 8px; }
   .cart-drawer .ab-cart-note__label {
     display: block;
-    font-size: 13px;
-    color: rgba(28, 48, 37, 0.7);
-    margin-bottom: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: var(--green);
+    margin-bottom: 10px;
   }
   .cart-drawer .ab-cart-note__input {
     width: 100%;
-    min-height: 96px;
+    height: 150px;
     resize: vertical;
-    border: 1px solid rgba(28, 48, 37, 0.25);
-    border-radius: 8px;
-    background: rgba(28, 48, 37, 0.04);
-    padding: 12px;
-    font-family: inherit;
+    border: 1px solid rgba(28, 48, 37, 0.3);
+    border-radius: 4px;
+    background: rgba(28, 48, 37, 0.05);
+    padding: 14px;
+    font-family: 'Inter', sans-serif;
     font-size: 14px;
     color: var(--green);
     outline: none;
+    box-sizing: border-box;
   }
   .cart-drawer .ab-cart-note__input:focus { border-color: var(--green); }
 
-  /* ---- Footer / totals ---- */
+  /* ---- Footer / totals (bottom inset 37px, sides 32px) ---- */
   .cart-drawer .cart-drawer__footer {
     flex: 0 0 auto;
-    padding: 18px 22px 22px;
+    padding: 22px 32px 37px;
     border-top: 1px dashed rgba(28, 48, 37, 0.3);
     background-color: var(--beige);
   }
-  .cart-drawer .ab-totals { display: flex; flex-direction: column; gap: 8px; }
+  .cart-drawer .ab-totals { display: flex; flex-direction: column; gap: 10px; }
   .cart-drawer .ab-totals__row {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
     font-size: 14px;
+    line-height: 1.5;
     color: var(--green);
   }
   .cart-drawer .ab-totals__row span:last-child { font-weight: 600; }
@@ -261,38 +282,49 @@
     display: flex;
     align-items: baseline;
     justify-content: space-between;
-    margin-top: 14px;
-    padding-top: 14px;
-    border-top: 1px solid rgba(28, 48, 37, 0.18);
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(28, 48, 37, 0.2);
   }
-  .cart-drawer .ab-totals__subtotal span {
-    font-family: var(--font-heading-family, inherit);
-    font-weight: 700;
-    font-size: 22px;
+  .cart-drawer .ab-totals__subtotal .ab-totals__subtotal-label {
+    font-family: 'Rasbern', serif;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 1.1;
+    color: var(--green);
+  }
+  .cart-drawer .ab-totals__subtotal .ab-totals__subtotal-value {
+    font-family: 'Rasbern', serif;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 1.1;
     color: var(--green);
   }
   .cart-drawer .ab-totals__note {
     margin: 6px 0 0;
-    font-size: 12px;
-    color: rgba(28, 48, 37, 0.6);
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1;
+    color: var(--green);
   }
 
   /* ---- Promocode ---- */
   .cart-drawer .ab-promo {
     display: flex;
-    align-items: center;
-    margin: 16px 0;
+    align-items: stretch;
+    margin: 18px 0;
     border: 1px solid rgba(28, 48, 37, 0.3);
-    border-radius: 8px;
+    border-radius: 4px;
     overflow: hidden;
-    background: rgba(28, 48, 37, 0.04);
+    background: rgba(28, 48, 37, 0.05);
   }
   .cart-drawer .ab-promo__input {
     flex: 1 1 auto;
     border: none;
     background: transparent;
-    padding: 13px 14px;
-    font-family: inherit;
+    padding: 14px 16px;
+    font-family: 'Inter', sans-serif;
     font-size: 14px;
     color: var(--green);
     outline: none;
@@ -303,28 +335,28 @@
     border: none;
     background: transparent;
     padding: 0 18px;
-    align-self: stretch;
-    font-weight: 700;
-    font-size: 13px;
-    letter-spacing: 0.04em;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.02em;
     color: var(--green);
     cursor: pointer;
   }
   .cart-drawer .ab-promo__apply:hover { text-decoration: underline; }
 
-  /* ---- Buttons (clean — no double border) ---- */
+  /* ---- Buttons (clean, single style) ---- */
   .cart-drawer .ab-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     width: 100%;
-    min-height: 54px;
-    padding: 15px 24px;
+    min-height: 56px;
+    padding: 16px 24px;
     border: none;
-    border-radius: 10px;
+    border-radius: 4px;
     background: var(--green);
     color: var(--beige);
-    font-family: inherit;
+    font-family: 'Inter', sans-serif;
     font-weight: 600;
     font-size: 16px;
     letter-spacing: 0.01em;
@@ -333,15 +365,9 @@
     box-shadow: none;
     transition: background-color 0.2s ease, color 0.2s ease;
   }
-  .cart-drawer .ab-btn:hover {
-    background: #16261d;
-    color: #fff;
-  }
+  .cart-drawer .ab-btn:hover { background: #16261d; color: #fff; }
   .cart-drawer .ab-btn[disabled],
-  .cart-drawer .ab-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
+  .cart-drawer .ab-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
   /* ---- Empty state ---- */
   .cart-drawer .ab-cart-empty {
@@ -352,20 +378,25 @@
     justify-content: center;
     text-align: center;
     gap: 18px;
-    padding: 40px 28px;
+    padding: 40px 32px;
   }
   .cart-drawer .ab-cart-empty .cart__empty-text {
     margin: 0;
-    font-family: var(--font-heading-family, inherit);
+    font-family: 'Rasbern', serif;
     font-weight: 600;
-    font-size: 24px;
+    font-size: 26px;
     color: var(--green);
   }
   .cart-drawer .ab-cart-empty .ab-btn { width: auto; min-width: 240px; }
-  .cart-drawer .ab-cart-empty__login { margin: 4px 0 0; font-size: 14px; color: var(--green); }
+  .cart-drawer .ab-cart-empty__login {
+    margin: 4px 0 0;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: var(--green);
+  }
   .cart-drawer .ab-cart-empty__login a { color: var(--green); }
 
-  /* Spinner overlay sits over the item while updating */
+  /* Spinner overlay while a line updates */
   .cart-drawer .ab-cart-item .loading__spinner {
     position: absolute;
     inset: 0;
@@ -376,6 +407,15 @@
   }
   .cart-drawer .ab-cart-item .loading__spinner:not(.hidden) { display: flex; }
   .cart-drawer .ab-cart-item .loading__spinner svg { width: 22px; height: 22px; }
+
+  @media screen and (max-width: 749px) {
+    .cart-drawer .drawer__header { padding: 24px 20px 16px; }
+    .cart-drawer cart-drawer-items { padding: 6px 20px 4px; }
+    .cart-drawer .cart-drawer__footer { padding: 20px 20px 28px; }
+    .cart-drawer .ab-cart-item { grid-template-columns: 104px 1fr; gap: 16px; }
+    .cart-drawer .ab-cart-item__title { font-size: 20px; }
+    .cart-drawer .ab-totals__subtotal .ab-totals__subtotal-label { font-size: 28px; }
+  }
 </style>
 
 <cart-drawer class="drawer{% if cart == empty %} is-empty{% endif %}">
@@ -431,11 +471,11 @@
                   <a href="{{ item.url }}" class="ab-cart-item__media" tabindex="-1" aria-hidden="true">
                     {%- if item.image -%}
                       <img
-                        src="{{ item.image | image_url: width: 200 }}"
+                        src="{{ item.image | image_url: width: 300 }}"
                         alt="{{ item.image.alt | escape }}"
                         loading="lazy"
-                        width="72"
-                        height="72"
+                        width="132"
+                        height="174"
                       >
                     {%- endif -%}
                   </a>
@@ -553,8 +593,8 @@
           </div>
 
           <div class="ab-totals__subtotal">
-            <span>Subtotal</span>
-            <span>{{ cart.total_price | money }}</span>
+            <span class="ab-totals__subtotal-label">Subtotal</span>
+            <span class="ab-totals__subtotal-value">{{ cart.total_price | money }}</span>
           </div>
           <p class="ab-totals__note">Taxes &amp; Shipping calculated at checkout</p>
 
