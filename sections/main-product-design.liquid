@@ -662,8 +662,10 @@
 
     picker.querySelectorAll('.weight-opt').forEach(function (opt) {
       opt.addEventListener('click', function () {
-        /* Unavailable weights can't be selected. */
-        if (opt.classList.contains('is-unavailable')) return;
+        /* Sold-out / unavailable weights are still selectable so the page
+           reflects them like a standard Shopify product page: the price and
+           image update and the Add to Cart button switches to a disabled
+           "Sold out" (handled in update()). */
         var group = opt.closest('.product-weight-buttons');
         var index = parseInt(group.getAttribute('data-option-index'), 10);
         selected[index] = opt.getAttribute('data-value');
