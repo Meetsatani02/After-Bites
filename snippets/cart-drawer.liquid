@@ -64,9 +64,18 @@
     transition: background-color 0.2s ease;
   }
   /* Keep the header (and its close button) visible + correctly laid out in the
-     empty state too — Dawn hides it and switches the inner to a grid. */
-  cart-drawer.is-empty .drawer__inner { display: flex; flex-direction: column; padding: 0; }
-  cart-drawer.is-empty .drawer__header { display: flex; }
+     empty state too — Dawn hides it and switches the inner to a centered grid.
+     Higher specificity (+ .cart-drawer) so these always beat Dawn's rules. */
+  cart-drawer.is-empty .cart-drawer .drawer__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0;
+  }
+  cart-drawer.is-empty .cart-drawer .drawer__header {
+    display: flex;
+    width: 100%;
+  }
   .cart-drawer .drawer__close:hover { background-color: rgba(28, 48, 37, 0.08); }
   .cart-drawer .drawer__close .svg-wrapper,
   .cart-drawer .drawer__close svg { width: 18px; height: 18px; }
