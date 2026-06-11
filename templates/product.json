@@ -18,6 +18,7 @@
     },
     "related-products": {
       "type": "related-products",
+      "disabled": true,
       "settings": {
         "heading": "More After Bites Paan Mukhwas",
         "heading_size": "h2",
@@ -74,8 +75,7 @@
       ],
       "name": "FAQ",
       "settings": {
-        "heading": "Frequently Asked Questions",
-        "border_image": "shopify://shop_images/border_image.svg"
+        "heading": "Frequently Asked Questions"
       }
     },
     "review_video_qwjQyQ": {
