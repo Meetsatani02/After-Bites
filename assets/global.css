@@ -375,6 +375,7 @@ p,h1,h2,h3,h4{
     #product-slider-main-product .product-new-img__thumbs {
         display: block;
         margin-top: 12px;
+        margin-right: 5px;
         overflow: hidden;
     }
 
