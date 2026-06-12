@@ -17,6 +17,17 @@
             margin: auto;
         }
 
+        /* Desktop (≥1025px): static grid, no slider. Mobile keeps the slider,
+           where JS adds the .swiper-wrapper class and Swiper takes over. */
+        @media (min-width: 1025px) {
+            .product-track:not(.swiper-wrapper) {
+                display: grid;
+                grid-template-columns: repeat(var(--pg-cols, 2), 1fr);
+                gap: 64px;
+            }
+            .arrow-group { display: none; }
+        }
+
         .product-card {
             text-align: center;
             height: auto;
@@ -171,8 +182,9 @@
         assign product_count = best_collection.all_products_count
       endif
 
+      # Slider is mobile-only, so base the loop on the mobile slides-per-view.
       assign enable_loop = section.settings.loop
-      if product_count <= section.settings.slides_desktop
+      if product_count <= section.settings.slides_mobile
         assign enable_loop = false
       endif
     -%}
@@ -200,11 +212,11 @@
                 <h3>{{ section.settings.heading | escape }}</h3>
             </div>
 
-            <div class="product-grid swiper">
-                <div class="swiper-wrapper">
+            <div class="product-grid" data-pg style="--pg-cols: {{ section.settings.slides_desktop }};">
+                <div class="product-track" data-pg-track>
                     {%- if use_blocks -%}
                         {%- for block in section.blocks -%}
-                            <div class="product-card swiper-slide" {{ block.shopify_attributes }}>
+                            <div class="product-card" data-pg-slide {{ block.shopify_attributes }}>
                                 <div class="product-image">
                                     {%- if block.settings.link != blank -%}<a href="{{ block.settings.link }}">{%- endif -%}
                                         {%- if block.settings.image != blank -%}
@@ -239,7 +251,7 @@
                         {%- endfor -%}
                     {%- else -%}
                         {%- for product in best_collection.products -%}
-                            <div class="product-card swiper-slide">
+                            <div class="product-card" data-pg-slide>
                                 <div class="product-image">
                                     <a href="{{ product.url }}">
                                         {%- if product.featured_image != blank -%}
@@ -306,30 +318,58 @@
     <script>
         (function () {
             var root = document.getElementById('BestProduct-{{ section.id }}');
-            if (!root || typeof Swiper === 'undefined') return;
+            if (!root) return;
 
-            new Swiper(root.querySelector('.swiper'), {
-                slidesPerView: {{ section.settings.slides_mobile }},
-                spaceBetween: {{ section.settings.space_mobile }},
-                loop: {{ enable_loop }},
-                {% if section.settings.autoplay %}
-                autoplay: {
-                    delay: {{ section.settings.autoplay_speed | times: 1000 }},
-                    disableOnInteraction: false
-                },
-                {% endif %}
-                navigation: {
-                    nextEl: root.querySelector('[data-next]'),
-                    prevEl: root.querySelector('[data-prev]'),
-                    disabledClass: 'is-disabled'
-                },
-                breakpoints: {
-                    769: {
-                        slidesPerView: {{ section.settings.slides_desktop }},
-                        spaceBetween: {{ section.settings.space_desktop }}
+            var container = root.querySelector('[data-pg]');
+            var track = root.querySelector('[data-pg-track]');
+            if (!container || !track) return;
+            var slides = Array.prototype.slice.call(root.querySelectorAll('[data-pg-slide]'));
+
+            /* Slider only on mobile / tablet (≤1024px); desktop is a static grid. */
+            var mq = window.matchMedia('(max-width: 1024px)');
+            var swiper = null;
+
+            function build() {
+                if (swiper) return;
+                if (typeof Swiper === 'undefined') { return window.setTimeout(build, 60); }
+
+                container.classList.add('swiper');
+                track.classList.add('swiper-wrapper');
+                slides.forEach(function (s) { s.classList.add('swiper-slide'); });
+
+                swiper = new Swiper(container, {
+                    slidesPerView: {{ section.settings.slides_mobile }},
+                    spaceBetween: {{ section.settings.space_mobile }},
+                    loop: {{ enable_loop }},
+                    watchOverflow: true,
+                    {% if section.settings.autoplay %}
+                    autoplay: {
+                        delay: {{ section.settings.autoplay_speed | times: 1000 }},
+                        disableOnInteraction: false
+                    },
+                    {% endif %}
+                    navigation: {
+                        nextEl: root.querySelector('[data-next]'),
+                        prevEl: root.querySelector('[data-prev]'),
+                        disabledClass: 'is-disabled'
                     }
-                }
-            });
+                });
+            }
+
+            function destroy() {
+                if (swiper) { swiper.destroy(true, true); swiper = null; }
+                container.classList.remove('swiper');
+                track.classList.remove('swiper-wrapper');
+                slides.forEach(function (s) { s.classList.remove('swiper-slide'); });
+            }
+
+            function apply() {
+                if (mq.matches) { build(); } else { destroy(); }
+            }
+
+            apply();
+            if (mq.addEventListener) { mq.addEventListener('change', apply); }
+            else if (mq.addListener) { mq.addListener(apply); }
         })();
     </script>
 
