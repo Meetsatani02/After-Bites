@@ -7,10 +7,9 @@
 
         .product-image img {
             width: 100%;
+            height: 100%;
             display: block;
-            border-radius: 50%;
-            height: 427px;
-            object-fit: cover;
+            object-fit: contain;
         }
 
         .product-grid {
@@ -21,22 +20,44 @@
         .product-card {
             text-align: center;
             height: auto;
+            border: 1px solid rgba(244, 237, 219, 0.45);
+            border-radius: 8px;
+            overflow: hidden;
+            background: var(--green);
         }
 
+        /* Image panel: full jar on a light beige background. */
         .product-image {
-            max-width: 360px;
-            margin: auto;
+            background: var(--beige);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 28px;
+            aspect-ratio: 1 / 1;
         }
 
+        .product-image a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Green band with the name + description. */
         .product-content {
-            margin-top: 25px;
+            background: var(--green);
+            color: var(--beige);
+            padding: 22px 18px 26px;
+            margin-top: 0;
         }
 
         .product-content h3 {
-            font-size: 33px;
+            font-family: 'Rasbern', 'Cormorant Garamond', serif;
+            font-size: 28px;
             font-weight: 600;
-            line-height: 1;
-            margin-bottom: 6px;
+            line-height: 1.1;
+            margin-bottom: 8px;
             color: var(--beige);
         }
 
