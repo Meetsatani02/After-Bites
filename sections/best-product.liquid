@@ -133,6 +133,12 @@
               filter: brightness(0) saturate(100%) invert(11%) sepia(18%) saturate(1093%) hue-rotate(86deg) brightness(95%) contrast(88%);
           }
 
+          /* Inline SVG arrows: recolor stroke to green so the icon stays
+             visible on the beige hover background. */
+          .arrow-btn:hover svg path {
+              stroke: var(--green);
+          }
+
           /* Disabled state for slider arrows (Swiper adds this class automatically) */
           .arrow-btn.is-disabled {
               opacity: .35;
