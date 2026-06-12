@@ -24,9 +24,69 @@
         "image": "shopify://shop_images/desktop-hero.jpg",
         "image_mobile": "shopify://shop_images/mobile-hero.jpg"
       }
+    },
+    "benifites_BVWUXM": {
+      "type": "benifites",
+      "blocks": {
+        "item_Kzxz7F": {
+          "type": "item",
+          "settings": {
+            "icon": "shopify://shop_images/digestion_99b7d7d8-db5e-4fbc-bf20-8c6043a399fe.svg",
+            "label": "Degestion"
+          }
+        },
+        "item_4ENKAp": {
+          "type": "item",
+          "settings": {
+            "icon": "shopify://shop_images/dental-tooth.svg",
+            "label": "Mouth & Oral Health"
+          }
+        },
+        "item_PCtRJQ": {
+          "type": "item",
+          "settings": {
+            "icon": "shopify://shop_images/snow.svg",
+            "label": "Body Cooling"
+          }
+        },
+        "item_8i9T9V": {
+          "type": "item",
+          "settings": {
+            "icon": "shopify://shop_images/zap.svg",
+            "label": "Energy & Nutrition"
+          }
+        },
+        "item_LPRmtQ": {
+          "type": "item",
+          "settings": {
+            "icon": "shopify://shop_images/security.svg",
+            "label": "Immunity & Antioxidants"
+          }
+        },
+        "item_WnrjTw": {
+          "type": "item",
+          "settings": {
+            "icon": "shopify://shop_images/brain-01.svg",
+            "label": "Mind & Mood"
+          }
+        }
+      },
+      "block_order": [
+        "item_Kzxz7F",
+        "item_4ENKAp",
+        "item_PCtRJQ",
+        "item_8i9T9V",
+        "item_LPRmtQ",
+        "item_WnrjTw"
+      ],
+      "name": "Benifites",
+      "settings": {
+        "heading": "Everyday After Bites\ngoodness in every paan mukhwas"
+      }
     }
   },
   "order": [
-    "hero_FXj7hX"
+    "hero_FXj7hX",
+    "benifites_BVWUXM"
   ]
 }
