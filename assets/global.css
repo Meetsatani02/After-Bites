@@ -48,10 +48,13 @@ p,h1,h2,h3,h4{
 .hero-border {
     display: flex;
     line-height: 0;
+    width: 100%;
 }
 
 .hero-border img {
     width: 100%;
+    max-width: 100%;
+    min-width: 0;       /* Safari: stop the flex image from using its intrinsic width and overflowing */
     display: block;
     height: auto;
 }
