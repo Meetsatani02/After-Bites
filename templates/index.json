@@ -128,6 +128,22 @@
         "note_center_pin": "🖇️",
         "note_center_text": "Ek chutki mein tradition, taste, aur ek yaad jo rehti hai"
       }
+    },
+    "product_feature_new_nm8h3F": {
+      "type": "product-feature-new",
+      "name": "Product feature new",
+      "settings": {
+        "product": "wet-paan-mukhwas-after-bites-1",
+        "feature_image": "shopify://shop_images/product-feature.png",
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "padding_top_mobile": 36,
+        "padding_bottom_mobile": 36,
+        "margin_top_mobile": 0,
+        "margin_bottom_mobile": 0
+      }
     }
   },
   "order": [
@@ -135,6 +151,7 @@
     "best_product_ab8Eqb",
     "benifites_BVWUXM",
     "image_banner_Drdeky",
-    "product_vision_nzWJaW"
+    "product_vision_nzWJaW",
+    "product_feature_new_nm8h3F"
   ]
 }
