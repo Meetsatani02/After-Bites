@@ -27,6 +27,18 @@
     },
     "best_product_ab8Eqb": {
       "type": "best-product",
+      "blocks": {
+        "product_rTjq3B": {
+          "type": "product",
+          "settings": {
+            "product": "dry-paan-mukhwas-after-bites-copy",
+            "image": "shopify://shop_images/product-feature.png"
+          }
+        }
+      },
+      "block_order": [
+        "product_rTjq3B"
+      ],
       "name": "Best Product",
       "settings": {
         "collection": "our-best-products",
