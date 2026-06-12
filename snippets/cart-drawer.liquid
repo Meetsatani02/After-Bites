@@ -137,31 +137,27 @@
     margin-bottom: 6px;
   }
   .cart-drawer .ab-cart-item__title:hover { text-decoration: underline; }
-  .cart-drawer .ab-cart-item__desc {
-    margin: 0 0 6px;
-    font-family: 'Inter', sans-serif;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 1.45;
-    color: rgba(28, 48, 37, 0.6);
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
   .cart-drawer .ab-cart-item__variant {
     margin: 0 0 4px;
     font-family: 'Inter', sans-serif;
     font-size: 13px;
     color: rgba(28, 48, 37, 0.6);
   }
-  /* Price on its own line: final price + struck compare, inline. */
+  /* Price + quantity sit together on one row. */
+  .cart-drawer .ab-cart-item__buy {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 12px;
+  }
+  /* Price: final price + struck compare, inline. */
   .cart-drawer .ab-cart-item__price {
     display: flex;
     align-items: baseline;
     flex-wrap: wrap;
     gap: 8px;
-    margin-top: 10px;
   }
   .cart-drawer .ab-cart-item__price-final {
     font-family: 'Rasbern', serif;
@@ -176,8 +172,8 @@
     color: rgba(28, 48, 37, 0.45);
     text-decoration: line-through;
   }
-  /* Quantity stepper on its own line below the price. */
-  .cart-drawer .ab-cart-item__qty { margin-top: 14px; }
+  /* Quantity stepper sits on the same row as the price. */
+  .cart-drawer .ab-cart-item__qty { margin-top: 0; }
 
   /* ---- Quantity stepper (rectangular) ---- */
   .cart-drawer .ab-qty {
@@ -445,9 +441,6 @@
     .cart-drawer .ab-cart-item__info { padding-right: 24px; }
     .cart-drawer .ab-totals__subtotal .ab-totals__subtotal-label { font-size: 28px; }
 
-    /* Description hidden on mobile per request. */
-    .cart-drawer .ab-cart-item__desc { display: none; }
-
     .cart-drawer .ab-cart-item__price-final { font-size: 20px; }
     .cart-drawer .ab-qty { height: 42px; }
     .cart-drawer .ab-qty .quantity__button { width: 38px; font-size: 18px; }
@@ -522,12 +515,6 @@
                       {{- item.product.title | escape -}}
                     </a>
 
-                    {%- if item.product.description != blank -%}
-                      <p class="ab-cart-item__desc">
-                        {{- item.product.description | strip_html | truncatewords: 12 -}}
-                      </p>
-                    {%- endif -%}
-
                     {%- unless item.product.has_only_default_variant -%}
                       <p class="ab-cart-item__variant">
                         {%- for option in item.options_with_values -%}
@@ -536,16 +523,17 @@
                       </p>
                     {%- endunless -%}
 
-                    <div class="ab-cart-item__price">
-                      {%- if item.original_line_price != item.final_line_price -%}
-                        <span class="ab-cart-item__price-final">{{ item.final_line_price | money }}</span>
-                        <s class="ab-cart-item__price-compare">{{ item.original_line_price | money }}</s>
-                      {%- else -%}
-                        <span class="ab-cart-item__price-final">{{ item.original_line_price | money }}</span>
-                      {%- endif -%}
-                    </div>
+                    <div class="ab-cart-item__buy">
+                      <div class="ab-cart-item__price">
+                        {%- if item.original_line_price != item.final_line_price -%}
+                          <span class="ab-cart-item__price-final">{{ item.final_line_price | money }}</span>
+                          <s class="ab-cart-item__price-compare">{{ item.original_line_price | money }}</s>
+                        {%- else -%}
+                          <span class="ab-cart-item__price-final">{{ item.original_line_price | money }}</span>
+                        {%- endif -%}
+                      </div>
 
-                    <div class="ab-cart-item__qty">
+                      <div class="ab-cart-item__qty">
                       <quantity-input class="quantity cart-quantity ab-qty">
                         <button class="quantity__button" name="minus" type="button" aria-label="Decrease quantity">−</button>
                         <input
@@ -567,6 +555,7 @@
                         >
                         <button class="quantity__button" name="plus" type="button" aria-label="Increase quantity">+</button>
                       </quantity-input>
+                      </div>
                     </div>
 
                     <div
