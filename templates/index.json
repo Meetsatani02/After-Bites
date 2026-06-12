@@ -25,6 +25,23 @@
         "image_mobile": "shopify://shop_images/mobile-hero.jpg"
       }
     },
+    "best_product_ab8Eqb": {
+      "type": "best-product",
+      "name": "Best Product",
+      "settings": {
+        "collection": "our-best-products",
+        "background_text": "Afterbites",
+        "heading": "Our Best Pan Mukhwas",
+        "button_label": "View All Products",
+        "loop": true,
+        "autoplay": false,
+        "autoplay_speed": 4,
+        "slides_desktop": 2,
+        "slides_mobile": 1,
+        "space_desktop": 40,
+        "space_mobile": 20
+      }
+    },
     "benifites_BVWUXM": {
       "type": "benifites",
       "blocks": {
@@ -87,6 +104,7 @@
   },
   "order": [
     "hero_FXj7hX",
+    "best_product_ab8Eqb",
     "benifites_BVWUXM"
   ]
 }
