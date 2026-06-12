@@ -69,6 +69,12 @@
             "icon": "shopify://shop_images/brain-01.svg",
             "label": "Mind & Mood"
           }
+        },
+        "item_3CJkt8": {
+          "type": "item",
+          "settings": {
+            "label": "Organic"
+          }
         }
       },
       "block_order": [
@@ -77,7 +83,8 @@
         "item_PCtRJQ",
         "item_8i9T9V",
         "item_LPRmtQ",
-        "item_WnrjTw"
+        "item_WnrjTw",
+        "item_3CJkt8"
       ],
       "name": "Benifites",
       "settings": {
