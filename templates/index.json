@@ -39,7 +39,7 @@
         "autoplay_speed": 4,
         "slides_desktop": 2,
         "slides_mobile": 1,
-        "space_desktop": 40,
+        "space_desktop": 64,
         "space_mobile": 20
       }
     },
