@@ -59,6 +59,13 @@
     gap: 18px;
   }
 
+  /* One product per row on small phones. */
+  @media (max-width: 575px) {
+    #CollectionGrid-{{ section.id }} .cg-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
   @media (min-width: 750px) {
     #CollectionGrid-{{ section.id }} .cg-grid {
       grid-template-columns: repeat(2, 1fr);
