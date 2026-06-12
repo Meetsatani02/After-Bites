@@ -144,6 +144,81 @@
         "margin_top_mobile": 0,
         "margin_bottom_mobile": 0
       }
+    },
+    "faq_Q93xmd": {
+      "type": "faq",
+      "blocks": {
+        "faq_item_kHgjUE": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What is After Bites Paan Mukhwas?",
+            "answer": "After Bites Paan Mukhwas is a traditional, tobacco-free after-meal mouth freshener with the sweet, cooling taste of classic paan — ready to eat, no mess."
+          }
+        },
+        "faq_item_3ptKN3": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is After Bites paan mukhwas tobacco-free?",
+            "answer": "Yes — our paan mukhwas is 100% tobacco-free and supari-free, made with natural ingredients only."
+          }
+        },
+        "faq_item_njhnW4": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Does paan mukhwas help with digestion?",
+            "answer": "Yes. The fennel and betel leaf in our pan mukhwas soothe the stomach and freshen your breath after meals."
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_kHgjUE",
+        "faq_item_3ptKN3",
+        "faq_item_njhnW4"
+      ],
+      "name": "FAQ",
+      "settings": {
+        "heading": "Frequently Asked Questions",
+        "border_image": "shopify://shop_images/border-image.svg"
+      }
+    },
+    "review_video_YjJFXa": {
+      "type": "review-video",
+      "blocks": {
+        "review_XTKRB8": {
+          "type": "review",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/d49e6b5bcd434c5db48393df3f6711ea.mov",
+            "caption": "The authentic taste of After Bites paan mukhwas has made it a family favourite across the country."
+          }
+        },
+        "review_Jqt3je": {
+          "type": "review",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/d49e6b5bcd434c5db48393df3f6711ea.mov",
+            "caption": "Our customers love how fresh and authentic every bite of our paan mukhwas tastes."
+          }
+        },
+        "review_hi8cY9": {
+          "type": "review",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/d49e6b5bcd434c5db48393df3f6711ea.mov",
+            "caption": "From everyday meals to special occasions, After Bites paan mukhwas has become essential in my family's kitchen."
+          }
+        }
+      },
+      "block_order": [
+        "review_XTKRB8",
+        "review_Jqt3je",
+        "review_hi8cY9"
+      ],
+      "name": "Review Video",
+      "settings": {
+        "heading": "What People Say About After Bites",
+        "background_text": "Reviews",
+        "autoplay": true,
+        "autoplay_speed": 4,
+        "transition_speed": 800
+      }
     }
   },
   "order": [
@@ -152,6 +227,8 @@
     "benifites_BVWUXM",
     "image_banner_Drdeky",
     "product_vision_nzWJaW",
-    "product_feature_new_nm8h3F"
+    "product_feature_new_nm8h3F",
+    "faq_Q93xmd",
+    "review_video_YjJFXa"
   ]
 }
