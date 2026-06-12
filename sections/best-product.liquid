@@ -1,5 +1,5 @@
 {{ 'global.css' | asset_url | stylesheet_tag }}
-{{ 'swiper-bundle.min.js' | asset_url | script_tag }}
+
 {{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
     {% comment %} <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"> {% endcomment %}
 
@@ -259,6 +259,7 @@
 
     </section>
 
+    {{ 'swiper-bundle.min.js' | asset_url | script_tag }}
     {% comment %} <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script> {% endcomment %}
     <script>
         (function () {
@@ -397,3 +398,5 @@
 }
 
 {% endschema %}
+
+
