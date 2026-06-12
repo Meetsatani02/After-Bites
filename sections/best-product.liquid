@@ -181,7 +181,7 @@
       if best_collection == blank or best_collection.all_products_count == 0
         assign best_collection = collections['best-product']
       endif
-      assign product_count = best_collection.all_products_count
+      assign product_count = section.blocks.size
 
       assign enable_loop = section.settings.loop
       if product_count <= section.settings.slides_desktop
@@ -214,16 +214,27 @@
 
             <div class="product-grid swiper">
                 <div class="swiper-wrapper">
-                    {%- for product in best_collection.products -%}
-                        <div class="product-card swiper-slide">
+                    {%- for block in section.blocks -%}
+                        {%- assign block_product = block.settings.product -%}
+                        <div class="product-card swiper-slide" {{ block.shopify_attributes }}>
                             <div class="product-image">
-                                <a href="{{ product.url }}">
-                                    {%- if product.featured_image != blank -%}
+                                <a href="{{ block_product.url | default: '#' }}">
+                                    {%- if block.settings.image != blank -%}
                                         {{
-                                            product.featured_image
+                                            block.settings.image
                                             | image_url: width: 720
                                             | image_tag:
-                                                alt: product.featured_image.alt | default: product.title,
+                                                alt: block.settings.image.alt | default: block_product.title,
+                                                widths: '180, 360, 540, 720',
+                                                sizes: '360px',
+                                                loading: 'lazy'
+                                        }}
+                                    {%- elsif block_product.featured_image != blank -%}
+                                        {{
+                                            block_product.featured_image
+                                            | image_url: width: 720
+                                            | image_tag:
+                                                alt: block_product.featured_image.alt | default: block_product.title,
                                                 widths: '180, 360, 540, 720',
                                                 sizes: '360px',
                                                 loading: 'lazy'
@@ -235,8 +246,8 @@
                             </div>
 
                             <div class="product-content">
-                                <h3><a href="{{ product.url }}">{{ product.title | escape }}</a></h3>
-                                <p>{{ product.description | strip_html | truncatewords: 20 }}</p>
+                                <h3><a href="{{ block_product.url | default: '#' }}">{{ block_product.title | escape }}</a></h3>
+                                <p>{{ block_product.description | strip_html | truncatewords: 20 }}</p>
                             </div>
                         </div>
                     {%- endfor -%}
@@ -419,9 +430,33 @@
       "default": 20
     }
   ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product",
+          "info": "Title, description and link come from this product."
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Custom image",
+          "info": "Optional. Leave empty to use the product's featured image."
+        }
+      ]
+    }
+  ],
   "presets": [
     {
-      "name": "Best Product"
+      "name": "Best Product",
+      "blocks": [
+        { "type": "product" },
+        { "type": "product" }
+      ]
     }
   ]
 }
