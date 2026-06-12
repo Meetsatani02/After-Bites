@@ -246,8 +246,14 @@
                             </div>
 
                             <div class="product-content">
-                                <h3><a href="{{ block_product.url | default: '#' }}">{{ block_product.title | escape }}</a></h3>
-                                <p>{{ block_product.description | strip_html | truncatewords: 20 }}</p>
+                                <h3><a href="{{ block_product.url | default: '#' }}">{{ block.settings.title | default: block_product.title | escape }}</a></h3>
+                                <p>
+                                    {%- if block.settings.description != blank -%}
+                                        {{ block.settings.description }}
+                                    {%- else -%}
+                                        {{ block_product.description | strip_html | truncatewords: 20 }}
+                                    {%- endif -%}
+                                </p>
                             </div>
                         </div>
                     {%- endfor -%}
@@ -439,13 +445,25 @@
           "type": "product",
           "id": "product",
           "label": "Product",
-          "info": "Title, description and link come from this product."
+          "info": "Link comes from this product. Title and description fall back to it when left empty below."
         },
         {
           "type": "image_picker",
           "id": "image",
           "label": "Custom image",
           "info": "Optional. Leave empty to use the product's featured image."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Custom title",
+          "info": "Optional. Leave empty to use the product's title."
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Custom description",
+          "info": "Optional. Leave empty to use the product's description."
         }
       ]
     }
