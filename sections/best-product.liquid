@@ -139,6 +139,26 @@
             cursor: default;
         }
 
+        /* Desktop: no slider — lay slides out as a static grid and hide arrows. */
+        @media (min-width:769px) {
+            .product-grid.swiper .swiper-wrapper {
+                display: grid;
+                grid-template-columns: repeat({{ section.settings.slides_desktop }}, 1fr);
+                gap: {{ section.settings.space_desktop }}px;
+                transform: none !important;
+            }
+
+            .product-grid.swiper .swiper-slide {
+                width: auto !important;
+                height: auto;
+                margin: 0 !important;
+            }
+
+            .product-bottom .arrow-group {
+                display: none;
+            }
+        }
+
         @media (max-width:768px) {
             .product-content h3 {
                 font-size: 28px;
@@ -266,28 +286,37 @@
             var root = document.getElementById('BestProduct-{{ section.id }}');
             if (!root || typeof Swiper === 'undefined') return;
 
-            new Swiper(root.querySelector('.swiper'), {
-                slidesPerView: {{ section.settings.slides_mobile }},
-                spaceBetween: {{ section.settings.space_mobile }},
-                loop: {{ enable_loop }},
-                {% if section.settings.autoplay %}
-                autoplay: {
-                    delay: {{ section.settings.autoplay_speed | times: 1000 }},
-                    disableOnInteraction: false
-                },
-                {% endif %}
-                navigation: {
-                    nextEl: root.querySelector('[data-next]'),
-                    prevEl: root.querySelector('[data-prev]'),
-                    disabledClass: 'is-disabled'
-                },
-                breakpoints: {
-                    769: {
-                        slidesPerView: {{ section.settings.slides_desktop }},
-                        spaceBetween: {{ section.settings.space_desktop }}
-                    }
+            var DESKTOP = 769;
+            var swiper = null;
+
+            function syncSlider() {
+                // Mobile only: build the slider. Desktop uses the CSS grid.
+                if (window.innerWidth < DESKTOP) {
+                    if (swiper) return;
+                    swiper = new Swiper(root.querySelector('.swiper'), {
+                        slidesPerView: {{ section.settings.slides_mobile }},
+                        spaceBetween: {{ section.settings.space_mobile }},
+                        loop: {{ enable_loop }},
+                        {% if section.settings.autoplay %}
+                        autoplay: {
+                            delay: {{ section.settings.autoplay_speed | times: 1000 }},
+                            disableOnInteraction: false
+                        },
+                        {% endif %}
+                        navigation: {
+                            nextEl: root.querySelector('[data-next]'),
+                            prevEl: root.querySelector('[data-prev]'),
+                            disabledClass: 'is-disabled'
+                        }
+                    });
+                } else if (swiper) {
+                    swiper.destroy(true, true);
+                    swiper = null;
                 }
-            });
+            }
+
+            syncSlider();
+            window.addEventListener('resize', syncSlider);
         })();
     </script>
 
