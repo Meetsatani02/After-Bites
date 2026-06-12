@@ -125,18 +125,10 @@
               color: var(--green);
           }
 
+          /* Keep the arrows outlined on hover/tap (no beige fill); just a
+             subtle background tint for feedback. */
           .arrow-btn:hover {
-              background: var(--beige);
-          }
-
-          .arrow-btn:hover img {
-              filter: brightness(0) saturate(100%) invert(11%) sepia(18%) saturate(1093%) hue-rotate(86deg) brightness(95%) contrast(88%);
-          }
-
-          /* Inline SVG arrows: recolor stroke to green so the icon stays
-             visible on the beige hover background. */
-          .arrow-btn:hover svg path {
-              stroke: var(--green);
+              background: rgba(244, 237, 219, 0.08);
           }
 
           /* Disabled state for slider arrows (Swiper adds this class automatically) */
