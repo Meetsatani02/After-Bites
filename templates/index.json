@@ -28,6 +28,13 @@
     "best_product_ab8Eqb": {
       "type": "best-product",
       "blocks": {
+        "product_LNDTQi": {
+          "type": "product",
+          "settings": {
+            "product": "wet-paan-mukhwas-after-bites-1",
+            "image": "shopify://shop_images/product-feature.png"
+          }
+        },
         "product_rTjq3B": {
           "type": "product",
           "settings": {
@@ -37,6 +44,7 @@
         }
       },
       "block_order": [
+        "product_LNDTQi",
         "product_rTjq3B"
       ],
       "name": "Best Product",
