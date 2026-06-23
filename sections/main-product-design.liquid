@@ -19,6 +19,74 @@
   .product-buy-button button.loading [data-add-button-text] { visibility: hidden; }
   .product-buy-button button .loading__spinner svg { width: 24px; height: 24px; }
   .product-buy-button button .loading__spinner .path { stroke: currentColor; }
+
+  /* ===========================================================
+     Judge.me — match the After Bites brand palette
+     green #1C3025 · beige #F4EDDB · gold #CAA36C
+     =========================================================== */
+
+  /* Preview badge (stars + count next to the title) */
+  .product-review .jdgm-prev-badge__stars { color: var(--yellow); }
+  .product-review .jdgm-prev-badge__text { color: var(--green); font-family: "Inter", sans-serif; }
+
+  /* Reviews section wrapper — give it room top & bottom */
+  .product-reviews-section {
+      padding: 60px 0 70px;
+      color: var(--green);
+  }
+  @media (max-width: 749px) {
+      .product-reviews-section { padding: 40px 0 50px; }
+  }
+
+  /* Stars everywhere in the full widget */
+  .jdgm-widget .jdgm-star.jdgm--on,
+  .jdgm-widget .jdgm-star.jdgm--half { color: var(--yellow) !important; }
+  .jdgm-widget .jdgm-star.jdgm--off { color: var(--dark-beige) !important; }
+
+  /* Headings / summary / body / author text */
+  .jdgm-widget,
+  .jdgm-widget .jdgm-rev-widg__title,
+  .jdgm-widget .jdgm-rev-widg__summary-text,
+  .jdgm-widget .jdgm-histogram__label,
+  .jdgm-widget .jdgm-rev__author,
+  .jdgm-widget .jdgm-rev__title,
+  .jdgm-widget .jdgm-rev__body { color: var(--green) !important; }
+  .jdgm-widget .jdgm-rev__timestamp { color: var(--green); opacity: 0.6; }
+
+  /* "Write a review" button → solid brand green */
+  .jdgm-widget .jdgm-write-rev-link,
+  .jdgm-widget .jdgm-btn {
+      background-color: var(--green) !important;
+      color: var(--beige) !important;
+      border: 1px solid var(--green) !important;
+  }
+  .jdgm-widget .jdgm-write-rev-link:hover,
+  .jdgm-widget .jdgm-btn:hover {
+      background-color: var(--light-green) !important;
+      border-color: var(--light-green) !important;
+  }
+
+  /* Filter & sort icon buttons → outlined in brand green */
+  .jdgm-widget .jdgm-sort-dropdown__button,
+  .jdgm-widget .jdgm-filters-panel-toggle-btn {
+      color: var(--green) !important;
+      border: 1px solid var(--green) !important;
+      background: transparent !important;
+  }
+
+  /* Reviewer avatar circle */
+  .jdgm-widget .jdgm-rev__pic-content,
+  .jdgm-widget .jdgm-rev__author-wrapper .jdgm-rev__pic {
+      background-color: var(--dark-beige) !important;
+      color: var(--green) !important;
+  }
+
+  /* Histogram bars */
+  .jdgm-widget .jdgm-histogram__bar-content { background-color: var(--yellow) !important; }
+
+  /* Divider lines between reviews */
+  .jdgm-widget .jdgm-rev,
+  .jdgm-widget .jdgm-rev-widg__header { border-color: var(--dark-beige) !important; }
 </style>
 
 {%- liquid
