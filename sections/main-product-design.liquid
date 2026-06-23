@@ -49,18 +49,13 @@
                 <h1>{{ product.title | escape }}</h1>
               </div>
 
-              {%- comment -%} Reviews (static design; uses metafield count if present) {%- endcomment -%}
+              {%- comment -%} Reviews — Judge.me preview badge (real rating + count) {%- endcomment -%}
               <div class="product-review">
-                <div class="pro-review-start">
-                  {% render 'start' %}
-                  {% render 'start' %}
-                  {% render 'start' %}
-                  {% render 'start' %}
-                  {% render 'start' %}
+                <!-- Start of Judge.me code -->
+                <div style='{{ jm_style }}' class='jdgm-widget jdgm-preview-badge' data-id='{{ product.id }}' data-auto-install='false'>
+                  {{ product.metafields.judgeme.badge }}
                 </div>
-                <div class="pro-how-many-review-content">
-                  ({{ product.metafields.reviews.rating_count.value | default: 36 }} reviews)
-                </div>
+                <!-- End of Judge.me code -->
               </div>
 
               {%- comment -%} Description (dynamic) {%- endcomment -%}
