@@ -56,7 +56,7 @@
         "collection": "our-best-products",
         "background_text": "Afterbites",
         "heading": "Our Best Pan Mukhwas",
-        "button_label": "View All Products",
+        "button_label": "",
         "border_image": "shopify://shop_images/border-image.svg",
         "loop": true,
         "autoplay": false,
