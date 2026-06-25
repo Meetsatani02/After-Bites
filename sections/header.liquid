@@ -411,9 +411,8 @@
 
     {%- comment %} CENTER: logo {% endcomment -%}
     <div class="header-logo">
-      {%- if request.page_type == 'index' -%}
-        <h1 class="header__heading" style="margin:0;">
-      {%- endif -%}
+      {%- comment -%} Logo wrapper kept as a div (not h1) so the page H1 lives in the main content {%- endcomment -%}
+      <div class="header__heading" style="margin:0;">
       <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
         {%- if settings.logo != blank -%}
           {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
@@ -436,9 +435,7 @@
           <span class="h2">{{ shop.name }}</span>
         {%- endif -%}
       </a>
-      {%- if request.page_type == 'index' -%}
-        </h1>
-      {%- endif -%}
+      </div>
     </div>
 
     {%- comment %} RIGHT: localization, account, search, cart {% endcomment -%}
