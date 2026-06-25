@@ -112,6 +112,9 @@
           <div class="product-sec-inner">
             <div class="product-content-custom">
 
+              {%- comment -%} Breadcrumbs (with BreadcrumbList schema) {%- endcomment -%}
+              {% render 'breadcrumbs' %}
+
               {%- comment -%} Title (dynamic) {%- endcomment -%}
               <div class="product-heading">
                 <h1>{{ product.title | escape }}</h1>

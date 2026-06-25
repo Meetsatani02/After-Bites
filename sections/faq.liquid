@@ -181,6 +181,28 @@
     </div>
     {%- endif -%}
 
+    {%- comment -%} FAQPage structured data — eligible for FAQ rich results {%- endcomment -%}
+    {%- if section.blocks.size > 0 -%}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {%- for block in section.blocks -%}
+        {
+          "@type": "Question",
+          "name": {{ block.settings.question | json }},
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": {{ block.settings.answer | json }}
+          }
+        }{%- unless forloop.last -%},{%- endunless -%}
+        {%- endfor -%}
+      ]
+    }
+    </script>
+    {%- endif -%}
+
     <script>
         (function () {
             const items = document.querySelectorAll('.afterbites-faq-content .faq-item');

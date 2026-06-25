@@ -1,0 +1,78 @@
+{%- comment -%}
+  Breadcrumbs — visible navigation + BreadcrumbList structured data.
+  Builds a Home > [Collection] > Page trail per template type.
+  Improves internal linking, crawlability and rich-result breadcrumbs.
+{%- endcomment -%}
+
+{%- liquid
+  assign item_sep = '|;|'
+  assign field_sep = ';;'
+  assign crumbs = 'Home' | append: field_sep | append: routes.root_url
+
+  case request.page_type
+    when 'product'
+      if product.collections.size > 0
+        assign col = product.collections.first
+        assign crumbs = crumbs | append: item_sep | append: col.title | append: field_sep | append: col.url
+      endif
+      assign crumbs = crumbs | append: item_sep | append: product.title | append: field_sep | append: product.url
+    when 'collection'
+      assign crumbs = crumbs | append: item_sep | append: collection.title | append: field_sep | append: collection.url
+    when 'article'
+      assign crumbs = crumbs | append: item_sep | append: blog.title | append: field_sep | append: blog.url
+      assign crumbs = crumbs | append: item_sep | append: article.title | append: field_sep | append: article.url
+    when 'page'
+      assign crumbs = crumbs | append: item_sep | append: page.title | append: field_sep | append: page.url
+    else
+      assign crumbs = ''
+  endcase
+-%}
+
+{%- if crumbs != blank -%}
+  {%- assign items = crumbs | split: item_sep -%}
+  <nav class="breadcrumbs page-width" aria-label="Breadcrumb">
+    <ol class="breadcrumbs__list">
+      {%- for item in items -%}
+        {%- assign parts = item | split: field_sep -%}
+        <li class="breadcrumbs__item">
+          {%- if forloop.last -%}
+            <span aria-current="page">{{ parts[0] | escape }}</span>
+          {%- else -%}
+            <a href="{{ parts[1] }}">{{ parts[0] | escape }}</a>
+            <span class="breadcrumbs__sep" aria-hidden="true">/</span>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ol>
+  </nav>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {%- for item in items -%}
+        {%- assign parts = item | split: field_sep -%}
+        {
+          "@type": "ListItem",
+          "position": {{ forloop.index }},
+          "name": {{ parts[0] | json }},
+          "item": {{ request.origin | append: parts[1] | json }}
+        }{%- unless forloop.last -%},{%- endunless -%}
+      {%- endfor -%}
+    ]
+  }
+  </script>
+  {%- style -%}
+    .breadcrumbs { padding-top: 16px; padding-bottom: 4px; }
+    .breadcrumbs__list {
+      list-style: none; margin: 0; padding: 0;
+      display: flex; flex-wrap: wrap; align-items: center; gap: 6px;
+      font-family: 'Inter', sans-serif; font-size: 1.3rem;
+    }
+    .breadcrumbs__item { display: inline-flex; align-items: center; gap: 6px; }
+    .breadcrumbs__item a { color: rgba(var(--color-foreground), 0.7); text-decoration: none; }
+    .breadcrumbs__item a:hover { text-decoration: underline; }
+    .breadcrumbs__item [aria-current="page"] { color: rgb(var(--color-foreground)); font-weight: 500; }
+    .breadcrumbs__sep { color: rgba(var(--color-foreground), 0.4); }
+  {%- endstyle -%}
+{%- endif -%}

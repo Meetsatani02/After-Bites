@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="theme-color" content="">
+    <meta name="theme-color" content="#1C3025">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <link rel="canonical" href="{{ canonical_url }}">
 
     {%- if settings.favicon != blank -%}
@@ -24,9 +25,12 @@
 
     {% if page_description %}
       <meta name="description" content="{{ page_description | escape }}">
+    {% elsif request.page_type == 'index' %}
+      <meta name="description" content="After Bites Paan Mukhwas — buy 100% tobacco-free &amp; supari-free paan mukhwas and mouth freshener online. Sweet wet &amp; crunchy dry blends made with natural paan leaves, gulkand and fennel for a refreshing after-meal taste.">
     {% endif %}
 
     {% render 'meta-tags' %}
+    {% render 'schema-org' %}
 
     <script src="{{ 'constants.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'pubsub.js' | asset_url }}" defer="defer"></script>

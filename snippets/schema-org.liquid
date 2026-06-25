@@ -1,0 +1,66 @@
+{%- comment -%}
+  Global structured data rendered once in <head> on every page:
+    - Organization (brand, logo, social profiles)
+    - WebSite (with Sitelinks Search Box action)
+  Helps Google understand the After Bites brand and show a search box in results.
+{%- endcomment -%}
+
+{%- liquid
+  assign social_links = ''
+  assign social_sep = '~~'
+  if settings.social_facebook_link != blank and settings.social_facebook_link != '#'
+    assign social_links = social_links | append: settings.social_facebook_link | append: social_sep
+  endif
+  if settings.social_instagram_link != blank and settings.social_instagram_link != '#'
+    assign social_links = social_links | append: settings.social_instagram_link | append: social_sep
+  endif
+  if settings.social_youtube_link != blank and settings.social_youtube_link != '#'
+    assign social_links = social_links | append: settings.social_youtube_link | append: social_sep
+  endif
+  if settings.social_twitter_link != blank and settings.social_twitter_link != '#'
+    assign social_links = social_links | append: settings.social_twitter_link | append: social_sep
+  endif
+  if settings.social_tiktok_link != blank and settings.social_tiktok_link != '#'
+    assign social_links = social_links | append: settings.social_tiktok_link | append: social_sep
+  endif
+  if settings.social_pinterest_link != blank and settings.social_pinterest_link != '#'
+    assign social_links = social_links | append: settings.social_pinterest_link | append: social_sep
+  endif
+  assign social_array = social_links | split: social_sep
+-%}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": {{ shop.name | json }},
+  "url": {{ request.origin | json }},
+  {%- if settings.favicon != blank -%}
+  "logo": {{ settings.favicon | image_url: width: 512 | prepend: 'https:' | json }},
+  {%- endif -%}
+  "description": {{ shop.description | default: shop.name | json }}
+  {%- if social_array.size > 0 -%}
+  ,"sameAs": [
+    {%- for link in social_array -%}
+      {{ link | json }}{%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor -%}
+  ]
+  {%- endif -%}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": {{ shop.name | json }},
+  "url": {{ request.origin | json }},
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "{{ request.origin }}{{ routes.search_url }}?q={search_term_string}"
+    },
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>

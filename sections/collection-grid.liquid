@@ -336,6 +336,9 @@
 <section id="CollectionGrid-{{ section.id }}">
   <div class="cg-inner">
 
+    {%- comment -%} Breadcrumbs (with BreadcrumbList schema) {%- endcomment -%}
+    {% render 'breadcrumbs' %}
+
     {%- comment -%} Header {%- endcomment -%}
     <div class="cg-header">
       <h1>{{ heading | escape }}</h1>
