@@ -161,12 +161,12 @@
       },
       "1409715032340194113": {
         "type": "shopify://apps/gokwik-cart-slide-cart-drawer/blocks/app-embed/531cd8ff-cc36-43b1-9a44-c16d44927215",
-        "disabled": false,
+        "disabled": true,
         "settings": {}
       },
       "1219337400145039034": {
         "type": "shopify://apps/kwikpass/blocks/kp_login/603e209b-d585-47ff-8592-837a4faa325b",
-        "disabled": true,
+        "disabled": false,
         "settings": {}
       }
     },
