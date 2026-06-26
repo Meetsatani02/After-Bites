@@ -460,8 +460,62 @@
     ]
   </script>
 
+  {%- comment -%}
+    Product structured data WITH aggregateRating.
+    Shopify's `product | structured_data` omits ratings, and Judge.me only
+    emits loose microdata that isn't attached to the Product — so Google saw
+    no product rating. We build a single, connected Product entity here using
+    the reviews.rating / reviews.rating_count metafields Judge.me populates.
+  {%- endcomment -%}
+  {%- liquid
+    assign jm_rating = product.metafields.reviews.rating.value
+    assign jm_rating_count = product.metafields.reviews.rating_count.value
+    assign low_price = product.price_min | money_without_currency | strip_html | replace: ',', ''
+    assign high_price = product.price_max | money_without_currency | strip_html | replace: ',', ''
+    assign first_variant = product.selected_or_first_available_variant
+  -%}
   <script type="application/ld+json">
-    {{ product | structured_data }}
+  {
+    "@context": "https://schema.org/",
+    "@type": "Product",
+    "name": {{ product.title | json }},
+    "url": {{ request.origin | append: product.url | json }},
+    {%- if product.images.size > 0 %}
+    "image": [
+      {%- for image in product.images limit: 3 -%}
+        {{ image | image_url: width: 1200 | prepend: 'https:' | json }}{%- unless forloop.last -%},{%- endunless -%}
+      {%- endfor -%}
+    ],
+    {%- endif %}
+    {%- if product.description != blank %}
+    "description": {{ product.description | strip_html | truncate: 320 | json }},
+    {%- endif %}
+    "brand": {
+      "@type": "Brand",
+      "name": {{ product.vendor | default: shop.name | json }}
+    },
+    {%- if first_variant.sku != blank %}
+    "sku": {{ first_variant.sku | json }},
+    {%- endif %}
+    {%- if jm_rating_count and jm_rating_count > 0 %}
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "{{ jm_rating.rating }}",
+      "reviewCount": "{{ jm_rating_count }}",
+      "bestRating": "{{ jm_rating.scale_max | default: 5 }}",
+      "worstRating": "{{ jm_rating.scale_min | default: 1 }}"
+    },
+    {%- endif %}
+    "offers": {
+      "@type": "AggregateOffer",
+      "priceCurrency": {{ cart.currency.iso_code | json }},
+      "lowPrice": "{{ low_price }}",
+      "highPrice": "{{ high_price }}",
+      "offerCount": {{ product.variants.size }},
+      "availability": "https://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}",
+      "url": {{ request.origin | append: product.url | json }}
+    }
+  }
   </script>
 </product-info>
 
