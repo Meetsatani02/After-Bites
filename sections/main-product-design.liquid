@@ -494,6 +494,7 @@
       "@type": "Brand",
       "name": {{ product.vendor | default: shop.name | json }}
     },
+    "category": {{ product.type | default: 'Paan Mukhwas / Mouth Freshener' | json }},
     {%- if first_variant.sku != blank %}
     "sku": {{ first_variant.sku | json }},
     {%- endif %}

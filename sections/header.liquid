@@ -647,26 +647,57 @@
   customElements.define('sticky-header', StickyHeader);
 {% endjavascript %}
 
+{%- comment -%}
+  Organization schema. Builds a clean sameAs from only the social links that are
+  actually set (the old version emitted empty "" entries, which is invalid JSON-LD),
+  and adds the canonical Surat/Gujarat address + contact details for local-SEO
+  relevance. Business identity values are kept in sync with policies & contact page.
+{%- endcomment -%}
+{%- liquid
+  assign raw_socials = settings.social_twitter_link | append: '|||' | append: settings.social_facebook_link | append: '|||' | append: settings.social_instagram_link | append: '|||' | append: settings.social_pinterest_link | append: '|||' | append: settings.social_tiktok_link | append: '|||' | append: settings.social_youtube_link | append: '|||' | append: settings.social_tumblr_link | append: '|||' | append: settings.social_snapchat_link | append: '|||' | append: settings.social_vimeo_link
+  assign raw_socials = raw_socials | split: '|||'
+  assign clean_socials = ''
+  for link in raw_socials
+    if link != blank
+      assign clean_socials = clean_socials | append: link | append: '|||'
+    endif
+  endfor
+  assign clean_socials = clean_socials | split: '|||'
+-%}
 <script type="application/ld+json">
   {
-    "@context": "http://schema.org",
+    "@context": "https://schema.org",
     "@type": "Organization",
     "name": {{ shop.name | json }},
+    "legalName": "AfterBites",
+    "url": {{ request.origin | json }},
     {% if settings.logo %}
       "logo": {{ settings.logo | image_url: width: 500 | prepend: "https:" | json }},
     {% endif %}
+    "description": {{ shop.description | default: 'After Bites makes 100% natural, tobacco-free paan mukhwas — both wet and dry — handcrafted in Surat, Gujarat.' | json }},
+    "email": "support.afterbites@gmail.com",
+    "telephone": "+91 99980 51832",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "419, Tulsi Arcade, Sudama Chowk, Mota Varachha",
+      "addressLocality": "Surat",
+      "addressRegion": "Gujarat",
+      "postalCode": "394101",
+      "addressCountry": "IN"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+91 99980 51832",
+      "email": "support.afterbites@gmail.com",
+      "contactType": "customer service",
+      "areaServed": "IN",
+      "availableLanguage": ["en", "hi", "gu"]
+    }{% if clean_socials.size > 0 %},
     "sameAs": [
-      {{ settings.social_twitter_link | json }},
-      {{ settings.social_facebook_link | json }},
-      {{ settings.social_pinterest_link | json }},
-      {{ settings.social_instagram_link | json }},
-      {{ settings.social_tiktok_link | json }},
-      {{ settings.social_tumblr_link | json }},
-      {{ settings.social_snapchat_link | json }},
-      {{ settings.social_youtube_link | json }},
-      {{ settings.social_vimeo_link | json }}
-    ],
-    "url": {{ request.origin | append: page.url | json }}
+      {%- for link in clean_socials -%}
+        {{ link | json }}{%- unless forloop.last -%},{%- endunless -%}
+      {%- endfor -%}
+    ]{% endif %}
   }
 </script>
 
@@ -674,7 +705,7 @@
   {% assign potential_action_target = request.origin | append: routes.search_url | append: '?q={search_term_string}' %}
   <script type="application/ld+json">
     {
-      "@context": "http://schema.org",
+      "@context": "https://schema.org",
       "@type": "WebSite",
       "name": {{ shop.name | json }},
       "potentialAction": {
