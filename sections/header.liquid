@@ -658,7 +658,7 @@
   assign raw_socials = raw_socials | split: '|||'
   assign clean_socials = ''
   for link in raw_socials
-    if link != blank
+    if link != blank and link != '#'
       assign clean_socials = clean_socials | append: link | append: '|||'
     endif
   endfor
