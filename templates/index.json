@@ -179,6 +179,13 @@
             "answer": "After Bites Paan Mukhwas is a traditional, tobacco-free after-meal mouth freshener with the sweet, cooling taste of classic paan ready to eat, no mess."
           }
         },
+        "faq_item_6gmen6": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What is After Bites Paan Mukhwas?",
+            "answer": "After Bites Paan Mukhwas is a traditional, tobacco free after-meal mouth freshener with the sweet, cooling taste of classic paan."
+          }
+        },
         "faq_item_3ptKN3": {
           "type": "faq_item",
           "settings": {
@@ -196,6 +203,7 @@
       },
       "block_order": [
         "faq_item_kHgjUE",
+        "faq_item_6gmen6",
         "faq_item_3ptKN3",
         "faq_item_njhnW4"
       ],
