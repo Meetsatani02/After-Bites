@@ -398,7 +398,7 @@
           {%- form 'contact', id: form_id -%}
             {%- if form.posted_successfully? -%}
               <p class="contact-form__message contact-form__message--success">
-                {{ section.settings.success_message | default: 'Thanks for reaching out — we will get back to you soon.' }}
+                {{ section.settings.success_message | default: 'Thanks for reaching out, we will get back to you soon.' }}
               </p>
             {%- elsif form.errors -%}
               <div class="contact-form__message contact-form__message--error">
@@ -559,7 +559,7 @@
       "type": "textarea",
       "id": "success_message",
       "label": "Success message",
-      "default": "Thanks for reaching out — we will get back to you soon."
+      "default": "Thanks for reaching out, we will get back to you soon."
     },
     {
       "type": "header",

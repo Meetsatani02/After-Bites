@@ -674,7 +674,7 @@
     {% if settings.logo %}
       "logo": {{ settings.logo | image_url: width: 500 | prepend: "https:" | json }},
     {% endif %}
-    "description": {{ shop.description | default: 'After Bites makes 100% natural, tobacco-free paan mukhwas — both wet and dry — handcrafted in Surat, Gujarat.' | json }},
+    "description": {{ shop.description | default: 'After Bites makes 100% natural, tobacco free paan mukhwas, both wet and dry, handcrafted in Surat, Gujarat.' | json }},
     "email": "support.afterbites@gmail.com",
     "telephone": "+91 99980 51832",
     "address": {

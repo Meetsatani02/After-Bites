@@ -14,21 +14,21 @@
           "type": "faq_item",
           "settings": {
             "question": "What is paan mukhwas?",
-            "answer": "Paan mukhwas is a traditional Indian after-meal mouth freshener inspired by classic paan (betel leaf). After Bites paan mukhwas blends natural paan leaves, gulkand, fennel and aromatic seeds into a ready-to-eat treat that freshens your breath and satisfies sweet cravings — with no preparation and no mess."
+            "answer": "Paan mukhwas is a traditional Indian after meal mouth freshener inspired by classic paan (betel leaf). After Bites paan mukhwas blends natural paan leaves, gulkand, fennel and aromatic seeds into a ready to eat treat that freshens your breath and satisfies sweet cravings, with no preparation and no mess."
           }
         },
         "q_tobacco_free": {
           "type": "faq_item",
           "settings": {
-            "question": "Is After Bites paan mukhwas tobacco-free and supari-free?",
-            "answer": "Yes. Every After Bites paan mukhwas is 100% tobacco-free and supari-free, made only with natural ingredients. You get the authentic taste of paan without any tobacco, areca nut (supari) or harmful additives."
+            "question": "Is After Bites paan mukhwas tobacco free and supari free?",
+            "answer": "Yes. Every After Bites paan mukhwas is 100% tobacco free and supari free, made only with natural ingredients. You get the authentic taste of paan without any tobacco, areca nut (supari) or harmful additives."
           }
         },
         "q_benefits": {
           "type": "faq_item",
           "settings": {
             "question": "What are the benefits of eating paan mukhwas after meals?",
-            "answer": "A spoonful of paan mukhwas after meals helps freshen your breath, supports digestion, cools the body and leaves a pleasant sweet taste. The fennel and betel leaf are traditionally used to ease post-meal heaviness and aid digestion."
+            "answer": "A spoonful of paan mukhwas after meals helps freshen your breath, supports digestion, cools the body and leaves a pleasant sweet taste. The fennel and betel leaf are traditionally used to ease post meal heaviness and aid digestion."
           }
         },
         "q_digestion": {
@@ -42,14 +42,14 @@
           "type": "faq_item",
           "settings": {
             "question": "What is the difference between wet and dry paan mukhwas?",
-            "answer": "Wet paan mukhwas is soft, moist and sweeter, with gulkand and candied paan for a juicy bite. Dry paan mukhwas is light, crunchy and made with toasted seeds and fennel for a refreshing, less-sweet finish. Both are 100% tobacco-free — choose by the taste and texture you prefer."
+            "answer": "Wet paan mukhwas is soft, moist and sweeter, with gulkand and candied paan for a juicy bite. Dry paan mukhwas is light, crunchy and made with toasted seeds and fennel for a refreshing, less sweet finish. Both are 100% tobacco free, choose by the taste and texture you prefer."
           }
         },
         "q_ingredients": {
           "type": "faq_item",
           "settings": {
             "question": "What ingredients are in After Bites paan mukhwas?",
-            "answer": "Our paan mukhwas is made with natural paan (betel) leaves, gulkand (rose-petal preserve), fennel seeds, sesame and a blend of traditional mouth-freshening seeds and spices — with no tobacco, supari or artificial colours."
+            "answer": "Our paan mukhwas is made with natural paan (betel) leaves, gulkand (rose petal preserve), fennel seeds, sesame and a blend of traditional mouth freshening seeds and spices, with no tobacco, supari or artificial colours."
           }
         },
         "q_family": {
@@ -70,14 +70,14 @@
           "type": "faq_item",
           "settings": {
             "question": "Is paan mukhwas a good natural mouth freshener for bad breath?",
-            "answer": "Yes. Paan mukhwas is a natural mouth freshener — the betel leaf, fennel and aromatic seeds leave your mouth feeling clean and your breath fresh after meals, without artificial mint or chemicals."
+            "answer": "Yes. Paan mukhwas is a natural mouth freshener, the betel leaf, fennel and aromatic seeds leave your mouth feeling clean and your breath fresh after meals, without artificial mint or chemicals."
           }
         },
         "q_buy_online": {
           "type": "faq_item",
           "settings": {
             "question": "How can I buy After Bites paan mukhwas online?",
-            "answer": "You can buy After Bites paan mukhwas online directly from our store — just choose your wet or dry paan mukhwas and pack size, add it to your cart and check out. We seal every pack fresh and deliver across India."
+            "answer": "You can buy After Bites paan mukhwas online directly from our store, just choose your wet or dry paan mukhwas and pack size, add it to your cart and check out. We seal every pack fresh and deliver across India."
           }
         }
       },
@@ -95,7 +95,7 @@
       ],
       "name": "FAQ",
       "settings": {
-        "heading": "Paan Mukhwas — Frequently Asked Questions",
+        "heading": "Paan Mukhwas Frequently Asked Questions",
         "border_image": "shopify://shop_images/border-image.svg"
       }
     }

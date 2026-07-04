@@ -27,11 +27,11 @@
         "text": "Have a question or just want to say hello? Fill out the form and our team will get back to you as soon as possible.",
         "contact_email": "support.afterbites@gmail.com",
         "contact_phone": "99980 51832",
-        "contact_address": "419, Tulsi Arcade, Sudama Chowk, Mota Varachha, Surat - 394101, Gujarat, India",
+        "contact_address": "419, Tulsi Arcade, Sudama Chowk, Mota Varachha, Surat 394101, Gujarat, India",
         "form_heading": "Contact With Afterbites",
         "ornament_image": "shopify://shop_images/contact_form.svg",
         "button_label": "Send Message",
-        "success_message": "Thanks for reaching out — we will get back to you soon.",
+        "success_message": "Thanks for reaching out, we will get back to you soon.",
         "form_position": "right"
       }
     },
@@ -42,14 +42,14 @@
           "type": "faq_item",
           "settings": {
             "question": "How can I get in touch with the After Bites team?",
-            "answer": "Just fill out the contact form above with your question and we'll reply by email. You can also reach us through our social channels — we're always happy to help with anything about our paan mukhwas."
+            "answer": "Just fill out the contact form above with your question and we'll reply by email. You can also reach us through our social channels, we're always happy to help with anything about our paan mukhwas."
           }
         },
         "faq_item_VDCK7m": {
           "type": "faq_item",
           "settings": {
             "question": "How soon will I get a reply?",
-            "answer": "We aim to respond to every message within 1–2 business days. For order-related queries, please include your order number so our team can help you faster."
+            "answer": "We aim to respond to every message within 1 to 2 business days. For order related queries, please include your order number so our team can help you faster."
           }
         },
         "faq_item_CTfapT": {
@@ -62,7 +62,7 @@
         "faq_item_pRq7Lm": {
           "type": "faq_item",
           "settings": {
-            "question": "I have a question about my order — what should I share?",
+            "question": "I have a question about my order, what should I share?",
             "answer": "Please include your order number, the email used at checkout, and a short note about your question so we can resolve it quickly in one reply."
           }
         }
@@ -87,7 +87,7 @@
           "settings": {
             "video": "shopify://files/videos/mukhawas.mov",
             "video_url": "",
-            "caption": "Quick replies and genuine care — the After Bites team really looks after their customers."
+            "caption": "Quick replies and genuine care, the After Bites team really looks after their customers."
           }
         },
         "review_kydRzN": {
