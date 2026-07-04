@@ -19,16 +19,30 @@
 
     <title>
       {{ page_title }}
-      {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
-      {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+      {%- if current_tags %} | tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+      {%- if current_page != 1 %} | Page {{ current_page }}{% endif -%}
+      {%- unless page_title contains shop.name %} | {{ shop.name }}{% endunless -%}
     </title>
 
-    {% if page_description %}
-      <meta name="description" content="{{ page_description | escape }}">
-    {% elsif request.page_type == 'index' %}
-      <meta name="description" content="After Bites Paan Mukhwas, buy 100% tobacco free &amp; supari free paan mukhwas and mouth freshener online. Sweet wet &amp; crunchy dry blends made with natural paan leaves, gulkand and fennel for a refreshing after meal taste.">
-    {% endif %}
+    {%- liquid
+      assign meta_description = page_description
+      if meta_description == blank
+        case request.page_type
+          when 'product'
+            assign meta_description = product.description | strip_html | truncate: 320
+          when 'collection'
+            assign meta_description = collection.description | strip_html | truncate: 320
+          when 'page'
+            assign meta_description = page.content | strip_html | truncate: 320
+          when 'article'
+            assign meta_description = article.excerpt_or_content | strip_html | truncate: 320
+        endcase
+      endif
+      if meta_description == blank
+        assign meta_description = 'After Bites Paan Mukhwas, buy 100% tobacco free and supari free paan mukhwas and mouth freshener online. Sweet wet and crunchy dry blends made with natural paan leaves, gulkand and fennel for a refreshing after meal taste.'
+      endif
+    -%}
+    <meta name="description" content="{{ meta_description | escape }}">
 
     {% render 'meta-tags' %}
 
