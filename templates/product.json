@@ -87,6 +87,63 @@
         "border_image": "shopify://shop_images/border-image.svg"
       }
     },
+    "nutrition_ntRb01": {
+      "type": "nutrition",
+      "blocks": {
+        "row_n1": {
+          "type": "row",
+          "settings": {
+            "label": "Lorem Ipsum is simply dummy text",
+            "value": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+          }
+        },
+        "row_n2": {
+          "type": "row",
+          "settings": {
+            "label": "Lorem Ipsum is simply dummy text",
+            "value": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+          }
+        },
+        "row_n3": {
+          "type": "row",
+          "settings": {
+            "label": "Lorem Ipsum is simply dummy text",
+            "value": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+          }
+        },
+        "row_n4": {
+          "type": "row",
+          "settings": {
+            "label": "Lorem Ipsum is simply dummy text",
+            "value": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+          }
+        },
+        "row_n5": {
+          "type": "row",
+          "settings": {
+            "label": "Lorem Ipsum is simply dummy text",
+            "value": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+          }
+        },
+        "row_n6": {
+          "type": "row",
+          "settings": {
+            "label": "Lorem Ipsum is simply dummy text",
+            "value": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+          }
+        }
+      },
+      "block_order": [
+        "row_n1",
+        "row_n2",
+        "row_n3",
+        "row_n4",
+        "row_n5",
+        "row_n6"
+      ],
+      "name": "Nutrition",
+      "settings": {}
+    },
     "faq_FdDkeG": {
       "type": "faq",
       "blocks": {
@@ -175,6 +232,7 @@
     "main",
     "related-products",
     "product_details_YG9RAy",
+    "nutrition_ntRb01",
     "faq_FdDkeG",
     "review_video_qwjQyQ"
   ]
