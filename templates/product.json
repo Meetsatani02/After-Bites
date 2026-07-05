@@ -16,65 +16,6 @@
         "image_position_mobile": "top"
       }
     },
-    "product_details_YG9RAy": {
-      "type": "product-details",
-      "blocks": {
-        "list_item_rfmbyC": {
-          "type": "list_item",
-          "settings": {
-            "text": "Lorem Ipsum is simply dummy text"
-          }
-        },
-        "list_item_MHxVqh": {
-          "type": "list_item",
-          "settings": {
-            "text": "Lorem Ipsum is simply dummy text"
-          }
-        },
-        "list_item_ygVm7x": {
-          "type": "list_item",
-          "settings": {
-            "text": "Lorem Ipsum is simply dummy text"
-          }
-        },
-        "list_item_DDDbmq": {
-          "type": "list_item",
-          "settings": {
-            "text": "Lorem Ipsum is simply dummy text"
-          }
-        },
-        "list_item_DKar64": {
-          "type": "list_item",
-          "settings": {
-            "text": "Lorem Ipsum is simply dummy text"
-          }
-        },
-        "list_item_JiV9Ta": {
-          "type": "list_item",
-          "settings": {
-            "text": "Lorem Ipsum is simply dummy text"
-          }
-        }
-      },
-      "block_order": [
-        "list_item_rfmbyC",
-        "list_item_MHxVqh",
-        "list_item_ygVm7x",
-        "list_item_DDDbmq",
-        "list_item_DKar64",
-        "list_item_JiV9Ta"
-      ],
-      "disabled": true,
-      "name": "Product Details",
-      "settings": {
-        "heading": "Product Details",
-        "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.",
-        "image_position": "right",
-        "image_position_mobile": "top",
-        "image": "shopify://shop_images/pro-img.png",
-        "border_image": "shopify://shop_images/border-image.svg"
-      }
-    },
     "related-products": {
       "type": "related-products",
       "disabled": true,
@@ -92,6 +33,58 @@
         "show_rating": false,
         "padding_top": 36,
         "padding_bottom": 28
+      }
+    },
+    "product_details_YG9RAy": {
+      "type": "product-details",
+      "blocks": {
+        "list_item_9h3jrD": {
+          "type": "list_item",
+          "settings": {
+            "text": "Helps freshen breath after meals"
+          }
+        },
+        "list_item_rfmbyC": {
+          "type": "list_item",
+          "settings": {
+            "text": "Enhances mouth freshness and taste"
+          }
+        },
+        "list_item_MHxVqh": {
+          "type": "list_item",
+          "settings": {
+            "text": "Traditional blend of aromatic seeds and herbs"
+          }
+        },
+        "list_item_pg6wLe": {
+          "type": "list_item",
+          "settings": {
+            "text": "A delightful digestive mouth freshener"
+          }
+        },
+        "list_item_ygVm7x": {
+          "type": "list_item",
+          "settings": {
+            "text": "Rich in flavour with a refreshing aftertaste"
+          }
+        }
+      },
+      "block_order": [
+        "list_item_9h3jrD",
+        "list_item_rfmbyC",
+        "list_item_MHxVqh",
+        "list_item_pg6wLe",
+        "list_item_ygVm7x"
+      ],
+      "disabled": true,
+      "name": "Product Details",
+      "settings": {
+        "heading": "Product Details",
+        "text": "A premium after-meal refreshment crafted with aromatic seeds, spices, and rich traditional flavours. A delightful digestive mouth freshener that enhances taste and freshness after every meal.",
+        "image_position": "right",
+        "image_position_mobile": "top",
+        "image": "shopify://shop_images/pro-img.png",
+        "border_image": "shopify://shop_images/border-image.svg"
       }
     },
     "faq_FdDkeG": {
@@ -180,8 +173,8 @@
   },
   "order": [
     "main",
-    "product_details_YG9RAy",
     "related-products",
+    "product_details_YG9RAy",
     "faq_FdDkeG",
     "review_video_qwjQyQ"
   ]
