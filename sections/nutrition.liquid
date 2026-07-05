@@ -10,6 +10,7 @@
   }
 
   .nutrition-inner {
+    position: relative;
     box-sizing: border-box;
     width: 100%;
     max-width: 1296px;
@@ -75,22 +76,33 @@
     border-left: 1px solid rgba(28, 48, 37, 0.28);
   }
 
-  /* decorative brand seal, faded, tucked into the bottom-right corner */
+  /* Brand seal — crisp gold badge bleeding past the box's bottom-right corner,
+     matching the home-page "Product feature new" logo. */
   .nutrition-stamp {
     position: absolute;
-    right: 20px;
-    bottom: 14px;
-    width: clamp(90px, 10vw, 132px);
-    height: auto;
-    opacity: 0.7;
+    right: 24px;
+    bottom: -40px;
+    width: 150px;
+    opacity: 1;
     pointer-events: none;
-    z-index: 2;
+    z-index: 3;
   }
 
   .nutrition-stamp svg {
     display: block;
-    width: 100%;
-    height: auto;
+    width: 100% !important;
+    height: auto !important;
+    transform-origin: center center;
+    animation: nutrition-seal-spin 12s linear infinite;
+  }
+
+  @keyframes nutrition-seal-spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .nutrition-stamp svg { animation: none; }
   }
 
   /* Tablet */
@@ -139,10 +151,10 @@
     }
 
     .nutrition-stamp {
-      right: 10px;
-      bottom: 8px;
-      width: 78px;
-      opacity: 0.55;
+      right: 12px;
+      bottom: -22px;
+      width: 104px;
+      opacity: 1;
     }
   }
 </style>
@@ -171,10 +183,15 @@
           </div>
         </div>
       {%- endfor -%}
+    </div>
 
-      <div class="nutrition-stamp" aria-hidden="true">
-        {% render 'gray-logo' %}
-      </div>
+    {%- comment -%}
+      Brand seal — sits OUTSIDE the (clipped) box so it can bleed past the
+      bottom-right corner as a crisp badge, like the home-page "Product feature
+      new" logo. Positioned against .nutrition-inner.
+    {%- endcomment -%}
+    <div class="nutrition-stamp" aria-hidden="true">
+      {% render 'gray-logo' %}
     </div>
   </div>
 </section>
