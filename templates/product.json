@@ -18,6 +18,7 @@
     },
     "product_logo_pl01": {
       "type": "product-logo",
+      "disabled": true,
       "settings": {
         "alignment": "right",
         "logo_size": 176,
@@ -154,7 +155,9 @@
         "row_n6"
       ],
       "name": "Nutrition",
-      "settings": {}
+      "settings": {
+        "heading": ""
+      }
     },
     "faq_FdDkeG": {
       "type": "faq",
