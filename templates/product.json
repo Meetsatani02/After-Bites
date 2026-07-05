@@ -16,19 +16,6 @@
         "image_position_mobile": "top"
       }
     },
-    "product_logo_pl01": {
-      "type": "product-logo",
-      "disabled": true,
-      "settings": {
-        "alignment": "right",
-        "logo_size": 176,
-        "logo_size_mobile": 120,
-        "padding_top": 40,
-        "padding_bottom": 40,
-        "padding_top_mobile": 24,
-        "padding_bottom_mobile": 24
-      }
-    },
     "related-products": {
       "type": "related-products",
       "disabled": true,
@@ -245,7 +232,6 @@
   },
   "order": [
     "main",
-    "product_logo_pl01",
     "related-products",
     "product_details_YG9RAy",
     "nutrition_ntRb01",
