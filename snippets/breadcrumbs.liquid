@@ -63,7 +63,8 @@
   }
   </script>
   {%- style -%}
-    .breadcrumbs { padding-top: 16px; padding-bottom: 4px; }
+    /* Visible breadcrumb trail hidden by request; BreadcrumbList schema above is kept for SEO. */
+    .breadcrumbs { display: none !important; }
     .breadcrumbs__list {
       list-style: none; margin: 0; padding: 0;
       display: flex; flex-wrap: wrap; align-items: center; gap: 6px;
