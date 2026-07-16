@@ -92,22 +92,20 @@
     background: var(--beige);
   }
 
+  /* Image shows FULL (no crop): natural aspect ratio, centered vertically
+     if the text half happens to be taller. */
   .pd-img {
-    position: relative;
-    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     line-height: 0;
   }
-  /* Absolute-fill: the image adopts the section's height (set by the text +
-     min-height) and crops with object-fit instead of dictating the height. */
+  .pd-img picture { width: 100%; }
   .pd-img picture,
   .pd-img img {
-    position: absolute;
-    inset: 0;
     display: block;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
+    height: auto;
   }
 
   @media (max-width: 1024px) {
@@ -129,16 +127,11 @@
     .pd-container--image-left .pd-content {
       padding: 56px 20px;
     }
-    /* Stacked layout: back to natural flow, cap very tall images with a
-       pleasant crop so the section stays balanced on mobile too. */
+    /* Stacked layout: full image, natural flow. */
     .pd-img picture,
     .pd-img img {
-      position: static;
+      width: 100%;
       height: auto;
-    }
-    .pd-img img {
-      max-height: 70vh;
-      object-fit: cover;
     }
   }
 
