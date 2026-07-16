@@ -174,13 +174,13 @@
     }
   }
 </style>
-
+{% comment %} 
 {%- if section.settings.border_image != blank -%}
   {%- assign border_alt = section.settings.border_image.alt | default: 'border' -%}
   <div class="hero-border">
     {{ section.settings.border_image | image_url: width: 3000 | image_tag: alt: border_alt, widths: '750, 1100, 1500, 2000, 3000', sizes: '100vw', loading: 'lazy' }}
   </div>
-{%- endif -%}
+{%- endif -%} {% endcomment %}
 
 <section class="nutrition-section" id="Nutrition-{{ section.id }}">
   <div class="nutrition-inner">
