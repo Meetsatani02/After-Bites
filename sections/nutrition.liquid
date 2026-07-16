@@ -76,16 +76,26 @@
     border-left: 1px solid rgba(28, 48, 37, 0.28);
   }
 
-  /* Brand seal — crisp gold badge bleeding past the box's bottom-right corner,
+  /* Brand seal — crisp gold badge straddling the box's bottom-right corner:
+     half bleeds past the right edge and slightly past the bottom edge,
      matching the home-page "Product feature new" logo. */
   .nutrition-stamp {
     position: absolute;
-    right: 24px;
-    bottom: -40px;
+    right: -75px;  /* half the seal width — centers it on the right border */
+    bottom: -40px; /* slight bleed below the bottom corner */
     width: 150px;
     opacity: 1;
     pointer-events: none;
     z-index: 3;
+  }
+
+  /* Below ~1400px the inner wrapper fills the section, so only the section's
+     40px inline padding is available for the right-side bleed — cap it there
+     to avoid the seal being clipped by the section's overflow: hidden. */
+  @media (max-width: 1400px) {
+    .nutrition-stamp {
+      right: -40px;
+    }
   }
 
   .nutrition-stamp svg {
@@ -122,6 +132,12 @@
       font-size: 18px;
       line-height: 24px;
     }
+
+    .nutrition-stamp {
+      right: -30px; /* matches the 30px section padding — bleeds without clipping */
+      bottom: -32px;
+      width: 120px;
+    }
   }
 
   /* Mobile */
@@ -151,9 +167,9 @@
     }
 
     .nutrition-stamp {
-      right: 12px;
+      right: -18px; /* stays inside the 20px section padding */
       bottom: -22px;
-      width: 104px;
+      width: 96px;
       opacity: 1;
     }
   }
