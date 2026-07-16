@@ -1,0 +1,101 @@
+
+<style>
+  /* ===========================================================
+     Judge.me product reviews — match the After Bites brand palette
+     green #1C3025 · beige #F4EDDB · gold #CAA36C
+     =========================================================== */
+
+  /* Reviews section wrapper — give it room top & bottom */
+  .product-reviews-section {
+      padding: 60px 0 70px;
+      color: var(--green);
+  }
+  @media (max-width: 749px) {
+      .product-reviews-section { padding: 40px 0 50px; }
+  }
+
+  /* Stars everywhere in the full widget */
+  .jdgm-widget .jdgm-star.jdgm--on,
+  .jdgm-widget .jdgm-star.jdgm--half { color: var(--yellow) !important; }
+  .jdgm-widget .jdgm-star.jdgm--off { color: var(--dark-beige) !important; }
+
+  /* Headings / summary / body / author text */
+  .jdgm-widget,
+  .jdgm-widget .jdgm-rev-widg__title,
+  .jdgm-widget .jdgm-rev-widg__summary-text,
+  .jdgm-widget .jdgm-histogram__label,
+  .jdgm-widget .jdgm-rev__author,
+  .jdgm-widget .jdgm-rev__title,
+  .jdgm-widget .jdgm-rev__body { color: var(--green) !important; }
+  .jdgm-widget .jdgm-rev__timestamp { color: var(--green); opacity: 0.6; }
+
+  /* "Write a review" button → solid brand green */
+  .jdgm-widget .jdgm-write-rev-link,
+  .jdgm-widget .jdgm-btn {
+      background-color: var(--green) !important;
+      color: var(--beige) !important;
+      border: 1px solid var(--green) !important;
+  }
+  .jdgm-widget .jdgm-write-rev-link:hover,
+  .jdgm-widget .jdgm-btn:hover {
+      background-color: var(--light-green) !important;
+      border-color: var(--light-green) !important;
+  }
+
+  /* Filter & sort icon buttons → outlined in brand green */
+  .jdgm-widget .jdgm-sort-dropdown__button,
+  .jdgm-widget .jdgm-filters-panel-toggle-btn {
+      color: var(--green) !important;
+      border: 1px solid var(--green) !important;
+      background: transparent !important;
+  }
+
+  /* Reviewer avatar circle */
+  .jdgm-widget .jdgm-rev__pic-content,
+  .jdgm-widget .jdgm-rev__author-wrapper .jdgm-rev__pic {
+      background-color: var(--dark-beige) !important;
+      color: var(--green) !important;
+  }
+
+  /* Histogram bars */
+  .jdgm-widget .jdgm-histogram__bar-content { background-color: var(--yellow) !important; }
+
+  /* Divider lines between reviews */
+  .jdgm-widget .jdgm-rev,
+  .jdgm-widget .jdgm-rev-widg__header { border-color: var(--dark-beige) !important; }
+</style>
+
+{%- comment -%} Judge.me product review widget {%- endcomment -%}
+<section class="product-reviews-section page-width" id="ProductReviews-{{ section.id }}">
+  <!-- Start of Judge.me code -->
+  {% assign has_legacy = false %}
+  {% if product.metafields.judgeme.widget.size > 20 %}{% assign has_legacy = true %}{% endif %}
+  <div style='clear:both'></div>
+  <div id='judgeme_product_reviews' class='jdgm-widget jdgm-review-widget' data-product-title='{{ product.title | escape }}' data-id='{{ product.id }}' data-product-id='{{ product.id }}' data-widget='review' data-auto-install='false' data-shop-reviews-count='{{ shop.metafields.judgeme.shop_reviews_count | default: 0 | escape }}' data-entry-point='review_widget.js' data-entry-key='review-widget/main.js'>
+    {% if has_legacy %}<div class='jdgm-legacy-widget-content' style='display: none;'>{{ product.metafields.judgeme.widget }}</div>{% endif %}
+  </div>
+  {% if product.metafields.judgeme.review_widget_data %}<script>jdgm.data ||= {}; jdgm.data.reviewWidget ||= {}; jdgm.data.reviewWidget[{{ product.id }}] = {{ product.metafields.judgeme.review_widget_data }}</script>{% endif %}
+  <!-- End of Judge.me code -->
+</section>
+
+{% schema %}
+{
+  "name": "Product Reviews",
+  "tag": "section",
+  "class": "section",
+  "enabled_on": {
+    "templates": ["product"]
+  },
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Judge.me review widget for the current product. Move or reorder this section freely on the product template."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Reviews"
+    }
+  ]
+}
+{% endschema %}

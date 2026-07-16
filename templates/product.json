@@ -16,6 +16,11 @@
         "image_position_mobile": "top"
       }
     },
+    "product_reviews_main": {
+      "type": "product-reviews",
+      "name": "Product Reviews",
+      "settings": {}
+    },
     "related-products": {
       "type": "related-products",
       "disabled": true,
@@ -231,6 +236,7 @@
   },
   "order": [
     "main",
+    "product_reviews_main",
     "related-products",
     "product_details_YG9RAy",
     "nutrition_ntRb01",
