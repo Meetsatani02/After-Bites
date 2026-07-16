@@ -142,7 +142,8 @@
       ],
       "name": "Nutrition",
       "settings": {
-        "heading": ""
+        "heading": "",
+        "border_image": "shopify://shop_images/border-image.svg"
       }
     },
     "product_reviews_main": {
