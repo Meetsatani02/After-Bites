@@ -16,11 +16,6 @@
         "image_position_mobile": "top"
       }
     },
-    "product_reviews_main": {
-      "type": "product-reviews",
-      "name": "Product Reviews",
-      "settings": {}
-    },
     "related-products": {
       "type": "related-products",
       "disabled": true,
@@ -90,6 +85,11 @@
         "image": "shopify://shop_images/pro-img.png",
         "border_image": "shopify://shop_images/border-image.svg"
       }
+    },
+    "product_reviews_main": {
+      "type": "product-reviews",
+      "name": "Product Reviews",
+      "settings": {}
     },
     "nutrition_ntRb01": {
       "type": "nutrition",
@@ -236,10 +236,10 @@
   },
   "order": [
     "main",
-    "product_reviews_main",
     "related-products",
     "product_details_YG9RAy",
     "nutrition_ntRb01",
+    "product_reviews_main",
     "faq_FdDkeG",
     "review_video_qwjQyQ"
   ]
