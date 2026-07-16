@@ -10,6 +10,9 @@
     display: flex;
     align-items: stretch;
     width: 100%;
+    /* Section height ≈ one screen: the image half fills & crops to this
+       instead of its natural (very tall) height stretching the section. */
+    min-height: clamp(520px, 80vh, 740px);
   }
 
   /* Image-left variant: flip the row so the image bleeds to the left edge. */
@@ -90,22 +93,28 @@
   }
 
   .pd-img {
-    display: flex;
+    position: relative;
+    overflow: hidden;
     line-height: 0;
   }
-  .pd-img picture { width: 100%; }
+  /* Absolute-fill: the image adopts the section's height (set by the text +
+     min-height) and crops with object-fit instead of dictating the height. */
   .pd-img picture,
   .pd-img img {
+    position: absolute;
+    inset: 0;
     display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
   }
 
   @media (max-width: 1024px) {
     .pd-container {
       align-items: flex-start;
       flex-direction: column;
+      min-height: 0;
     }
     .pd-container--image-mobile-top { flex-direction: column-reverse; }
     .pd-container--image-mobile-bottom { flex-direction: column; }
@@ -120,7 +129,17 @@
     .pd-container--image-left .pd-content {
       padding: 56px 20px;
     }
-    .pd-img img { height: auto; }
+    /* Stacked layout: back to natural flow, cap very tall images with a
+       pleasant crop so the section stays balanced on mobile too. */
+    .pd-img picture,
+    .pd-img img {
+      position: static;
+      height: auto;
+    }
+    .pd-img img {
+      max-height: 70vh;
+      object-fit: cover;
+    }
   }
 
   @media (max-width: 768px) {
