@@ -5,13 +5,23 @@
      green #1C3025 · beige #F4EDDB · gold #CAA36C
      =========================================================== */
 
-  /* Reviews section wrapper — give it room top & bottom */
+  /* Reviews section wrapper — room top & bottom, and inline padding
+     mirroring the Nutrition / FAQ sections so content never touches
+     the screen edge. */
   .product-reviews-section {
-      padding: 60px 0 70px;
+      box-sizing: border-box;
+      padding: 60px 40px 70px;
       color: var(--green);
   }
-  @media (max-width: 749px) {
-      .product-reviews-section { padding: 40px 0 50px; }
+
+  /* Tablet */
+  @media (max-width: 1024px) {
+      .product-reviews-section { padding: 48px 30px 56px; }
+  }
+
+  /* Mobile */
+  @media (max-width: 600px) {
+      .product-reviews-section { padding: 40px 20px 48px; }
   }
 
   /* Stars everywhere in the full widget */
