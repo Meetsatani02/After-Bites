@@ -5,7 +5,9 @@
   - Slides come from image blocks (if added) or the current product's images
 {%- endcomment -%}
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+{%- comment -%} Self hosted Swiper CSS, loaded without blocking render (slider is below the fold) {%- endcomment -%}
+<link rel="stylesheet" href="{{ 'swiper-bundle.min.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="{{ 'swiper-bundle.min.css' | asset_url }}"></noscript>
 
 {%- liquid
   assign bg = section.settings.bg_color
@@ -163,7 +165,7 @@
   </div>
 </section>
 
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer></script>
 <script>
   (function () {
     function initSlider() {
