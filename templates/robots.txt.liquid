@@ -1,0 +1,30 @@
+{%- comment -%}
+  Custom robots.txt for After Bites.
+
+  This starts from Shopify's default robots rules (which already allow the
+  main pages, block cart, checkout, account and admin URLs, and link the
+  sitemap) and then adds a few extra rules of our own.
+
+  Shopify auto serves this at https://www.theafterbites.com/robots.txt and
+  keeps the sitemap reference in sync, so search engines can crawl the store
+  and find every product, collection, page and blog post.
+{%- endcomment -%}
+{%- for group in robots.default_groups -%}
+  {{- group.user_agent }}
+
+  {%- for rule in group.rules -%}
+    {{ rule }}
+  {%- endfor -%}
+
+  {%- comment -%} Keep internal search result and filtered URLs out of crawl {%- endcomment -%}
+  {%- if group.user_agent.value == '*' -%}
+    {{ 'Disallow: /search' }}
+    {{ 'Disallow: /*?q=*' }}
+    {{ 'Disallow: /*sort_by*' }}
+    {{ 'Disallow: /*filter.*' }}
+  {%- endif -%}
+
+  {%- if group.sitemap != blank -%}
+    {{ group.sitemap }}
+  {%- endif -%}
+{%- endfor -%}

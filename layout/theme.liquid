@@ -6,7 +6,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="#1C3025">
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    {%- comment -%}
+      Index the pages that should rank (home, products, collections, blog,
+      articles, static pages, policies) and keep thin or private utility
+      pages out of the index (cart, search results, all customer account
+      pages, password, gift card, 404). This concentrates ranking signals
+      on the main pages and avoids duplicate or empty pages in Google.
+    {%- endcomment -%}
+    {%- liquid
+      assign noindex_types = 'cart,search,customers/account,customers/login,customers/register,customers/order,customers/reset_password,customers/activate_account,customers/addresses,password,gift_card,404' | split: ','
+      assign robots_index = 'index, follow'
+      if noindex_types contains request.page_type
+        assign robots_index = 'noindex, follow'
+      endif
+    -%}
+    <meta name="robots" content="{{ robots_index }}, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <link rel="canonical" href="{{ canonical_url }}">
 
     {%- if settings.favicon != blank -%}
