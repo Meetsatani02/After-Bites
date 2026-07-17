@@ -20,7 +20,7 @@
 
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+  /* Inter is loaded once globally in theme.liquid; no per-section import needed */
 
   {%- if section.settings.sticky_header_type == 'reduce-logo-size' -%}
     .scrolled-past-header .header-logo img {
