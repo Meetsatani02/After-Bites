@@ -188,17 +188,73 @@
       <h2 class="nutrition-heading">{{ section.settings.heading | escape }}</h2>
     {%- endif -%}
 
+    {%- liquid
+      # ---------------------------------------------------------------
+      # Per-product rows from a metafield (multi-line text).
+      # One row per line, "Label | Value" (also accepts "Label : Value").
+      # Falls back to the static section blocks when the product has no
+      # metafield data, so the theme-editor rows still work everywhere.
+      # ---------------------------------------------------------------
+      assign mf_raw = ''
+      assign mf_key = section.settings.metafield_key | default: 'custom.product_details' | strip
+      assign mf_parts = mf_key | split: '.'
+      if product and mf_parts.size == 2
+        assign mf_value = product.metafields[mf_parts[0]][mf_parts[1]].value
+        assign mf_raw = mf_value | default: '' | strip
+      endif
+    -%}
+
     <div class="nutrition-box">
-      {%- for block in section.blocks -%}
-        <div class="nut-row" {{ block.shopify_attributes }}>
-          <div class="nut-cell nut-cell--label">
-            {{ block.settings.label }}{% if block.settings.label != blank %} :{% endif %}
+      {%- if mf_raw != blank -%}
+        {%- assign mf_lines = mf_raw | newline_to_br | split: '<br />' -%}
+        {%- for line in mf_lines -%}
+          {%- assign row = line | strip -%}
+          {%- if row == blank -%}{%- continue -%}{%- endif -%}
+
+          {%- liquid
+            # Prefer "|" as the label/value separator; fall back to the
+            # first ":" so plain "Label : Value" lines also work.
+            if row contains '|'
+              assign sep = '|'
+            else
+              assign sep = ':'
+            endif
+            assign row_parts = row | split: sep
+            assign raw_label = row_parts | first
+            assign row_label = raw_label | strip
+            # slice everything after the FIRST separator so values may
+            # freely contain "|" or ":" themselves
+            assign value_offset = raw_label.size | plus: 1
+            assign row_value = row | slice: value_offset, row.size | strip
+          -%}
+
+          <div class="nut-row">
+            <div class="nut-cell nut-cell--label">
+              {%- if row_value != blank -%}
+                {{ row_label | escape }} :
+              {%- endif -%}
+            </div>
+            <div class="nut-cell nut-cell--value">
+              {%- if row_value != blank -%}
+                {{ row_value | escape }}
+              {%- else -%}
+                {{ row_label | escape }}
+              {%- endif -%}
+            </div>
           </div>
-          <div class="nut-cell nut-cell--value">
-            {{ block.settings.value }}
+        {%- endfor -%}
+      {%- else -%}
+        {%- for block in section.blocks -%}
+          <div class="nut-row" {{ block.shopify_attributes }}>
+            <div class="nut-cell nut-cell--label">
+              {{ block.settings.label }}{% if block.settings.label != blank %} :{% endif %}
+            </div>
+            <div class="nut-cell nut-cell--value">
+              {{ block.settings.value }}
+            </div>
           </div>
-        </div>
-      {%- endfor -%}
+        {%- endfor -%}
+      {%- endif -%}
     </div>
 
     {%- comment -%}
@@ -234,6 +290,17 @@
       "id": "heading",
       "label": "Heading",
       "info": "Optional. Leave blank to show only the table."
+    },
+    {
+      "type": "header",
+      "content": "Per-product rows (metafield)"
+    },
+    {
+      "type": "text",
+      "id": "metafield_key",
+      "label": "Product metafield (namespace.key)",
+      "default": "custom.product_details",
+      "info": "Multi-line text metafield. One row per line, written as: Label | Value. When the product has data here it replaces the static rows below; products without it fall back to the static rows."
     },
     {
       "type": "image_picker",

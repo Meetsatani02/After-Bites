@@ -92,43 +92,78 @@
         "row_n1": {
           "type": "row",
           "settings": {
-            "label": "Lorem Ipsum is simply dummy text",
-            "value": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+            "label": "Energy",
+            "value": "360-390 kcal (per 100 g)"
           }
         },
         "row_n2": {
           "type": "row",
           "settings": {
-            "label": "Lorem Ipsum is simply dummy text",
-            "value": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+            "label": "Total Carbohydrates",
+            "value": "72-78 g"
           }
         },
         "row_n3": {
           "type": "row",
           "settings": {
-            "label": "Lorem Ipsum is simply dummy text",
-            "value": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+            "label": "Total Sugars",
+            "value": "32-38 g"
           }
         },
         "row_n4": {
           "type": "row",
           "settings": {
-            "label": "Lorem Ipsum is simply dummy text",
-            "value": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+            "label": "Added Sugars",
+            "value": "25-30 g"
           }
         },
         "row_n5": {
           "type": "row",
           "settings": {
-            "label": "Lorem Ipsum is simply dummy text",
-            "value": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+            "label": "Dietary Fiber",
+            "value": "12-16 g"
           }
         },
         "row_n6": {
           "type": "row",
           "settings": {
-            "label": "Lorem Ipsum is simply dummy text",
-            "value": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+            "label": "Protein",
+            "value": "6-8 g"
+          }
+        },
+        "row_n7": {
+          "type": "row",
+          "settings": {
+            "label": "Total Fat",
+            "value": "4-6 g"
+          }
+        },
+        "row_n8": {
+          "type": "row",
+          "settings": {
+            "label": "- Saturated Fat",
+            "value": "Less than 0.5 g"
+          }
+        },
+        "row_n9": {
+          "type": "row",
+          "settings": {
+            "label": "- Trans Fat",
+            "value": "0 g"
+          }
+        },
+        "row_n10": {
+          "type": "row",
+          "settings": {
+            "label": "Sodium",
+            "value": "30-50 mg"
+          }
+        },
+        "row_n11": {
+          "type": "row",
+          "settings": {
+            "label": "Calcium",
+            "value": "600-800 mg"
           }
         }
       },
@@ -138,11 +173,16 @@
         "row_n3",
         "row_n4",
         "row_n5",
-        "row_n6"
+        "row_n6",
+        "row_n7",
+        "row_n8",
+        "row_n9",
+        "row_n10",
+        "row_n11"
       ],
       "name": "Nutrition",
       "settings": {
-        "heading": "",
+        "heading": "Nutrition",
         "border_image": "shopify://shop_images/border-image.svg"
       }
     },
