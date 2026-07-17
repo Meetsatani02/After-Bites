@@ -175,6 +175,29 @@
   }
 </style>
 
+{%- comment -%}
+  Preload the hero image so the browser starts downloading it immediately,
+  in parallel with the CSS, instead of discovering it late. This is the main
+  fix for a slow Largest Contentful Paint. The preload scanner picks these up
+  right away because the hero is the first section on the page.
+{%- endcomment -%}
+{%- if section.settings.image != blank or section.settings.image_mobile != blank -%}
+  {%- liquid
+    assign pl_desktop = section.settings.image | default: section.settings.image_mobile
+    assign pl_mobile = section.settings.image_mobile | default: section.settings.image
+  -%}
+  <link rel="preload" as="image" fetchpriority="high"
+    media="(max-width: 768px)"
+    href="{{ pl_mobile | image_url: width: 900 }}"
+    imagesrcset="{{ pl_mobile | image_url: width: 600 }} 600w, {{ pl_mobile | image_url: width: 900 }} 900w, {{ pl_mobile | image_url: width: 1100 }} 1100w"
+    imagesizes="100vw">
+  <link rel="preload" as="image" fetchpriority="high"
+    media="(min-width: 769px)"
+    href="{{ pl_desktop | image_url: width: 1500 }}"
+    imagesrcset="{{ pl_desktop | image_url: width: 1000 }} 1000w, {{ pl_desktop | image_url: width: 1500 }} 1500w, {{ pl_desktop | image_url: width: 2000 }} 2000w"
+    imagesizes="100vw">
+{%- endif -%}
+
 <section class="hero-section">
   <div class="hero-container hero-container--image-{{ section.settings.image_position }} hero-container--image-mobile-{{ section.settings.image_position_mobile }}">
     <div class="hero-content">
@@ -221,13 +244,15 @@
           {%- if section.settings.image_mobile != blank -%}
             <source
               media="(max-width: 768px)"
-              srcset="{{ section.settings.image_mobile | image_url: width: 1100 }}"
+              srcset="{{ section.settings.image_mobile | image_url: width: 600 }} 600w, {{ section.settings.image_mobile | image_url: width: 900 }} 900w, {{ section.settings.image_mobile | image_url: width: 1100 }} 1100w"
+              sizes="100vw"
             >
           {%- endif -%}
           {%- if section.settings.image != blank -%}
             <source
               media="(min-width: 769px)"
-              srcset="{{ section.settings.image | image_url: width: 1500 }}"
+              srcset="{{ section.settings.image | image_url: width: 1000 }} 1000w, {{ section.settings.image | image_url: width: 1500 }} 1500w, {{ section.settings.image | image_url: width: 2000 }} 2000w"
+              sizes="100vw"
             >
           {%- endif -%}
           <img
@@ -236,6 +261,8 @@
             width="{{ desktop_image.width }}"
             height="{{ image_height }}"
             fetchpriority="high"
+            loading="eager"
+            decoding="async"
           >
         </picture>
       {%- else -%}
