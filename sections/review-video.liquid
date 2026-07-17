@@ -270,6 +270,61 @@
   </div>
 </section>
 
+{%- comment -%}
+  VideoObject structured data, built dynamically from the review video blocks.
+  When you add a video block in the theme editor (uploaded video or video URL)
+  it is added here automatically, so Google can read and show the videos.
+  Duplicate video URLs (from the preset) are emitted only once.
+{%- endcomment -%}
+{%- liquid
+  assign vid_seen = ''
+  assign vid_date = ''
+  if product and product.published_at
+    assign vid_date = product.published_at | date: '%Y-%m-%d'
+  endif
+-%}
+{%- for block in section.blocks -%}
+  {%- liquid
+    assign v_url = ''
+    assign v_thumb = ''
+    if block.settings.video != blank
+      assign v_source = block.settings.video.sources | first
+      assign v_url = v_source.url
+      if block.settings.video.preview_image
+        assign v_thumb = block.settings.video.preview_image | image_url: width: 800 | prepend: 'https:'
+      endif
+    elsif block.settings.video_url != blank
+      assign v_url = block.settings.video_url
+    endif
+    assign v_desc = block.settings.caption | strip_html | strip
+    assign v_name = v_desc | truncate: 70
+    if v_name == blank
+      assign v_name = 'After Bites paan mukhwas customer review video'
+      assign v_desc = 'A customer review video for After Bites paan mukhwas mouth freshener.'
+    endif
+  -%}
+  {%- if v_url != blank -%}
+    {%- unless vid_seen contains v_url -%}
+      {%- assign vid_seen = vid_seen | append: v_url | append: '|||' -%}
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "VideoObject",
+        "name": {{ v_name | json }},
+        "description": {{ v_desc | json }},
+        {% if v_thumb != blank %}"thumbnailUrl": {{ v_thumb | json }},{% endif %}
+        {% if vid_date != blank %}"uploadDate": {{ vid_date | json }},{% endif %}
+        "contentUrl": {{ v_url | json }},
+        "publisher": {
+          "@type": "Organization",
+          "name": {{ shop.name | json }}
+        }
+      }
+      </script>
+    {%- endunless -%}
+  {%- endif -%}
+{%- endfor -%}
+
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
   (function () {

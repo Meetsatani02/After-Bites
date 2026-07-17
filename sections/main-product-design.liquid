@@ -467,7 +467,34 @@
       "highPrice": "{{ high_price }}",
       "offerCount": {{ product.variants.size }},
       "availability": "https://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}",
-      "url": {{ request.origin | append: product.url | json }}
+      "url": {{ request.origin | append: product.url | json }}{% if section.settings.ship_show %},
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": "{{ section.settings.ship_rate | default: 0 }}",
+          "currency": {{ cart.currency.iso_code | json }}
+        },
+        "shippingDestination": {
+          "@type": "DefinedRegion",
+          "addressCountry": {{ section.settings.ship_country | default: 'IN' | json }}
+        },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": {{ section.settings.ship_handling_min | default: 1 }},
+            "maxValue": {{ section.settings.ship_handling_max | default: 2 }},
+            "unitCode": "DAY"
+          },
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": {{ section.settings.ship_transit_min | default: 3 }},
+            "maxValue": {{ section.settings.ship_transit_max | default: 7 }},
+            "unitCode": "DAY"
+          }
+        }
+      }{% endif %}
     }
   }
   </script>
@@ -835,6 +862,58 @@
         { "value": "top", "label": "Above text" }
       ],
       "default": "top"
+    },
+    {
+      "type": "header",
+      "content": "Shipping details (for Google structured data)"
+    },
+    {
+      "type": "paragraph",
+      "content": "These values feed the shippingDetails in the product structured data so Google can show delivery cost and time. Leave the rate at 0 for free shipping."
+    },
+    {
+      "type": "checkbox",
+      "id": "ship_show",
+      "label": "Add shipping details to structured data",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "ship_country",
+      "label": "Ships to (country code)",
+      "default": "IN",
+      "info": "Two letter code, for example IN for India."
+    },
+    {
+      "type": "number",
+      "id": "ship_rate",
+      "label": "Shipping rate",
+      "default": 0,
+      "info": "Delivery charge in your store currency. Use 0 for free shipping."
+    },
+    {
+      "type": "number",
+      "id": "ship_handling_min",
+      "label": "Handling time min (days)",
+      "default": 1
+    },
+    {
+      "type": "number",
+      "id": "ship_handling_max",
+      "label": "Handling time max (days)",
+      "default": 2
+    },
+    {
+      "type": "number",
+      "id": "ship_transit_min",
+      "label": "Transit time min (days)",
+      "default": 3
+    },
+    {
+      "type": "number",
+      "id": "ship_transit_max",
+      "label": "Transit time max (days)",
+      "default": 7
     }
   ],
   "enabled_on": {
