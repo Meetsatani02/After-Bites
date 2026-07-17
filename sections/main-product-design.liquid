@@ -401,6 +401,11 @@
     assign low_price = product.price_min | money_without_currency | strip_html | replace: ',', ''
     assign high_price = product.price_max | money_without_currency | strip_html | replace: ',', ''
     assign first_variant = product.selected_or_first_available_variant
+
+    # Nutrition / product-details rows for structured data.
+    # Same source + "Label | Value" format the Nutrition section renders,
+    # exposed to Google as Product.additionalProperty (PropertyValue).
+    assign pd_raw = product.metafields.custom.product_details.value | default: '' | strip
   -%}
   <script type="application/ld+json">
   {
@@ -434,6 +439,26 @@
       "bestRating": "{{ jm_rating.scale_max | default: 5 }}",
       "worstRating": "{{ jm_rating.scale_min | default: 1 }}"
     },
+    {%- endif %}
+    {%- if pd_raw != blank %}
+    "additionalProperty": [
+      {%- assign pd_lines = pd_raw | newline_to_br | split: '<br />' -%}
+      {%- assign pd_first = true -%}
+      {%- for line in pd_lines -%}
+        {%- assign pd_row = line | strip -%}
+        {%- if pd_row == blank -%}{%- continue -%}{%- endif -%}
+        {%- if pd_row contains '|' -%}{%- assign pd_sep = '|' -%}{%- else -%}{%- assign pd_sep = ':' -%}{%- endif -%}
+        {%- assign pd_parts = pd_row | split: pd_sep -%}
+        {%- assign pd_raw_label = pd_parts | first -%}
+        {%- assign pd_label = pd_raw_label | strip -%}
+        {%- assign pd_offset = pd_raw_label.size | plus: 1 -%}
+        {%- assign pd_value = pd_row | slice: pd_offset, pd_row.size | strip -%}
+        {%- if pd_value == blank -%}{%- continue -%}{%- endif -%}
+        {%- unless pd_first -%},{%- endunless -%}
+        { "@type": "PropertyValue", "name": {{ pd_label | json }}, "value": {{ pd_value | json }} }
+        {%- assign pd_first = false -%}
+      {%- endfor -%}
+    ],
     {%- endif %}
     "offers": {
       "@type": "AggregateOffer",
