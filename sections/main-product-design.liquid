@@ -360,7 +360,16 @@
     <button class="product-zoom__nav product-zoom__nav--prev" type="button" data-zoom-prev aria-label="Previous">
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </button>
-    <img class="product-zoom__img" data-zoom-img alt="{{ product.title | escape }}">
+    <img
+      class="product-zoom__img"
+      data-zoom-img
+      src="{{ main_media | image_url: width: 2048 }}"
+      alt="{{ main_media.alt | default: product.title | escape }}"
+      width="{{ main_media.preview_image.width }}"
+      height="{{ main_media.preview_image.height }}"
+      loading="lazy"
+      decoding="async"
+    >
     <button class="product-zoom__nav product-zoom__nav--next" type="button" data-zoom-next aria-label="Next">
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </button>
