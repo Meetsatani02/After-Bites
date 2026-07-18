@@ -1,11 +1,26 @@
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer="defer"></script>
+<link rel="stylesheet" href="{{ 'swiper-bundle.min.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="{{ 'swiper-bundle.min.css' | asset_url }}"></noscript>
+<script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
 
 <style>
   body {
       background-color: var(--beige);
+  }
+
+  /* Keep the first description paragraph visible; the rest stays in the HTML
+     for search engines and screen readers but is hidden from the visual page. */
+  .product-description-content > *:not(:first-child) {
+      position: absolute !important;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+      border: 0;
   }
 
   /* Add to Cart loading feedback — spinner shows, label hides while adding */
@@ -70,7 +85,12 @@
                 <!-- End of Judge.me code -->
               </div>
 
-              {%- comment -%} Description (dynamic) {%- endcomment -%}
+              {%- comment -%}
+                Description (dynamic). The first paragraph stays visible. The
+                rest is kept in the page HTML so search engines (and screen
+                readers) can still read it, but is hidden from the visual
+                layout, per the store owner's request.
+              {%- endcomment -%}
               {%- if product.description != blank -%}
                 <div class="product-description-content">
                   {{ product.description }}

@@ -20,8 +20,8 @@
         "q_tobacco_free": {
           "type": "faq_item",
           "settings": {
-            "question": "Is After Bites paan mukhwas tobacco free and supari free?",
-            "answer": "Yes. Every After Bites paan mukhwas is 100% tobacco free and supari free, made only with natural ingredients. You get the authentic taste of paan without any tobacco, areca nut (supari) or harmful additives."
+            "question": "Is After Bites paan mukhwas tobacco free?",
+            "answer": "Yes. Every After Bites paan mukhwas is 100% tobacco free, made only with natural ingredients. You get the authentic taste of paan without any tobacco or harmful additives."
           }
         },
         "q_benefits": {
@@ -49,14 +49,14 @@
           "type": "faq_item",
           "settings": {
             "question": "What ingredients are in After Bites paan mukhwas?",
-            "answer": "Our paan mukhwas is made with natural paan (betel) leaves, gulkand (rose petal preserve), fennel seeds, sesame and a blend of traditional mouth freshening seeds and spices, with no tobacco, supari or artificial colours."
+            "answer": "Our paan mukhwas is made with natural paan (betel) leaves, gulkand (rose petal preserve), fennel seeds, sesame and a blend of traditional mouth freshening seeds and spices, with no tobacco or artificial colours."
           }
         },
         "q_family": {
           "type": "faq_item",
           "settings": {
             "question": "Is paan mukhwas safe for kids and the whole family?",
-            "answer": "Absolutely. Because it is free from tobacco and supari and made with natural ingredients, After Bites paan mukhwas is a refreshing treat the whole family can enjoy together after meals."
+            "answer": "Absolutely. Because it is free from tobacco and made with natural ingredients, After Bites paan mukhwas is a refreshing treat the whole family can enjoy together after meals."
           }
         },
         "q_storage": {
