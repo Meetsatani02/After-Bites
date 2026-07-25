@@ -1,7 +1,6 @@
 
 <link rel="stylesheet" href="{{ 'swiper-bundle.min.css' | asset_url }}" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="{{ 'swiper-bundle.min.css' | asset_url }}"></noscript>
-<script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
 
 <style>
@@ -657,11 +656,28 @@
       var mainSwiper = null;
       var thumbsSwiper = null;
       var galleryMq = window.matchMedia('(max-width: 1024px)');
+      var SWIPER_JS_URL = "{{ 'swiper-bundle.min.js' | asset_url }}";
+
+      // Shared, cached loader — the 154 KB Swiper bundle is fetched once, on demand.
+      // The thumbs gallery only exists on <=1024px, so desktop never loads Swiper.
+      window.loadSwiperLib = window.loadSwiperLib || function (url) {
+        if (window.__swiperLibPromise) return window.__swiperLibPromise;
+        window.__swiperLibPromise = new Promise(function (resolve) {
+          if (window.Swiper) return resolve(window.Swiper);
+          var s = document.createElement('script');
+          s.src = url;
+          s.onload = function () { resolve(window.Swiper); };
+          s.onerror = function () { resolve(window.Swiper); };
+          document.head.appendChild(s);
+        });
+        return window.__swiperLibPromise;
+      };
 
       var buildGallery = function () {
         if (mainSwiper) return;
         if (typeof Swiper === 'undefined') {
-          return window.setTimeout(buildGallery, 60);
+          window.loadSwiperLib(SWIPER_JS_URL).then(buildGallery);
+          return;
         }
 
         imgMain.classList.add('swiper');

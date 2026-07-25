@@ -165,14 +165,28 @@
   </div>
 </section>
 
-<script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer></script>
 <script>
   (function () {
-    function initSlider() {
-      if (typeof Swiper === 'undefined') {
-        return window.setTimeout(initSlider, 50);
-      }
+    var JS_URL = "{{ 'swiper-bundle.min.js' | asset_url }}";
+    var root = document.getElementById('ProductSlider-{{ section.id }}');
+    if (!root) return;
 
+    // Shared, cached loader — the 154 KB Swiper bundle is fetched once, on demand,
+    // no matter how many slider sections are on the page.
+    window.loadSwiperLib = window.loadSwiperLib || function (url) {
+      if (window.__swiperLibPromise) return window.__swiperLibPromise;
+      window.__swiperLibPromise = new Promise(function (resolve) {
+        if (window.Swiper) return resolve(window.Swiper);
+        var s = document.createElement('script');
+        s.src = url;
+        s.onload = function () { resolve(window.Swiper); };
+        s.onerror = function () { resolve(window.Swiper); };
+        document.head.appendChild(s);
+      });
+      return window.__swiperLibPromise;
+    };
+
+    function initSlider(Swiper) {
       new Swiper('#ProductSlider-{{ section.id }}', {
         effect: 'coverflow',
         grabCursor: true,
@@ -203,7 +217,17 @@
       });
     }
 
-    initSlider();
+    function boot() { window.loadSwiperLib(JS_URL).then(initSlider); }
+
+    // Below the fold — only load Swiper and build the slider when it nears the viewport.
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) { io.disconnect(); boot(); }
+      }, { rootMargin: '400px 0px' });
+      io.observe(root);
+    } else {
+      boot();
+    }
   })();
 </script>
 

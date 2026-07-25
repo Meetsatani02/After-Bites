@@ -73,8 +73,10 @@
 
     {{ content_for_header }}
 
-    {%- comment %} Only two fonts: Inter (body) via Google Fonts + Rasbern (headings) via base.css {% endcomment -%}
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    {%- comment %} Only two fonts: Inter (body) via Google Fonts + Rasbern (headings) via base.css.
+       Preconnect only to fonts.gstatic.com (serves the font files). The googleapis.com
+       stylesheet is loaded non-render-blocking below, so a preconnect to it is not worth
+       one of the ~4 preconnect slots the browser recommends staying under. {% endcomment -%}
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     {%- comment -%} Load Inter without blocking render. display=swap keeps text visible while it loads. {%- endcomment -%}
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100..900;1,100..900&display=swap" media="print" onload="this.media='all'">

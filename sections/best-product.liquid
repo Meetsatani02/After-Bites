@@ -270,42 +270,86 @@
   {%- endif -%}
 </section>
 
-<script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer></script>
 <script>
   (function () {
+      var JS_URL = "{{ 'swiper-bundle.min.js' | asset_url }}";
       var root = document.getElementById('BestProduct-{{ section.id }}');
-      if (!root || typeof Swiper === 'undefined') return;
+      if (!root) return;
+
+      // Shared, cached loader — the 154 KB Swiper bundle is fetched once, on demand.
+      window.loadSwiperLib = window.loadSwiperLib || function (url) {
+          if (window.__swiperLibPromise) return window.__swiperLibPromise;
+          window.__swiperLibPromise = new Promise(function (resolve) {
+              if (window.Swiper) return resolve(window.Swiper);
+              var s = document.createElement('script');
+              s.src = url;
+              s.onload = function () { resolve(window.Swiper); };
+              s.onerror = function () { resolve(window.Swiper); };
+              document.head.appendChild(s);
+          });
+          return window.__swiperLibPromise;
+      };
 
       var DESKTOP = 769;
       var swiper = null;
+      var SwiperLib = null;
+      var inView = false;
+
+      function build() {
+          if (swiper || !SwiperLib) return;
+          swiper = new SwiperLib(root.querySelector('.swiper'), {
+              slidesPerView: {{ section.settings.slides_mobile }},
+              spaceBetween: {{ section.settings.space_mobile }},
+              loop: {{ enable_loop }},
+              {% if section.settings.autoplay %}
+              autoplay: {
+                  delay: {{ section.settings.autoplay_speed | times: 1000 }},
+                  disableOnInteraction: false
+              },
+              {% endif %}
+              navigation: {
+                  nextEl: root.querySelector('[data-next]'),
+                  prevEl: root.querySelector('[data-prev]'),
+                  disabledClass: 'is-disabled'
+              }
+          });
+      }
 
       function syncSlider() {
+          if (!inView) return;
           // Mobile only: build the slider. Desktop uses the CSS grid.
           if (window.innerWidth < DESKTOP) {
               if (swiper) return;
-              swiper = new Swiper(root.querySelector('.swiper'), {
-                  slidesPerView: {{ section.settings.slides_mobile }},
-                  spaceBetween: {{ section.settings.space_mobile }},
-                  loop: {{ enable_loop }},
-                  {% if section.settings.autoplay %}
-                  autoplay: {
-                      delay: {{ section.settings.autoplay_speed | times: 1000 }},
-                      disableOnInteraction: false
-                  },
-                  {% endif %}
-                  navigation: {
-                      nextEl: root.querySelector('[data-next]'),
-                      prevEl: root.querySelector('[data-prev]'),
-                      disabledClass: 'is-disabled'
-                  }
-              });
+              if (!SwiperLib) {
+                  window.loadSwiperLib(JS_URL).then(function (S) {
+                      SwiperLib = S;
+                      syncSlider();
+                  });
+                  return;
+              }
+              build();
           } else if (swiper) {
               swiper.destroy(true, true);
               swiper = null;
           }
       }
 
-      syncSlider();
+      // Only load Swiper once the section nears the viewport (it's below the fold),
+      // and even then only on mobile widths where the slider is actually used.
+      if ('IntersectionObserver' in window) {
+          var io = new IntersectionObserver(function (entries) {
+              if (entries[0].isIntersecting) {
+                  io.disconnect();
+                  inView = true;
+                  syncSlider();
+              }
+          }, { rootMargin: '400px 0px' });
+          io.observe(root);
+      } else {
+          inView = true;
+          syncSlider();
+      }
+
       window.addEventListener('resize', syncSlider);
   })();
 </script>
