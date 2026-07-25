@@ -130,7 +130,7 @@
       "type": "image-banner",
       "name": "Image Banner",
       "settings": {
-        "image": "shopify://shop_images/banner_image.jpg"
+        "image": "shopify://shop_images/banner_hero_image.jpg"
       }
     },
     "product_vision_nzWJaW": {
