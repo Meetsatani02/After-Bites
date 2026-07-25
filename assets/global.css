@@ -241,6 +241,14 @@ p,h1,h2,h3,h4{
     #product-slider-main-product .product-new-img__arrow {
         display: none !important;
     }
+
+    /* macOS only (class added by the product section's JS): Mac displays are
+       taller (16:10), so cover crops the landscape product image on the sides.
+       Use contain there so the whole image is visible, uncropped. Windows and
+       other platforms keep the cover fill above. */
+    product-info.pn-mac #product-slider-main-product .product-new-img__slide .product-new-img__item {
+        object-fit: contain;
+    }
 }
 
 /* Thumbnail strip + arrows hidden by default; shown on the mobile gallery. */

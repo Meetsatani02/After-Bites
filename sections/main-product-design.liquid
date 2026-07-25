@@ -534,6 +534,17 @@
     var root = document.getElementById('MainProduct-{{ section.id }}');
     if (!root) return;
 
+    /* macOS-only flag. Mac displays are typically 16:10 (taller), which makes
+       the 50%-wide × full-height image panel squarer, so a landscape product
+       image gets cropped on the sides by object-fit:cover. We tag the section
+       so CSS can switch the fit to `contain` on Mac only, leaving other
+       platforms untouched. Covers Intel + Apple-Silicon (reported as MacIntel)
+       and iPadOS Safari (which reports as a Mac). */
+    var ua = navigator.userAgent || '';
+    var platform = navigator.platform || '';
+    var isMac = /Mac/i.test(platform) || /Mac OS X/i.test(ua);
+    if (isMac) root.classList.add('pn-mac');
+
     var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     /* ---- Entrance animations: staggered fade-up on details, fade-in on image ---- */
