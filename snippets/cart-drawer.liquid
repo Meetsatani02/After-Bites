@@ -136,10 +136,15 @@
     text-decoration: none;
     margin-bottom: 6px;
   }
-  /* Cancel Shopify's default .cart-item__name:hover underline */
+  /* Cancel Shopify's default .cart-item__name:hover underline/color shift.
+     !important + both class targets so no theme rule or load order can win. */
+  .cart-drawer .ab-cart-item__title,
   .cart-drawer .ab-cart-item__title:hover,
-  .cart-drawer .ab-cart-item__title:focus {
-    text-decoration: none;
+  .cart-drawer .ab-cart-item__title:focus,
+  .cart-drawer .cart-item__name:hover,
+  .cart-drawer .cart-item__name:focus {
+    text-decoration: none !important;
+    color: var(--green) !important;
   }
   .cart-drawer .ab-cart-item__variant {
     margin: 0 0 4px;
