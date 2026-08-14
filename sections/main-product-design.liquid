@@ -208,27 +208,13 @@
                 {%- endform -%}
               </product-form>
 
-              {%- comment -%} Shipping info (static design) {%- endcomment -%}
-              <div class="product-buy-shipping">
-                <div class="product-buy-shipping-inner">
-                  <div class="product-buy-shipping-icon-text border-right">
-                    <div class="product-icon-text">
-                      <div class="product-icon-package-truck">
-                        {% render 'shipping' %}
-                      </div>
-                      <span>Free shipping for <br> orders over $60</span>
-                    </div>
-                  </div>
-                  <div class="product-buy-shipping-icon-text">
-                    <div class="product-icon-text">
-                      <div class="product-icon-package-truck">
-                        {% render 'truck' %}
-                      </div>
-                      <span>Ships in 1 <br> business day</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              {%- comment -%}
+                Shipping info block removed: it advertised a free-shipping
+                threshold in USD and a 1-business-day dispatch SLA, neither of
+                which is backed by a configured shipping rate or a live courier
+                integration. Restore only once the matching Shopify rate and
+                fulfilment capability actually exist.
+              {%- endcomment -%}
 
               {%- comment -%}
                 Ingredients / Benefits — driven by the product metafields
