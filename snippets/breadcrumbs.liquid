@@ -1,7 +1,11 @@
 {%- comment -%}
-  Breadcrumbs — visible navigation + BreadcrumbList structured data.
-  Builds a Home > [Collection] > Page trail per template type.
+  Breadcrumbs — source-only navigation + BreadcrumbList structured data.
+  The trail mirrors the real URL path so each crumb maps to a live segment,
+  e.g. /collections/our-best-products => Home > Collections > Our Best Products.
   Improves internal linking, crawlability and rich-result breadcrumbs.
+
+  Note: Shopify serves no /pages or /blogs index (both 404), so page and
+  article trails skip that segment rather than link somewhere broken.
 {%- endcomment -%}
 
 {%- liquid
@@ -11,13 +15,17 @@
 
   case request.page_type
     when 'product'
+      assign crumbs = crumbs | append: item_sep | append: 'Collections' | append: field_sep | append: routes.collections_url
       if product.collections.size > 0
         assign col = product.collections.first
         assign crumbs = crumbs | append: item_sep | append: col.title | append: field_sep | append: col.url
       endif
       assign crumbs = crumbs | append: item_sep | append: product.title | append: field_sep | append: product.url
     when 'collection'
+      assign crumbs = crumbs | append: item_sep | append: 'Collections' | append: field_sep | append: routes.collections_url
       assign crumbs = crumbs | append: item_sep | append: collection.title | append: field_sep | append: collection.url
+    when 'list-collections'
+      assign crumbs = crumbs | append: item_sep | append: 'Collections' | append: field_sep | append: routes.collections_url
     when 'article'
       assign crumbs = crumbs | append: item_sep | append: blog.title | append: field_sep | append: blog.url
       assign crumbs = crumbs | append: item_sep | append: article.title | append: field_sep | append: article.url
