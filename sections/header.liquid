@@ -96,26 +96,6 @@
     border: none;
   }
 
-  /* Product links in the main menu are hidden from the visible nav by request
-     but kept in the markup, so the <a href> stays crawlable and the products
-     keep their persistent-navigation link signal. Shoppers still reach them
-     through Shop Mukhwas -> collection -> product card.
-     Matches by href, so adding or removing a product menu item needs no CSS
-     change. To show them again, delete this block. */
-  .header__inline-menu > ul > li:has(> a[href*="/products/"]),
-  .menu-drawer__navigation > ul > li:has(> a[href*="/products/"]) {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0 0 0 0);
-    clip-path: inset(50%);
-    white-space: nowrap;
-    border: 0;
-  }
-
   .header-logo {
     position: absolute;
     left: 50.5%;
