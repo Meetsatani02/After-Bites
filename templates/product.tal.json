@@ -1,0 +1,257 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product-design",
+      "settings": {
+        "image_position": "left",
+        "image_position_mobile": "top"
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "disabled": true,
+      "settings": {
+        "heading": "More After Bites Mukhwas",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "padding_top": 36,
+        "padding_bottom": 28
+      }
+    },
+    "product_details_YG9RAy": {
+      "type": "product-details",
+      "blocks": {
+        "list_item_9h3jrD": {
+          "type": "list_item",
+          "settings": {
+            "text": "Slow roasted white sesame for a nutty crunch"
+          }
+        },
+        "list_item_rfmbyC": {
+          "type": "list_item",
+          "settings": {
+            "text": "Naturally rich in calcium and healthy fats"
+          }
+        },
+        "list_item_MHxVqh": {
+          "type": "list_item",
+          "settings": {
+            "text": "Freshens breath and aids digestion after meals"
+          }
+        },
+        "list_item_pg6wLe": {
+          "type": "list_item",
+          "settings": {
+            "text": "100% tobacco free, supari free and no artificial colours"
+          }
+        },
+        "list_item_ygVm7x": {
+          "type": "list_item",
+          "settings": {
+            "text": "A wholesome everyday mukhwas for the whole family"
+          }
+        }
+      },
+      "block_order": [
+        "list_item_9h3jrD",
+        "list_item_rfmbyC",
+        "list_item_MHxVqh",
+        "list_item_pg6wLe",
+        "list_item_ygVm7x"
+      ],
+      "name": "Product Details",
+      "settings": {
+        "heading": "Product Details",
+        "text": "A light, nutty after-meal refreshment made with slow roasted white sesame, candied fennel, dry coconut and green cardamom. Crisp, gently sweet and naturally rich in calcium, it freshens your mouth after every meal.",
+        "image_position": "right",
+        "image_position_mobile": "top",
+        "border_image": "shopify://shop_images/border-image.svg"
+      }
+    },
+    "nutrition_ntRb01": {
+      "type": "nutrition",
+      "blocks": {
+        "row_n1": {
+          "type": "row",
+          "settings": { "label": "Energy", "value": "480-540 kcal (per 100 g)" }
+        },
+        "row_n2": {
+          "type": "row",
+          "settings": { "label": "Total Carbohydrates", "value": "45-52 g" }
+        },
+        "row_n3": {
+          "type": "row",
+          "settings": { "label": "Total Sugars", "value": "22-28 g" }
+        },
+        "row_n4": {
+          "type": "row",
+          "settings": { "label": "Added Sugars", "value": "18-24 g" }
+        },
+        "row_n5": {
+          "type": "row",
+          "settings": { "label": "Dietary Fiber", "value": "9-12 g" }
+        },
+        "row_n6": {
+          "type": "row",
+          "settings": { "label": "Protein", "value": "12-15 g" }
+        },
+        "row_n7": {
+          "type": "row",
+          "settings": { "label": "Total Fat", "value": "26-32 g" }
+        },
+        "row_n8": {
+          "type": "row",
+          "settings": { "label": "- Saturated Fat", "value": "4-6 g" }
+        },
+        "row_n9": {
+          "type": "row",
+          "settings": { "label": "- Trans Fat", "value": "0 g" }
+        },
+        "row_n10": {
+          "type": "row",
+          "settings": { "label": "Sodium", "value": "60-90 mg" }
+        },
+        "row_n11": {
+          "type": "row",
+          "settings": { "label": "Calcium", "value": "700-950 mg" }
+        },
+        "row_n12": {
+          "type": "row",
+          "settings": { "label": "Iron", "value": "8-12 mg" }
+        }
+      },
+      "block_order": [
+        "row_n1",
+        "row_n2",
+        "row_n3",
+        "row_n4",
+        "row_n5",
+        "row_n6",
+        "row_n7",
+        "row_n8",
+        "row_n9",
+        "row_n10",
+        "row_n11",
+        "row_n12"
+      ],
+      "name": "Nutrition",
+      "settings": {
+        "heading": "Nutrition",
+        "border_image": "shopify://shop_images/border-image.svg"
+      }
+    },
+    "product_reviews_main": {
+      "type": "product-reviews",
+      "name": "Product Reviews",
+      "settings": {}
+    },
+    "faq_FdDkeG": {
+      "type": "faq",
+      "blocks": {
+        "faq_item_ihN9Cr": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What's inside this tal mukhwas?",
+            "answer": "Slow roasted white sesame seeds (tal), candied fennel, dhaniya dal, dry coconut flakes, green cardamom, lemon and rock salt. There is no tobacco, no supari and no artificial colours or flavours."
+          }
+        },
+        "faq_item_AHUhew": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How do I enjoy After Bites tal mukhwas?",
+            "answer": "It's ready to eat straight from the jar, no preparation needed. Enjoy a teaspoon after meals to freshen your breath, or anytime you want a light, nutty and crunchy treat."
+          }
+        },
+        "faq_item_TalDiff": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How is tal mukhwas different from paan mukhwas?",
+            "answer": "Tal mukhwas is built around roasted sesame, so it tastes nutty, crisp and only lightly sweet. Our paan mukhwas is built around betel leaf and gulkand, so it tastes sweeter and more aromatic. Many families keep both on the table and switch between them."
+          }
+        },
+        "faq_item_qT3TUi": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is it suitable for kids and the whole family?",
+            "answer": "Yes. It is free from tobacco and supari and made with natural ingredients, and sesame is naturally rich in calcium and iron. Please note it contains sesame and coconut, so avoid it if anyone in your family has a sesame or nut allergy."
+          }
+        },
+        "faq_item_dW8Kns": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How fresh will my order arrive?",
+            "answer": "Every jar is sealed to lock in flavour and freshness and arrives ready to enjoy. Once opened, store it in an airtight container in a cool, dry place and it stays fresh for up to 6 months."
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_ihN9Cr",
+        "faq_item_AHUhew",
+        "faq_item_TalDiff",
+        "faq_item_qT3TUi",
+        "faq_item_dW8Kns"
+      ],
+      "name": "FAQ",
+      "settings": {
+        "heading": "Frequently Asked Questions",
+        "border_image": "shopify://shop_images/border-image.svg"
+      }
+    },
+    "review_video_qwjQyQ": {
+      "type": "review-video",
+      "blocks": {
+        "review_nmYaQk": {
+          "type": "review",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/d49e6b5bcd434c5db48393df3f6711ea.mov",
+            "caption": "The authentic taste of After Bites mukhwas has made it a family favourite across the country."
+          }
+        },
+        "review_m8QDkN": {
+          "type": "review",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/d49e6b5bcd434c5db48393df3f6711ea.mov",
+            "caption": "Our customers love how fresh and authentic every bite of our mukhwas tastes."
+          }
+        },
+        "review_mA7TTC": {
+          "type": "review",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/d49e6b5bcd434c5db48393df3f6711ea.mov",
+            "caption": "From everyday meals to special occasions, After Bites has become essential in my family's kitchen."
+          }
+        }
+      },
+      "block_order": [
+        "review_nmYaQk",
+        "review_m8QDkN",
+        "review_mA7TTC"
+      ],
+      "name": "Review Video",
+      "settings": {
+        "heading": "What People Say About After Bites",
+        "background_text": "Reviews",
+        "autoplay": true,
+        "autoplay_speed": 4,
+        "transition_speed": 800
+      }
+    }
+  },
+  "order": [
+    "main",
+    "related-products",
+    "product_details_YG9RAy",
+    "nutrition_ntRb01",
+    "product_reviews_main",
+    "faq_FdDkeG",
+    "review_video_qwjQyQ"
+  ]
+}
