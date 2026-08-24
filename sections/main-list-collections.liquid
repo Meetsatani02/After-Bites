@@ -1,114 +1,454 @@
-{{ 'component-card.css' | asset_url | stylesheet_tag }}
-{{ 'section-collection-list.css' | asset_url | stylesheet_tag }}
+{%- comment -%}
+  Collections list — branded grid that mirrors the collection page design.
 
-<div class="page-width">
-  <h1 class="title title--primary inline-richtext{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
-    {{ section.settings.title }}
-  </h1>
-  {%- liquid
-    case section.settings.sort
-      when 'products_high', 'products_low'
-        assign collections = collections | sort: 'all_products_count'
-      when 'date', 'date_reversed'
-        assign collections = collections | sort: 'published_at'
-    endcase
+  Shares the visual system of sections/collection-grid.liquid (beige ground,
+  Rasbern heading, bordered card with hover lift, full-width green button) so
+  /collections and /products look like one family. The difference is what each
+  card points at: collection-grid renders products, this renders collections.
+{%- endcomment -%}
 
-    if section.settings.sort == 'products_high' or section.settings.sort == 'date_reversed' or section.settings.sort == 'alphabetical_reversed'
-      assign collections = collections | reverse
-    endif
+{%- liquid
+  assign heading = section.settings.title
+  if heading == blank
+    assign heading = 'Collections'
+  endif
 
-    assign moduloResult = 28 | modulo: section.settings.columns_desktop
-    assign paginate_by = 30
-    if moduloResult == 0
-      assign paginate_by = 28
-    endif
-  -%}
-  {%- paginate collections by paginate_by -%}
-    <ul
-      class="collection-list grid grid--{{ section.settings.columns_desktop }}-col-desktop grid--{{ section.settings.columns_mobile }}-col-tablet-down"
-      role="list"
-    >
-      {%- for collection in collections -%}
-        <li
-          class="collection-list__item grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-          {% if settings.animations_reveal_on_scroll %}
-            data-cascade
-            style="--animation-order: {{ forloop.index }};"
-          {% endif %}
-        >
-          {% render 'card-collection',
-            card_collection: collection,
-            media_aspect_ratio: section.settings.image_ratio,
-            columns: 3
-          %}
-        </li>
-      {%- endfor -%}
-    </ul>
-    {% render 'pagination', paginate: paginate %}
-  {%- endpaginate -%}
-</div>
+  case section.settings.sort
+    when 'products_high', 'products_low'
+      assign collections = collections | sort: 'all_products_count'
+    when 'date', 'date_reversed'
+      assign collections = collections | sort: 'published_at'
+  endcase
+
+  if section.settings.sort == 'products_high' or section.settings.sort == 'date_reversed' or section.settings.sort == 'alphabetical_reversed'
+    assign collections = collections | reverse
+  endif
+
+  case section.settings.image_ratio
+    when 'portrait'
+      assign media_ratio = '3 / 4'
+    when 'adapt'
+      assign media_ratio = 'auto'
+    else
+      assign media_ratio = '1 / 1'
+  endcase
+-%}
+
+<style>
+  #CollectionsList-{{ section.id }} {
+    background-color: var(--beige);
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  #CollectionsList-{{ section.id }} .cg-inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---- Header ---- */
+  #CollectionsList-{{ section.id }} .cg-header {
+    text-align: center;
+    max-width: 760px;
+    margin: 0 auto 48px;
+  }
+
+  #CollectionsList-{{ section.id }} .cg-header h1 {
+    font-family: 'Rasbern', sans-serif;
+    color: var(--green);
+    font-size: 56px;
+    line-height: 1.05;
+    margin: 0;
+    letter-spacing: 0.01em;
+  }
+
+  #CollectionsList-{{ section.id }} .cg-header p {
+    font-family: 'Inter', sans-serif;
+    color: var(--green);
+    opacity: 0.85;
+    font-size: 17px;
+    line-height: 1.6;
+    margin: 16px auto 0;
+    max-width: 620px;
+  }
+
+  /* ---- Grid ---- */
+  #CollectionsList-{{ section.id }} .cg-grid {
+    display: grid;
+    grid-template-columns: repeat({{ section.settings.columns_mobile }}, 1fr);
+    gap: 18px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  @media (max-width: 575px) {
+    #CollectionsList-{{ section.id }} .cg-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (min-width: 750px) {
+    #CollectionsList-{{ section.id }} .cg-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+    }
+  }
+
+  @media (min-width: 1025px) {
+    #CollectionsList-{{ section.id }} .cg-grid {
+      grid-template-columns: repeat({{ section.settings.columns_desktop }}, 1fr);
+      gap: 28px;
+    }
+  }
+
+  /* ---- Card ---- */
+  #CollectionsList-{{ section.id }} .cg-card {
+    display: flex;
+    border: 1px solid #7a6b43;
+    flex-direction: column;
+    background: {{ section.settings.card_bg }};
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 14px 34px rgba(28, 48, 37, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+  }
+
+  #CollectionsList-{{ section.id }} .cg-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 44px rgba(28, 48, 37, 0.14);
+  }
+
+  /* ---- Image ---- */
+  #CollectionsList-{{ section.id }} .cg-media {
+    position: relative;
+    display: block;
+    width: 100%;
+    {% if media_ratio == 'auto' %}
+      min-height: 220px;
+    {% else %}
+      aspect-ratio: {{ media_ratio }};
+    {% endif %}
+    overflow: hidden;
+    background: var(--dark-beige);
+  }
+
+  #CollectionsList-{{ section.id }} .cg-media img,
+  #CollectionsList-{{ section.id }} .cg-media svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* ---- Body ---- */
+  #CollectionsList-{{ section.id }} .cg-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    padding: 20px;
+    gap: 12px;
+  }
+
+  #CollectionsList-{{ section.id }} .cg-title {
+    font-family: 'Rasbern', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 0;
+  }
+
+  #CollectionsList-{{ section.id }} .cg-title a {
+    color: var(--green);
+    text-decoration: none;
+  }
+
+  #CollectionsList-{{ section.id }} .cg-title a:hover {
+    text-decoration: underline;
+  }
+
+  #CollectionsList-{{ section.id }} .cg-desc {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--green);
+    opacity: 0.75;
+    margin: 0;
+  }
+
+  #CollectionsList-{{ section.id }} .cg-count {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: var(--green);
+    opacity: 0.65;
+    margin: 0;
+  }
+
+  /* ---- Button ---- */
+  #CollectionsList-{{ section.id }} .cg-action {
+    margin-top: auto;
+    padding-top: 4px;
+  }
+
+  #CollectionsList-{{ section.id }} .cg-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 1.2;
+    letter-spacing: 0.01em;
+    text-decoration: none;
+    text-align: center;
+    color: var(--beige);
+    background-color: var(--green);
+    padding: 13px 20px;
+    min-height: 50px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: inset 0 0 0 1.5px var(--green);
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+
+  #CollectionsList-{{ section.id }} .cg-button:hover {
+    background-color: var(--beige);
+    color: var(--green);
+  }
+
+  /* ---- Pagination ---- */
+  #CollectionsList-{{ section.id }} .cg-pagination {
+    margin-top: 48px;
+    text-align: center;
+  }
+
+  #CollectionsList-{{ section.id }} .cg-pagination .list {
+    list-style: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0;
+    margin: 0;
+  }
+
+  #CollectionsList-{{ section.id }} .cg-pagination a,
+  #CollectionsList-{{ section.id }} .cg-pagination span {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: var(--green);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    padding: 0 10px;
+    border-radius: 10px;
+    border: 1px solid var(--green);
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  #CollectionsList-{{ section.id }} .cg-pagination a:hover {
+    background-color: var(--green);
+    color: var(--beige);
+  }
+
+  #CollectionsList-{{ section.id }} .cg-pagination .pagination__item--current,
+  #CollectionsList-{{ section.id }} .cg-pagination span[aria-current] {
+    background-color: var(--green);
+    color: var(--beige);
+  }
+
+  /* ---- Empty state ---- */
+  #CollectionsList-{{ section.id }} .cg-empty {
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    color: var(--green);
+    padding: 60px 0;
+  }
+
+  @media (max-width: 749px) {
+    #CollectionsList-{{ section.id }} .cg-header h1 {
+      font-size: 38px;
+    }
+    #CollectionsList-{{ section.id }} .cg-header {
+      margin-bottom: 32px;
+    }
+    #CollectionsList-{{ section.id }} .cg-body {
+      padding: 16px;
+      gap: 10px;
+    }
+  }
+</style>
+
+<section id="CollectionsList-{{ section.id }}">
+  <div class="cg-inner">
+
+    {%- comment -%} Breadcrumbs (with BreadcrumbList schema) {%- endcomment -%}
+    {% render 'breadcrumbs' %}
+
+    {%- comment -%} Header {%- endcomment -%}
+    <div class="cg-header">
+      <h1>{{ heading }}</h1>
+      {%- if section.settings.subtitle != blank -%}
+        <p>{{ section.settings.subtitle }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- if collections.size == 0 -%}
+      <p class="cg-empty">No collections found.</p>
+    {%- else -%}
+      {%- paginate collections by section.settings.collections_per_page -%}
+        <ul class="cg-grid" role="list">
+          {%- for collection in collections -%}
+            {%- comment -%}
+              Collections often have no uploaded image, so fall back to the
+              first product's photo rather than leaving an empty tile.
+            {%- endcomment -%}
+            {%- assign card_image = collection.image | default: collection.products.first.featured_image -%}
+            <li class="cg-card">
+
+              <a href="{{ collection.url }}" class="cg-media">
+                {%- if card_image != blank -%}
+                  <img
+                    src="{{ card_image | image_url: width: 800 }}"
+                    alt="{{ card_image.alt | default: collection.title | escape }}"
+                    width="800"
+                    height="800"
+                    loading="lazy"
+                  >
+                {%- else -%}
+                  {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                {%- endif -%}
+              </a>
+
+              <div class="cg-body">
+                <h3 class="cg-title"><a href="{{ collection.url }}">{{ collection.title | escape }}</a></h3>
+
+                {%- if section.settings.show_description and collection.description != blank -%}
+                  <p class="cg-desc">{{ collection.description | strip_html | truncatewords: 22 }}</p>
+                {%- endif -%}
+
+                {%- if section.settings.show_count -%}
+                  <p class="cg-count">
+                    {{ collection.all_products_count }}
+                    {%- if collection.all_products_count == 1 %} product{% else %} products{% endif -%}
+                  </p>
+                {%- endif -%}
+
+                <div class="cg-action">
+                  <a href="{{ collection.url }}" class="cg-button">Shop now</a>
+                </div>
+              </div>
+
+            </li>
+          {%- endfor -%}
+        </ul>
+
+        {%- if paginate.pages > 1 -%}
+          <div class="cg-pagination">
+            {{ paginate | default_pagination }}
+          </div>
+        {%- endif -%}
+      {%- endpaginate -%}
+    {%- endif -%}
+
+  </div>
+</section>
+
+{%- comment -%}
+  CollectionPage + ItemList structured data describing this page as an index of
+  collections, mirroring the equivalent block on collection-grid.liquid.
+{%- endcomment -%}
+{%- if collections.size > 0 -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": {{ heading | strip_html | json }},
+      "url": {{ request.origin | append: routes.collections_url | json }},
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": {{ shop.name | json }},
+        "url": {{ request.origin | json }}
+      },
+      "mainEntity": {
+        "@type": "ItemList",
+        "numberOfItems": {{ collections.size }},
+        "itemListElement": [
+          {%- for collection in collections limit: 48 -%}
+          {
+            "@type": "ListItem",
+            "position": {{ forloop.index }},
+            "name": {{ collection.title | json }},
+            "url": {{ request.origin | append: collection.url | json }}
+          }{%- unless forloop.last -%},{%- endunless -%}
+          {%- endfor -%}
+        ]
+      }
+    }
+  </script>
+{%- endif -%}
+
 {% schema %}
 {
-  "name": "t:sections.main-list-collections.name",
+  "name": "Collections list",
+  "tag": "section",
   "class": "section",
   "settings": [
     {
       "type": "inline_richtext",
       "id": "title",
-      "label": "t:sections.main-list-collections.settings.title.label",
-      "default": "t:sections.main-list-collections.settings.title.default"
+      "label": "Heading",
+      "default": "Collections"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "info": "Shown under the heading. Leave blank to hide."
     },
     {
       "type": "select",
       "id": "sort",
       "options": [
-        {
-          "value": "alphabetical",
-          "label": "t:sections.main-list-collections.settings.sort.options__1.label"
-        },
-        {
-          "value": "alphabetical_reversed",
-          "label": "t:sections.main-list-collections.settings.sort.options__2.label"
-        },
-        {
-          "value": "date_reversed",
-          "label": "t:sections.main-list-collections.settings.sort.options__3.label"
-        },
-        {
-          "value": "date",
-          "label": "t:sections.main-list-collections.settings.sort.options__4.label"
-        },
-        {
-          "value": "products_high",
-          "label": "t:sections.main-list-collections.settings.sort.options__5.label"
-        },
-        {
-          "value": "products_low",
-          "label": "t:sections.main-list-collections.settings.sort.options__6.label"
-        }
+        { "value": "alphabetical", "label": "Alphabetically, A-Z" },
+        { "value": "alphabetical_reversed", "label": "Alphabetically, Z-A" },
+        { "value": "date_reversed", "label": "Date, new to old" },
+        { "value": "date", "label": "Date, old to new" },
+        { "value": "products_high", "label": "Product count, high to low" },
+        { "value": "products_low", "label": "Product count, low to high" }
       ],
       "default": "alphabetical",
-      "label": "t:sections.main-list-collections.settings.sort.label"
+      "label": "Sort collections by"
     },
     {
       "type": "select",
       "id": "image_ratio",
       "options": [
-        {
-          "value": "adapt",
-          "label": "t:sections.main-list-collections.settings.image_ratio.options__1.label"
-        },
-        {
-          "value": "portrait",
-          "label": "t:sections.main-list-collections.settings.image_ratio.options__2.label"
-        },
-        {
-          "value": "square",
-          "label": "t:sections.main-list-collections.settings.image_ratio.options__3.label"
-        }
+        { "value": "adapt", "label": "Adapt to image" },
+        { "value": "portrait", "label": "Portrait" },
+        { "value": "square", "label": "Square" }
       ],
-      "default": "adapt",
-      "label": "t:sections.main-list-collections.settings.image_ratio.label"
+      "default": "square",
+      "label": "Image ratio"
+    },
+    {
+      "type": "range",
+      "id": "collections_per_page",
+      "min": 4,
+      "max": 24,
+      "step": 4,
+      "label": "Collections per page",
+      "default": 12
     },
     {
       "type": "range",
@@ -117,24 +457,63 @@
       "max": 6,
       "step": 1,
       "default": 3,
-      "label": "t:sections.main-list-collections.settings.columns_desktop.label"
+      "label": "Columns (desktop)"
     },
     {
       "type": "select",
       "id": "columns_mobile",
       "options": [
-        {
-          "value": "1",
-          "label": "t:sections.main-list-collections.settings.columns_mobile.options__1.label"
-        },
-        {
-          "value": "2",
-          "label": "t:sections.main-list-collections.settings.columns_mobile.options__2.label"
-        }
+        { "value": "1", "label": "1 column" },
+        { "value": "2", "label": "2 columns" }
       ],
       "default": "2",
-      "label": "t:sections.main-list-collections.settings.columns_mobile.label"
+      "label": "Columns (mobile)"
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Card background",
+      "default": "#e6dcc2"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_description",
+      "label": "Show collection description",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_count",
+      "label": "Show product count",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 64
     }
-  ]
+  ],
+  "enabled_on": {
+    "templates": ["list-collections"]
+  }
 }
 {% endschema %}

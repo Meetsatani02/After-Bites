@@ -3,11 +3,18 @@
     "main": {
       "type": "main-list-collections",
       "settings": {
-        "title": "Collections",
+        "title": "Shop Our Collections",
+        "subtitle": "Every After Bites blend in one place, from sweet wet paan and crunchy dry paan to nutty tal mukhwas and our value combos. All 100% tobacco free and crafted to refresh after every meal.",
         "sort": "alphabetical",
         "image_ratio": "square",
+        "collections_per_page": 12,
         "columns_desktop": 3,
-        "columns_mobile": "2"
+        "columns_mobile": "2",
+        "card_bg": "#e6dcc2",
+        "show_description": true,
+        "show_count": true,
+        "padding_top": 64,
+        "padding_bottom": 64
       }
     }
   },
