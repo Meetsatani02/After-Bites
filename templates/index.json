@@ -32,7 +32,7 @@
           "type": "product",
           "settings": {
             "product": "wet-paan-mukhwas-after-bites",
-            "image": "shopify://shop_images/product-feature.png",
+            "image": "shopify://shop_images/Wet_Pan.webp",
             "title": "Wet Paan Mukhwas",
             "description": "After Bites Wet Paan Mukhwas is a sweet, refreshing and 100% tobacco..."
           }
@@ -41,7 +41,7 @@
           "type": "product",
           "settings": {
             "product": "dry-paan-mukhwas-after-bites",
-            "image": "shopify://shop_images/product-feature.png",
+            "image": "shopify://shop_images/Dry_Pan.webp",
             "title": "Dry Paan Mukhwas",
             "description": "After Bites Wet Paan Mukhwas is a sweet, refreshing and 100% tobacco..."
           }
