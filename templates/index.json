@@ -21,8 +21,8 @@
         "button_link": "https://theafterbites.com/collections/our-best-products",
         "image_position": "right",
         "image_position_mobile": "top",
-        "image": "shopify://shop_images/banner_hero.jpg",
-        "image_mobile": "shopify://shop_images/mobile-hero.jpg"
+        "image": "shopify://shop_images/img.webp",
+        "image_mobile": "shopify://shop_images/img.webp"
       }
     },
     "best_product_ab8Eqb": {
@@ -158,7 +158,7 @@
       "name": "Product feature new",
       "settings": {
         "product": "wet-paan-mukhwas-after-bites",
-        "feature_image": "shopify://shop_images/product-feature.png",
+        "feature_image": "shopify://shop_images/Wet_Pan.webp",
         "padding_top": 60,
         "padding_bottom": 60,
         "margin_top": 0,
