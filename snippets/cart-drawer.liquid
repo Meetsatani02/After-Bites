@@ -403,6 +403,14 @@
   .cart-drawer .ab-btn:hover { background: #16261d; color: #fff; }
   .cart-drawer .ab-btn[disabled],
   .cart-drawer .ab-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .cart-drawer .ab-btn[aria-disabled="true"] { opacity: 0.5; pointer-events: none; }
+  .cart-drawer .ab-btn--viewcart {
+    margin-top: 10px;
+    background: transparent;
+    color: var(--green);
+    border: 1px solid var(--green);
+  }
+  .cart-drawer .ab-btn--viewcart:hover { background: var(--green); color: var(--beige); }
 
   /* ---- Empty state ---- */
   .cart-drawer .ab-cart-empty {
@@ -639,16 +647,34 @@
             >APPLY</button>
           </div>
 
-          <button
-            type="submit"
-            id="CartDrawer-Checkout"
+          {%- comment -%}
+            Plain link to Shopify's native checkout. Deliberately has no name="checkout" /
+            form submit so third-party checkout apps (Razorpay Magic Checkout) don't hijack it.
+          {%- endcomment -%}
+          <a
+            href="{{ routes.root_url | append: '/checkout' | replace: '//', '/' }}"
+            id="AbDrawerNativeCheckout"
             class="ab-btn ab-btn--checkout"
-            name="checkout"
-            form="CartDrawer-Form"
-            {% if cart == empty %}disabled{% endif %}
+            data-ab-native-checkout
+            {% if cart == empty %}aria-disabled="true"{% endif %}
           >
             Check out
-          </button>
+          </a>
+          <a href="{{ routes.cart_url }}" class="ab-btn ab-btn--viewcart">View cart</a>
+          <script>
+            (function () {
+              if (window.__abNativeCheckoutBound) return;
+              window.__abNativeCheckoutBound = true;
+              // Capture on window so this runs before app listeners bound on document/buttons.
+              window.addEventListener('click', function (e) {
+                var el = e.target.closest && e.target.closest('[data-ab-native-checkout]');
+                if (!el || el.getAttribute('aria-disabled') === 'true') return;
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                window.location.href = el.getAttribute('href');
+              }, true);
+            })();
+          </script>
         </div>
       {%- endif -%}
     </div>
