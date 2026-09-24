@@ -105,18 +105,35 @@
               </div>
             {%- else -%}
               <div class="cart__ctas" {{ block.shopify_attributes }}>
-                <button
-                  type="submit"
-                  id="checkout"
+                {%- comment -%}
+                  Plain link to Shopify's native checkout (no name="checkout" / form submit)
+                  so Razorpay Magic Checkout doesn't intercept it.
+                {%- endcomment -%}
+                <a
+                  href="{{ routes.root_url | append: '/checkout' | replace: '//', '/' }}"
+                  id="AbCartNativeCheckout"
                   class="cart__checkout-button button"
-                  name="checkout"
+                  data-ab-native-checkout
                   {% if cart == empty %}
-                    disabled
+                    aria-disabled="true" style="pointer-events:none;opacity:0.5;"
                   {% endif %}
-                  form="cart"
                 >
                   {{ 'sections.cart.checkout' | t }}
-                </button>
+                </a>
+                <script>
+                  (function () {
+                    if (window.__abNativeCheckoutBound) return;
+                    window.__abNativeCheckoutBound = true;
+                    // Capture on window so this runs before app listeners bound on document/buttons.
+                    window.addEventListener('click', function (e) {
+                      var el = e.target.closest && e.target.closest('[data-ab-native-checkout]');
+                      if (!el || el.getAttribute('aria-disabled') === 'true') return;
+                      e.preventDefault();
+                      e.stopImmediatePropagation();
+                      window.location.href = el.getAttribute('href');
+                    }, true);
+                  })();
+                </script>
               </div>
 
               {%- if additional_checkout_buttons -%}
