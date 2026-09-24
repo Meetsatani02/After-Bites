@@ -219,6 +219,7 @@
         "review_XTKRB8": {
           "type": "review",
           "settings": {
+            "video": "shopify://files/videos/Yeh Mukhwas Kahan Se Liya.mp4",
             "video_url": "https://cdn.shopify.com/videos/c/o/v/d49e6b5bcd434c5db48393df3f6711ea.mov",
             "caption": "The authentic taste of After Bites paan mukhwas has made it a family favourite across the country."
           }
