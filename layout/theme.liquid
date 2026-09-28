@@ -350,11 +350,8 @@
         content (policy pages, page bodies). Shopify renders /policies/*
         with its own markup, so this is the only theme hook for them.
       {%- endcomment -%}
-      {{ content_for_layout
-        | replace: '99980 51832', '97260 12067'
-        | replace: '99980-51832', '97260 12067'
-        | replace: '9998051832', '9726012067'
-      }}
+      {%- capture main_content -%}{{ content_for_layout }}{%- endcapture -%}
+      {{ main_content | replace: '99980 51832', '97260 12067' | replace: '99980-51832', '97260 12067' | replace: '9998051832', '9726012067' }}
     </main>
 
     {% sections 'footer-group' %}
