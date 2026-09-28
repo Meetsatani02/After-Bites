@@ -471,6 +471,57 @@
   </div>
 </section>
 
+{%- comment -%}
+  CollectionPage + ItemList structured data. Describes the page as a product
+  listing and enumerates its products (name, image, price, availability) so
+  search engines can understand the collection. Only emitted when the
+  collection has products.
+{%- endcomment -%}
+{%- if collection.products.size > 0 -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": {{ collection.title | json }},
+      "url": {{ request.origin | append: collection.url | json }},
+      {%- if collection.description != blank %}
+      "description": {{ collection.description | strip_html | strip_newlines | truncate: 300 | json }},
+      {%- endif %}
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": {{ shop.name | json }},
+        "url": {{ request.origin | json }}
+      },
+      "mainEntity": {
+        "@type": "ItemList",
+        "numberOfItems": {{ collection.products_count | default: collection.products.size }},
+        "itemListElement": [
+          {%- for product in collection.products limit: 48 -%}
+          {
+            "@type": "ListItem",
+            "position": {{ forloop.index }},
+            "item": {
+              "@type": "Product",
+              "name": {{ product.title | json }},
+              "url": {{ request.origin | append: product.url | json }}
+              {%- if product.featured_media %}, "image": {{ product.featured_media | image_url: width: 800 | prepend: 'https:' | json }}{%- endif -%}
+              {%- if product.description != blank %}, "description": {{ product.description | strip_html | strip_newlines | truncate: 200 | json }}{%- endif -%},
+              "offers": {
+                "@type": "Offer",
+                "priceCurrency": {{ cart.currency.iso_code | json }},
+                "price": "{{ product.price | money_without_currency | strip_html | replace: ',', '' }}",
+                "availability": "https://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}",
+                "url": {{ request.origin | append: product.url | json }}
+              }
+            }
+          }{%- unless forloop.last -%},{%- endunless -%}
+          {%- endfor -%}
+        ]
+      }
+    }
+  </script>
+{%- endif -%}
+
 {% schema %}
 {
   "name": "Collection grid",

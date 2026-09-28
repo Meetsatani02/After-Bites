@@ -5,9 +5,17 @@
       "settings": {
         "show_buttons": true,
         "primary_label": "Back to Home",
-        "contact_label": "Contact Us"
+        "contact_label": "Contact Us",
+        "show_contact": true,
+        "contact_heading": "Contact Information",
+        "contact_name": "GITABEN JAGDISHBHAI DEVANI",
+        "contact_phone": "+91 97260 12067",
+        "contact_email": "support.afterbites@gmail.com",
+        "contact_address": "419, Tulsi Arcade, Sudama Chowk, Mota Varachha, Surat 394101, Gujarat, India"
       }
     }
   },
-  "order": ["main"]
+  "order": [
+    "main"
+  ]
 }

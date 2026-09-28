@@ -344,8 +344,14 @@
         <p>{{ section.settings.text }}</p>
       {%- endif -%}
 
-      {%- if section.settings.contact_email != blank or section.settings.contact_phone != blank or section.settings.contact_address != blank -%}
+      {%- if section.settings.contact_name != blank or section.settings.contact_email != blank or section.settings.contact_phone != blank or section.settings.contact_address != blank -%}
         <ul class="contact-details">
+          {%- if section.settings.contact_name != blank -%}
+            <li>
+              <span class="contact-details__label">Owner:</span>
+              {{ section.settings.contact_name }}
+            </li>
+          {%- endif -%}
           {%- if section.settings.contact_email != blank -%}
             <li>
               <span class="contact-details__label">Email:</span>
@@ -517,6 +523,12 @@
     },
     {
       "type": "text",
+      "id": "contact_name",
+      "label": "Contact name",
+      "default": "GITABEN JAGDISHBHAI DEVANI"
+    },
+    {
+      "type": "text",
       "id": "contact_email",
       "label": "Contact email",
       "default": "support.afterbites@gmail.com"
@@ -525,7 +537,7 @@
       "type": "text",
       "id": "contact_phone",
       "label": "Contact phone",
-      "default": "99980 51832"
+      "default": "+91 97260 12067"
     },
     {
       "type": "textarea",

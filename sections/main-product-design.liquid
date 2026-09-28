@@ -454,6 +454,40 @@
       "worstRating": "{{ jm_rating.scale_min | default: 1 }}"
     },
     {%- endif %}
+    {%- comment -%}
+      Individual reviews, sourced from Judge.me's review_widget_data metafield
+      (the same data its widget renders). Emitted only when real reviews exist,
+      so nothing is fabricated. Guarded per-review so malformed entries are
+      skipped. Validate with Google's Rich Results Test once a real review is
+      posted; if Judge.me changes its field names, adjust the keys below.
+    {%- endcomment -%}
+    {%- assign jm_reviews = product.metafields.judgeme.review_widget_data.value.reviews -%}
+    {%- if jm_reviews and jm_reviews.size > 0 %}
+    "review": [
+      {%- assign r_emitted = 0 -%}
+      {%- for r in jm_reviews limit: 15 -%}
+        {%- if r.rating == blank -%}{%- continue -%}{%- endif -%}
+        {%- if r_emitted > 0 -%},{%- endif -%}
+        {
+          "@type": "Review",
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "{{ r.rating }}",
+            "bestRating": "5",
+            "worstRating": "1"
+          },
+          "author": {
+            "@type": "Person",
+            "name": {{ r.reviewer.name | default: 'Verified Buyer' | json }}
+          }
+          {%- if r.title != blank -%}, "name": {{ r.title | strip_html | json }}{%- endif -%}
+          {%- if r.body != blank -%}, "reviewBody": {{ r.body | strip_html | json }}{%- endif -%}
+          {%- if r.created_at != blank -%}, "datePublished": {{ r.created_at | date: '%Y-%m-%d' | json }}{%- endif -%}
+        }
+        {%- assign r_emitted = r_emitted | plus: 1 -%}
+      {%- endfor -%}
+    ],
+    {%- endif %}
     {%- if pd_raw != blank %}
     "additionalProperty": [
       {%- assign pd_lines = pd_raw | newline_to_br | split: '<br />' -%}

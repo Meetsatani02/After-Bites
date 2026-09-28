@@ -8,8 +8,37 @@
     <h1 class="policy-page__title">{{ policy.title }}</h1>
     <hr class="policy-page__divider">
 
+    {%- comment -%}
+      Policy text is edited in Shopify admin (Settings > Policies). The
+      replace chain swaps the old support number if it is still there.
+    {%- endcomment -%}
     <div class="policy-rte rte">
-      {{ policy.body }}
+      {{ policy.body
+        | replace: '+91 99980 51832', '+91 97260 12067'
+        | replace: '+91-99980-51832', '+91 97260 12067'
+        | replace: '+919998051832', '+919726012067'
+        | replace: '99980 51832', '97260 12067'
+        | replace: '99980-51832', '97260 12067'
+        | replace: '9998051832', '9726012067'
+      }}
+
+      {%- if section.settings.show_contact -%}
+        <h2>{{ section.settings.contact_heading }}</h2>
+        <p>
+          {%- if section.settings.contact_name != blank -%}
+            <strong>Owner:</strong> {{ section.settings.contact_name }}<br>
+          {%- endif -%}
+          {%- if section.settings.contact_phone != blank -%}
+            <strong>Phone:</strong> <a href="tel:{{ section.settings.contact_phone | remove: ' ' }}">{{ section.settings.contact_phone }}</a><br>
+          {%- endif -%}
+          {%- if section.settings.contact_email != blank -%}
+            <strong>Email:</strong> <a href="mailto:{{ section.settings.contact_email }}">{{ section.settings.contact_email }}</a><br>
+          {%- endif -%}
+          {%- if section.settings.contact_address != blank -%}
+            <strong>Address:</strong> {{ section.settings.contact_address }}
+          {%- endif -%}
+        </p>
+      {%- endif -%}
     </div>
 
     {%- if section.settings.show_buttons -%}
@@ -33,6 +62,46 @@
 {
   "name": "Policy page",
   "settings": [
+    {
+      "type": "header",
+      "content": "Contact information"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_contact",
+      "label": "Show contact information",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "contact_heading",
+      "label": "Heading",
+      "default": "Contact Information"
+    },
+    {
+      "type": "text",
+      "id": "contact_name",
+      "label": "Owner name",
+      "default": "GITABEN JAGDISHBHAI DEVANI"
+    },
+    {
+      "type": "text",
+      "id": "contact_phone",
+      "label": "Phone",
+      "default": "+91 97260 12067"
+    },
+    {
+      "type": "text",
+      "id": "contact_email",
+      "label": "Email",
+      "default": "support.afterbites@gmail.com"
+    },
+    {
+      "type": "textarea",
+      "id": "contact_address",
+      "label": "Address",
+      "default": "419, Tulsi Arcade, Sudama Chowk, Mota Varachha, Surat 394101, Gujarat, India"
+    },
     {
       "type": "header",
       "content": "Action buttons"
