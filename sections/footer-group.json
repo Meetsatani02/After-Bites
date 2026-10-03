@@ -27,6 +27,7 @@
         "show_social": true,
         "tiktok_url": "",
         "instagram_url": "",
+        "facebook_url": "",
         "twitter_url": "",
         "youtube_url": ""
       }
@@ -44,7 +45,8 @@
         "rights_text": "All rights reserved.",
         "show_social": true,
         "tiktok_url": "",
-        "instagram_url": "",
+        "instagram_url": "https://www.instagram.com/afterbitesofficial/",
+        "facebook_url": "",
         "twitter_url": "",
         "youtube_url": ""
       }
